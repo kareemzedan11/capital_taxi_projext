@@ -2,6 +2,7 @@ plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.compose)
+    alias(libs.plugins.google.gms.google.services)
 }
 
 android {
@@ -43,7 +44,9 @@ dependencies {
 
     implementation(libs.androidx.core.ktx)
     implementation (libs.accompanist.pager.indicators)
+    implementation("io.coil-kt:coil-compose:2.3.0")
 
+    implementation ("com.google.android.gms:play-services-auth:")
     implementation ("com.airbnb.android:lottie-compose:6.6.0")
     implementation ("androidx.compose.animation:animation:")
     implementation ("androidx.camera:camera-core:1.3.1")
@@ -54,7 +57,11 @@ dependencies {
     implementation("com.google.maps.android:maps-compose-utils:4.3.0")
     implementation("com.google.maps.android:maps-compose-widgets:4.3.0")
     implementation("com.google.android.gms:play-services-location:21.0.1")
+    implementation(platform("com.google.firebase:firebase-bom:33.6.0"))
     implementation ("androidx.compose.material3:material3:")
+    implementation("com.google.firebase:firebase-auth")
+    implementation ("androidx.compose.material3:material3:")
+    implementation ("androidx.compose.foundation:foundation:")
     implementation ("androidx.navigation:navigation-compose:")
     implementation(libs.androidx.lifecycle.runtime.ktx)
     implementation(libs.androidx.activity.compose)
@@ -65,6 +72,7 @@ dependencies {
     implementation(libs.androidx.material3)
     implementation(libs.androidx.navigation.runtime.ktx)
     implementation(libs.androidx.core.splashscreen)
+    implementation(libs.firebase.auth)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)

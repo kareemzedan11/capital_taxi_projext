@@ -1,3 +1,10 @@
 <resources>
     <string name="app_name">Capital_Taxi</string>
+    <string name="login">login</string>
+    <string name="SignUp">SignUp</string>
+
+    <string name="Email_label">Email</string>
+    <string name="Password_label">Password</string>
+    <string name="Dont_have_an_account"> Don\'t have an account?</string>
+
 </resources>
