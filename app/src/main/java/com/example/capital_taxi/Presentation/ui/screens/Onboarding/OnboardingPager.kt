@@ -172,20 +172,23 @@ fun OnboardingPager(navController: NavController, onSignInClick: () -> Unit) {
                 colors = ButtonDefaults.buttonColors(Color.White),
                 shape = RoundedCornerShape(16.dp)
             ) {
-                Spacer(modifier = Modifier.height(30.dp))
+
                 Icon(
                     modifier = Modifier.size(30.dp),
                     tint = Color.Unspecified,
                     contentDescription = "Google icon",
                     painter = painterResource(R.drawable.googleicon)
                 )
-                Spacer(modifier = Modifier.width(10.dp))
+                Spacer(modifier = Modifier.weight(1f))
+
                 Text(
                     "Continue with Google",
                     color = Color.Black,
                     fontSize = 18.sp,
                     fontWeight = FontWeight.Bold,
                 )
+                Spacer(modifier = Modifier.weight(1f))
+
             }
 
             Spacer(modifier = Modifier.height(20.dp))
@@ -198,17 +201,27 @@ fun OnboardingPager(navController: NavController, onSignInClick: () -> Unit) {
                 colors = ButtonDefaults.buttonColors(Color.Black),
                 shape = RoundedCornerShape(16.dp)
             ) {
+                Icon(
+                    modifier = Modifier.size(30.dp)  ,
+                    tint = Color.Unspecified,
+                    contentDescription = "phone icon",
+                    painter = painterResource(R.drawable.mobile)
+                )
+                Spacer(modifier = Modifier.weight(1f))
+
                 Text(
                     "Continue with phone",
                     color = Color.White,
                     fontSize = 18.sp,
                     fontWeight = FontWeight.Bold,
                 )
+                Spacer(modifier = Modifier.weight(1f))
+
             }
             Spacer(modifier = Modifier.height(20.dp))
 
             ElevatedButton(
-                onClick = { navController.navigate(Destination.SelectTheMode.route) },
+                onClick = { navController.navigate(Destination.SelectTheMode2.route) },
                 modifier = Modifier
                     .height(60.dp)
                     .fillMaxWidth(),

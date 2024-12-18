@@ -24,5 +24,10 @@ sealed class Destination(val route: String) {
     object Profile : Destination("Profile")
 
     object settings : Destination("settings")
+    object PickupWithPickoffPoints : Destination("PickupWithPickoffPoints")
+    object OtpScreen : Destination("OtpScreen")
+    object SelectTheMode2 : Destination("SelectTheMode2")
+    object WhereToButton : Destination("WhereToButton")
+
 }
 

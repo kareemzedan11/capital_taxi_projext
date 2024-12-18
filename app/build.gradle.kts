@@ -46,6 +46,7 @@ dependencies {
     implementation (libs.accompanist.pager.indicators)
     implementation("io.coil-kt:coil-compose:2.3.0")
 
+
     implementation ("com.google.android.gms:play-services-auth:")
     implementation ("com.airbnb.android:lottie-compose:6.6.0")
     implementation ("androidx.compose.animation:animation:")

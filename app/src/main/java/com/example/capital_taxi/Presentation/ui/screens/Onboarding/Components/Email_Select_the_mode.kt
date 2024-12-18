@@ -1,4 +1,4 @@
-package com.example.capital_taxi.Presentation.ui.screens.Select_the_mode
+package com.example.capital_taxi.Presentation.ui.screens.Onboarding.Components
 
 
 import androidx.compose.foundation.Image
@@ -14,7 +14,6 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 
-import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
@@ -26,7 +25,7 @@ import com.example.capital_taxi.Navigation.Destination
 import com.example.capital_taxi.R
 
 @Composable
-fun SelectTheMode(navController: NavController) {
+fun SelectTheMode2(navController: NavController) {
     val configuration = LocalConfiguration.current
     val screenHeight = configuration.screenHeightDp.dp
     val boxHeight = screenHeight * 0.4f // Adjust box height relative to screen size
@@ -99,7 +98,7 @@ fun SelectTheMode(navController: NavController) {
                         "Passenger Mode",
 
                         Color(0xFF4CAF50).copy(alpha = 0.3f),
-                        onClick = {navController.navigate(Destination.UserHomeScreen.route)}
+                        onClick = {navController.navigate(Destination.UserLogin.route  )}
 
                     ) // Light Green background
                 }

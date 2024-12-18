@@ -4,6 +4,7 @@ import android.widget.Toast
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.ExperimentalMaterialApi
@@ -20,6 +21,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
+import com.example.capital_taxi.Navigation.Destination
 import com.example.capital_taxi.R
 import com.google.firebase.FirebaseException
 import com.google.firebase.auth.*
@@ -179,14 +181,24 @@ fun PhoneVerification(navController: NavController) {
                     keyboardActions = KeyboardActions(onDone = { sendVerificationCode() })
                 )
 
-                Spacer(modifier = Modifier.height(20.dp))
-
+                Spacer(modifier = Modifier.height(40.dp))
                 Button(
-                    onClick = { sendVerificationCode() },
-                    modifier = Modifier.fillMaxWidth(),
-                    enabled = phoneNumber.isNotEmpty() && !isVerifying
+                    onClick = {navController.navigate(Destination.SelectTheMode.route)},
+                    modifier = Modifier
+                        .fillMaxWidth()
+
+
+
+                        .height(60.dp),
+                    colors = ButtonDefaults.buttonColors(Color(0XFF46C96B)),
+                    shape = RoundedCornerShape(8.dp)
+
                 ) {
-                    Text("Send Code")
+                    Text(
+                        text = "Send code",
+                        fontSize = 18.sp,
+
+                        )
                 }
 
                 Spacer(modifier = Modifier.height(20.dp))

@@ -32,9 +32,7 @@ import com.example.capital_taxi.R
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun DriverLoginIn(navController: NavController) {
-    var email by remember { mutableStateOf("") }
-    var password by remember { mutableStateOf("") }
-    var passwordVisible by remember { mutableStateOf(false) }
+
 
     Scaffold(
         topBar = {
@@ -45,6 +43,15 @@ fun DriverLoginIn(navController: NavController) {
                         color = Color.Black,
                         fontWeight = FontWeight.Bold
                     )
+                },
+                navigationIcon = {
+                    IconButton(onClick = { navController.popBackStack() }) {
+                        Icon(
+                            painter = painterResource(id = R.drawable.baseline_arrow_back_24),
+                            contentDescription = "Back",
+                            tint = Color.Black
+                        )
+                    }
                 },
                 colors = TopAppBarDefaults.smallTopAppBarColors(containerColor = Color.Transparent)
             )
@@ -57,7 +64,7 @@ fun DriverLoginIn(navController: NavController) {
                     .background(Color.White),
                 contentAlignment = Alignment.Center
             ) {
-                driverLoginContent(email, password, passwordVisible, navController)
+                driverLoginContent(  navController)
             }
         }
     )

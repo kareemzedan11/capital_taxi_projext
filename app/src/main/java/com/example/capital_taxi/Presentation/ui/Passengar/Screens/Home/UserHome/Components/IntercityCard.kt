@@ -22,24 +22,31 @@ import com.example.capital_taxi.R
 fun IntercityCard() {
     Card(
         modifier = Modifier
-            .padding(16.dp)
+
             .fillMaxWidth()
-            .border(5.dp, Color(0XFF46C96B), RoundedCornerShape(12.dp)),
+            .background(Color.White)
+            .border(5.dp, Color.White, RoundedCornerShape(12.dp)),
         shape = RoundedCornerShape(12.dp),
+        elevation =  CardDefaults.elevatedCardElevation( 5.dp),
         colors = CardDefaults.cardColors(
             containerColor = Color.White
+
         )
     ) {
         Column(
-            modifier = Modifier.padding(16.dp)
+            modifier = Modifier .background(Color.White)
         ) {
-            Row(verticalAlignment = Alignment.CenterVertically) {
+            Row(verticalAlignment = Alignment.CenterVertically, modifier = Modifier
+                .fillMaxWidth()
+                .background(Color.White)) {
                 Image(
                     modifier = Modifier.size(120.dp),
-                    painter = painterResource(R.drawable.greencar),
+                    painter = painterResource(R.drawable.greencarlogo),
                     contentDescription = "car logo"
                 )
                 Spacer(modifier = Modifier.weight(1f))
+                Spacer(modifier = Modifier.width(8.dp))
+
                 Column {
                     Row(verticalAlignment = Alignment.CenterVertically) {
                         Text(

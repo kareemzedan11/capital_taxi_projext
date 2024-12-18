@@ -9,7 +9,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.navigation.NavController
 
 @Composable
-fun homeScreenDesign(navController: NavController) {
+fun homeScreen(navController: NavController) {
 
     var isDrawerOpen by remember { mutableStateOf(false) }
 
@@ -24,7 +24,7 @@ fun homeScreenDesign(navController: NavController) {
             modifier = Modifier
                 .fillMaxSize()
         ) {
-            DrawerScreen(navController)
+            homeScreenContent(navController)
         }
     }
 }

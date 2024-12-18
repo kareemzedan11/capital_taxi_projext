@@ -32,15 +32,7 @@ import com.example.capital_taxi.Presentation.ui.Driver.Screens.Register.Componen
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun DriverSignUp(navController: NavController) {
-    var name by remember { mutableStateOf("") }
-
-    var email by remember { mutableStateOf("") }
-    var password by remember { mutableStateOf("") }
-    var phone by remember { mutableStateOf("") }
-    var confirmPassword by remember { mutableStateOf("") }
-
-
-    Scaffold(
+   Scaffold(
         topBar = {
             TopAppBar(
                 title = {
@@ -49,6 +41,15 @@ fun DriverSignUp(navController: NavController) {
                         color = Color.Black,
                         fontWeight = FontWeight.Bold
                     )
+                },
+                navigationIcon = {
+                    IconButton(onClick = { navController.popBackStack() }) {
+                        Icon(
+                            painter = painterResource(id = R.drawable.baseline_arrow_back_24),
+                            contentDescription = "Back",
+                            tint = Color.Black
+                        )
+                    }
                 },
                 colors = TopAppBarDefaults.smallTopAppBarColors(containerColor = Color.Transparent)
             )

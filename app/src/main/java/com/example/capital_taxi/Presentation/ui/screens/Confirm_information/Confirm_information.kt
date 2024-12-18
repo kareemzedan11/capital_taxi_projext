@@ -128,12 +128,12 @@ fun ConfirmInformation(navController: NavController, Name: String, Email: String
                 Spacer(modifier = Modifier.height(20.dp))
 
                 Button(
-                    onClick = { navController.navigate(Destination.SelectTheMode.route)
+                    onClick = { navController.navigate(Destination.OtpScreen.route)
                     },
                     modifier = Modifier
                         .fillMaxWidth()
                         .height(60.dp),
-                    colors = ButtonDefaults.buttonColors(Color.Black)
+                    colors = ButtonDefaults.buttonColors(Color(0XFF46C96B))
                 ) {
                     Text("Next", color = Color.White, fontSize = 20.sp, fontWeight = FontWeight.W400)
                 }

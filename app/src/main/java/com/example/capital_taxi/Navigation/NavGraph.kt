@@ -13,6 +13,8 @@ import com.example.capital_taxi.Presentation.ui.Driver.Screens.VerficationScreen
 import com.example.capital_taxi.Presentation.ui.Driver.Screens.VerficationScreens.faceValidation.FaceValidation
 import com.example.capital_taxi.Presentation.ui.Passengar.Screens.Home.TripHistory.TripsHistoryScreen
 import com.example.capital_taxi.Presentation.ui.Passengar.Screens.Home.UserHome.Components.LocationModalBottomSheetContent
+import com.example.capital_taxi.Presentation.ui.Passengar.Screens.Home.UserHome.Components.PickupWithPickoffPoints
+import com.example.capital_taxi.Presentation.ui.Passengar.Screens.Home.UserHome.Components.WhereToButton
 import com.example.capital_taxi.Presentation.ui.Passengar.Screens.Home.UserHome.UserHomeScreen
 import com.example.capital_taxi.Presentation.ui.Passengar.Screens.Home.Voucher.voucherScreen
 import com.example.capital_taxi.Presentation.ui.Passengar.Screens.Home.payment.PaymentScreen
@@ -21,6 +23,8 @@ import com.example.capital_taxi.Presentation.ui.Passengar.Screens.Login.UserLogi
 import com.example.capital_taxi.Presentation.ui.Passengar.Screens.Register.UserRegister
 import com.example.capital_taxi.Presentation.ui.Passengar.Screens.profile.Profile
 import com.example.capital_taxi.Presentation.ui.screens.Confirm_information.ConfirmInformation
+import com.example.capital_taxi.Presentation.ui.screens.OTP.OtpScreen
+import com.example.capital_taxi.Presentation.ui.screens.Onboarding.Components.SelectTheMode2
 import com.example.capital_taxi.Presentation.ui.screens.Onboarding.OnboardingPager
 import com.example.capital_taxi.Presentation.ui.screens.Select_the_mode.SelectTheMode
 import com.example.capital_taxi.Presentation.ui.screens.Start.StartScreen
@@ -51,6 +55,7 @@ fun AppNavGraph(navController: NavHostController) {
         composable(Destination.UserLogin.route) {
             UserLogin(navController)
         }
+
         composable(Destination.driverSignUp.route) {
             DriverSignUp(navController)
         }
@@ -92,6 +97,18 @@ fun AppNavGraph(navController: NavHostController) {
         }
         composable(Destination.settings.route) {
             settings(navController)
+        }
+        composable(Destination.PickupWithPickoffPoints.route) {
+            PickupWithPickoffPoints(navController)
+        }
+        composable(Destination.OtpScreen.route) {
+            OtpScreen(navController)
+        }
+        composable(Destination.SelectTheMode2.route) {
+            SelectTheMode2(navController)
+        }
+        composable(Destination.WhereToButton.route) {
+            WhereToButton(navController)
         }
 
 

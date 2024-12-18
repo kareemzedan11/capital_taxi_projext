@@ -1,4 +1,4 @@
-package com.example.capital_taxi.Presentation.ui.Passengar.Screens.Register.Components
+package com.example.capital_taxi.Presentation.ui.Driver.Screens.Register.Components
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -43,7 +43,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
@@ -55,32 +54,29 @@ import com.example.capital_taxi.Navigation.Destination
 import com.example.capital_taxi.R
 
 
+
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun userRegisterContent(
+fun userSignupContent(navController: NavController) {
 
-
-
-    navController: NavController
-) {
     var name by remember { mutableStateOf("") }
 
-    var email1 by remember { mutableStateOf("") }
-    var password1 by remember { mutableStateOf("") }
-    var phone1 by remember { mutableStateOf("") }
-    var Confirmpassword1 by remember { mutableStateOf("") }
-    var passwordVisible1 by remember { mutableStateOf(false) }
-    var Confirmpasswordvisible1 by remember { mutableStateOf(false) }
-    var phonevisible1 by remember { mutableStateOf(false) }
+    var email by remember { mutableStateOf("") }
+    var password by remember { mutableStateOf("") }
+    var phone by remember { mutableStateOf("") }
+    var Confirmpassword by remember { mutableStateOf("") }
 
-    var isChecked1 by remember { mutableStateOf(false) }
+    var isChecked by remember { mutableStateOf(false) }
+    var passwordVisible by remember { mutableStateOf(false) }
+    var Confirmpasswordvisible by remember { mutableStateOf(false) }
     Column(
         modifier = Modifier
             .fillMaxWidth()
             .padding(16.dp)
             .verticalScroll(rememberScrollState()),
-        horizontalAlignment = Alignment.CenterHorizontally// This ensures scrolling when keyboard appears
+        horizontalAlignment = Alignment.CenterHorizontally,
     ) {
+        // Logo
         // Title
         Text(
 
@@ -136,8 +132,8 @@ fun userRegisterContent(
 
         // Email TextField
         OutlinedTextField(
-            value = email1,
-            onValueChange = { email1 = it },
+            value = email,
+            onValueChange = { email = it },
             colors = TextFieldDefaults.outlinedTextFieldColors(
                 // Setting the container background color to #F2F2F2
                 containerColor = Color(0xFFF2F2F2), // Use the Color class to set the color
@@ -166,8 +162,8 @@ fun userRegisterContent(
 
         // Password TextField with trailing icon
         OutlinedTextField(
-            value = password1,
-            onValueChange = { password1 = it },
+            value = password,
+            onValueChange = { password = it },
             colors = TextFieldDefaults.outlinedTextFieldColors(
                 // Setting the container background color to #F2F2F2
                 containerColor = Color(0xFFF2F2F2), // Use the Color class to set the color
@@ -180,7 +176,7 @@ fun userRegisterContent(
                 Icon(
                     imageVector = Icons.Default.Lock,
                     tint = Color.Gray,
-                    contentDescription = "passord icon",
+                    contentDescription = "password icon",
                     modifier = Modifier
                         .clip(CircleShape)
                         .size(20.dp)
@@ -189,14 +185,14 @@ fun userRegisterContent(
             },
             label = { Text("Password") },
             modifier = Modifier.fillMaxWidth(),
-            visualTransformation = if (passwordVisible1) VisualTransformation.None else PasswordVisualTransformation(),
+            visualTransformation = if (passwordVisible) VisualTransformation.None else PasswordVisualTransformation(),
             trailingIcon = {
-                IconButton(onClick = { passwordVisible1 = !passwordVisible1 }) {
+                IconButton(onClick = { passwordVisible = !passwordVisible}) {
                     Icon(
                         painter = painterResource(
-                            if (passwordVisible1) R.drawable.baseline_visibility_24 else R.drawable.baseline_visibility_off_24
+                            if (passwordVisible) R.drawable.baseline_visibility_24 else R.drawable.baseline_visibility_off_24
                         ),
-                        contentDescription = if (passwordVisible1) "Hide password" else "Show password"
+                        contentDescription = if (passwordVisible) "Hide password" else "Show password"
                     )
                 }
             },
@@ -207,8 +203,8 @@ fun userRegisterContent(
 
         // Confirm Password TextField with trailing icon
         OutlinedTextField(
-            value = Confirmpassword1,
-            onValueChange = { Confirmpassword1 = it },
+            value = Confirmpassword,
+            onValueChange = { Confirmpassword = it },
             colors = TextFieldDefaults.outlinedTextFieldColors(
                 // Setting the container background color to #F2F2F2
                 containerColor = Color(0xFFF2F2F2), // Use the Color class to set the color
@@ -230,14 +226,14 @@ fun userRegisterContent(
             },
             label = { Text("Confirm Password") },
             modifier = Modifier.fillMaxWidth(),
-            visualTransformation = if (Confirmpasswordvisible1) VisualTransformation.None else PasswordVisualTransformation(),
+            visualTransformation = if (Confirmpasswordvisible) VisualTransformation.None else PasswordVisualTransformation(),
             trailingIcon = {
-                IconButton(onClick = { Confirmpasswordvisible1 = !Confirmpasswordvisible1 }) {
+                IconButton(onClick = { Confirmpasswordvisible= !Confirmpasswordvisible }) {
                     Icon(
                         painter = painterResource(
-                            if (Confirmpasswordvisible1) R.drawable.baseline_visibility_24 else R.drawable.baseline_visibility_off_24
+                            if (Confirmpasswordvisible) R.drawable.baseline_visibility_24 else R.drawable.baseline_visibility_off_24
                         ),
-                        contentDescription = if (Confirmpasswordvisible1) "Hide password" else "Show password"
+                        contentDescription = if (Confirmpasswordvisible) "Hide password" else "Show password"
                     )
                 }
             },
@@ -248,8 +244,8 @@ fun userRegisterContent(
 
         // Phone TextField with trailing icon
         OutlinedTextField(
-            value = phone1,
-            onValueChange = { phone1 = it },
+            value = phone,
+            onValueChange = { phone = it },
             colors = TextFieldDefaults.outlinedTextFieldColors(
                 // Setting the container background color to #F2F2F2
                 containerColor = Color(0xFFF2F2F2), // Use the Color class to set the color
@@ -285,8 +281,8 @@ fun userRegisterContent(
         ) {
             Checkbox(
 
-                checked = isChecked1,
-                onCheckedChange = { isChecked1 = it },
+                checked = isChecked,
+                onCheckedChange = { isChecked= it },
                 modifier = Modifier.padding(end = 8.dp)
             )
             Text(
@@ -300,20 +296,20 @@ fun userRegisterContent(
 
         Spacer(modifier = Modifier.height(24.dp))
         Button(
-            onClick = { /* Handle Sign Up */ },
+            onClick = {  navController.navigate( Destination.FaceValidation.route) },
             modifier = Modifier
                 .fillMaxWidth()
                 .height(60.dp),
             colors = ButtonDefaults.buttonColors(
-                containerColor = if (isChecked1) Color(0XFF46C96B) else Color.Gray // Change color based on checkbox state
+                containerColor = if (isChecked) Color(0XFF46C96B) else Color.Gray // Change color based on checkbox state
             ),
-            enabled = isChecked1, // Enable the button only when the checkbox is checked
+            enabled = isChecked, // Enable the button only when the checkbox is checked
             shape = RoundedCornerShape(8.dp) // Rounded corners
         ) {
             Text(
-                text = "Sign up",
+                text = "Continue",
                 fontSize = 18.sp,
-                color = Color.White // Ensure text color is always visible
+                color = Color.White
             )
         }
 
