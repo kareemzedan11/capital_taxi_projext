@@ -89,6 +89,7 @@ fun DraggableBottomSheet_Content(navController: NavController) {
         PickupWithDropOffButtons(navController)
     }
 }
+
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun PickupWithDropOffButtons(navController: NavController) {
@@ -137,7 +138,7 @@ fun PickupWithDropOffButtons(navController: NavController) {
         PickupDropOffRow(
             iconRes = R.drawable.travel,
             text = "Select Drop-Off Location",
-            onClick = { showBottomSheet = true  }
+            onClick = { showBottomSheet = true }
         )
 
         Spacer(modifier = Modifier.padding(top = 15.dp))
@@ -192,8 +193,11 @@ fun PickupWithDropOffButtons(navController: NavController) {
                                 .weight(1f)
                                 .fillMaxWidth()
                                 .background(
-                                    color =  if (selectedVehicleIndex == index) Color(0XFF46C96B) else Color.White,
-                                    shape = RoundedCornerShape(bottomStart = 20.dp, bottomEnd = 20.dp)
+                                    color = if (selectedVehicleIndex == index) Color(0XFF46C96B) else Color.White,
+                                    shape = RoundedCornerShape(
+                                        bottomStart = 20.dp,
+                                        bottomEnd = 20.dp
+                                    )
                                 )
                         ) {
                             Column(
@@ -204,13 +208,12 @@ fun PickupWithDropOffButtons(navController: NavController) {
                                     text = vehicle.name,
                                     fontWeight = FontWeight.Bold,
                                     fontSize = 20.sp,
-                                    color =if (selectedVehicleIndex == index) Color.White else Color.Black
+                                    color = if (selectedVehicleIndex == index) Color.White else Color.Black
                                 )
                                 Text(
                                     text = "£${vehicle.price}",
                                     fontSize = 18.sp,
-                                    color =if (selectedVehicleIndex == index) Color.White else Color.Black
-
+                                    color = if (selectedVehicleIndex == index) Color.White else Color.Black
                                 )
                             }
                         }
@@ -218,20 +221,88 @@ fun PickupWithDropOffButtons(navController: NavController) {
                 }
             }
         }
+        Spacer(modifier = Modifier.padding(top = 15.dp))
+
+        if (selectedVehicleIndex != -1) {
+            Box(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(horizontal = 16.dp)
+                    .border(
+                        width = 2.dp,
+                        color = Color.Gray,
+                        shape = RoundedCornerShape(10.dp)
+                    )
+                    .background(
+                        color = Color(0XFFECECEC),
+                        shape = RoundedCornerShape(10.dp)
+                    )
+                    .padding(20.dp)
+            ) {
+                Row(
+                    horizontalArrangement = Arrangement.SpaceBetween,
+                    verticalAlignment = Alignment.CenterVertically,
+                    modifier = Modifier.fillMaxWidth()
+                ) {
+
+                    Text(
+                        text = "Distance \n \n 2.4 miles",
+                        fontSize = 16.sp,
+                        fontWeight = FontWeight.Bold,
+                        color = Color.Black
+                    )
+                    VerticalDivider(
+                        thickness = 2.dp,
+                        modifier = Modifier
+
+                            .height(70.dp)
+                            .padding(horizontal = 12.dp)
+                    )
+                    Text(
+                        text = "Duration \n \n 15:02",
+                        fontSize = 16.sp,
+                        fontWeight = FontWeight.Bold,
+
+                        color = Color.Black
+                    )
+                    VerticalDivider(
+                        thickness = 2.dp,
+                        modifier = Modifier
+                            .height(70.dp)
+                            .padding(horizontal = 12.dp)
+                    )
+                    Text(
+                        text = "Price \n \n £10.50",
+                        fontSize = 16.sp,
+                        fontWeight = FontWeight.Bold,
+
+                        color = Color.Black
+                    )
+
+
+                }
+            }
+            Spacer(modifier = Modifier.padding(top = 15.dp))
+
+            Button(
+                onClick = { /* Perform action */ },
+                colors = ButtonDefaults.buttonColors(Color(0XFF46C96B)),
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .height(60.dp)
+                    .clip(RoundedCornerShape(10.dp))
+            ) {
+                Text(
+                    text = "Order Now",
+                    color = Color.White,
+                    fontSize = 18.sp,
+                    fontWeight = FontWeight.Bold
+                )
+            }
+        }
+
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 @Composable
@@ -240,7 +311,6 @@ fun PickupDropOffRow(
     text: String,
     onClick: () -> Unit
 ) {
-
 
 
     Row(
@@ -282,7 +352,8 @@ fun PickupDropOffRow(
             // Underline: Draw a line at the bottom of the Button
             Divider(
                 modifier = Modifier
-                    .fillMaxWidth().padding(start = 20.dp)
+                    .fillMaxWidth()
+                    .padding(start = 20.dp)
                     .height(2.dp)
                     .align(Alignment.BottomCenter),
                 color = Color.LightGray, // Underline color

@@ -41,7 +41,7 @@ fun homeScreenContent(navController: NavController) {
 
     BottomSheetScaffold(
         scaffoldState = bottomSheetState,
-        sheetPeekHeight = 300.dp,
+        sheetPeekHeight = 500.dp,
         sheetContent = {
             // Bottom Sheet Content
             Box(
@@ -49,7 +49,7 @@ fun homeScreenContent(navController: NavController) {
                     .fillMaxSize()
             ) {
                // BottomSheetContent()
-                WhereToButton(navController)
+                searchAboutADriver()
             }
 
         }

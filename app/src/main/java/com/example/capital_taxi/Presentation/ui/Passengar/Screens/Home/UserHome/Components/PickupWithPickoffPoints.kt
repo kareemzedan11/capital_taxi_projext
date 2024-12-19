@@ -1,3 +1,5 @@
+@file:Suppress("NAME_SHADOWING")
+
 package com.example.capital_taxi.Presentation.ui.Passengar.Screens.Home.UserHome.Components
 
 import IntercityCard
@@ -30,6 +32,7 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.material.LinearProgressIndicator
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.Call
@@ -473,35 +476,32 @@ fun driverViewing() {
     }
 
 }
-
 @Composable
 fun searchAboutADriver() {
-    Column {
+    Column  {
         Box(
             modifier = Modifier
                 .fillMaxWidth()
                 .fillMaxHeight(0.06f)
-                .background(Color(0XFFF2F2F2)), contentAlignment = Alignment.Center
-
-
+                .background(Color(0XFFF2F2F2)),
+            contentAlignment = Alignment.Center
         ) {
-
             driverViewing()
-
         }
+
         Box(
             modifier = Modifier
                 .fillMaxWidth()
-                .fillMaxHeight(0.4f) // Ensure Box takes up 30% of height
+
+
                 .background(Color.White)
                 .border(
-                    width = 2.dp, // Border thickness
-                    color = Color.White, // Border color
+                    width = 2.dp,
+                    color = Color.White,
                     shape = RoundedCornerShape(topStart = 30.dp, topEnd = 30.dp)
                 ),
             contentAlignment = Alignment.Center
         ) {
-            // Inner Box with white background
             Box(
                 modifier = Modifier
                     .fillMaxSize()
@@ -510,7 +510,7 @@ fun searchAboutADriver() {
                             topStart = 30.dp,
                             topEnd = 30.dp
                         )
-                    ) // Match inner shape to border
+                    )
                     .background(Color.White)
                     .padding(2.dp),
                 contentAlignment = Alignment.Center
@@ -528,7 +528,7 @@ fun searchAboutADriver() {
                         color = Color(0XFFF2F2F2)
                     )
 
-                    Spacer(modifier = Modifier.height(8.dp)) // Adjust spacer height if needed
+                    Spacer(modifier = Modifier.height(8.dp))
 
                     Text(
                         "Ride requested. Please wait for the driver.",
@@ -536,33 +536,38 @@ fun searchAboutADriver() {
                         fontWeight = FontWeight.SemiBold
                     )
 
+                    Spacer(modifier = Modifier.height(4.dp))
 
-                    Spacer(modifier = Modifier.height(8.dp)) // Adjust spacer height if needed
 
-                    HorizontalDivider(
+                    // Linear progress indicator with 60-second animation
+                    var progress by remember { mutableStateOf(0f) }
+                    LaunchedEffect(Unit) {
+                        val totalDuration = 60000L // 60 seconds in milliseconds
+                        val frameDuration = 16L // Roughly 60 FPS
+                        while (progress < 1f) {
+                            progress += frameDuration.toFloat() / totalDuration
+                            delay(frameDuration)
+                        }
+                        progress = 1f
+                    }
+
+                    LinearProgressIndicator(
+                        progress = progress,
                         modifier = Modifier
-                            .fillMaxWidth()
-                            .padding(horizontal = 10.dp)
-                            .padding(vertical = 10.dp),
-                        thickness = 2.dp,
-                        color = Color(0XFFF2F2F2)
+                            .fillMaxWidth(0.8f)
+                            .padding(horizontal = 16.dp),
+                        color = Color(0XFF46C96B), // Customize color if needed
+                        Color(0XFFF2F2F2)
                     )
 
-                    // Use animated progress bar
-                    CustomProgressBarWithSlowFill()
                     Spacer(modifier = Modifier.padding(top = 10.dp))
+
                     Box(
                         modifier = Modifier
                             .clip(
-                                RoundedCornerShape(
-                                    10.dp
-                                )
+                                RoundedCornerShape(10.dp)
                             )
-                            .background(
-                                Color.LightGray,
-
-                                ),
-
+                            .background(Color.LightGray),
                         contentAlignment = Alignment.Center
                     ) {
                         Text(
@@ -575,33 +580,22 @@ fun searchAboutADriver() {
                     val composition by rememberLottieComposition(
                         spec = LottieCompositionSpec.RawRes(R.raw.location)
                     )
-                    val progress by animateLottieCompositionAsState(
+                    val progress2 by animateLottieCompositionAsState(
                         composition = composition,
-                        iterations = LottieConstants.IterateForever // Infinite loop
+                        iterations = LottieConstants.IterateForever
                     )
                     Box(modifier = Modifier.fillMaxWidth(.5f)) {
-
                         LottieAnimation(
                             composition = composition,
-                            progress = progress,
-                            modifier = Modifier
-                                .fillMaxWidth()
+                            progress = progress2,
+                            modifier = Modifier.fillMaxWidth()
                         )
                     }
-
                 }
             }
         }
     }
-
-
 }
-
-
-
-
-
-
 
 
 
