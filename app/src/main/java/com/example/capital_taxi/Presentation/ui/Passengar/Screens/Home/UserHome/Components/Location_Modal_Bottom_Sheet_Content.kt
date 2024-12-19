@@ -17,11 +17,8 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
-
 @Composable
-fun LocationModalBottomSheetContent(apiKey: String,navController: NavController) {
-
-
+fun LocationModalBottomSheetContent(navController: NavController) {
     Column(
         modifier = Modifier
             .padding(20.dp)
@@ -38,25 +35,20 @@ fun LocationModalBottomSheetContent(apiKey: String,navController: NavController)
             )
         )
 
-
         PickupNowForMeUI()
         PickupWithPickoffPoints(navController)
 
-
-}
-
         Spacer(modifier = Modifier.padding(vertical = 10.dp))
-    MostVisitedPlaces()
-    Spacer(modifier = Modifier.padding(vertical = 10.dp))
-    Column(modifier = Modifier.padding(horizontal = 10.dp)) {
+        MostVisitedPlaces()
+        Spacer(modifier = Modifier.padding(vertical = 10.dp))
 
-        HorizontalDivider(
-            modifier = Modifier,
-            thickness = 2.dp
-        )
-
+        Column(modifier = Modifier.padding(horizontal = 10.dp)) {
+            HorizontalDivider(
+                modifier = Modifier,
+                thickness = 2.dp
+            )
+        }
     }
 }
-
 
 

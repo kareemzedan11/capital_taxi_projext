@@ -73,7 +73,7 @@ fun ScreenContent(navController: NavController) {
 
 
         ) {
-            DraggableBottomSheet()
+            DraggableBottomSheet(sheetContent =  {BottomSheetContent()} )
         }
 
 
@@ -318,18 +318,18 @@ fun fromLocationToDestination() {
 
             Spacer(modifier = Modifier.weight(1f)) // Push the next icon to the end
 
-            Box(
-                modifier = Modifier
-                    .size(35.dp)
-                    .background(Color.LightGray, shape = CircleShape),
-                contentAlignment = Alignment.Center
-            ) {
-                Icon(
-                    painter = painterResource(R.drawable.pen), // Replace with your pen icon resource
-                    contentDescription = null,
-                    modifier = Modifier.size(20.dp)
-                )
-            }
+//            Box(
+//                modifier = Modifier
+//                    .size(35.dp)
+//                    .background(Color.LightGray, shape = CircleShape),
+//                contentAlignment = Alignment.Center
+//            ) {
+//                Icon(
+//                    painter = painterResource(R.drawable.pen), // Replace with your pen icon resource
+//                    contentDescription = null,
+//                    modifier = Modifier.size(20.dp)
+//                )
+//            }
         }
 
         repeat(6) {
@@ -355,35 +355,35 @@ fun fromLocationToDestination() {
 
             Spacer(modifier = Modifier.weight(1f))
 
-            Row {
-                Box(
-                    modifier = Modifier
-                        .size(35.dp)
-                        .background(Color.LightGray, shape = CircleShape),
-                    contentAlignment = Alignment.Center
-                ) {
-                    Icon(
-                        painter = painterResource(R.drawable.pen),
-                        contentDescription = null,
-                        modifier = Modifier.size(20.dp)
-                    )
-                }
-
-                Spacer(modifier = Modifier.padding(4.dp)) // Add space between icons
-
-                Box(
-                    modifier = Modifier
-                        .size(35.dp)
-                        .background(Color.LightGray, shape = CircleShape),
-                    contentAlignment = Alignment.Center
-                ) {
-                    Icon(
-                     imageVector = Icons.Default.Add,
-                        contentDescription = null,
-                        modifier = Modifier.size(20.dp)
-                    )
-                }
-            }
+//            Row {
+//                Box(
+//                    modifier = Modifier
+//                        .size(35.dp)
+//                        .background(Color.LightGray, shape = CircleShape),
+//                    contentAlignment = Alignment.Center
+//                ) {
+//                    Icon(
+//                        painter = painterResource(R.drawable.pen),
+//                        contentDescription = null,
+//                        modifier = Modifier.size(20.dp)
+//                    )
+//                }
+//
+//                Spacer(modifier = Modifier.padding(4.dp)) // Add space between icons
+//
+//                Box(
+//                    modifier = Modifier
+//                        .size(35.dp)
+//                        .background(Color.LightGray, shape = CircleShape),
+//                    contentAlignment = Alignment.Center
+//                ) {
+//                    Icon(
+//                     imageVector = Icons.Default.Add,
+//                        contentDescription = null,
+//                        modifier = Modifier.size(20.dp)
+//                    )
+//                }
+        //       }
 
         }
         HorizontalDivider(Modifier.fillMaxWidth(), thickness = 2.dp)

@@ -8,22 +8,26 @@ import androidx.compose.material.rememberModalBottomSheetState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.rememberCoroutineScope
 
-
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
-fun DraggableBottomSheet({() -> unit}) {
-    val sheetState = rememberModalBottomSheetState(initialValue = ModalBottomSheetValue.Expanded,
+fun DraggableBottomSheet(
+    sheetContent: @Composable () -> Unit,
+
+    ) {
+    val sheetState = rememberModalBottomSheetState(
+        initialValue = ModalBottomSheetValue.Expanded,
         skipHalfExpanded = false,
         confirmValueChange = { newState ->
             newState != ModalBottomSheetValue.Hidden
-        })
+        }
+    )
 
     val scope = rememberCoroutineScope()
 
-    ModalBottomSheetLayout(sheetState = sheetState,
+    ModalBottomSheetLayout(
+        sheetState = sheetState,
         sheetShape = MaterialTheme.shapes.medium,
-        sheetContent = {  BottomSheetContent() },
-        content = {
-
-        })
+        sheetContent =  { },
+        content =  {sheetContent()}
+    )
 }
