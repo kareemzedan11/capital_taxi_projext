@@ -3,14 +3,6 @@
 package com.example.capital_taxi.Presentation.ui.Passengar.Screens.Home.UserHome.Components
 
 import IntercityCard
-import androidx.compose.animation.animateColor
-import androidx.compose.animation.core.LinearEasing
-import androidx.compose.animation.core.RepeatMode
-import androidx.compose.animation.core.animateFloat
-import androidx.compose.animation.core.animateIntAsState
-import androidx.compose.animation.core.infiniteRepeatable
-import androidx.compose.animation.core.rememberInfiniteTransition
-import androidx.compose.animation.core.tween
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
@@ -19,7 +11,6 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -27,7 +18,6 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
-import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -36,15 +26,11 @@ import androidx.compose.material.LinearProgressIndicator
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.Call
-import androidx.compose.material.icons.filled.KeyboardArrowLeft
 import androidx.compose.material.icons.filled.KeyboardArrowRight
-import androidx.compose.material.icons.filled.Person
 import androidx.compose.material.icons.filled.Place
 import androidx.compose.material.icons.filled.Star
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
-import androidx.compose.material3.ButtonElevation
-import androidx.compose.material3.ElevatedButton
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
@@ -75,7 +61,6 @@ import com.airbnb.lottie.compose.LottieCompositionSpec
 import com.airbnb.lottie.compose.LottieConstants
 import com.airbnb.lottie.compose.animateLottieCompositionAsState
 import com.airbnb.lottie.compose.rememberLottieComposition
-import com.example.capital_taxi.Navigation.Destination
 import com.example.capital_taxi.R
 import kotlinx.coroutines.delay
 
@@ -361,68 +346,6 @@ fun confirmPickup() {
 
 
 @Composable
-fun CustomProgressBarWithSlowFill() {
-    // Total number of segments
-    val totalSegments = 4
-
-    // State to track the current segment being filled
-    var currentSegment by remember { mutableStateOf(0) }
-
-    // Animate the current segment index
-    val animatedSegment by animateIntAsState(
-        targetValue = currentSegment,
-        animationSpec = tween(durationMillis = 1000) // Duration for each segment
-    )
-
-    // Control for iterative animation in the last segment (color fill)
-    val infiniteTransition = rememberInfiniteTransition()
-    val lastSegmentFillColor by infiniteTransition.animateColor(
-        initialValue = Color.Transparent, // Starting with transparent
-        targetValue = Color(0XFF46C96B), // Fully filled color
-        animationSpec = infiniteRepeatable(
-            animation = tween(
-                5000,
-                easing = LinearEasing
-            ), // Slow fill animation (increased duration)
-            repeatMode = RepeatMode.Reverse
-        )
-    )
-
-    // Start the animation to fill each segment
-    LaunchedEffect(Unit) {
-        repeat(totalSegments) { segment ->
-            delay(1500) // Delay before filling the next segment
-            currentSegment = segment + 1
-        }
-    }
-
-    Row(
-        modifier = Modifier
-            .fillMaxWidth()
-            .height(8.dp), // Height of the bar
-        horizontalArrangement = Arrangement.spacedBy(4.dp) // Space between segments
-    ) {
-        repeat(totalSegments) { index ->
-            Box(
-                modifier = Modifier
-                    .weight(1f) // Equal width for each segment
-                    .fillMaxHeight()
-                    .padding(horizontal = 3.dp)
-
-                    .background(
-                        when {
-                            index < animatedSegment - 1 -> Color(0XFF46C96B) // Fully filled segments
-                            index == animatedSegment - 1 -> lastSegmentFillColor // Animated last segment fill color
-                            else -> Color(0XFFF2F2F2) // Remaining segments
-                        },
-                        shape = RoundedCornerShape(4.dp) // Rounded corners
-                    )
-            )
-        }
-    }
-}
-
-@Composable
 fun driverViewing() {
     Row(
         verticalAlignment = Alignment.CenterVertically,
@@ -492,6 +415,7 @@ fun searchAboutADriver() {
         Box(
             modifier = Modifier
                 .fillMaxWidth()
+                .fillMaxHeight(0.6f)
 
 
                 .background(Color.White)
@@ -554,8 +478,8 @@ fun searchAboutADriver() {
                     LinearProgressIndicator(
                         progress = progress,
                         modifier = Modifier
-                            .fillMaxWidth(0.8f)
-                            .padding(horizontal = 16.dp),
+                            .fillMaxWidth()
+                            ,
                         color = Color(0XFF46C96B), // Customize color if needed
                         Color(0XFFF2F2F2)
                     )
@@ -578,13 +502,13 @@ fun searchAboutADriver() {
                     }
 
                     val composition by rememberLottieComposition(
-                        spec = LottieCompositionSpec.RawRes(R.raw.location)
+                        spec = LottieCompositionSpec.RawRes(R.raw.loadinganimation)
                     )
                     val progress2 by animateLottieCompositionAsState(
                         composition = composition,
                         iterations = LottieConstants.IterateForever
                     )
-                    Box(modifier = Modifier.fillMaxWidth(.5f)) {
+                    Box(modifier = Modifier.fillMaxWidth(.4f)) {
                         LottieAnimation(
                             composition = composition,
                             progress = progress2,
@@ -607,7 +531,7 @@ fun searchAboutADriver() {
 
 
 @Composable
-fun tripTracker() {
+fun tripDetailsBox() {
 
     Box(
         modifier = Modifier
@@ -638,13 +562,6 @@ fun tripTracker() {
                 verticalArrangement = Arrangement.Top,
 
                 ) {
-                HorizontalDivider(
-                    modifier = Modifier
-                        .fillMaxWidth(0.2f)
-                        .padding(top = 10.dp),
-                    thickness = 6.dp,
-                    color = Color(0XFFF2F2F2)
-                )
 
                 Spacer(modifier = Modifier.padding(top = 10.dp))
                 Box(
