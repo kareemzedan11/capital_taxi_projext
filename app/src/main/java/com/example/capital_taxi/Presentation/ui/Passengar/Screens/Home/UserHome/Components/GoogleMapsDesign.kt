@@ -29,7 +29,22 @@ import com.google.maps.android.compose.rememberCameraPositionState
 import android.content.Context
 
 import android.location.Location
+import androidx.compose.foundation.background
+import androidx.compose.foundation.border
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.LocationOn
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.unit.dp
+import com.example.capital_taxi.R
 
 import com.google.android.gms.location.LocationServices
 import com.google.maps.android.compose.Polyline
@@ -44,17 +59,16 @@ import java.net.URL
 @Composable
 fun GoogleMapsDesign(context: Context, modifier: Modifier = Modifier) {
     var userLocation by remember { mutableStateOf<LatLng?>(null) }
+    val context = LocalContext.current
 
     // Initialize the camera position state
     val cameraPositionState = rememberCameraPositionState {
-        position = CameraPosition.builder()
-            .target(LatLng(0.0, 0.0)) // Temporary position until location is fetched
-            .zoom(15f)
-            .build()
+        position = CameraPosition.fromLatLngZoom(LatLng(0.0, 0.0), 15f) // Default camera position
     }
 
     // Fetch user's location when composable is launched
     LaunchedEffect(Unit) {
+        // Check for location permission
         if (ContextCompat.checkSelfPermission(
                 context,
                 Manifest.permission.ACCESS_FINE_LOCATION
@@ -65,11 +79,8 @@ fun GoogleMapsDesign(context: Context, modifier: Modifier = Modifier) {
                 if (location != null) {
                     val latLng = LatLng(location.latitude, location.longitude)
                     userLocation = latLng
-                    // Update camera position
-                    cameraPositionState.position = CameraPosition.builder()
-                        .target(latLng)
-                        .zoom(15f)
-                        .build()
+                    // Update camera position to user's location
+                    cameraPositionState.position = CameraPosition.fromLatLngZoom(latLng, 15f)
                 } else {
                     Toast.makeText(context, "Unable to fetch location", Toast.LENGTH_SHORT).show()
                 }
@@ -81,39 +92,70 @@ fun GoogleMapsDesign(context: Context, modifier: Modifier = Modifier) {
         }
     }
 
-    // Render the Google Map
-    GoogleMap(
-        modifier = modifier.fillMaxSize(),
-        cameraPositionState = cameraPositionState,
-        properties = MapProperties(
-            mapType = MapType.NORMAL,
-            isMyLocationEnabled = false
-        ),
-        uiSettings = MapUiSettings(
-            zoomControlsEnabled = false,
-            myLocationButtonEnabled = false
-        )
-    ) {
-        // Add a marker for user's location
-        userLocation?.let { location ->
-            Marker(
-                state = MarkerState(position = location),
-                title = "Your Location",
-                icon = BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE)
+    Box(modifier = modifier.fillMaxSize()) {
+        // Render the Google Map
+        GoogleMap(
+            modifier = Modifier.fillMaxSize(),
+            cameraPositionState = cameraPositionState,
+            properties = MapProperties(
+                mapType = MapType.NORMAL,
+                isMyLocationEnabled = true
+            ),
+            uiSettings = MapUiSettings(
+                zoomControlsEnabled = false,
+                myLocationButtonEnabled = false
             )
+        ) {
+            // Add a marker for user's location
+            userLocation?.let { location ->
+                Marker(
+                    state = MarkerState(position = location),
+                    title = "Your Location",
+                    icon = BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE)
+                )
 
-            // Optional: Add a circle around user's location
-            Circle(
-                center = location,
-                radius = 500.0,
-                fillColor = Color(0x2200FF00),
-                strokeColor = Color(0x2200FF00),
-                strokeWidth = 2f
-            )
+                // Optional: Add a circle around user's location
+                Circle(
+                    center = location,
+                    radius = 500.0,
+                    fillColor = Color(0x2200FF00),
+                    strokeColor = Color(0x2200FF00),
+                    strokeWidth = 2f
+                )
+            }
         }
-    }
-}
-@Composable
+
+        Box(
+            modifier = Modifier
+                .padding(16.dp)
+                .align(Alignment.BottomEnd)
+        ) {
+            // Box for custom location button with white background
+            Box(
+                modifier = Modifier
+                    .size(56.dp) // Adjust the size of the button
+                    .background(Color.White, shape = CircleShape) // White circular background
+                    .border(2.dp, Color.White, shape = CircleShape) // Optional border
+                    .clickable {
+                        // Handle location button click (e.g., move to user's location)
+                        userLocation?.let { location ->
+                            cameraPositionState.position =
+                                CameraPosition.fromLatLngZoom(location, 15f)
+                        }
+                    },
+                contentAlignment = Alignment.Center // Center the icon inside the button
+            ) {
+                Icon(
+                    painter = painterResource(R.drawable.getlocation), // Your custom location icon
+                    contentDescription = "My Location",
+                    modifier = Modifier.size(32.dp), // Adjust icon size
+                    tint = Color.Unspecified // Icon color
+                )
+            }
+        }
+
+    }}
+        @Composable
 fun GoogleMapsWithSimulatedMovement(
     context: Context,
     origin: LatLng,
@@ -324,11 +366,6 @@ fun MapSection(modifier: Modifier=Modifier) {
     )
     val apiKey = "AIzaSyArzERc9xBRprPePwc4uTopBW9WMBymX74"
 
-    GoogleMapsWithSimulatedMovement(
-        context = LocalContext.current,
-        origin = origin,
-        destinations = destinations,
-        apiKey = apiKey
-    )
+    GoogleMapsDesign(modifier = modifier, context = LocalContext.current)
 }
 

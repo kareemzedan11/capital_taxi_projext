@@ -2,8 +2,10 @@ package com.example.capital_taxi.Presentation.ui.Passengar.Screens.profile
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
@@ -13,8 +15,10 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import coil.compose.AsyncImage
+import com.example.capital_taxi.Navigation.Destination
 import com.example.capital_taxi.R
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -56,14 +60,39 @@ fun Profile(navController: NavController) {
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
                 // Top Image
-                Image(
-                    painter = painterResource(R.drawable.person),
-                    contentDescription = "Profile Picture",
+                Box(
                     modifier = Modifier
                         .padding(top = 16.dp)
                         .size(120.dp)
-                        .background(Color.Gray, CircleShape)
-                )
+                ) {
+                    // Profile Picture
+                    Image(
+                        painter = painterResource(R.drawable.person),
+                        contentDescription = "Profile Picture",
+                        modifier = Modifier
+                            .size(120.dp)
+                            .background(Color.Gray, CircleShape)
+                    )
+
+                    // Icon overlay
+                    IconButton(
+                        onClick = {
+                            // Handle file picker logic here
+                        },
+                        modifier = Modifier
+                            .align(Alignment.BottomEnd)
+                            .size(26.dp) // Adjust icon size as needed
+                            .background(Color.White, CircleShape)
+                    ) {
+                        Icon(
+                            modifier = Modifier .size(32.dp),
+
+                            painter = painterResource(R.drawable.baseline_add_circle_outline_24), // Replace with your icon resource
+                            contentDescription = "Upload Picture",
+                            tint = Color((0XFF46B96C))
+                        )
+                    }
+                }
 
                 Spacer(modifier = Modifier.height(16.dp))
 
@@ -115,14 +144,22 @@ fun Profile(navController: NavController) {
 
                 Spacer(modifier = Modifier.height(24.dp))
 
-                // Save Button
                 Button(
-                    onClick = { /* Handle save action */ },
+                    onClick = { navController.navigate(Destination.UserHomeScreen.route)},
                     modifier = Modifier
-                        .fillMaxWidth(0.8f)
-                        .height(50.dp)
+                        .fillMaxWidth(.9f)
+
+
+                        .height(60.dp),
+                    colors = ButtonDefaults.buttonColors(Color(0XFF46C96B)),
+                    shape = RoundedCornerShape(16.dp)
+
                 ) {
-                    Text(text = "Save", fontWeight = FontWeight.Bold)
+                    Text(
+                        text = "Save ",
+                        fontSize = 18.sp,
+
+                        )
                 }
             }
         }
@@ -142,8 +179,10 @@ fun ProfileTextField(
         label = { Text(label) },
         leadingIcon = leadingIcon,
         modifier = Modifier
-            .fillMaxWidth(0.9f)
+             .fillMaxWidth(0.9f)
             .padding(vertical = 8.dp),
+        shape = RoundedCornerShape(16.dp)
+        ,
         textStyle = LocalTextStyle.current.copy(color = Color.Black),
         colors = TextFieldDefaults.outlinedTextFieldColors(
             focusedBorderColor = Color.Black,
