@@ -194,48 +194,14 @@ fun PickupWithDropOffButtons(navController: NavController) {
                     )
                     .padding(20.dp)
             ) {
-                Row(
-                    horizontalArrangement = Arrangement.SpaceBetween,
-                    verticalAlignment = Alignment.CenterVertically,
-                    modifier = Modifier.fillMaxWidth()
-                ) {
-
-                    Text(
-                        text = "Distance \n \n 2.4 miles",
-                        fontSize = 16.sp,
-                        fontWeight = FontWeight.Bold,
-                        color = Color.Black
-                    )
-                    VerticalDivider(
-                        thickness = 2.dp,
-                        modifier = Modifier
-
-                            .height(70.dp)
-                            .padding(horizontal = 12.dp)
-                    )
-                    Text(
-                        text = "Duration \n \n 15:02",
-                        fontSize = 16.sp,
-                        fontWeight = FontWeight.Bold,
-
-                        color = Color.Black
-                    )
-                    VerticalDivider(
-                        thickness = 2.dp,
-                        modifier = Modifier
-                            .height(70.dp)
-                            .padding(horizontal = 12.dp)
-                    )
-                    Text(
-                        text = "Price \n \n £10.50",
-                        fontSize = 16.sp,
-                        fontWeight = FontWeight.Bold,
-
-                        color = Color.Black
-                    )
 
 
-                }
+                TripInfoRow(
+                    distance = "2.4 miles",
+                    duration = "15:02",
+                    price = "£10.50"
+                )
+
             }
             Spacer(modifier = Modifier.padding(top = 15.dp))
 

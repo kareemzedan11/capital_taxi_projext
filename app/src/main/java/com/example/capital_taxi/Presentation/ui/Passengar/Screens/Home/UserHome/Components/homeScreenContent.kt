@@ -57,7 +57,7 @@ fun homeScreenContent(navController: NavController) {
                 Box(
                     modifier = Modifier.fillMaxSize().background(Color.White)
                 ) {
-                    TripRatingDialog()
+                    TripDetailsLiveTracker()
                 }
             }
         ) { padding ->

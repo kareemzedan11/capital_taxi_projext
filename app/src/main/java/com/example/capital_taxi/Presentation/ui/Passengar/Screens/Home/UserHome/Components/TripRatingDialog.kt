@@ -67,7 +67,8 @@ fun StarRating(rating: Float, onRatingSelected: (Float) -> Unit) {
 
 @Composable
 fun TripRatingDialog() {
-    var selectedRating by remember { mutableStateOf(0f) } // Use Float for half-star ratings
+    var selectedRating by remember { mutableStateOf(0f) }
+    var comments by remember { mutableStateOf("") }
 
     Column(
         modifier = Modifier
@@ -100,8 +101,8 @@ fun TripRatingDialog() {
 
 
         TextField(
-            value = "",
-            onValueChange = {},
+            value = comments,
+            onValueChange = {comments=it},
             placeholder = { Text("Additional comments...") },
             modifier = Modifier
                 .fillMaxWidth()

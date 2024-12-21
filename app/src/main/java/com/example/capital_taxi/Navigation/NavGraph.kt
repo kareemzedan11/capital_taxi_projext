@@ -35,7 +35,7 @@ import settings
 
 @Composable
 fun AppNavGraph(navController: NavHostController) {
-    NavHost(navController = navController, startDestination = Destination.UserHomeScreen.route) {
+    NavHost(navController = navController, startDestination = Destination.StartScreen.route) {
 
         composable(Destination.SplashScreen.route) {
             SplashScreen(navController)

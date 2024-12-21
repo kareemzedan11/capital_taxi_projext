@@ -6,16 +6,7 @@ import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.ArrowForward
-
-import androidx.compose.material.icons.filled.Close
-import androidx.compose.material.icons.filled.Delete
-import androidx.compose.material.icons.filled.ExitToApp
-import androidx.compose.material.icons.filled.Home
-import androidx.compose.material.icons.filled.KeyboardArrowRight
-
-import androidx.compose.material.icons.filled.Phone
-
+import androidx.compose.material.icons.filled.*
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -26,6 +17,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
+
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun settings(navController: NavController) {
@@ -87,33 +79,91 @@ fun settings(navController: NavController) {
                 verticalArrangement = Arrangement.Top,
                 horizontalAlignment = Alignment.Start
             ) {
-                // Settings Options wrapped in boxes
+                // Section 1: Account Settings
+                SectionTitle(title = "Account Settings")
+                SettingBox(
+                    title = "Home",
+                    icon = Icons.Default.Home,
+                    color = Color(0XFF46C96B),
+                    onClick = { /* Handle phone number click */ }
+                )
+                SettingBox(
+                    title = "Add Work",
+                    icon = Icons.Default.Home,
+                    color = Color(0XFF46C96B),
+                    onClick = { /* Handle phone number click */ }
+                )
                 SettingBox(
                     title = "Phone Number",
                     icon = Icons.Default.Phone,
+                    color = Color(0XFF46C96B),
                     onClick = { /* Handle phone number click */ }
                 )
-
                 SettingBox(
-                    title = "Language",
+                    title = "Saved Places",
+                    icon = Icons.Default.Home,
+                    color = Color(0XFF46C96B),
+                    onClick = { /* Handle saved places click */ }
+                )
+                SettingBox(
+                    title = "Communication",
+                    color = Color(0XFF46C96B),
+
                     icon = Icons.Default.Close,
                     onClick = { /* Handle language change */ }
                 )
-
+                // Section 2: Preferences
+                SectionTitle(title = "Preferences")
+                SettingBox(
+                    title = "Language",
+                    icon = Icons.Default.Add,
+                    color = Color(0XFF46C96B),
+                    onClick = { /* Handle language change */ }
+                )
                 SettingBox(
                     title = "Night Mode",
-                    icon = Icons.Default.Home,
+                    icon = Icons.Default.Add,
+                    color = Color(0XFF46C96B),
                     onClick = { /* Handle night mode toggle */ }
                 )
+// Inside the settings function, after the Security section
+                SectionTitle(title = "Safety")
+                SettingBox(
+                    title = "Two-Factor Authentication",
+                    icon = Icons.Default.Add,
+                    color = Color(0xFF46C96B),
+                    onClick = { /* Handle Two-Factor Authentication */ }
+                )
+                SettingBox(
+                    title = "Privacy Settings",
+                    icon = Icons.Default.Lock,
+                    color = Color(0xFF46C96B),
+                    onClick = { /* Handle Privacy Settings */ }
+                )
+                SettingBox(
+                    title = "Security Notifications",
+                    icon = Icons.Default.Notifications,
+                    color = Color(0xFF46C96B),
+                    onClick = { /* Handle Security Notifications */ }
+                )
+                SettingBox(
+                    title = "Emergency Contact",
+                    icon = Icons.Default.Phone,
+                    color = Color(0xFF46C96B),
+                    onClick = { /* Handle Emergency Contact */ }
+                )
 
+                // Section 3: Security
+                SectionTitle(title = "Security")
                 SettingBox(
                     title = "Log Out",
+                    color = Color.Red,
                     icon = Icons.Default.ExitToApp,
                     onClick = { /* Handle log out */ }
                 )
-
                 SettingBox(
                     title = "Delete Account",
+                    color = Color.Red,
                     icon = Icons.Default.Delete,
                     onClick = { /* Handle account deletion */ }
                 )
@@ -123,10 +173,23 @@ fun settings(navController: NavController) {
 }
 
 @Composable
+fun SectionTitle(title: String) {
+    Text(
+        text = title,
+        fontSize = 18.sp,
+        fontWeight = FontWeight.Bold,
+        color = Color.Black,
+        modifier = Modifier
+            .padding(vertical = 8.dp)
+    )
+}
+
+@Composable
 fun SettingBox(
     title: String,
     icon: androidx.compose.ui.graphics.vector.ImageVector,
-    onClick: () -> Unit
+    onClick: () -> Unit,
+    color: Color,
 ) {
     Box(
         modifier = Modifier
@@ -138,6 +201,7 @@ fun SettingBox(
         SettingOptionWithArrow(
             title = title,
             icon = icon,
+            color = color,
             onClick = onClick
         )
     }
@@ -146,6 +210,7 @@ fun SettingBox(
 @Composable
 fun SettingOptionWithArrow(
     title: String,
+    color: Color,
     icon: androidx.compose.ui.graphics.vector.ImageVector,
     onClick: () -> Unit
 ) {
@@ -159,7 +224,7 @@ fun SettingOptionWithArrow(
         Icon(
             imageVector = icon,
             contentDescription = title,
-            tint = Color(0XFF46C96B),
+            tint = color,
             modifier = Modifier.size(32.dp) // Larger icon size
         )
         Spacer(modifier = Modifier.width(20.dp))
