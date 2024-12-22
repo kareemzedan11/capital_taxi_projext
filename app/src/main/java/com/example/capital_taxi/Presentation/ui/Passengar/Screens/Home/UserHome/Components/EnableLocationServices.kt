@@ -42,16 +42,10 @@ fun EnableLocationServices() {
     ) {
 
 
-        Column (horizontalAlignment = Alignment.CenterHorizontally){
+        Column (horizontalAlignment = Alignment.Start){
 
 
-            Box(
-                modifier = Modifier
 
-                    .height(100.dp)
-                    .width(200.dp),
-                contentAlignment = Alignment.Center
-            ) {
                 Image(
                     modifier = Modifier
                         .verticalScroll(rememberScrollState())
@@ -62,23 +56,23 @@ fun EnableLocationServices() {
                 )
 
 
-            }
-            Spacer(Modifier.height(50.dp))
+
+            Spacer(Modifier.height(20.dp))
 
             Text(
                 buildAnnotatedString {
                     withStyle(style = SpanStyle(fontSize = 24.sp, fontWeight = FontWeight.Bold, color = Color.Black)) {
-                        append("Enable Location\nServices\n")
+                        append("Enable Location Services\n")
                     }
 
                     withStyle(style = SpanStyle(fontSize = 16.sp, fontWeight = FontWeight.W600)) {
-                        append("Please enable location services so\nwe can offer personalized features and\nservices based on where you are")
+                        append("Please enable location services")
                     }
                 },
                 modifier = Modifier.padding(vertical = 16.dp, horizontal = 16.dp),
                 color = Color.Gray
             )
-            Spacer(Modifier.height(30.dp))
+            Spacer(Modifier.height(20.dp))
 
             Button(
                 onClick = { /* Handle new method */ },
@@ -89,7 +83,7 @@ fun EnableLocationServices() {
                     .height(80.dp)
                     .fillMaxWidth()
                     .padding(vertical = 16.dp, horizontal = 30.dp),
-                colors = ButtonDefaults.buttonColors(Color(0xffFFA500))
+                colors = ButtonDefaults.buttonColors(Color(0xff46C96B))
             ) {
                 Text("Enable in Settings",
                     fontSize = 18.sp, fontWeight = FontWeight.Bold, color = Color.White)

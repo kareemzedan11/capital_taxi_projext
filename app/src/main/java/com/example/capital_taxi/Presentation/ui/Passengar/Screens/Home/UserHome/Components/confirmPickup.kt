@@ -57,15 +57,6 @@ fun confirmPickup() {
                 verticalArrangement = Arrangement.Top,
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
-                HorizontalDivider(
-                    modifier = Modifier
-                        .fillMaxWidth(0.2f)
-                        .padding(top = 10.dp),
-                    thickness = 6.dp,
-                    color = Color(0XFFF2F2F2)
-                )
-
-                Spacer(modifier = Modifier.weight(1f))
                 Button(
                     onClick = { },
                     modifier = Modifier

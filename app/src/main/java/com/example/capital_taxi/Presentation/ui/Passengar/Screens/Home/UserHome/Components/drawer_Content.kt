@@ -196,20 +196,23 @@ fun drawerContent( navController: NavController) {
 
 
 @Composable
-fun navigationDrawerItem(onClick: () -> Unit, painter: Painter, text: String) {
+fun navigationDrawerItem(onClick: () -> Unit, painter: Painter?=null, text: String) {
     NavigationDrawerItem(
 
         onClick = { onClick() },
         icon = {
+        if(painter!=null){
             Icon(
                 modifier = Modifier
 
                     .padding(start = 5.dp, end = 3.dp) // Apply padding inside the background
                     .size(28.dp), // Set the size of the icon
                 contentDescription = "menu",
-                painter = painter, tint = Color.Unspecified
+                painter =painter , tint = Color.Unspecified
 
             )
+
+        }
         },
         selected = false,
         label = {

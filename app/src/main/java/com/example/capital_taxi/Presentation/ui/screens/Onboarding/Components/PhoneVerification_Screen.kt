@@ -183,7 +183,7 @@ fun PhoneVerification(navController: NavController) {
 
                 Spacer(modifier = Modifier.height(40.dp))
                 Button(
-                    onClick = {navController.navigate(Destination.SelectTheMode.route)},
+                    onClick = {navController.navigate(Destination.OtpScreen.route)},
                     modifier = Modifier
                         .fillMaxWidth()
 

@@ -48,6 +48,8 @@ fun homeScreenContent(navController: NavController) {
         gesturesEnabled = gesturesEnabled,
         modifier = Modifier.fillMaxSize()
     ) {
+        confirmPickup()
+
         BottomSheetScaffold(
             scaffoldState = bottomSheetState,
             sheetPeekHeight = 500.dp,
@@ -55,9 +57,18 @@ fun homeScreenContent(navController: NavController) {
             sheetContent = {
                 // Bottom Sheet Content
                 Box(
-                    modifier = Modifier.fillMaxSize().background(Color.White)
+                    modifier = Modifier
+                        .fillMaxSize()
+                        .background(Color.White)
                 ) {
-                    TripDetailsLiveTracker()
+                    PickupWithDropOffButtons(navController)
+
+                    //searchAboutADriver()
+                    //EnableLocationServices()
+                     //    confirmPickup()
+
+                     //  TripDetailsLiveTracker()
+                    // ServiceAvailability(navController)
                 }
             }
         ) { padding ->
@@ -97,7 +108,6 @@ fun homeScreenContent(navController: NavController) {
         }
     }
 }
-
 
 
 //                val composition by rememberLottieComposition(

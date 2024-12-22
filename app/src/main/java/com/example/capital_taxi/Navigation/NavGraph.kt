@@ -7,12 +7,14 @@ import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
+import com.example.capital_taxi.Presentation.ui.Driver.Screens.Home.drawerTabs.Inbox.InboxPage
+import com.example.capital_taxi.Presentation.ui.Driver.Screens.Home.drawerTabs.invite_friends.InviteFriendsPage
+import com.example.capital_taxi.Presentation.ui.Driver.Screens.Home.driverHomeScreen
 import com.example.capital_taxi.Presentation.ui.Driver.Screens.Login.DriverLoginIn
 import com.example.capital_taxi.Presentation.ui.Driver.Screens.Register.DriverSignUp
 import com.example.capital_taxi.Presentation.ui.Driver.Screens.VerficationScreens.Validation_Navigation.ValidationNavigation
 import com.example.capital_taxi.Presentation.ui.Driver.Screens.VerficationScreens.faceValidation.FaceValidation
 import com.example.capital_taxi.Presentation.ui.Passengar.Screens.Home.TripHistory.TripsHistoryScreen
-import com.example.capital_taxi.Presentation.ui.Passengar.Screens.Home.UserHome.Components.LocationModalBottomSheetContent
 import com.example.capital_taxi.Presentation.ui.Passengar.Screens.Home.UserHome.Components.PickupWithPickoffPoints
 import com.example.capital_taxi.Presentation.ui.Passengar.Screens.Home.UserHome.Components.WhereToButton
 import com.example.capital_taxi.Presentation.ui.Passengar.Screens.Home.UserHome.UserHomeScreen
@@ -35,7 +37,7 @@ import settings
 
 @Composable
 fun AppNavGraph(navController: NavHostController) {
-    NavHost(navController = navController, startDestination = Destination.StartScreen.route) {
+    NavHost(navController = navController, startDestination = Destination.DriverHomeScreen.route) {
 
         composable(Destination.SplashScreen.route) {
             SplashScreen(navController)
@@ -110,8 +112,15 @@ fun AppNavGraph(navController: NavHostController) {
         composable(Destination.WhereToButton.route) {
             WhereToButton(navController)
         }
-
-
+        composable(Destination.DriverHomeScreen.route) {
+        driverHomeScreen(navController)
+        }
+        composable(Destination.InboxPage.route) {
+            InboxPage(navController)
+        }
+        composable(Destination.InviteFriendsPage.route) {
+            InviteFriendsPage(navController)
+        }
 
         composable(
             route = "ConfirmInformation?name={name}&email={email}&photoUrl={photoUrl}",

@@ -28,6 +28,9 @@ sealed class Destination(val route: String) {
     object OtpScreen : Destination("OtpScreen")
     object SelectTheMode2 : Destination("SelectTheMode2")
     object WhereToButton : Destination("WhereToButton")
+    object DriverHomeScreen : Destination("DriverHomeScreen")
+    object InboxPage : Destination("InboxPage")
+    object InviteFriendsPage : Destination("InviteFriendsPage")
 
 }
 
