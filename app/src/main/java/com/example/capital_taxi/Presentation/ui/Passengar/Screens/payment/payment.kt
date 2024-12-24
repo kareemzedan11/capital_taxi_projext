@@ -1,4 +1,4 @@
-package com.example.capital_taxi.Presentation.ui.Passengar.Screens.Home.payment
+package com.example.capital_taxi.Presentation.ui.Passengar.Screens.payment
 
 
 import androidx.compose.foundation.background

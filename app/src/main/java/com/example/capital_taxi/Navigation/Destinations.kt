@@ -31,6 +31,9 @@ sealed class Destination(val route: String) {
     object DriverHomeScreen : Destination("DriverHomeScreen")
     object InboxPage : Destination("InboxPage")
     object InviteFriendsPage : Destination("InviteFriendsPage")
+    object IncomePage : Destination("IncomePage")
+    object notification : Destination("notification")
+    object driversettings : Destination("driversettings")
 
 }
 

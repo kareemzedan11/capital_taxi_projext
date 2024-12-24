@@ -111,18 +111,15 @@ fun DriverNavigationDrawer(navController: NavController) {
                 )
 
                 Spacer(Modifier.height(10.dp))
-
-
-
-                navigationDrawerItem(
-                    onClick = { navController.navigate(Destination.voucherScreen.route) },
+               navigationDrawerItem(
+                    onClick = { navController.navigate(Destination.notification.route) },
                     text = "Notifications"
 
                 )
                 Spacer(Modifier.height(10.dp))
 
                 navigationDrawerItem(
-                    onClick = { navController.navigate(Destination.voucherScreen.route) },
+                    onClick = { navController.navigate(Destination.IncomePage.route) },
                     text = "Income"
                 )
                 Spacer(Modifier.height(10.dp))
@@ -138,7 +135,7 @@ fun DriverNavigationDrawer(navController: NavController) {
                 )
                 Spacer(Modifier.height(10.dp))
                 navigationDrawerItem(
-                    onClick = { navController.navigate(Destination.settings.route) },
+                    onClick = { navController.navigate(Destination.driversettings.route) },
                     text = "Setting"
                 )
 

@@ -8,18 +8,21 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
 import com.example.capital_taxi.Presentation.ui.Driver.Screens.Home.drawerTabs.Inbox.InboxPage
+import com.example.capital_taxi.Presentation.ui.Driver.Screens.Home.drawerTabs.income.IncomePage
 import com.example.capital_taxi.Presentation.ui.Driver.Screens.Home.drawerTabs.invite_friends.InviteFriendsPage
+import com.example.capital_taxi.Presentation.ui.Driver.Screens.Home.drawerTabs.notification.notification
+import com.example.capital_taxi.Presentation.ui.Driver.Screens.Home.drawerTabs.settings.driversettings
 import com.example.capital_taxi.Presentation.ui.Driver.Screens.Home.driverHomeScreen
 import com.example.capital_taxi.Presentation.ui.Driver.Screens.Login.DriverLoginIn
 import com.example.capital_taxi.Presentation.ui.Driver.Screens.Register.DriverSignUp
 import com.example.capital_taxi.Presentation.ui.Driver.Screens.VerficationScreens.Validation_Navigation.ValidationNavigation
 import com.example.capital_taxi.Presentation.ui.Driver.Screens.VerficationScreens.faceValidation.FaceValidation
-import com.example.capital_taxi.Presentation.ui.Passengar.Screens.Home.TripHistory.TripsHistoryScreen
+import com.example.capital_taxi.Presentation.ui.Passengar.Screens.TripHistory.TripsHistoryScreen
 import com.example.capital_taxi.Presentation.ui.Passengar.Screens.Home.UserHome.Components.PickupWithPickoffPoints
 import com.example.capital_taxi.Presentation.ui.Passengar.Screens.Home.UserHome.Components.WhereToButton
 import com.example.capital_taxi.Presentation.ui.Passengar.Screens.Home.UserHome.UserHomeScreen
-import com.example.capital_taxi.Presentation.ui.Passengar.Screens.Home.Voucher.voucherScreen
-import com.example.capital_taxi.Presentation.ui.Passengar.Screens.Home.payment.PaymentScreen
+import com.example.capital_taxi.Presentation.ui.Passengar.Screens.Voucher.voucherScreen
+import com.example.capital_taxi.Presentation.ui.Passengar.Screens.payment.PaymentScreen
 
 import com.example.capital_taxi.Presentation.ui.Passengar.Screens.Login.UserLogin
 import com.example.capital_taxi.Presentation.ui.Passengar.Screens.Register.UserRegister
@@ -37,7 +40,7 @@ import settings
 
 @Composable
 fun AppNavGraph(navController: NavHostController) {
-    NavHost(navController = navController, startDestination = Destination.DriverHomeScreen.route) {
+    NavHost(navController = navController, startDestination = Destination.UserHomeScreen.route) {
 
         composable(Destination.SplashScreen.route) {
             SplashScreen(navController)
@@ -120,6 +123,15 @@ fun AppNavGraph(navController: NavHostController) {
         }
         composable(Destination.InviteFriendsPage.route) {
             InviteFriendsPage(navController)
+        }
+        composable(Destination.IncomePage.route) {
+            IncomePage(navController)
+        }
+        composable(Destination.notification.route) {
+            notification(navController)
+        }
+        composable(Destination.driversettings.route) {
+            driversettings(navController)
         }
 
         composable(

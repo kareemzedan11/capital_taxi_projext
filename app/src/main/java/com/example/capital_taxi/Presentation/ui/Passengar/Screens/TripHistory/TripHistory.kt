@@ -1,4 +1,5 @@
-package com.example.capital_taxi.Presentation.ui.Passengar.Screens.Home.Voucher
+package com.example.capital_taxi.Presentation.ui.Passengar.Screens.TripHistory
+
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -13,12 +14,10 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Close
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
-import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -27,9 +26,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.sp
-import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.platform.LocalContext
@@ -41,15 +38,15 @@ import com.example.capital_taxi.R
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun voucherScreen(navController: NavController) {
+fun TripsHistoryScreen(navController: NavController) {
 
 
-    VoucherScreenContent(navController = navController)
+    Trips_History_Screen_Content(navController = navController)
 }
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun VoucherScreenContent(modifier: Modifier = Modifier, navController: NavController) {
+fun Trips_History_Screen_Content(modifier: Modifier = Modifier, navController: NavController) {
     var voucher by remember { mutableStateOf("") }
     val context = LocalContext.current // Access the context safely
     val backgroundColor = Color(ContextCompat.getColor(context, R.color.general))
@@ -85,7 +82,7 @@ fun VoucherScreenContent(modifier: Modifier = Modifier, navController: NavContro
 
             // Text centered in the Box
             Text(
-                "Voucher",
+                "Trip History",
                 modifier = Modifier
                     .align(Alignment.Center) // Align text in the center of the Box
                     .padding(top = 60.dp), // Add padding from the top
@@ -95,24 +92,8 @@ fun VoucherScreenContent(modifier: Modifier = Modifier, navController: NavContro
             )
         }
 
-        Spacer(modifier=Modifier.height(20.dp))
 
-        // Promo Code Input Section
-        OutlinedTextField(
-            value = voucher,
-            onValueChange = { voucher = it },
-            label = { Text("Have a promo code? Enter it here", color = Color.Gray) },
-            keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Text),
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(horizontal = 30.dp, vertical = 8.dp),
-            shape = RoundedCornerShape(30.dp),
-            colors = TextFieldDefaults.outlinedTextFieldColors(
-
-                containerColor = Color.White
-            )
-        )
-Spacer(modifier=Modifier.height(40.dp))
+        Spacer(modifier=Modifier.height(40.dp))
         Box(
             modifier = Modifier
                 .fillMaxSize()
@@ -121,12 +102,12 @@ Spacer(modifier=Modifier.height(40.dp))
             contentAlignment = Alignment.Center // Align content in the center of the Box
         ) {
             Text(
-                "No Vouchers Available",
+                "No Trip History Available Now",
                 fontSize = 16.sp,
                 fontWeight = FontWeight.Medium,
                 color = Color.Black
             )
         }
     }
-    }
+}
 

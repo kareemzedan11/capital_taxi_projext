@@ -7,7 +7,11 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowDropDown
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -18,6 +22,7 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.example.capital_taxi.Presentation.ui.Driver.Screens.Home.Components.DriverNavigationDrawer
 import com.example.capital_taxi.Presentation.ui.Driver.Screens.Home.Components.driverHomeScreenContent
+import com.example.capital_taxi.Presentation.ui.Driver.Screens.Home.Components.tripDetailsCard
 import com.example.capital_taxi.Presentation.ui.Passengar.Screens.Home.UserHome.Components.MapSection
 import com.example.capital_taxi.Presentation.ui.Passengar.Screens.Home.UserHome.Components.confirmPickup
 import com.example.capital_taxi.R
@@ -31,7 +36,23 @@ fun driverHomeScreen(navController: NavController) {
     val scope = rememberCoroutineScope()
     val bottomSheetState = rememberBottomSheetScaffoldState()
     val drawerState = rememberDrawerState(initialValue = DrawerValue.Closed)
+    var showBottomSheet by remember { mutableStateOf(false) }
+    val sheetState = rememberModalBottomSheetState(
+        skipPartiallyExpanded = false,
+    )
 
+
+    if (showBottomSheet) {
+        ModalBottomSheet(
+            modifier = Modifier.fillMaxHeight().padding(bottom = 20.dp),
+            sheetState = sheetState,
+            onDismissRequest = { showBottomSheet = false },
+
+
+        ) {
+
+        }
+    }
     val gesturesEnabled = drawerState.isOpen
 
     Box(modifier = Modifier.fillMaxSize()) {
@@ -71,7 +92,9 @@ fun driverHomeScreen(navController: NavController) {
                         modifier = Modifier.fillMaxSize(),
                         contentAlignment = Alignment.Center
                     ) {
-                        MapSection()
+                         MapSection()
+
+
                     }
 
                     Box(
@@ -99,14 +122,17 @@ fun driverHomeScreen(navController: NavController) {
                            Button(
                                colors = ButtonDefaults.buttonColors(containerColor = Color.Black),
                                onClick = {
-                                   // Handle button click here
+                                   showBottomSheet = true
                                },
 
                                modifier = Modifier.wrapContentWidth()
                                    .height(60.dp)
                                    .padding(end = 80.dp)
                            ) {
-                              Row(horizontalArrangement = Arrangement.Center,
+                              Row(
+
+
+                                  horizontalArrangement = Arrangement.Center,
                                   verticalAlignment = Alignment.CenterVertically) {
 
                                   Icon(
@@ -129,7 +155,7 @@ fun driverHomeScreen(navController: NavController) {
             }
         }
 
-        // Fixed Bottom Section
+
         Card(
             modifier = Modifier
                 .fillMaxWidth()

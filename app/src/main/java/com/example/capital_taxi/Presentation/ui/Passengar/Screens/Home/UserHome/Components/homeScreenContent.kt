@@ -19,6 +19,7 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.rememberBottomSheetScaffoldState
 import androidx.compose.material3.rememberDrawerState
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -26,6 +27,12 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
+import com.airbnb.lottie.compose.LottieAnimation
+import com.airbnb.lottie.compose.LottieCompositionSpec
+import com.airbnb.lottie.compose.LottieConstants
+import com.airbnb.lottie.compose.animateLottieCompositionAsState
+import com.airbnb.lottie.compose.rememberLottieComposition
+import com.example.capital_taxi.R
 import drawerContent
 import kotlinx.coroutines.launch
 
@@ -61,12 +68,12 @@ fun homeScreenContent(navController: NavController) {
                         .fillMaxSize()
                         .background(Color.White)
                 ) {
-                    PickupWithDropOffButtons(navController)
+                    //PickupWithDropOffButtons(navController)
 
-                    //searchAboutADriver()
-                    //EnableLocationServices()
+                    // searchAboutADriver()
+                     EnableLocationServices()
                      //    confirmPickup()
-
+                      //RideDetailsScreen
                      //  TripDetailsLiveTracker()
                     // ServiceAvailability(navController)
                 }
@@ -82,7 +89,25 @@ fun homeScreenContent(navController: NavController) {
                     modifier = Modifier.fillMaxSize(),
                     contentAlignment = Alignment.Center
                 ) {
+
+
+
                     MapSection()
+//                    val composition by rememberLottieComposition(
+//                        spec = LottieCompositionSpec.RawRes(R.raw.searching)
+//                    )
+//                    val progress2 by animateLottieCompositionAsState(
+//                        composition = composition,
+//                        iterations = LottieConstants.IterateForever
+//                    )
+//
+//                    Box(modifier = Modifier.fillMaxWidth(0.7f), contentAlignment = Alignment.Center) {
+//                        LottieAnimation(
+//                            composition = composition,
+//                            progress = progress2,
+//                            modifier = Modifier.fillMaxWidth()
+//                        )
+//                    }
                 }
 
                 Box(
@@ -109,19 +134,3 @@ fun homeScreenContent(navController: NavController) {
     }
 }
 
-
-//                val composition by rememberLottieComposition(
-//                    spec = LottieCompositionSpec.RawRes(R.raw.searching)
-//                )
-//                val progress2 by animateLottieCompositionAsState(
-//                    composition = composition,
-//                    iterations = LottieConstants.IterateForever
-//                )
-//
-//                Box(modifier = Modifier.fillMaxWidth(0.7f), contentAlignment = Alignment.Center) {
-//                    LottieAnimation(
-//                        composition = composition,
-//                        progress = progress2,
-//                        modifier = Modifier.fillMaxWidth()
-//                    )
-//                }

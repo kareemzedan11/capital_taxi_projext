@@ -13,10 +13,14 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.Paint
+import androidx.compose.ui.graphics.painter.Painter
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
+import com.example.capital_taxi.R
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -83,25 +87,25 @@ fun settings(navController: NavController) {
                 SectionTitle(title = "Account Settings")
                 SettingBox(
                     title = "Home",
-                    icon = Icons.Default.Home,
+                    icon = painterResource(R.drawable.home),
                     color = Color(0XFF46C96B),
                     onClick = { /* Handle phone number click */ }
                 )
                 SettingBox(
                     title = "Add Work",
-                    icon = Icons.Default.Home,
+                    icon = painterResource(R.drawable.work),
                     color = Color(0XFF46C96B),
                     onClick = { /* Handle phone number click */ }
                 )
                 SettingBox(
                     title = "Phone Number",
-                    icon = Icons.Default.Phone,
+                    icon = painterResource(R.drawable.baseline_phone_24),
                     color = Color(0XFF46C96B),
                     onClick = { /* Handle phone number click */ }
                 )
                 SettingBox(
                     title = "Saved Places",
-                    icon = Icons.Default.Home,
+                    icon = painterResource(R.drawable.baseline_place_24),
                     color = Color(0XFF46C96B),
                     onClick = { /* Handle saved places click */ }
                 )
@@ -109,20 +113,20 @@ fun settings(navController: NavController) {
                     title = "Communication",
                     color = Color(0XFF46C96B),
 
-                    icon = Icons.Default.Close,
+                    icon = painterResource(R.drawable.messageicon),
                     onClick = { /* Handle language change */ }
                 )
                 // Section 2: Preferences
                 SectionTitle(title = "Preferences")
                 SettingBox(
                     title = "Language",
-                    icon = Icons.Default.Add,
+                    icon = painterResource(R.drawable.language),
                     color = Color(0XFF46C96B),
                     onClick = { /* Handle language change */ }
                 )
                 SettingBox(
                     title = "Night Mode",
-                    icon = Icons.Default.Add,
+                    icon = painterResource(R.drawable.mode),
                     color = Color(0XFF46C96B),
                     onClick = { /* Handle night mode toggle */ }
                 )
@@ -130,25 +134,25 @@ fun settings(navController: NavController) {
                 SectionTitle(title = "Safety")
                 SettingBox(
                     title = "Two-Factor Authentication",
-                    icon = Icons.Default.Add,
+                    icon = painterResource(R.drawable.safety),
                     color = Color(0xFF46C96B),
                     onClick = { /* Handle Two-Factor Authentication */ }
                 )
                 SettingBox(
                     title = "Privacy Settings",
-                    icon = Icons.Default.Lock,
+                    icon = painterResource(R.drawable.settings_3524636),
                     color = Color(0xFF46C96B),
                     onClick = { /* Handle Privacy Settings */ }
                 )
                 SettingBox(
                     title = "Security Notifications",
-                    icon = Icons.Default.Notifications,
+                    icon = painterResource(R.drawable.notification),
                     color = Color(0xFF46C96B),
                     onClick = { /* Handle Security Notifications */ }
                 )
                 SettingBox(
                     title = "Emergency Contact",
-                    icon = Icons.Default.Phone,
+                    icon = painterResource(R.drawable.emergency),
                     color = Color(0xFF46C96B),
                     onClick = { /* Handle Emergency Contact */ }
                 )
@@ -158,13 +162,13 @@ fun settings(navController: NavController) {
                 SettingBox(
                     title = "Log Out",
                     color = Color.Red,
-                    icon = Icons.Default.ExitToApp,
+                    icon = painterResource(R.drawable.logout),
                     onClick = { /* Handle log out */ }
                 )
                 SettingBox(
                     title = "Delete Account",
                     color = Color.Red,
-                    icon = Icons.Default.Delete,
+                    icon = painterResource(R.drawable.baseline_delete_24),
                     onClick = { /* Handle account deletion */ }
                 )
             }
@@ -187,7 +191,7 @@ fun SectionTitle(title: String) {
 @Composable
 fun SettingBox(
     title: String,
-    icon: androidx.compose.ui.graphics.vector.ImageVector,
+    icon: Painter,
     onClick: () -> Unit,
     color: Color,
 ) {
@@ -195,7 +199,10 @@ fun SettingBox(
         modifier = Modifier
             .fillMaxWidth()
             .padding(vertical = 8.dp) // Add spacing between items
-            .background(Color(0xFFF2F2F2), RoundedCornerShape(12.dp)) // Background color with rounded corners
+            .background(
+                Color(0xFFF2F2F2),
+                RoundedCornerShape(12.dp)
+            ) // Background color with rounded corners
             .clickable { onClick() }
     ) {
         SettingOptionWithArrow(
@@ -211,7 +218,7 @@ fun SettingBox(
 fun SettingOptionWithArrow(
     title: String,
     color: Color,
-    icon: androidx.compose.ui.graphics.vector.ImageVector,
+    icon: Painter,
     onClick: () -> Unit
 ) {
     Row(
@@ -222,7 +229,7 @@ fun SettingOptionWithArrow(
         verticalAlignment = Alignment.CenterVertically
     ) {
         Icon(
-            imageVector = icon,
+            painter = icon,
             contentDescription = title,
             tint = color,
             modifier = Modifier.size(32.dp) // Larger icon size
