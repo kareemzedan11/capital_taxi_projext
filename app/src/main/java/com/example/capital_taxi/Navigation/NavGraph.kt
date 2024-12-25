@@ -7,6 +7,7 @@ import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
+import com.example.capital_taxi.Presentation.ui.Driver.Screens.Home.Components.TripDetailsForDriver
 import com.example.capital_taxi.Presentation.ui.Driver.Screens.Home.drawerTabs.Inbox.InboxPage
 import com.example.capital_taxi.Presentation.ui.Driver.Screens.Home.drawerTabs.income.IncomePage
 import com.example.capital_taxi.Presentation.ui.Driver.Screens.Home.drawerTabs.invite_friends.InviteFriendsPage
@@ -40,7 +41,7 @@ import settings
 
 @Composable
 fun AppNavGraph(navController: NavHostController) {
-    NavHost(navController = navController, startDestination = Destination.UserHomeScreen.route) {
+    NavHost(navController = navController, startDestination = Destination.TripDetailsForDriver.route) {
 
         composable(Destination.SplashScreen.route) {
             SplashScreen(navController)
@@ -132,6 +133,9 @@ fun AppNavGraph(navController: NavHostController) {
         }
         composable(Destination.driversettings.route) {
             driversettings(navController)
+        }
+        composable(Destination.TripDetailsForDriver.route) {
+            TripDetailsForDriver(navController)
         }
 
         composable(

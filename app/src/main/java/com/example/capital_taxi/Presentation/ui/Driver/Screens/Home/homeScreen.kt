@@ -21,6 +21,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.example.capital_taxi.Presentation.ui.Driver.Screens.Home.Components.DriverNavigationDrawer
+import com.example.capital_taxi.Presentation.ui.Driver.Screens.Home.Components.captainToPassengar
 import com.example.capital_taxi.Presentation.ui.Driver.Screens.Home.Components.driverHomeScreenContent
 import com.example.capital_taxi.Presentation.ui.Driver.Screens.Home.Components.tripDetailsCard
 import com.example.capital_taxi.Presentation.ui.Passengar.Screens.Home.UserHome.Components.MapSection
@@ -29,6 +30,7 @@ import com.example.capital_taxi.R
 import drawerContent
 
 import kotlinx.coroutines.launch
+import passengerAcceptPrice
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -93,7 +95,7 @@ fun driverHomeScreen(navController: NavController) {
                         contentAlignment = Alignment.Center
                     ) {
                          MapSection()
-
+                        tripDetailsCard(light = false)
 
                     }
 
@@ -155,51 +157,51 @@ fun driverHomeScreen(navController: NavController) {
             }
         }
 
-
-        Card(
-            modifier = Modifier
-                .fillMaxWidth()
-                .background(Color.White)
-                .height(100.dp)
-                .align(Alignment.BottomCenter)
-                .padding(16.dp),
-
-            elevation = CardDefaults.cardElevation(defaultElevation = 20.dp),
-
-            ) {
-
-            Row(  modifier = Modifier.fillMaxSize().padding(horizontal =
-            10.dp),
-                horizontalArrangement = Arrangement.SpaceBetween,
-                verticalAlignment = Alignment.CenterVertically
-            ) {
-
-
-                Icon(
-
-                    modifier = Modifier.size(26.dp),
-                    painter = painterResource(R.drawable.note), contentDescription = null
-                    , tint = Color.Unspecified
-                )
-
-                Spacer(modifier = Modifier.weight(1f))
-
-                Button(
-                    colors = ButtonDefaults.buttonColors(containerColor = Color(0XFF46C96B)),
-                    onClick = {
-                        // Handle button click here
-                    },
-                    modifier = Modifier.fillMaxWidth(0.4f).fillMaxHeight(.8f)
-                ) {
-                    Text(text = "Start", fontSize = 18.sp)
-                }
-                Spacer(modifier = Modifier.weight(1f))
-                Icon(
-                    modifier = Modifier.size(26.dp),
-                    painter = painterResource(R.drawable.tools), contentDescription = null
-                )
-            }
-
-        }
+        captainToPassengar(navController)
+//        Card(
+//            modifier = Modifier
+//                .fillMaxWidth()
+//                .background(Color.White)
+//                .height(100.dp)
+//                .align(Alignment.BottomCenter)
+//                .padding(16.dp),
+//
+//            elevation = CardDefaults.cardElevation(defaultElevation = 20.dp),
+//
+//            ) {
+//
+//            Row(  modifier = Modifier.fillMaxSize().padding(horizontal =
+//            10.dp),
+//                horizontalArrangement = Arrangement.SpaceBetween,
+//                verticalAlignment = Alignment.CenterVertically
+//            ) {
+//
+//
+//                Icon(
+//
+//                    modifier = Modifier.size(26.dp),
+//                    painter = painterResource(R.drawable.note), contentDescription = null
+//                    , tint = Color.Unspecified
+//                )
+//
+//                Spacer(modifier = Modifier.weight(1f))
+//
+//                Button(
+//                    colors = ButtonDefaults.buttonColors(containerColor = Color(0XFF46C96B)),
+//                    onClick = {
+//                        // Handle button click here
+//                    },
+//                    modifier = Modifier.fillMaxWidth(0.4f).fillMaxHeight(.8f)
+//                ) {
+//                    Text(text = "Start", fontSize = 18.sp)
+//                }
+//                Spacer(modifier = Modifier.weight(1f))
+//                Icon(
+//                    modifier = Modifier.size(26.dp),
+//                    painter = painterResource(R.drawable.tools), contentDescription = null
+//                )
+//            }
+//
+//        }
     }
 }

@@ -68,14 +68,14 @@ fun homeScreenContent(navController: NavController) {
                         .fillMaxSize()
                         .background(Color.White)
                 ) {
-                    //PickupWithDropOffButtons(navController)
+                    PickupWithDropOffButtons(navController)
 
                     // searchAboutADriver()
-                     EnableLocationServices()
-                     //    confirmPickup()
-                      //RideDetailsScreen
+                     //EnableLocationServices()
+                     //   confirmPickup()
+                    //  RideDetailsScreen(navController)
                      //  TripDetailsLiveTracker()
-                    // ServiceAvailability(navController)
+                     // ServiceAvailability(navController)
                 }
             }
         ) { padding ->
