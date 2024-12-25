@@ -31,20 +31,20 @@ import drawerContent
 import kotlinx.coroutines.delay
 
 
-
 @Composable
-fun tripDetailsCard(light:Boolean) {
+fun tripDetailsCard(light: Boolean) {
     Card(
         modifier = Modifier
-            .fillMaxWidth().padding(16.dp),
+            .fillMaxWidth()
+            .padding(16.dp),
         shape = RoundedCornerShape(8.dp),
     ) {
         Box(
             modifier = Modifier
                 .fillMaxWidth()
-                .background(Color.White) // خلفية البطاقة الأساسية
+                .background(Color.White)
         ) {
-            // طبقة الخلفية الوميضية
+
             var blinkState by remember { mutableStateOf(true) }
 
             LaunchedEffect(Unit) {
@@ -54,7 +54,7 @@ fun tripDetailsCard(light:Boolean) {
                 }
             }
 
-            if(light==true){
+            if (light == true) {
                 Box(
                     modifier = Modifier
                         .fillMaxHeight(.7f)
@@ -154,7 +154,7 @@ fun tripDetailsCard(light:Boolean) {
                         DestinationText = "Alex",
                         distance1 = "3m (1.2KM)",
                         distance2 = "45m (20KM)",
-
+                        isDestance = true,
                         onClick = { })
 
                 }
@@ -200,15 +200,17 @@ fun tripDetailsCard(light:Boolean) {
         }
     }
 }
+
 @Composable
 fun RidePointDetails(
-    distance1: String, distance2: String,
+    distance1: String? = null,
+    distance2: String? = null,
+    isDestance: Boolean,
     Locationicon: Int,
     Destinationicon: Int,
     onClick: () -> Unit,
     LocationText: String,
     DestinationText: String
-
 ) {
     Row(
         modifier = Modifier.fillMaxWidth(),
@@ -221,7 +223,7 @@ fun RidePointDetails(
 
         ) {
 
-            Row {
+            Row (horizontalArrangement = Arrangement.Start, verticalAlignment = Alignment.CenterVertically){
 
                 androidx.compose.material.Icon(
                     modifier = Modifier.size(26.dp),
@@ -229,20 +231,7 @@ fun RidePointDetails(
                     contentDescription = null,
                     tint = Color.Unspecified
                 )
-
-
-
-                Column {
-
-                    Text(
-                        modifier = Modifier.padding(horizontal = 10.dp),
-
-                        text = distance1,
-                        fontSize = 14.sp,
-                        fontWeight = FontWeight.Bold,
-                        color = Color.Black
-                    )
-
+                if (!isDestance) {
 
                     Button(
                         onClick = onClick,
@@ -260,30 +249,56 @@ fun RidePointDetails(
                             )
                         }
                     }
+                }
+                if (isDestance) {
+                    Column {
+
+
+                        distance1?.let {
+                            Text(
+                                modifier = Modifier.padding(horizontal = 10.dp),
+                                text = it,
+                                fontSize = 14.sp,
+                                fontWeight = FontWeight.Bold,
+                                color = Color.Black
+                            )
+                        }
+
+
+
+
+                        Button(
+                            onClick = onClick,
+                            modifier = Modifier.fillMaxWidth(),
+                            colors = ButtonDefaults.buttonColors(Color.Transparent),
+                        ) {
+                            Box(
+                                modifier = Modifier.fillMaxWidth(),
+                                contentAlignment = Alignment.CenterStart
+                            ) {
+                                androidx.compose.material.Text(
+                                    text = LocationText,
+                                    fontSize = 16.sp,
+                                    fontWeight = FontWeight.W600,
+                                )
+                            }
+                        }
+
+                    }
 
                 }
 
             }
+            Row (horizontalArrangement = Arrangement.Start, verticalAlignment = Alignment.CenterVertically){
 
 
-            Row {
-
-                androidx.compose.material.Icon(
+            androidx.compose.material.Icon(
                     modifier = Modifier.size(26.dp),
                     painter = painterResource(Destinationicon),
                     contentDescription = null,
                     tint = Color.Unspecified
                 )
-                Column {
-
-                    Text(
-                        modifier = Modifier.padding(horizontal = 10.dp),
-                        text = distance2,
-                        fontSize = 14.sp,
-                        fontWeight = FontWeight.Bold,
-                        color = Color.Black
-                    )
-
+                if (isDestance == false) {
 
                     Button(
                         onClick = onClick,
@@ -302,7 +317,42 @@ fun RidePointDetails(
                         }
                     }
                 }
+                if (isDestance) {
 
+                    Column {
+
+                        if (isDestance) {
+                            distance2?.let {
+                                Text(
+                                    modifier = Modifier.padding(horizontal = 10.dp),
+                                    text = it,
+                                    fontSize = 14.sp,
+                                    fontWeight = FontWeight.Bold,
+                                    color = Color.Black
+                                )
+                            }
+                        }
+
+
+
+                        Button(
+                            onClick = onClick,
+                            modifier = Modifier.fillMaxWidth(),
+                            colors = ButtonDefaults.buttonColors(Color.Transparent),
+                        ) {
+                            Box(
+                                modifier = Modifier.fillMaxWidth(),
+                                contentAlignment = Alignment.CenterStart
+                            ) {
+                                androidx.compose.material.Text(
+                                    text = DestinationText,
+                                    fontSize = 16.sp,
+                                    fontWeight = FontWeight.W600,
+                                )
+                            }
+                        }
+                    }
+                }
 
             }
         }
