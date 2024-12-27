@@ -41,7 +41,7 @@ fun IntercityCard() {
                 .background(Color.White)) {
                 Image(
                     modifier = Modifier.size(120.dp),
-                    painter = painterResource(R.drawable.greencarlogo),
+                    painter = painterResource(R.drawable.uber),
                     contentDescription = "car logo"
                 )
                 Spacer(modifier = Modifier.weight(1f))

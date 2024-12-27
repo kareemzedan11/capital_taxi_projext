@@ -1,5 +1,6 @@
 package com.example.capital_taxi.Presentation.ui.Passengar.Screens.Home.UserHome.Components
 
+import IntercityCard
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
@@ -119,7 +120,7 @@ fun PickupWithDropOffButtons(navController: NavController) {
                             shape = RoundedCornerShape(20.dp)
                         )
                         .clickable {
-                            selectedVehicleIndex = index // Set the clicked item as selected
+                            selectedVehicleIndex = index
                         }
                 ) {
                     Column {
@@ -179,30 +180,32 @@ fun PickupWithDropOffButtons(navController: NavController) {
         Spacer(modifier = Modifier.padding(top = 15.dp))
 
         if (selectedVehicleIndex != -1) {
-            Box(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(horizontal = 16.dp)
-                    .border(
-                        width = 2.dp,
-                        color = Color.Gray,
-                        shape = RoundedCornerShape(10.dp)
-                    )
-                    .background(
-                        color = Color(0XFFECECEC),
-                        shape = RoundedCornerShape(10.dp)
-                    )
-                    .padding(20.dp)
-            ) {
+//            Box(
+//                modifier = Modifier
+//                    .fillMaxWidth()
+//                    .padding(horizontal = 16.dp)
+//                    .border(
+//                        width = 2.dp,
+//                        color = Color.Gray,
+//                        shape = RoundedCornerShape(10.dp)
+//                    )
+//                    .background(
+//                        color = Color(0XFFECECEC),
+//                        shape = RoundedCornerShape(10.dp)
+//                    )
+//                    .padding(20.dp)
+//            ) {
+//
+//
+//                TripInfoRow(
+//                    distance = "2.4 miles",
+//                    duration = "15:02",
+//                    price = "£10.50"
+//                )
+//
+//            }
+            IntercityCard()
 
-
-                TripInfoRow(
-                    distance = "2.4 miles",
-                    duration = "15:02",
-                    price = "£10.50"
-                )
-
-            }
             Spacer(modifier = Modifier.padding(top = 15.dp))
 
             Button(

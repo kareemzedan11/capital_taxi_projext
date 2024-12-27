@@ -38,6 +38,11 @@ sealed class Destination(val route: String) {
 
     object chatbot : Destination("chatbot")
     object CapitalTaxiChatScreen : Destination("CapitalTaxiChatScreen")
+    object HelpScreen : Destination("HelpScreen")
+    object SafetyScreen : Destination("SafetyScreen")
+    object userNotification : Destination("userNotification")
+
+
 
 }
 

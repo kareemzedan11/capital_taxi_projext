@@ -124,14 +124,14 @@ fun drawerContent( navController: NavController) {
                   Spacer(Modifier.height(10.dp))
 
                   navigationDrawerItem(
-                      onClick = { navController.navigate(Destination.voucherScreen.route) },
+                      onClick = { navController.navigate(Destination.userNotification.route) },
                       painter = painterResource(R.drawable.notification),
                       text = "Notifications"
                   )
                    Spacer(Modifier.height(10.dp))
 
                   navigationDrawerItem(
-                      onClick = { navController.navigate(Destination.voucherScreen.route) },
+                      onClick = { navController.navigate(Destination.SafetyScreen.route) },
                       painter = painterResource(R.drawable.safety),
                       text = "Safety"
                   )
@@ -145,7 +145,7 @@ fun drawerContent( navController: NavController) {
                   Spacer(Modifier.height(10.dp))
 
                   navigationDrawerItem(
-                      onClick = { },
+                      onClick = {navController.navigate(Destination.HelpScreen.route) },
                       painter = painterResource(R.drawable.headphone_18080416),
                       text = "Help"
                   )
@@ -160,7 +160,7 @@ fun drawerContent( navController: NavController) {
 
 
                   navigationDrawerItem(
-                      onClick = { navController.navigate(Destination.voucherScreen.route) },
+                      onClick = { navController.navigate(Destination.InviteFriendsPage.route) },
                       painter = painterResource(R.drawable.invite),
                       text = "Invite Friends"
                   )

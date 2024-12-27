@@ -18,6 +18,8 @@ import com.example.capital_taxi.Presentation.ui.Driver.Screens.Login.DriverLogin
 import com.example.capital_taxi.Presentation.ui.Driver.Screens.Register.DriverSignUp
 import com.example.capital_taxi.Presentation.ui.Driver.Screens.VerficationScreens.Validation_Navigation.ValidationNavigation
 import com.example.capital_taxi.Presentation.ui.Driver.Screens.VerficationScreens.faceValidation.FaceValidation
+import com.example.capital_taxi.Presentation.ui.Passengar.Screens.HelpScreen.HelpDetailScreen
+import com.example.capital_taxi.Presentation.ui.Passengar.Screens.HelpScreen.HelpScreen
 import com.example.capital_taxi.Presentation.ui.Passengar.Screens.Home.UserHome.Components.CapitalTaxiChatScreen
 import com.example.capital_taxi.Presentation.ui.Passengar.Screens.TripHistory.TripsHistoryScreen
 import com.example.capital_taxi.Presentation.ui.Passengar.Screens.Home.UserHome.Components.PickupWithPickoffPoints
@@ -29,6 +31,8 @@ import com.example.capital_taxi.Presentation.ui.Passengar.Screens.payment.Paymen
 
 import com.example.capital_taxi.Presentation.ui.Passengar.Screens.Login.UserLogin
 import com.example.capital_taxi.Presentation.ui.Passengar.Screens.Register.UserRegister
+import com.example.capital_taxi.Presentation.ui.Passengar.Screens.Safety.SafetyScreen
+import com.example.capital_taxi.Presentation.ui.Passengar.Screens.notification.userNotification
 import com.example.capital_taxi.Presentation.ui.Passengar.Screens.profile.Profile
 import com.example.capital_taxi.Presentation.ui.screens.Confirm_information.ConfirmInformation
 import com.example.capital_taxi.Presentation.ui.screens.OTP.OtpScreen
@@ -145,7 +149,21 @@ fun AppNavGraph(navController: NavHostController) {
         composable(Destination.CapitalTaxiChatScreen.route) {
             CapitalTaxiChatScreen(navController)
         }
-
+        composable(Destination.HelpScreen.route) {
+            HelpScreen(navController)
+        }
+        composable(Destination.SafetyScreen.route) {
+            SafetyScreen(navController)
+        }
+        composable(Destination.userNotification.route) {
+            userNotification(navController)
+        }
+        composable("help_detail/{topic}") { backStackEntry ->
+            HelpDetailScreen(
+                navController = navController,
+                topic = backStackEntry.arguments?.getString("topic") ?: ""
+            )
+        }
 
         composable(
             route = "ConfirmInformation?name={name}&email={email}&photoUrl={photoUrl}",

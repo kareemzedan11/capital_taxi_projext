@@ -55,7 +55,7 @@ fun homeScreenContent(navController: NavController) {
         gesturesEnabled = gesturesEnabled,
         modifier = Modifier.fillMaxSize()
     ) {
-        confirmPickup()
+        // confirmPickup()
 
         BottomSheetScaffold(
             scaffoldState = bottomSheetState,
@@ -68,15 +68,18 @@ fun homeScreenContent(navController: NavController) {
                         .fillMaxSize()
                         .background(Color.White)
                 ) {
+                    // ServiceAvailability(navController)
+                    //EnableLocationServices()
 
-                    PickupWithDropOffButtons(navController)
+                    // PickupWithDropOffButtons(navController)
+                    //  confirmPickup()
 
                     // searchAboutADriver()
-                     //EnableLocationServices()
-                     //   confirmPickup()
-                    //  RideDetailsScreen(navController)
-                     //  TripDetailsLiveTracker()
-                     // ServiceAvailability(navController)
+
+                 // RideDetailsScreen(navController)
+                 TripDetailsLiveTracker()
+                    //TripRatingDialog()
+
                 }
             }
         ) { padding ->
@@ -92,7 +95,7 @@ fun homeScreenContent(navController: NavController) {
                 ) {
 
 
-                     MapSection()
+                    MapSection()
 
 
 //                    val composition by rememberLottieComposition(
@@ -131,7 +134,7 @@ fun homeScreenContent(navController: NavController) {
                         navController = navController
                     )
 
-                       DraggableIcon(navController = navController)
+                    DraggableIcon(navController = navController)
 
 
                 }

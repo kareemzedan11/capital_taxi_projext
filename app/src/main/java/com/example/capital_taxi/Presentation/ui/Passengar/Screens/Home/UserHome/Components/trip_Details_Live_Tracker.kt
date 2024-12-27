@@ -23,66 +23,88 @@ import androidx.compose.ui.unit.sp
 import com.example.capital_taxi.R
 
 @Composable
-fun TripDetailsLiveTracker(){
-Column (modifier = Modifier.fillMaxWidth().padding(horizontal = 15.dp, vertical = 10.dp),
-    horizontalAlignment = Alignment.CenterHorizontally,
-    verticalArrangement = Arrangement.Center
-    ){
-    Row(horizontalArrangement = Arrangement.Center) {
-        Text("Your Trip", fontSize = 20.sp, fontWeight = FontWeight.Bold)
-        Spacer(modifier = Modifier.weight(1f))
-
-        Text("12:02 PM", fontSize = 18.sp, color = Color.DarkGray)
-        Spacer(modifier = Modifier.padding(15.dp))
-        Text("21:12:2024", fontSize = 18.sp, color = Color.DarkGray)
-
-
-    }
-    Spacer(modifier = Modifier.padding(20.dp))
-
-    HorizontalDivider(thickness = 2.dp, modifier = Modifier.fillMaxWidth(.9f))
-
-    Spacer(modifier = Modifier.padding(20.dp))
-
-    Box(
+fun TripDetailsLiveTracker() {
+    Column(
         modifier = Modifier
             .fillMaxWidth()
-            .border(
-                width = 2.dp,
-                color = Color.Gray,
-                shape = RoundedCornerShape(10.dp)
-            )
-            .background(
-                color = Color(0XFFECECEC),
-                shape = RoundedCornerShape(10.dp)
-            )
-            .padding(20.dp)
+            .padding(horizontal = 15.dp, vertical = 10.dp),
+        horizontalAlignment = Alignment.CenterHorizontally,
+        verticalArrangement = Arrangement.Center
     ) {
+        Spacer(modifier = Modifier.padding(top = 10.dp))
+        Row(
+            horizontalArrangement = Arrangement.Center,
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            Text(
+                "The Arrive After",
+                fontSize = 24.sp,
+                fontWeight = FontWeight.Bold
+            )
+            Spacer(modifier = Modifier.weight(1f))
+            RoundedTimeDisplayWithFill()
+        }
+
+        Spacer(modifier = Modifier.padding(20.dp))
+
+        HorizontalDivider(thickness = 2.dp, modifier = Modifier.fillMaxWidth(.9f))
+        Spacer(modifier = Modifier.padding(20.dp))
 
 
-        TripInfoRow(
-            distance = "2.4 miles",
-            duration = "15:02",
-            price = "£10.50"
+        Row(horizontalArrangement = Arrangement.Center) {
+            Text("Your Trip", fontSize = 20.sp, fontWeight = FontWeight.Bold)
+            Spacer(modifier = Modifier.weight(1f))
+
+            Text("12:02 PM", fontSize = 18.sp, color = Color.DarkGray)
+            Spacer(modifier = Modifier.padding(15.dp))
+            Text("21:12:2024", fontSize = 18.sp, color = Color.DarkGray)
+
+
+        }
+        Spacer(modifier = Modifier.padding(20.dp))
+
+        HorizontalDivider(thickness = 2.dp, modifier = Modifier.fillMaxWidth(.9f))
+
+        Spacer(modifier = Modifier.padding(20.dp))
+
+        Box(
+            modifier = Modifier
+                .fillMaxWidth()
+                .border(
+                    width = 2.dp,
+                    color = Color.Gray,
+                    shape = RoundedCornerShape(10.dp)
+                )
+                .background(
+                    color = Color(0XFFECECEC),
+                    shape = RoundedCornerShape(10.dp)
+                )
+                .padding(20.dp)
+        ) {
+
+
+            TripInfoRow(
+                distance = "2.4 miles",
+                duration = "15:02",
+                price = "£10.50"
+            )
+
+
+        }
+        Spacer(modifier = Modifier.padding(20.dp))
+
+        HorizontalDivider(thickness = 2.dp, modifier = Modifier.fillMaxWidth(.9f))
+
+        Spacer(modifier = Modifier.padding(20.dp))
+        CarAndDriverInfoCard(
+            carNumber = "KN63 ZZT",
+            carBrand = "Volvo",
+            carColor = "Silver",
+            driverName = "Alex Smith",
+            driverRating = 4.8f,
+            tripsCount = 148,
+            carImage = painterResource(id = R.drawable.uber),
+            driverImage = painterResource(id = R.drawable.person)
         )
-
-
-
     }
-    Spacer(modifier = Modifier.padding(20.dp))
-
-    HorizontalDivider(thickness = 2.dp, modifier = Modifier.fillMaxWidth(.9f))
-
-    Spacer(modifier = Modifier.padding(20.dp))
-    CarAndDriverInfoCard(
-        carNumber = "KN63 ZZT",
-        carBrand = "Volvo",
-        carColor = "Silver",
-        driverName = "Alex Smith",
-        driverRating = 4.8f,
-        tripsCount = 148,
-        carImage = painterResource(id = R.drawable.uber),
-        driverImage = painterResource(id = R.drawable.person)
-    )
-}
 }
