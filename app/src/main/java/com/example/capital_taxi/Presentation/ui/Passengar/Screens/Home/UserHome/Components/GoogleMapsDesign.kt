@@ -32,7 +32,9 @@ import android.location.Location
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.gestures.detectDragGestures
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CircleShape
@@ -41,8 +43,11 @@ import androidx.compose.material.icons.filled.LocationOn
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.ui.Alignment
+import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.unit.Dp
+import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.dp
 import com.example.capital_taxi.R
 
@@ -55,6 +60,26 @@ import org.json.JSONObject
 import java.net.HttpURLConnection
 import java.net.URL
 
+import android.os.Bundle
+import androidx.activity.ComponentActivity
+import androidx.activity.compose.setContent
+import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
+import androidx.compose.foundation.gestures.detectDragGestures
+import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.runtime.*
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.ColorFilter
+import androidx.compose.ui.graphics.ColorMatrix
+import androidx.compose.ui.graphics.painter.Painter
+import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalDensity
+import androidx.navigation.NavController
+import com.example.capital_taxi.Navigation.Destination
+import kotlin.math.roundToInt
 
 @Composable
 fun GoogleMapsDesign(context: Context, modifier: Modifier = Modifier) {
@@ -369,3 +394,84 @@ fun MapSection(modifier: Modifier=Modifier) {
     GoogleMapsDesign(modifier = modifier, context = LocalContext.current)
 }
 
+
+@Composable
+fun DraggableIcon(iconSize: Dp = 50.dp,navController: NavController) {
+    var offsetX by remember { mutableStateOf(0f) }
+    var offsetY by remember { mutableStateOf(0f) }
+    var isDragging by remember { mutableStateOf(false) }
+
+
+    val density = LocalDensity.current
+    val iconSizePx = with(density) { iconSize.toPx() }
+
+    BoxWithConstraints(
+        modifier = Modifier
+            .fillMaxSize()
+            .background(Color.Transparent)
+    ) {
+        val screenWidth = constraints.maxWidth.toFloat()
+        val screenHeight = constraints.maxHeight.toFloat()
+
+        // Initialize the starting position to the left of the screen, with half of the icon off-screen
+        LaunchedEffect(Unit) {
+            offsetX = -iconSizePx / 2 // Start with the icon half off the screen to the left
+            offsetY = screenHeight / 2 - iconSizePx / 2
+        }
+
+        LaunchedEffect(isDragging) {
+            if (!isDragging) {
+                // When dragging ends, place the icon at the left or right based on position
+                offsetX = when {
+                    offsetX < screenWidth / 2 -> -iconSizePx / 2 // Place it off the left side if it's closer
+                    else -> screenWidth - iconSizePx // Place it at the right side
+                }
+            }
+        }
+
+        val icon: Painter = painterResource(id = R.drawable.headphone_18080416)
+
+        Box(
+            modifier = Modifier
+
+                .offset {
+                    IntOffset(offsetX.roundToInt(), offsetY.roundToInt())
+                }
+                .size(iconSize * 1.5f)
+                .clip(CircleShape) // Make the box circular
+                .background(
+                    color = Color.White.copy(alpha = 0.9f)
+,
+                            shape = RoundedCornerShape(30.dp)
+                )
+                .pointerInput(Unit) {
+                    detectDragGestures(
+                        onDragStart = { isDragging = true },
+                        onDragEnd = { isDragging = false },
+                        onDrag = { change, dragAmount ->
+                            change.consume()
+                            // Move icon based on drag and ensure it doesn't go out of screen bounds
+                            offsetX = (offsetX + dragAmount.x).coerceIn(0f, screenWidth - iconSizePx)
+                            offsetY = (offsetY + dragAmount.y).coerceIn(0f, screenHeight - iconSizePx)
+                        }
+                    )
+                }
+                .clickable {
+navController.navigate(Destination.chatbot.route)
+                }
+            ,
+            Alignment.Center
+        ) {
+            Image(
+                painter = icon,
+                contentDescription = "Chatbot Icon",
+                contentScale = ContentScale.Fit,
+                modifier = Modifier
+                    .size(iconSize)
+                    .padding(8.dp),
+                        colorFilter = ColorFilter.tint(Color(0XFF46C96B)) // Apply a green tint to the icon
+
+            )
+        }
+    }
+}

@@ -33,6 +33,7 @@ import com.example.capital_taxi.Presentation.Theme.LightOnSecondary
 import com.example.capital_taxi.Presentation.Theme.LightPrimary
 import com.example.capital_taxi.Presentation.Theme.LightSecondary
 import com.example.capital_taxi.Presentation.Theme.LightSurface
+import com.example.capital_taxi.Presentation.ui.Passengar.Screens.Home.UserHome.Components.DraggableIcon
 import com.example.capital_taxi.Presentation.ui.screens.Onboarding.Components.GoogleAndPhone
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 
@@ -88,10 +89,12 @@ class MainActivity : ComponentActivity() {
                 onSecondary = DarkOnSecondary
             )
 
-            // Apply the theme
+
             MaterialTheme(
-                colorScheme = lightColors, // Pass the lightColorScheme here
+
+                colorScheme = lightColors,
                 content = {
+
                     val navController = rememberNavController()
                     AppNavGraph(navController = navController)
                 }

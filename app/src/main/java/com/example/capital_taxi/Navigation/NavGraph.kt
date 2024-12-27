@@ -18,9 +18,11 @@ import com.example.capital_taxi.Presentation.ui.Driver.Screens.Login.DriverLogin
 import com.example.capital_taxi.Presentation.ui.Driver.Screens.Register.DriverSignUp
 import com.example.capital_taxi.Presentation.ui.Driver.Screens.VerficationScreens.Validation_Navigation.ValidationNavigation
 import com.example.capital_taxi.Presentation.ui.Driver.Screens.VerficationScreens.faceValidation.FaceValidation
+import com.example.capital_taxi.Presentation.ui.Passengar.Screens.Home.UserHome.Components.CapitalTaxiChatScreen
 import com.example.capital_taxi.Presentation.ui.Passengar.Screens.TripHistory.TripsHistoryScreen
 import com.example.capital_taxi.Presentation.ui.Passengar.Screens.Home.UserHome.Components.PickupWithPickoffPoints
 import com.example.capital_taxi.Presentation.ui.Passengar.Screens.Home.UserHome.Components.WhereToButton
+import com.example.capital_taxi.Presentation.ui.Passengar.Screens.Home.UserHome.Components.chatbot
 import com.example.capital_taxi.Presentation.ui.Passengar.Screens.Home.UserHome.UserHomeScreen
 import com.example.capital_taxi.Presentation.ui.Passengar.Screens.Voucher.voucherScreen
 import com.example.capital_taxi.Presentation.ui.Passengar.Screens.payment.PaymentScreen
@@ -41,7 +43,7 @@ import settings
 
 @Composable
 fun AppNavGraph(navController: NavHostController) {
-    NavHost(navController = navController, startDestination = Destination.DriverHomeScreen.route) {
+    NavHost(navController = navController, startDestination = Destination.UserHomeScreen.route) {
 
         composable(Destination.SplashScreen.route) {
             SplashScreen(navController)
@@ -137,6 +139,13 @@ fun AppNavGraph(navController: NavHostController) {
         composable(Destination.TripDetailsForDriver.route) {
             TripDetailsForDriver(navController)
         }
+        composable(Destination.chatbot.route) {
+            chatbot(navController)
+        }
+        composable(Destination.CapitalTaxiChatScreen.route) {
+            CapitalTaxiChatScreen(navController)
+        }
+
 
         composable(
             route = "ConfirmInformation?name={name}&email={email}&photoUrl={photoUrl}",

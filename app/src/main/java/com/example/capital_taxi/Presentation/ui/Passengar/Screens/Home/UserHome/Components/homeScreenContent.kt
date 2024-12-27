@@ -68,6 +68,7 @@ fun homeScreenContent(navController: NavController) {
                         .fillMaxSize()
                         .background(Color.White)
                 ) {
+
                     PickupWithDropOffButtons(navController)
 
                     // searchAboutADriver()
@@ -84,15 +85,16 @@ fun homeScreenContent(navController: NavController) {
                     .fillMaxSize()
                     .padding(padding),
             ) {
-                // Map Section and Animation
+
                 Box(
                     modifier = Modifier.fillMaxSize(),
                     contentAlignment = Alignment.Center
                 ) {
 
 
+                     MapSection()
 
-                    MapSection()
+
 //                    val composition by rememberLottieComposition(
 //                        spec = LottieCompositionSpec.RawRes(R.raw.searching)
 //                    )
@@ -128,6 +130,10 @@ fun homeScreenContent(navController: NavController) {
                         },
                         navController = navController
                     )
+
+                       DraggableIcon(navController = navController)
+
+
                 }
             }
         }

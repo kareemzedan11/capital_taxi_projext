@@ -36,6 +36,8 @@ sealed class Destination(val route: String) {
     object driversettings : Destination("driversettings")
     object TripDetailsForDriver : Destination("TripDetailsForDriver")
 
+    object chatbot : Destination("chatbot")
+    object CapitalTaxiChatScreen : Destination("CapitalTaxiChatScreen")
 
 }
 
