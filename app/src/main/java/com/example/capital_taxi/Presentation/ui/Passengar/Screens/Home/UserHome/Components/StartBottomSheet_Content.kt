@@ -11,7 +11,7 @@ import androidx.navigation.NavController
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun DraggableBottomSheet_Content(navController: NavController) {
+fun StartBottomSheet_Content(navController: NavController) {
 
 
     Column(

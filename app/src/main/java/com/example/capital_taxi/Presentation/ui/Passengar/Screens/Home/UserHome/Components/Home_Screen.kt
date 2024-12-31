@@ -19,7 +19,7 @@ fun homeScreen(navController: NavController) {
             .background(Color.White)
 
     ) {
-        // Google Map (Base Layer)
+
         Column(
             modifier = Modifier
                 .fillMaxSize()

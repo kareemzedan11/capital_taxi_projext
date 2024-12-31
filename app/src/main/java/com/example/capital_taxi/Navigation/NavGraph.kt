@@ -23,7 +23,7 @@ import com.example.capital_taxi.Presentation.ui.Passengar.Screens.HelpScreen.Hel
 import com.example.capital_taxi.Presentation.ui.Passengar.Screens.Home.UserHome.Components.CapitalTaxiChatScreen
 import com.example.capital_taxi.Presentation.ui.Passengar.Screens.TripHistory.TripsHistoryScreen
 import com.example.capital_taxi.Presentation.ui.Passengar.Screens.Home.UserHome.Components.PickupWithPickoffPoints
-import com.example.capital_taxi.Presentation.ui.Passengar.Screens.Home.UserHome.Components.WhereToButton
+import com.example.capital_taxi.Presentation.ui.Passengar.Screens.Home.UserHome.Components.TripDestination
 import com.example.capital_taxi.Presentation.ui.Passengar.Screens.Home.UserHome.Components.chatbot
 import com.example.capital_taxi.Presentation.ui.Passengar.Screens.Home.UserHome.UserHomeScreen
 import com.example.capital_taxi.Presentation.ui.Passengar.Screens.Voucher.voucherScreen
@@ -120,7 +120,7 @@ fun AppNavGraph(navController: NavHostController) {
             SelectTheMode2(navController)
         }
         composable(Destination.WhereToButton.route) {
-            WhereToButton(navController)
+            TripDestination(navController)
         }
         composable(Destination.DriverHomeScreen.route) {
         driverHomeScreen(navController)

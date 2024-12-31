@@ -23,49 +23,6 @@ import androidx.compose.ui.unit.sp
 import com.example.capital_taxi.R
 
 @Composable
-fun StarRating(rating: Float, onRatingSelected: (Float) -> Unit) {
-    Row(horizontalArrangement = Arrangement.Center) {
-        for (i in 1..5) {
-            // Calculate the star state: full, half, or empty
-            val isFullStar = rating >= i
-            val isHalfStar = rating in (i - 0.5)..i.toDouble()
-
-            Box(
-                modifier = Modifier
-                    .size(32.dp)
-                    .clickable {
-                        val newRating = if (rating >= i) i - 0.5f else i.toFloat()
-                        onRatingSelected(newRating)
-                    }
-            ) {
-                if (isFullStar) {
-                    Icon(
-                        painter = painterResource(R.drawable.baseline_star_rate_24), // Full star icon
-                        contentDescription = "Full Star",
-                        tint = Color(0XFFFDCD10),
-                        modifier = Modifier.fillMaxSize()
-                    )
-                } else if (isHalfStar) {
-                    Icon(
-                        painter = painterResource(R.drawable.baseline_star_half_24), // Half star icon
-                        contentDescription = "Half Star",
-                        tint = Color(0XFFFDCD10),
-                        modifier = Modifier.fillMaxSize()
-                    )
-                } else {
-                    Icon(
-                        painter = painterResource(R.drawable.baseline_star_24), // Empty star icon
-                        contentDescription = "Empty Star",
-                        tint = Color.Gray,
-                        modifier = Modifier.fillMaxSize()
-                    )
-                }
-            }
-        }
-    }
-}
-
-@Composable
 fun TripRatingDialog() {
     var selectedRating by remember { mutableStateOf(0f) }
     var comments by remember { mutableStateOf("") }

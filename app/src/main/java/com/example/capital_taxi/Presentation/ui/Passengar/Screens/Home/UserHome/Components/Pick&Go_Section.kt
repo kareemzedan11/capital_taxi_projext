@@ -4,6 +4,7 @@ import android.util.Log
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
@@ -29,6 +30,8 @@ import androidx.compose.material.icons.filled.Add
 
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.Card
+import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.ElevatedButton
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -39,6 +42,7 @@ import androidx.compose.material3.OutlinedTextField
 
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextFieldDefaults
+import androidx.compose.material3.VerticalDivider
 import androidx.compose.material3.rememberModalBottomSheetState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -59,6 +63,7 @@ import androidx.compose.ui.unit.sp
 import androidx.core.app.NotificationCompat.getColor
 import androidx.core.content.ContextCompat
 import androidx.core.content.ContextCompat.getColor
+import androidx.navigation.NavController
 import com.example.capital_taxi.R
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -72,147 +77,111 @@ import java.net.URL
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun pickAndGoDesign(modifier: Modifier = Modifier) {
+fun pickAndGoDesign(navController: NavController) {
     val context = LocalContext.current // Get the context using LocalContext
     var money by remember { mutableStateOf("") }
-    var showPickUpBottomSheet by remember { mutableStateOf(false) }
-    var showFareBottomSheet by remember { mutableStateOf(false) }
-    val pickUpSheetState = rememberModalBottomSheetState(
+    var showBottomSheet by remember { mutableStateOf(false) }
+    val sheetState = rememberModalBottomSheetState(
         skipPartiallyExpanded = true,
     )
 
-    val fareSheetState = rememberModalBottomSheetState(
-        skipPartiallyExpanded = false,
-    )
-    val backgroundColor = Color(ContextCompat.getColor(context, R.color.general))
-//
-//    Column(
-//        modifier = Modifier
-//            .fillMaxSize()
-//            .background(backgroundColor)
-//            .windowInsetsPadding(WindowInsets.navigationBars)
-//            .padding(20.dp),
-//        verticalArrangement = Arrangement.spacedBy(20.dp),
-//        horizontalAlignment = Alignment.Start
-//    ) {  // Title Text
+    if (showBottomSheet) {
+        ModalBottomSheet(
+            modifier = Modifier.fillMaxHeight(),
+            sheetState = sheetState,
+            onDismissRequest = { showBottomSheet = false }
+        ) {
+            LocationModalBottomSheetContent(navController = navController)
+        }
+    }
+    val backgroundColor = Color.White
+    Column(modifier = Modifier.fillMaxSize()) {
+        Column(
+            modifier = Modifier
+                .fillMaxSize()
+                .background(backgroundColor)
+                .windowInsetsPadding(WindowInsets.navigationBars)
+                .padding(20.dp),
+            verticalArrangement = Arrangement.spacedBy(20.dp),
+            horizontalAlignment = Alignment.Start
+        ) {  // Title Text
 
 
+            Text(
+                text = "Where are you going today?",
+                style = MaterialTheme.typography.titleLarge.copy(
+                    fontWeight = FontWeight.Bold,
+                    fontSize = 22.sp,
+                    color = Color.Black
+                ),
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(bottom = 16.dp)
+            )
+            Column(
+                modifier = Modifier
 
-//        Text(
-//            text = "Where are you going today?",
-//            style = MaterialTheme.typography.titleLarge.copy(
-//                fontWeight = FontWeight.Bold,
-//                fontSize = 22.sp,
-//                color = Color.Black
-//            ),
+                    .padding(20.dp),
+                verticalArrangement = Arrangement.spacedBy(1.dp),
+                horizontalAlignment = Alignment.Start
+            ) {
+                // Pickup Location Row
+                PickupDropOffRow(
+                    iconRes = R.drawable.circle,
+                    text = "Select Pickup Location",
+                    onClick = { showBottomSheet = true }
+                )
+
+                // Vertical Divider
+                repeat(9) {
+                    VerticalDivider(
+                        thickness = 2.dp,
+                        modifier = Modifier
+                            .height(5.dp)
+                            .padding(start = 12.dp)
+                    )
+                }
+
+                // Drop-Off Location Row
+                PickupDropOffRow(
+
+                    iconRes = R.drawable.travel,
+                    text = "Select Drop-Off Location",
+                    onClick = { showBottomSheet = true }
+
+                )
+            }
+
+
+        }
+
+//        Card(
 //            modifier = Modifier
 //                .fillMaxWidth()
-//                .padding(bottom = 16.dp)
-//        )
-
-//        // Pickup Button
-//        Button(
-//            onClick = { showPickUpBottomSheet = true },
-//            modifier = Modifier
-//                .fillMaxWidth()
-//                .padding(vertical = 8.dp),
-//            colors = ButtonDefaults.buttonColors(containerColor = Color.White),
-//            shape = RoundedCornerShape(20.dp)
+//                .padding(16.dp),
+//            elevation = CardDefaults.elevatedCardElevation(10.dp),
+//            shape = RoundedCornerShape(16.dp)
 //        ) {
-//            Row(
-//                verticalAlignment = Alignment.CenterVertically,
-//                horizontalArrangement = Arrangement.Start
-//            ) {
-//                Icon(
-//                    painter = painterResource(R.drawable.yellow),
-//                    contentDescription = null,
-//                    modifier = Modifier.size(30.dp),
-//                    tint = Color.Unspecified
-//                )
-//                Spacer(modifier = Modifier.width(12.dp))
-//                Text(
-//                    text = "Choose pick up point",
-//                    style = MaterialTheme.typography.bodyMedium.copy(color = Color.Gray),
-//                    modifier = Modifier.weight(1f)
-//                )
-//                Icon(
-//                    imageVector = Icons.Default.Add,
-//                    contentDescription = "Add Icon",
-//                    modifier = Modifier.size(24.dp),
-//                    tint = Color.Black
-//                )
-//            }
-//        }
-
-        // Destination Button
-//        ElevatedButton (
-//            onClick = { showPickUpBottomSheet = true },
-//            modifier = Modifier
-//                .fillMaxWidth()
-//                .padding(vertical = 8.dp),
-//            colors = ButtonDefaults.buttonColors(containerColor = Color.White),
-//            shape = RoundedCornerShape(30.dp)
-//        ) {
-//            Row(
-//                verticalAlignment = Alignment.CenterVertically,
-//                horizontalArrangement = Arrangement.Start
-//            ) {
-//                Icon(
-//                    painter = painterResource(R.drawable.travel),
-//                    contentDescription = null,
-//                    modifier = Modifier.size(35.dp),
-//                    tint = Color.Unspecified
-//                )
-//                Spacer(modifier = Modifier.width(12.dp))
-//                Text(
-//                    text = "Choose your destination",
-//                    style = MaterialTheme.typography.bodyMedium.copy(color = Color.Gray),
-//                    modifier = Modifier.weight(1f)
-//                )
-//                Icon(
-//                    imageVector = Icons.Default.Add,
-//                    contentDescription = "Add Icon",
-//                    modifier = Modifier.size(24.dp),
-//                    tint = Color.Black
-//                )
-//            }
-//        }
-//
-//        if (showPickUpBottomSheet) {
-//            ModalBottomSheet(
-//                modifier = Modifier.fillMaxHeight(),
-//                sheetState = pickUpSheetState,
-//                onDismissRequest = { showPickUpBottomSheet = false }
-//            ) {
-//                LocationModalBottomSheetContent(apiKey = "AIzaSyArzERc9xBRprPePwc4uTopBW9WMBymX74")
-//            }
-//        }
-
-
-//        Row(
-//            modifier = Modifier
-//                .fillMaxWidth()
-//                .padding(vertical = 20.dp),
-//            verticalAlignment = Alignment.CenterVertically,
-//            horizontalArrangement = Arrangement.Center
-//        ) {
-//
-//
-//            // Button in the Middle
-//            Button(
-//                onClick = { /* TODO */ },
-//                colors = ButtonDefaults.buttonColors(containerColor = Color.Yellow),
-//                shape = RoundedCornerShape(16.dp),
+//            Box(
 //                modifier = Modifier
-//                    .width(200.dp)
-//                    .height(50.dp),
-//                contentPadding = PaddingValues(0.dp) // Set contentPadding to 0
+//                    .fillMaxWidth()
+//                    .background(Color.Transparent)
+//                    .height(80.dp),
+//                contentAlignment = Alignment.Center
 //            ) {
-//                Text(text = "Find a driver", color = Color.Black, fontSize = 16.sp)
+//                Button(
+//                    onClick = { /* TODO */ },
+//                    colors = ButtonDefaults.buttonColors(containerColor = Color(0XFF46C96B)),
+//                    modifier = Modifier
+//                        .width(200.dp)
+//                        .height(50.dp),
+//                    contentPadding = PaddingValues(0.dp)
+//                ) {
+//                    Text(text = "Find a driver", color = Color.Black, fontSize = 16.sp)
+//                }
+//
 //            }
-//
-//
-//        }sp
-
+//        }
 
     }
+}
