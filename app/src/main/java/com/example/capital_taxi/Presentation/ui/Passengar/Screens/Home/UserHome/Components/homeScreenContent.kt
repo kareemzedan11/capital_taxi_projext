@@ -143,7 +143,12 @@ fun homeScreenContent(navController: NavController) {
                                 shape = RoundedCornerShape(16.dp) // Rounded corners
                             )
                     ) {
-                        pickAndGoDesign(navController)
+                       // pickAndGoDesign(navController)
+                        //searchAboutADriver()
+                        PickupWithDropOffButtons(navController)
+                       // RideDetailsScreen(navController)
+                        //TripDetailsLiveTracker()
+
                     }
 
 
