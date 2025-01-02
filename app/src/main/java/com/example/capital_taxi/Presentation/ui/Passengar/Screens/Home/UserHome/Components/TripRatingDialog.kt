@@ -16,6 +16,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
@@ -70,13 +71,13 @@ fun TripRatingDialog() {
 
         Button(
             onClick = { /* Handle rating confirmation */ },
-            colors = ButtonDefaults.buttonColors(backgroundColor = Color(0XFF46C96B)),
+            colors = ButtonDefaults.buttonColors(backgroundColor = colorResource(R.color.primary_color)),
             modifier = Modifier
                 .fillMaxWidth()
                 .height(55.dp),
             shape = RoundedCornerShape(8.dp)
         ) {
-            Text(text = "Confirm", color = Color.White, fontSize = 16.sp)
+            Text(text = "Confirm", color = Color.Black, fontSize = 16.sp)
         }
     }
 }

@@ -22,8 +22,11 @@ import coil.compose.AsyncImage
 import com.example.capital_taxi.R
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.text.font.FontWeight
 import coil.compose.rememberImagePainter
 import com.example.capital_taxi.Navigation.Destination
@@ -54,10 +57,21 @@ fun ConfirmInformation(navController: NavController, Name: String, Email: String
                 title = { null},
                 navigationIcon = {
                     IconButton(onClick = { navController.popBackStack() }) {
-                        Icon(
-                            painter = painterResource(R.drawable.baseline_arrow_back_24),
-                            contentDescription = "Back"
-                        )
+                        Box(
+                            modifier = Modifier
+
+                                .size(36.dp)
+                                .background(Color.Transparent)
+                                .border(4.dp, color = Color.Black, RoundedCornerShape(30.dp)),
+                            contentAlignment = Alignment.Center
+                        ) {
+                            Icon(
+                                modifier = Modifier.size(26.dp),
+                                painter = painterResource(id = R.drawable.baseline_arrow_back_ios_new_24),
+                                contentDescription = "Back",
+                                tint = Color.Black
+                            )
+                        }
                     }
                 }
             )
@@ -133,9 +147,9 @@ fun ConfirmInformation(navController: NavController, Name: String, Email: String
                     modifier = Modifier
                         .fillMaxWidth()
                         .height(60.dp),
-                    colors = ButtonDefaults.buttonColors(Color(0XFF46C96B))
+                    colors = ButtonDefaults.buttonColors(colorResource(R.color.primary_color))
                 ) {
-                    Text("Next", color = Color.White, fontSize = 20.sp, fontWeight = FontWeight.W400)
+                    Text("Next", color = Color.Black, fontSize = 20.sp, fontWeight = FontWeight.W400)
                 }
             }
         }

@@ -18,8 +18,10 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.capital_taxi.R
 
 
 @Composable
@@ -34,7 +36,7 @@ fun OptionButtonWithMenu(
             .width(200.dp)
             .height(50.dp),
         shape = RoundedCornerShape(12.dp),
-        color = Color(0xFFF2F2F2),
+        color =colorResource(R.color.secondary_color),
         shadowElevation = 4.dp
     ) {
         Row(
@@ -47,7 +49,7 @@ fun OptionButtonWithMenu(
                 Icon(
                     imageVector = icon,
                     contentDescription = null,
-                    tint = Color(0xFF4CAF50),
+                    tint = colorResource(R.color.primary_color),
                     modifier = Modifier.size(24.dp)
                 )
                 Spacer(modifier = Modifier.width(8.dp))

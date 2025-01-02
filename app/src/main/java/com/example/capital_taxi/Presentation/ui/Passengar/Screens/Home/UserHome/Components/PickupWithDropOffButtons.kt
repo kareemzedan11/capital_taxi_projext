@@ -39,6 +39,7 @@ import androidx.compose.ui.draw.scale
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
@@ -130,7 +131,7 @@ fun PickupWithDropOffButtons(navController: NavController) {
                                 .weight(1f)
                                 .fillMaxWidth()
                                 .background(
-                                    color = Color(0XFF46C96B),
+                                    color =colorResource(R.color.primary_color),
                                     shape = RoundedCornerShape(topStart = 20.dp, topEnd = 20.dp)
                                 ),
                             contentAlignment = Alignment.Center
@@ -149,7 +150,7 @@ fun PickupWithDropOffButtons(navController: NavController) {
                                 .weight(1f)
                                 .fillMaxWidth()
                                 .background(
-                                    color = if (selectedVehicleIndex == index) Color(0XFF46C96B) else Color.White,
+                                    color = if (selectedVehicleIndex == index)colorResource(R.color.primary_color) else Color.White,
                                     shape = RoundedCornerShape(
                                         bottomStart = 20.dp,
                                         bottomEnd = 20.dp
@@ -210,7 +211,7 @@ fun PickupWithDropOffButtons(navController: NavController) {
 
             Button(
                 onClick = { /* Perform action */ },
-                colors = ButtonDefaults.buttonColors(Color(0XFF46C96B)),
+                colors = ButtonDefaults.buttonColors(colorResource(R.color.primary_color)),
                 modifier = Modifier
                     .fillMaxWidth()
                     .height(60.dp)

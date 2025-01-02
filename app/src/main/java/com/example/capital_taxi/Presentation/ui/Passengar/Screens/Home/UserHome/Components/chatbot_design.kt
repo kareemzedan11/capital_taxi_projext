@@ -26,6 +26,7 @@ import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Path
+import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -41,6 +42,7 @@ import com.example.capital_taxi.R
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun chatbot(navController: NavController) {
+    val background=colorResource(R.color.primary_color)
     androidx.compose.material.Scaffold(
         topBar = {
             androidx.compose.material.TopAppBar(
@@ -82,7 +84,7 @@ fun chatbot(navController: NavController) {
                     }
                     drawPath(
                         path = path,
-                        color = Color(0XFF46C96B)
+                        color = background
                     )
                 }
 

@@ -42,8 +42,8 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
@@ -51,7 +51,6 @@ import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
-import com.example.capital_taxi.Navigation.Destination
 import com.example.capital_taxi.R
 
 
@@ -117,12 +116,13 @@ fun userRegisterContent(
             leadingIcon = {
                 Icon(
                     imageVector = Icons.Default.Person,
-                    tint = Color.Gray,
+                    tint = colorResource(R.color.primary_color),
+
                     contentDescription = "person icon",
                     modifier = Modifier
                         .clip(CircleShape)
                         .size(20.dp)
-                        .background(Color.Green)
+
                 )
             },
             label = { Text("User Name") },
@@ -149,12 +149,13 @@ fun userRegisterContent(
             leadingIcon = {
                 Icon(
                     imageVector = Icons.Default.Email,
-                    tint = Color.Gray,
+                    tint = colorResource(R.color.primary_color),
+
                     contentDescription = "Email icon",
                     modifier = Modifier
                         .clip(CircleShape)
                         .size(20.dp)
-                        .background(Color.Green)
+
                 )
             },
             label = { Text("Email") },
@@ -179,12 +180,13 @@ fun userRegisterContent(
             leadingIcon = {
                 Icon(
                     imageVector = Icons.Default.Lock,
-                    tint = Color.Gray,
+                    tint = colorResource(R.color.primary_color),
+
                     contentDescription = "passord icon",
                     modifier = Modifier
                         .clip(CircleShape)
                         .size(20.dp)
-                        .background(Color.Green)
+
                 )
             },
             label = { Text("Password") },
@@ -220,12 +222,13 @@ fun userRegisterContent(
             leadingIcon = {
                 Icon(
                     imageVector = Icons.Default.Lock,
-                    tint = Color.Gray,
+                    tint = colorResource(R.color.primary_color),
+
                     contentDescription = "password icon",
                     modifier = Modifier
                         .clip(CircleShape)
                         .size(20.dp)
-                        .background(Color.Green)
+
                 )
             },
             label = { Text("Confirm Password") },
@@ -261,12 +264,12 @@ fun userRegisterContent(
             leadingIcon = {
                 Icon(
                     imageVector = Icons.Default.Phone,
-                    tint = Color.Gray,
+                    tint = colorResource(R.color.primary_color),
                     contentDescription = "Phone icon",
                     modifier = Modifier
                         .clip(CircleShape)
                         .size(20.dp)
-                        .background(Color.Green)
+
                 )
             },
             label = { Text("Phone") },
@@ -305,7 +308,7 @@ fun userRegisterContent(
                 .fillMaxWidth()
                 .height(60.dp),
             colors = ButtonDefaults.buttonColors(
-                containerColor = if (isChecked1) Color(0XFF46C96B) else Color.Gray // Change color based on checkbox state
+                containerColor = if (isChecked1) colorResource(R.color.primary_color) else Color.Gray // Change color based on checkbox state
             ),
             enabled = isChecked1, // Enable the button only when the checkbox is checked
             shape = RoundedCornerShape(8.dp) // Rounded corners
@@ -313,7 +316,7 @@ fun userRegisterContent(
             Text(
                 text = "Sign up",
                 fontSize = 18.sp,
-                color = Color.White // Ensure text color is always visible
+                color = Color.Black // Ensure text color is always visible
             )
         }
 
@@ -338,7 +341,7 @@ fun userRegisterContent(
                     .size(50.dp)
 
                     .background(
-                        Color(0XFFF2F2F2),
+                        colorResource(R.color.secondary_color),
                         shape = RoundedCornerShape(10.dp) // For rounded corners with 8.dp radius
 
                     ), contentAlignment = Alignment.Center
@@ -362,7 +365,7 @@ fun userRegisterContent(
                         .size(50.dp)
 
                         .background(
-                            Color(0XFFF2F2F2),
+                            colorResource(R.color.secondary_color),
                             shape = RoundedCornerShape(10.dp) // For rounded corners with 8.dp radius
 
                         ), contentAlignment = Alignment.Center
@@ -386,7 +389,7 @@ fun userRegisterContent(
                             .size(50.dp)
 
                             .background(
-                                Color(0XFFF2F2F2),
+                                colorResource(R.color.secondary_color),
                                 shape = RoundedCornerShape(10.dp) // For rounded corners with 8.dp radius
 
                             ), contentAlignment = Alignment.Center

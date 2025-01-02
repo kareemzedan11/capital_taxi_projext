@@ -23,6 +23,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
@@ -36,6 +37,7 @@ fun StartButtonDesign(navController: NavController) {
     Box(
         modifier = Modifier
             .fillMaxSize()
+        , Alignment.Center
     ) {
 
 
@@ -43,15 +45,17 @@ fun StartButtonDesign(navController: NavController) {
             onClick = { navController.navigate(Destination.OnboardingPager.route) },
             modifier = Modifier
                 .align(Alignment.BottomCenter)
-                .padding(bottom = 60.dp, start = 20.dp , end = 20.dp)
+                .padding(bottom = 60.dp, start = 20.dp, end = 20.dp)
                 .fillMaxWidth()
                 .height(60.dp),
             colors = ButtonDefaults.buttonColors(Color.Black),
             shape = RoundedCornerShape(0.dp) // Ensure corners are square
         ) {
             Row(
+                Modifier.fillMaxWidth(),
                 verticalAlignment = Alignment.CenterVertically,
-                horizontalArrangement = Arrangement.Center
+                horizontalArrangement = Arrangement.Center,
+
             ) {
                 Text(
                     "Get Started",
@@ -61,9 +65,11 @@ fun StartButtonDesign(navController: NavController) {
                 )
                 Spacer(modifier = Modifier.width(8.dp))
                 Icon(
+                    tint = Color.Black,
                     contentDescription = null,
                     painter = painterResource(R.drawable.baseline_arrow_right_alt_24)
                 )
             }
         }
-    }}
+    }
+}

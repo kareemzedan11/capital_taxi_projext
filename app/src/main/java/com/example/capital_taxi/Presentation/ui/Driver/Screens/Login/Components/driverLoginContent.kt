@@ -36,12 +36,14 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
+import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
@@ -90,12 +92,12 @@ fun driverLoginContent(
             leadingIcon = {
                 Icon(
                     imageVector = Icons.Default.Email,
-                    tint = Color.Gray,
+                    tint = colorResource(id = R.color.primary_color),
                     contentDescription = "email icon",
                     modifier = Modifier
                         .clip(CircleShape)
                         .size(20.dp)
-                        .background(Color.Green)
+
                 )
 
 
@@ -114,12 +116,12 @@ fun driverLoginContent(
             leadingIcon = {
                 Icon(
                     imageVector = Icons.Default.Lock,
-                    tint = Color.Gray,
+                    tint = colorResource(id = R.color.primary_color),
                     contentDescription = "password icon",
                     modifier = Modifier
                         .clip(CircleShape)
                         .size(20.dp)
-                        .background(Color.Green)
+
                 )
             },
             label = { Text(stringResource(id = R.string.Password_label)) },
@@ -148,10 +150,11 @@ fun driverLoginContent(
 
         Spacer(modifier = Modifier.height(16.dp))
         Text(
+            textDecoration = TextDecoration.Underline,
 
             text = "Forget Password",
             modifier = Modifier.align(alignment = Alignment.End),
-            color = Color(0XFF46C96B),
+            color = colorResource(id = R.color.primary_color),
             fontWeight = FontWeight.Bold, fontSize = 18.sp,
         )
         Spacer(modifier = Modifier.height(24.dp))
@@ -163,7 +166,7 @@ fun driverLoginContent(
 
 
                 .height(60.dp),
-            colors = ButtonDefaults.buttonColors(Color(0XFF46C96B)),
+            colors = ButtonDefaults.buttonColors(colorResource(id = R.color.primary_color)),
             shape = RoundedCornerShape(8.dp) // For rounded corners with 8.dp radius
 // Use RectangleShape to remove any default rounded corners
 
@@ -171,6 +174,7 @@ fun driverLoginContent(
             Text(
                 text = "Sign In",
                 fontSize = 18.sp,
+                color = Color.Black
 
                 )
         }
@@ -195,9 +199,8 @@ fun driverLoginContent(
             Box(
                 modifier = Modifier
                     .size(50.dp)
-
                     .background(
-                        Color(0XFFF2F2F2),
+                        colorResource(R.color.secondary_color),
                         shape = RoundedCornerShape(10.dp) // For rounded corners with 8.dp radius
 
                     ), contentAlignment = Alignment.Center
@@ -221,7 +224,7 @@ fun driverLoginContent(
                         .size(50.dp)
 
                         .background(
-                            Color(0XFFF2F2F2),
+                            colorResource(R.color.secondary_color),
                             shape = RoundedCornerShape(10.dp) // For rounded corners with 8.dp radius
 
                         ), contentAlignment = Alignment.Center
@@ -243,9 +246,8 @@ fun driverLoginContent(
                     Box(
                         modifier = Modifier
                             .size(50.dp)
-
                             .background(
-                                Color(0XFFF2F2F2),
+                                colorResource(R.color.secondary_color),
                                 shape = RoundedCornerShape(10.dp) // For rounded corners with 8.dp radius
 
                             ), contentAlignment = Alignment.Center

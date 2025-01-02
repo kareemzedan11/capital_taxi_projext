@@ -7,6 +7,7 @@ import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -21,10 +22,13 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.windowInsetsPadding
 import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonColors
 import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.Card
+import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -44,6 +48,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.asImageBitmap
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
@@ -70,11 +75,21 @@ fun NationalIDValidation(navController: NavController) {
                 },
                 navigationIcon = {
                     IconButton(onClick = { navController.popBackStack() }) {
-                        Icon(
-                            painter = painterResource(id = R.drawable.baseline_arrow_back_24),
-                            contentDescription = "Back",
-                            tint = Color.Black
-                        )
+                        Box(
+                            modifier = Modifier
+
+                                .size(36.dp)
+                                .background(Color.Transparent)
+                                .border(4.dp, color = Color.Black, RoundedCornerShape(30.dp)),
+                            contentAlignment = Alignment.Center
+                        ) {
+                            Icon(
+                                modifier = Modifier.size(26.dp),
+                                painter = painterResource(id = R.drawable.baseline_arrow_back_ios_new_24),
+                                contentDescription = "Back",
+                                tint = Color.Black
+                            )
+                        }
                     }
                 },
                 colors = TopAppBarDefaults.topAppBarColors(containerColor = Color.White)
@@ -131,7 +146,7 @@ fun NationalIDValidation(navController: NavController) {
                     modifier = Modifier
                         .fillMaxWidth()
                         .padding(horizontal = 40.dp)
-                        .background(Color.Red),
+                        .background(Color.Black),
                     onClick = {navController.navigate(Destination.CertificateOfVehicleRegistration.route)
 
             } // Replace with actual route
@@ -202,34 +217,57 @@ fun DriverNationalIDCaptureSection(
                 contentAlignment = Alignment.Center
             ) {
                 if (capturedBitmap != null) {
-                    Image(
-                        bitmap = capturedBitmap!!.asImageBitmap(),
-                        contentDescription = "Captured Photo",
-                        modifier = Modifier.fillMaxSize()
-                    )
+                    Card(
+                        elevation = CardDefaults.elevatedCardElevation(10.dp),
+                        modifier = Modifier.background(Color.Transparent)
+                            .border(2.dp,Color.Transparent, RoundedCornerShape(16.dp))
+                    ) {
+                        Image(
+                            bitmap = capturedBitmap!!.asImageBitmap(),
+                            contentDescription = "Captured Photo",
+                            modifier = Modifier.fillMaxSize()
+                        )
+                    }
                 } else {
-                    Image(
-                        painter = painterResource(R.drawable.id), // Placeholder image
-                        contentDescription = null,
-                        contentScale = ContentScale.Crop,
-                        modifier = Modifier.fillMaxSize()
-                    )
+                    Card(
+                        elevation = CardDefaults.elevatedCardElevation(10.dp),
+                        modifier = Modifier.background(Color.Transparent)
+                            .border(2.dp,Color.Transparent, RoundedCornerShape(16.dp))
+                    ) {
+                        Image(
+                            painter = painterResource(R.drawable.id), // Placeholder image
+                            contentDescription = null,
+                            contentScale = ContentScale.Crop,
+                            modifier = Modifier.fillMaxSize()
+                        )
+                    }
                 }
             }
 
-            Button(
-                onClick = { captureLauncher.launch(null) },
-                colors = ButtonColors(
-                    containerColor = Color.White, contentColor = Color.Green,
-                    disabledContainerColor = Color.White, disabledContentColor = Color.Green
-                ),
-                modifier = Modifier
-                    .width(200.dp)
-                    .height(50.dp)
-                    .background(Color.Green)
+
+            Card(
+                elevation = CardDefaults.elevatedCardElevation(10.dp),
+                modifier = Modifier.background(Color.Transparent)
+
             ) {
-                Text(text = buttonText, color = Color.Green, fontSize = 18.sp)
-            }
+                Button(
+                    onClick = { captureLauncher.launch(null) },
+                    colors = ButtonColors(
+                        containerColor = colorResource(R.color.primary_color),
+                        contentColor = colorResource(R.color.primary_color),
+                        disabledContainerColor = colorResource(R.color.primary_color),
+                        disabledContentColor = colorResource(R.color.primary_color),
+                    ),
+                    modifier = Modifier
+                        .width(200.dp)
+                        .height(50.dp)
+
+                        .border(1.dp, Color.DarkGray, RoundedCornerShape(10.dp)),
+                    shape = RoundedCornerShape(10.dp)
+
+                ) {
+                Text(text = buttonText, color = Color(0XFF111111), fontSize = 18.sp)
+            }}
         }
     }
 }

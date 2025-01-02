@@ -42,6 +42,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
@@ -113,12 +114,13 @@ fun userSignupContent(navController: NavController) {
             leadingIcon = {
                 Icon(
                     imageVector = Icons.Default.Person,
-                    tint = Color.Gray,
+                    tint =    colorResource(id = R.color.primary_color)
+                ,
                     contentDescription = "person icon",
                     modifier = Modifier
                         .clip(CircleShape)
                         .size(20.dp)
-                        .background(Color.Green)
+
                 )
             },
             label = { Text("User Name") },
@@ -145,12 +147,12 @@ fun userSignupContent(navController: NavController) {
             leadingIcon = {
                 Icon(
                     imageVector = Icons.Default.Email,
-                    tint = Color.Gray,
+                    tint =    colorResource(id = R.color.primary_color),
                     contentDescription = "Email icon",
                     modifier = Modifier
                         .clip(CircleShape)
                         .size(20.dp)
-                        .background(Color.Green)
+
                 )
             },
             label = { Text("Email") },
@@ -175,12 +177,13 @@ fun userSignupContent(navController: NavController) {
             leadingIcon = {
                 Icon(
                     imageVector = Icons.Default.Lock,
-                    tint = Color.Gray,
+                    tint =    colorResource(id = R.color.primary_color),
+
                     contentDescription = "password icon",
                     modifier = Modifier
                         .clip(CircleShape)
                         .size(20.dp)
-                        .background(Color.Green)
+
                 )
             },
             label = { Text("Password") },
@@ -216,12 +219,12 @@ fun userSignupContent(navController: NavController) {
             leadingIcon = {
                 Icon(
                     imageVector = Icons.Default.Lock,
-                    tint = Color.Gray,
+                    tint =    colorResource(id = R.color.primary_color),
                     contentDescription = "password icon",
                     modifier = Modifier
                         .clip(CircleShape)
                         .size(20.dp)
-                        .background(Color.Green)
+
                 )
             },
             label = { Text("Confirm Password") },
@@ -257,12 +260,13 @@ fun userSignupContent(navController: NavController) {
             leadingIcon = {
                 Icon(
                     imageVector = Icons.Default.Phone,
-                    tint = Color.Gray,
+                    tint =    colorResource(id = R.color.primary_color),
+
                     contentDescription = "Phone icon",
                     modifier = Modifier
                         .clip(CircleShape)
                         .size(20.dp)
-                        .background(Color.Green)
+
                 )
             },
             label = { Text("Phone") },
@@ -301,7 +305,7 @@ fun userSignupContent(navController: NavController) {
                 .fillMaxWidth()
                 .height(60.dp),
             colors = ButtonDefaults.buttonColors(
-                containerColor = if (isChecked) Color(0XFF46C96B) else Color.Gray // Change color based on checkbox state
+                containerColor = if (isChecked)   colorResource(id = R.color.primary_color) else Color.Gray // Change color based on checkbox state
             ),
             enabled = isChecked, // Enable the button only when the checkbox is checked
             shape = RoundedCornerShape(8.dp) // Rounded corners
@@ -334,7 +338,8 @@ fun userSignupContent(navController: NavController) {
                     .size(50.dp)
 
                     .background(
-                        Color(0XFFF2F2F2),
+                         colorResource(id = R.color.secondary_color),
+
                         shape = RoundedCornerShape(10.dp) // For rounded corners with 8.dp radius
 
                     ), contentAlignment = Alignment.Center
@@ -358,7 +363,7 @@ fun userSignupContent(navController: NavController) {
                         .size(50.dp)
 
                         .background(
-                            Color(0XFFF2F2F2),
+                            colorResource(id = R.color.secondary_color),
                             shape = RoundedCornerShape(10.dp) // For rounded corners with 8.dp radius
 
                         ), contentAlignment = Alignment.Center
@@ -382,7 +387,7 @@ fun userSignupContent(navController: NavController) {
                             .size(50.dp)
 
                             .background(
-                                Color(0XFFF2F2F2),
+                                colorResource(id = R.color.secondary_color),
                                 shape = RoundedCornerShape(10.dp) // For rounded corners with 8.dp radius
 
                             ), contentAlignment = Alignment.Center

@@ -27,7 +27,9 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.focus.focusRequester
 import androidx.compose.ui.focus.onFocusEvent
+import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.style.TextDecoration
 import androidx.navigation.NavController
 import com.example.capital_taxi.Navigation.Destination
 import com.example.capital_taxi.R
@@ -36,14 +38,14 @@ import kotlinx.coroutines.delay
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun OtpScreen(navController: NavController) {
-    var timer by remember { mutableStateOf(60) }
+    var timer by remember { mutableStateOf(30) }
     var otpValues = remember { mutableStateListOf("", "", "", "") }
 
     val focusRequesters = List(4) { FocusRequester() }
     val localFocusManager = LocalFocusManager.current
 
     val progress by animateFloatAsState(
-        targetValue = timer / 60f,
+        targetValue = timer / 30f,
         animationSpec = androidx.compose.animation.core.tween(
             durationMillis = 1000,
             easing = LinearEasing
@@ -71,11 +73,21 @@ fun OtpScreen(navController: NavController) {
                 },
                 navigationIcon = {
                     IconButton(onClick = { navController.popBackStack() }) {
-                        Icon(
-                            painter = painterResource(id = R.drawable.baseline_arrow_back_24),
-                            contentDescription = "Back",
-                            tint = Color.Black
-                        )
+                        Box(
+                            modifier = Modifier
+
+                                .size(36.dp)
+                                .background(Color.Transparent)
+                                .border(4.dp, color = Color.Black, RoundedCornerShape(30.dp)),
+                            contentAlignment = Alignment.Center
+                        ) {
+                            Icon(
+                                modifier = Modifier.size(26.dp),
+                                painter = painterResource(id = R.drawable.baseline_arrow_back_ios_new_24),
+                                contentDescription = "Back",
+                                tint = Color.Black
+                            )
+                        }
                     }
                 },
                 colors = TopAppBarDefaults.topAppBarColors(containerColor = Color.White)
@@ -86,33 +98,37 @@ fun OtpScreen(navController: NavController) {
             modifier = Modifier
                 .fillMaxSize()
                 .padding(innerPadding)
-                .background(Color(0XFF46C96B)), contentAlignment = Alignment.TopCenter
-        ) { Column(
-            horizontalAlignment = Alignment.CenterHorizontally,
-            verticalArrangement = Arrangement.Top) {
-            Image(
+                .background(colorResource(R.color.primary_color)),
+            contentAlignment = Alignment.TopCenter
+        ) {
+            Column(
+                horizontalAlignment = Alignment.CenterHorizontally,
+                verticalArrangement = Arrangement.Top
+            ) {
+                Image(
 
-                modifier = Modifier.size(200.dp).clip(CircleShape)
-                ,
-                painter = painterResource(R.drawable.otp), contentDescription = null
-            )
+                    modifier = Modifier
+                        .size(200.dp)
+                        .clip(CircleShape),
+                    painter = painterResource(R.drawable.otp), contentDescription = null
+                )
 
-            Spacer(modifier = Modifier.height(60.dp))
+                Spacer(modifier = Modifier.height(60.dp))
 
-            Text(
-                text = "OTP",
-                fontSize = 32.sp,
-                fontWeight = FontWeight.Bold
-            )
+                Text(
+                    text = "OTP",
+                    fontSize = 32.sp,
+                    fontWeight = FontWeight.Bold
+                )
 
-            Spacer(modifier = Modifier.height(16.dp))
-            Text(
-                text = "Enter OTP sent to +0123456789",
-                fontSize = 18.sp,
-                color = Color(0XFFF2F2F2),
-                fontWeight = FontWeight.Bold
-            )
-        }
+                Spacer(modifier = Modifier.height(16.dp))
+                Text(
+                    text = "Enter OTP sent to +0123456789",
+                    fontSize = 18.sp,
+                    color = Color(0XFFF2F2F2),
+                    fontWeight = FontWeight.Bold
+                )
+            }
             Column(
                 modifier = Modifier
                     .fillMaxSize()
@@ -129,10 +145,10 @@ fun OtpScreen(navController: NavController) {
                         .fillMaxWidth()
 
 
-                        .clip(RoundedCornerShape(topStart = 100.dp ))
+                        .clip(RoundedCornerShape(topStart = 100.dp))
                         .background(Color.White),
                 ) {
-                    Column (         horizontalAlignment = Alignment.CenterHorizontally,){
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
 
 
                         Spacer(modifier = Modifier.height(60.dp))
@@ -166,21 +182,12 @@ fun OtpScreen(navController: NavController) {
                         Spacer(modifier = Modifier.height(24.dp))
 
                         Text(
+                            textDecoration = TextDecoration.Underline,
                             text = if (timer > 0) "Resend code in $timer seconds" else "Resend code now",
                             style = MaterialTheme.typography.bodyMedium
                         )
 
-                        Spacer(modifier = Modifier.height(2.dp))
 
-                            HorizontalDivider(
-
-                                color = Color.Gray,
-                                thickness = 1.dp,
-                                modifier = Modifier
-                                       .fillMaxWidth(.42f)
-
-
-                            )
 
 
                         Spacer(modifier = Modifier.height(16.dp))
@@ -191,29 +198,30 @@ fun OtpScreen(navController: NavController) {
                             progress = progress,
                             modifier = Modifier
                                 .fillMaxWidth()
-                                .padding(horizontal = 32.dp)
+                                .padding(horizontal = 32.dp),
+                            color = colorResource(R .color.primary_color)
                         )
 
                         Spacer(modifier = Modifier.weight(1f))
 
 
                         Button(
-                            onClick = {navController.navigate(Destination.SelectTheMode.route)},
+                            onClick = { navController.navigate(Destination.SelectTheMode.route) },
                             modifier = Modifier
                                 .fillMaxWidth()
                                 .padding(horizontal = 20.dp)
 
 
                                 .height(60.dp),
-                            colors = ButtonDefaults.buttonColors(Color(0XFF46C96B)),
+                            colors = ButtonDefaults.buttonColors(colorResource(R.color.primary_color)),
                             shape = RoundedCornerShape(8.dp)
 
                         ) {
                             Text(
                                 text = "Verify Now",
                                 fontSize = 18.sp,
-
-                                )
+                                color = Color.Black
+                            )
                         }
                         Spacer(modifier = Modifier.weight(1f))
                     }

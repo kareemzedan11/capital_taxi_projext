@@ -1,22 +1,24 @@
 package com.example.capital_taxi.Presentation.ui.Passengar.Screens.Login.Components
 
-import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
-import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardOptions
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Email
 import androidx.compose.material.icons.filled.Lock
@@ -28,7 +30,6 @@ import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
-import androidx.compose.material3.TextFieldColors
 import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -39,19 +40,19 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.RectangleShape
+import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
+import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.example.capital_taxi.Navigation.Destination
 import com.example.capital_taxi.R
-import com.google.android.gms.common.internal.StringResourceValueReader
 
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -68,9 +69,12 @@ fun userLoginContent(
 
     Column(
         modifier = Modifier
-            .fillMaxWidth()
+            .fillMaxSize()
+            .verticalScroll(rememberScrollState())
+
             .padding(16.dp),
-        horizontalAlignment = Alignment.CenterHorizontally
+        horizontalAlignment = Alignment.CenterHorizontally,
+        verticalArrangement = Arrangement.Center
     ) {
 
 
@@ -99,12 +103,12 @@ fun userLoginContent(
             leadingIcon = {
                 Icon(
                     imageVector = Icons.Default.Email,
-                    tint = Color.Gray,
+                    tint = colorResource(R.color.primary_color),
                     contentDescription = "email icon",
                     modifier = Modifier
                         .clip(CircleShape)
                         .size(20.dp)
-                        .background(Color.Green)
+
                 )
 
 
@@ -123,12 +127,13 @@ fun userLoginContent(
             leadingIcon = {
                 Icon(
                     imageVector = Icons.Default.Lock,
-                    tint = Color.Gray,
+                    tint = colorResource(R.color.primary_color),
+
                     contentDescription = "password icon",
                     modifier = Modifier
                         .clip(CircleShape)
                         .size(20.dp)
-                        .background(Color.Green)
+
                 )
             },
             label = { Text(stringResource(id = R.string.Password_label)) },
@@ -157,22 +162,26 @@ fun userLoginContent(
 
         Spacer(modifier = Modifier.height(16.dp))
         Text(
-
+            textDecoration = TextDecoration.Underline,
             text = "Forget Password",
-            modifier = Modifier.align(alignment = Alignment.End),
-            color = Color(0XFF46C96B),
+            modifier = Modifier
+                .align(alignment = Alignment.End)
+                .clickable {navController.navigate( Destination.NewPasswordScreen.route) },
+            color = colorResource(R.color.primary_color),
             fontWeight = FontWeight.Bold, fontSize = 18.sp,
-        )
+
+
+            )
         Spacer(modifier = Modifier.height(24.dp))
 
         Button(
-            onClick = { navController.navigate(Destination.UserHomeScreen.route)},
+            onClick = { navController.navigate(Destination.UserHomeScreen.route) },
             modifier = Modifier
                 .fillMaxWidth()
 
 
                 .height(60.dp),
-            colors = ButtonDefaults.buttonColors(Color(0XFF46C96B)),
+            colors = ButtonDefaults.buttonColors(colorResource(R.color.primary_color)),
             shape = RoundedCornerShape(8.dp) // For rounded corners with 8.dp radius
 // Use RectangleShape to remove any default rounded corners
 
@@ -180,8 +189,9 @@ fun userLoginContent(
             Text(
                 text = "Sign In",
                 fontSize = 18.sp,
+                color = Color.Black
 
-                )
+            )
         }
 
 
@@ -206,7 +216,7 @@ fun userLoginContent(
                     .size(50.dp)
 
                     .background(
-                        Color(0XFFF2F2F2),
+                        colorResource(R.color.secondary_color),
                         shape = RoundedCornerShape(10.dp) // For rounded corners with 8.dp radius
 
                     ), contentAlignment = Alignment.Center
@@ -230,7 +240,7 @@ fun userLoginContent(
                         .size(50.dp)
 
                         .background(
-                            Color(0XFFF2F2F2),
+                            colorResource(R.color.secondary_color),
                             shape = RoundedCornerShape(10.dp) // For rounded corners with 8.dp radius
 
                         ), contentAlignment = Alignment.Center
@@ -254,7 +264,7 @@ fun userLoginContent(
                             .size(50.dp)
 
                             .background(
-                                Color(0XFFF2F2F2),
+                                colorResource(R.color.secondary_color),
                                 shape = RoundedCornerShape(10.dp) // For rounded corners with 8.dp radius
 
                             ), contentAlignment = Alignment.Center
@@ -265,8 +275,10 @@ fun userLoginContent(
                                 .size(30.dp)
                                 .clip(CircleShape),
                             painter = painterResource(R.drawable.facelogo),
-                            contentDescription = "Google Logo"
-                        )
+                            contentDescription = "Google Logo",
+
+
+                            )
                     }
 
 
@@ -295,4 +307,5 @@ fun userLoginContent(
                 }
             )
         }
-    }}
+    }
+}

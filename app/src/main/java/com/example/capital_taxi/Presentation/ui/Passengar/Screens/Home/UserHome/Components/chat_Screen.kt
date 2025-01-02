@@ -15,6 +15,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
@@ -109,7 +110,7 @@ fun ChatBubble(text: String, isUser: Boolean) {
                             modifier = Modifier.size(26.dp),
                             painter = painterResource(R.drawable.headphone_18080416), // أيقونة المساعد
                             contentDescription = null,
-                            tint = Color(0XFF46C96B)
+                            tint = colorResource(R.color.primary_color)
                         )
                     }
                 }

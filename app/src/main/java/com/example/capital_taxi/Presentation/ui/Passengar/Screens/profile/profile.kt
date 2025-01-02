@@ -11,6 +11,7 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 
@@ -151,13 +152,14 @@ fun Profile(navController: NavController) {
 
 
                         .height(60.dp),
-                    colors = ButtonDefaults.buttonColors(Color(0XFF46C96B)),
+                    colors = ButtonDefaults.buttonColors(colorResource(R.color.primary_color)),
                     shape = RoundedCornerShape(16.dp)
 
                 ) {
                     Text(
                         text = "Save ",
                         fontSize = 18.sp,
+                        color = Color.Black
 
                         )
                 }

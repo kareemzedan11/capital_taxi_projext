@@ -1,33 +1,33 @@
 import android.app.Activity
-import android.util.Log
-import android.widget.Toast
 import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable
+import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
-import androidx.compose.material.ExperimentalMaterialApi
-import androidx.compose.material.ModalBottomSheetValue
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.ImeAction
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.compose.ui.viewinterop.AndroidView
 import androidx.navigation.NavController
 import com.example.capital_taxi.Navigation.Destination
 import com.example.capital_taxi.R
 import com.google.firebase.FirebaseException
 import com.google.firebase.auth.*
 import com.google.firebase.auth.PhoneAuthProvider.OnVerificationStateChangedCallbacks
-import kotlinx.coroutines.launch
+import com.hbb20.CountryCodePicker
 import java.util.concurrent.TimeUnit
+
+
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun PhoneVerification(navController: NavController) {
@@ -41,18 +41,6 @@ fun PhoneVerification(navController: NavController) {
     var errorMessage by remember { mutableStateOf("") }
 
     var selectedCountry by remember { mutableStateOf("+1") }
-    val sheetState = rememberModalBottomSheetState(skipPartiallyExpanded = true)
-
-    val coroutineScope = rememberCoroutineScope()
-
-    // List of countries with icons
-    val countries = listOf(
-        Triple("+1", "US", R.drawable.egypt,),
-        Triple("+91", "India", R.drawable.us),
-        Triple("+44", "UK", R.drawable.egypt),
-        Triple("+20", "Egypt", R.drawable.egypt),
-        Triple("+971", "UAE", R.drawable.egypt)
-    )
 
     // Send verification code function
     fun sendVerificationCode() {
@@ -83,57 +71,38 @@ fun PhoneVerification(navController: NavController) {
         }
     }
 
-    // Bottom sheet for selecting a country
-    if (sheetState.isVisible) {
-        ModalBottomSheet(
-            onDismissRequest = { coroutineScope.launch { sheetState.hide() } },
-            sheetState = sheetState,
-        ) {
-            Column(modifier = Modifier.padding(16.dp)) {
-                Text("Select Country", fontSize = 18.sp, fontWeight = FontWeight.Bold)
-                countries.forEach { country ->
-                    Row(
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .clickable {
-                                selectedCountry = country.first
-                                coroutineScope.launch { sheetState.hide() }
-                            }
-                            .padding(vertical = 8.dp),
-                        horizontalArrangement = Arrangement.Start,
-                        verticalAlignment = androidx.compose.ui.Alignment.CenterVertically
-                    ) {
-                        Icon(
-                            painter = painterResource(id = country.third),
-                            contentDescription = country.second,
-                            modifier = Modifier.size(24.dp),
-                            tint = Color.Unspecified
-                        )
-                        Spacer(modifier = Modifier.width(8.dp))
-                        Text("${country.first} (${country.second})")
-                    }
-                }
-            }
-        }
-    }
-
     Scaffold(
-        modifier = Modifier.fillMaxSize().background(Color.White),
+        modifier = Modifier
+            .fillMaxSize()
+            .background(Color.White),
         topBar = {
             TopAppBar(
                 title = { null },
                 navigationIcon = {
                     IconButton(onClick = { navController.popBackStack() }) {
-                        Icon(
-                            painter = painterResource(R.drawable.baseline_arrow_back_24),
-                            contentDescription = "Back"
-                        )
+                        Box(
+                            modifier = Modifier
+
+                                .size(36.dp)
+                                .background(Color.Transparent)
+                                .border(4.dp, color = Color.Black, RoundedCornerShape(30.dp)),
+                            contentAlignment = Alignment.Center
+                        ) {
+                            Icon(
+                                modifier = Modifier.size(26.dp),
+                                painter = painterResource(id = R.drawable.baseline_arrow_back_ios_new_24),
+                                contentDescription = "Back",
+                                tint = Color.Black
+                            )
+                        }
                     }
                 }
             )
         }
     ) { paddingValues ->
-        Box(modifier = Modifier.fillMaxSize().padding(paddingValues)) {
+        Box(modifier = Modifier
+            .fillMaxSize()
+            .padding(paddingValues)) {
             Column(modifier = Modifier.padding(16.dp)) {
                 Text(
                     "Join us via Phone",
@@ -148,57 +117,46 @@ fun PhoneVerification(navController: NavController) {
                     modifier = Modifier.padding(bottom = 20.dp)
                 )
 
-                // Combined TextField
-                OutlinedTextField(
-                    value = phoneNumber,
-                    onValueChange = { phoneNumber = it.trim() },
-                    label = { Text("Phone Number") },
-                    placeholder = { Text("Enter your phone number") },
+                // Country Code Picker and Phone Number Input Row
+                Row(
                     modifier = Modifier
                         .fillMaxWidth()
                         .background(Color.White.copy(alpha = .2f)),
-                    singleLine = true,
-                    leadingIcon = {
-                        Row(
-                            modifier = Modifier.padding(start = 8.dp),
-                            verticalAlignment = androidx.compose.ui.Alignment.CenterVertically
-                        ) {
-                            Text(
-                                text = selectedCountry,
-                                modifier = Modifier.clickable { coroutineScope.launch { sheetState.show() } },
-                                fontWeight = FontWeight.Bold,
-                                fontSize = 16.sp,
-                                color = Color.Black
-                            )
-                            Icon(
-                                painter = painterResource(R.drawable.baseline_arrow_drop_down_24),
-                                contentDescription = "Select Country",
-                                modifier = Modifier.clickable { coroutineScope.launch { sheetState.show() } }
-                            )
-                        }
-                    },
-                    keyboardOptions = KeyboardOptions.Default.copy(imeAction = ImeAction.Done),
-                    keyboardActions = KeyboardActions(onDone = { sendVerificationCode() })
-                )
+                    verticalAlignment = androidx.compose.ui.Alignment.CenterVertically
+                ) {
+                    CountryCodePickerView(onCountrySelected = { selectedCountry = it })
+
+                    Spacer(modifier = Modifier.width(8.dp))
+
+                    OutlinedTextField(
+                        value = phoneNumber,
+                        onValueChange = { phoneNumber = it.trim() },
+                        label = { Text("Phone Number") },
+                        placeholder = { Text("Enter your phone number") },
+                        modifier = Modifier
+                            .weight(1f)
+                            .background(Color.White.copy(alpha = .2f)),
+                        singleLine = true,
+                        keyboardOptions = KeyboardOptions.Default.copy(imeAction = ImeAction.Done),
+                        keyboardActions = KeyboardActions(onDone = { sendVerificationCode() })
+                    )
+                }
 
                 Spacer(modifier = Modifier.height(40.dp))
                 Button(
-                    onClick = {navController.navigate(Destination.OtpScreen.route)},
+                    onClick = { navController.navigate(Destination.OtpScreen.route) },
                     modifier = Modifier
                         .fillMaxWidth()
-
-
-
                         .height(60.dp),
-                    colors = ButtonDefaults.buttonColors(Color(0XFF46C96B)),
+                    colors = ButtonDefaults.buttonColors(colorResource(R.color.primary_color)),
                     shape = RoundedCornerShape(8.dp)
 
                 ) {
                     Text(
                         text = "Send code",
                         fontSize = 18.sp,
-
-                        )
+                        color = Color.Black
+                    )
                 }
 
                 Spacer(modifier = Modifier.height(20.dp))
@@ -234,4 +192,20 @@ fun PhoneVerification(navController: NavController) {
             }
         }
     }
+}
+@Composable
+fun CountryCodePickerView(onCountrySelected: (String) -> Unit) {
+    AndroidView(factory = { context ->
+        val countryCodePicker = CountryCodePicker(context).apply {
+            setOnCountryChangeListener {
+                onCountrySelected(selectedCountryCodeWithPlus)
+            }
+
+            setSearchAllowed(true)
+
+
+            setCountryForNameCode("EG")
+        }
+        countryCodePicker
+    })
 }

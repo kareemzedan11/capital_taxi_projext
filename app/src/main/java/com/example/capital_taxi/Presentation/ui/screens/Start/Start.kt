@@ -14,6 +14,7 @@ import androidx.compose.ui.graphics.Color
 
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalConfiguration
+import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
@@ -32,10 +33,11 @@ fun StartScreen(navController: NavController) {
     Box(
         modifier = Modifier
             .fillMaxSize()
+            .background(colorResource(R.color.secondary_color))
 
     ) {
 Column {
-    Box (modifier = Modifier.weight(6f).background(Color.Black)){
+    Box (modifier = Modifier.weight(6f).background(colorResource(R.color.secondary_color))){
         Image(
             modifier = Modifier
                 .fillMaxSize()
@@ -46,7 +48,8 @@ Column {
         )
 
     }
-    Box(modifier = Modifier.weight(2f).background(Color.White),
+    Box(modifier = Modifier.weight(2f).background(colorResource(R.color.secondary_color),),
+
 
 
     ){

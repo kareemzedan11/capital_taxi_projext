@@ -42,6 +42,7 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.colorResource
 import androidx.core.content.ContextCompat
 
 
@@ -67,7 +68,7 @@ fun PaymentScreenContent(
 ) {
     var selectedMethod by remember { mutableStateOf<PaymentMethod?>(null) }
     val context = LocalContext.current // Access the context safely
-    val backgroundColor = Color(ContextCompat.getColor(context, R.color.general))
+    val backgroundColor = Color(ContextCompat.getColor(context, R.color.primary_color))
     val paymentMethods = listOf(
         PaymentMethod(
             "Click",
@@ -83,7 +84,7 @@ fun PaymentScreenContent(
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .background(Color((0XFF46C96B))),
+            .background(backgroundColor),
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Top
     ) {
@@ -92,7 +93,7 @@ fun PaymentScreenContent(
             modifier = Modifier
                 .fillMaxWidth()
                 .height(100.dp)
-                .background(Color((0XFF46C96B))),
+                .background(backgroundColor),
 
             ) {
             // Close Icon

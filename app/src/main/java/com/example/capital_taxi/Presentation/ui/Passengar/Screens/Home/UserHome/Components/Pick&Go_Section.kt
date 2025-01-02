@@ -54,6 +54,7 @@ import androidx.compose.ui.Modifier
 
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
@@ -155,33 +156,58 @@ fun pickAndGoDesign(navController: NavController) {
 
         }
 
-//        Card(
-//            modifier = Modifier
-//                .fillMaxWidth()
-//                .padding(16.dp),
-//            elevation = CardDefaults.elevatedCardElevation(10.dp),
-//            shape = RoundedCornerShape(16.dp)
-//        ) {
-//            Box(
-//                modifier = Modifier
-//                    .fillMaxWidth()
-//                    .background(Color.Transparent)
-//                    .height(80.dp),
-//                contentAlignment = Alignment.Center
-//            ) {
-//                Button(
-//                    onClick = { /* TODO */ },
-//                    colors = ButtonDefaults.buttonColors(containerColor = Color(0XFF46C96B)),
-//                    modifier = Modifier
-//                        .width(200.dp)
-//                        .height(50.dp),
-//                    contentPadding = PaddingValues(0.dp)
-//                ) {
-//                    Text(text = "Find a driver", color = Color.Black, fontSize = 16.sp)
-//                }
-//
-//            }
-//        }
+        Card(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(16.dp),
+            elevation = CardDefaults.elevatedCardElevation(10.dp),
+            shape = RoundedCornerShape(16.dp)
+        ) {
+            Box(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .background(Color.Transparent)
+                    .height(80.dp),
+
+            ) {
+                Row(
+                    modifier = Modifier.fillMaxWidth(),
+                    Arrangement.Start,
+                    Alignment.CenterVertically
+                ) {
+                    Icon(
+                        modifier = Modifier.size(26.dp),
+                        painter = painterResource(R.drawable.dollar),
+                        tint = colorResource(R.color.Icons_color),
+
+                        contentDescription = null
+                    )
+                    Spacer(modifier = Modifier.weight(1f))
+
+                    Button(
+                        onClick = { /* TODO */ },
+                        colors = ButtonDefaults.buttonColors(containerColor = colorResource(R.color.primary_color)),
+                        modifier = Modifier
+                            .width(200.dp)
+                            .height(50.dp),
+                        contentPadding = PaddingValues(0.dp)
+                    ) {
+
+                        Text(text = "Find a driver", color = Color.Black, fontSize = 16.sp)
+
+
+                    }
+                    Spacer(modifier = Modifier.weight(1f))
+
+                    Icon(
+                        modifier = Modifier.size(26.dp),
+                        painter = painterResource(R.drawable.tools),
+                        tint = Color.Black,
+                        contentDescription = null
+                    )
+                }
+            }
+        }
 
     }
 }

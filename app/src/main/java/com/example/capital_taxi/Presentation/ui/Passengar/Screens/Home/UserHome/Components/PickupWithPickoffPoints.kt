@@ -50,6 +50,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
@@ -85,7 +86,7 @@ fun PickupWithPickoffPoints(navController: NavController) {
     Box(
         modifier = Modifier
             .background(
-                color = Color(0XFFF2F2F2), shape = RoundedCornerShape(20.dp)
+                color =colorResource(R.color.secondary_color), shape = RoundedCornerShape(20.dp)
             )
 
 
@@ -101,7 +102,7 @@ fun PickupWithPickoffPoints(navController: NavController) {
                     Icon(
                         imageVector = Icons.Default.Add,
                         contentDescription = "Pickup Point",
-                        tint = Color(0XFF46C96B)
+                        tint = colorResource(R.color.primary_color)
                     )
                 },
                 label = "Pickup Point",
@@ -127,7 +128,7 @@ fun PickupWithPickoffPoints(navController: NavController) {
 
                     }, modifier = Modifier
                         .background(
-                            color = Color(0XFF46C96B), shape = RoundedCornerShape(50)
+                            color = colorResource(R.color.primary_color), shape = RoundedCornerShape(50)
                         )
                         .size(36.dp)
                 ) {
@@ -145,7 +146,7 @@ fun PickupWithPickoffPoints(navController: NavController) {
                     Icon(
                         imageVector = Icons.Default.Place,
                         contentDescription = "Pickoff Point",
-                        tint = Color(0XFF46C96B)
+                        tint =colorResource(R.color.primary_color)
                     )
                 },
                 label = "Pickoff Point",

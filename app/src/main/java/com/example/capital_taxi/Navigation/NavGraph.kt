@@ -40,9 +40,12 @@ import com.example.capital_taxi.Presentation.ui.screens.Onboarding.Components.Se
 import com.example.capital_taxi.Presentation.ui.screens.Onboarding.OnboardingPager
 import com.example.capital_taxi.Presentation.ui.screens.Select_the_mode.SelectTheMode
 import com.example.capital_taxi.Presentation.ui.screens.Start.StartScreen
+import com.example.capital_taxi.Presentation.ui.screens.modeDesign.modeDesign
+import com.example.capital_taxi.Presentation.ui.screens.new_password.NewPasswordScreen
 import com.example.capital_taxi.ui.screens.Driver.VerficationScreens.CertificateOfVehicleRegistration
 import com.example.capital_taxi.ui.screens.Driver.VerficationScreens.DriverLicence
 import com.example.capital_taxi.ui.screens.Driver.VerficationScreens.NationalIDValidation
+
 import settings
 
 @Composable
@@ -158,6 +161,15 @@ fun AppNavGraph(navController: NavHostController) {
         composable(Destination.userNotification.route) {
             userNotification(navController)
         }
+        composable(Destination.modeDesign.route) {
+            modeDesign(navController)
+        }
+
+
+        composable(Destination.NewPasswordScreen.route) {
+            NewPasswordScreen(navController)
+        }
+
         composable("help_detail/{topic}") { backStackEntry ->
             HelpDetailScreen(
                 navController = navController,

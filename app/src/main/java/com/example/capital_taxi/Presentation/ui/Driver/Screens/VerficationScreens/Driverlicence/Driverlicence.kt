@@ -1,5 +1,6 @@
 package com.example.capital_taxi.ui.screens.Driver.VerficationScreens
 
+import android.app.DatePickerDialog
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.widget.Toast
@@ -7,6 +8,8 @@ import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -21,10 +24,14 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.windowInsetsPadding
 import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.material.icons.filled.AddCircle
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonColors
 import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.Card
+import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -43,6 +50,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.asImageBitmap
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
@@ -52,6 +60,7 @@ import com.example.capital_taxi.Navigation.Destination
 import com.example.capital_taxi.R
 import java.io.File
 import java.io.FileOutputStream
+import java.util.Calendar
 
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -67,11 +76,21 @@ fun DriverLicence(navController: NavController) {
                 title = { Text("Driver License", fontWeight = FontWeight.Bold, fontSize = 20.sp) },
                 navigationIcon = {
                     IconButton(onClick = { navController.popBackStack() }) {
-                        Icon(
-                            painter = painterResource(id = R.drawable.baseline_arrow_back_24),
-                            contentDescription = "Back",
-                            tint = Color.Black
-                        )
+                        Box(
+                            modifier = Modifier
+
+                                .size(36.dp)
+                                .background(Color.Transparent)
+                                .border(4.dp, color = Color.Black, RoundedCornerShape(30.dp)),
+                            contentAlignment = Alignment.Center
+                        ) {
+                            Icon(
+                                modifier = Modifier.size(26.dp),
+                                painter = painterResource(id = R.drawable.baseline_arrow_back_ios_new_24),
+                                contentDescription = "Back",
+                                tint = Color.Black
+                            )
+                        }
                     }
                 },
                 colors = TopAppBarDefaults.topAppBarColors(containerColor = Color.White)
@@ -153,7 +172,7 @@ fun DriverLicence(navController: NavController) {
                     modifier = Modifier
                         .fillMaxWidth()
                         .padding(horizontal = 40.dp)
-                        .background(Color.Red),
+                        .background(Color.Black),
                     onClick = { navController.navigate(Destination.NationalIDValidation.route) }
                 ) {
                     Text("Continue", fontSize = 20.sp, color = Color.White)
@@ -221,38 +240,63 @@ fun DriverLicenseCaptureSection(
                 } else {
                     if (file.exists()) {
                         val bitmapFromStorage = BitmapFactory.decodeFile(file.absolutePath)
-                        Image(
-                            bitmap = bitmapFromStorage.asImageBitmap(),
-                            contentDescription = null,
-                            contentScale = ContentScale.Crop,
-                            modifier = Modifier.fillMaxSize()
-                        )
+                        Card(
+                            elevation = CardDefaults.elevatedCardElevation(10.dp),
+                            modifier = Modifier
+                                .background(Color.Transparent)
+                                .border(2.dp, Color.Transparent, RoundedCornerShape(16.dp))
+                        ) {
+                            Image(
+                                bitmap = bitmapFromStorage.asImageBitmap(),
+                                contentDescription = null,
+                                contentScale = ContentScale.Crop,
+                                modifier = Modifier.fillMaxSize()
+                            )
+                        }
                     } else {
-                        Image(
-                            painter = painterResource(placeholderImage),
-                            contentDescription = null,
-                            contentScale = ContentScale.Crop,
-                            modifier = Modifier.fillMaxSize()
-                        )
+                        Card(
+                            elevation = CardDefaults.elevatedCardElevation(10.dp),
+                            modifier = Modifier
+                                .background(Color.Transparent)
+                                .border(2.dp, Color.Transparent, RoundedCornerShape(16.dp))
+                        ) {
+
+                            Image(
+                                painter = painterResource(placeholderImage),
+                                contentDescription = null,
+                                contentScale = ContentScale.Crop,
+                                modifier = Modifier.fillMaxSize()
+                            )
+                        }
                     }
                 }
             }
 
-            Button(
-                onClick = { captureLauncher.launch(null) },
-                colors = ButtonDefaults.buttonColors(
-                    containerColor = Color.White,
-                    contentColor = Color.Green
-                ),
-                modifier = Modifier
-                    .width(200.dp)
-                    .height(50.dp)
-                    .background(Color.Green)
+            Card(
+                elevation = CardDefaults.elevatedCardElevation(10.dp),
+                modifier = Modifier.background(Color.Transparent)
+
             ) {
-                Text(text = buttonText, color = Color.Green, fontSize = 18.sp)
+                Button(
+                    onClick = { captureLauncher.launch(null) },
+                    colors = ButtonColors(
+                        containerColor = colorResource(R.color.primary_color),
+                        contentColor = colorResource(R.color.primary_color),
+                        disabledContainerColor = colorResource(R.color.primary_color),
+                        disabledContentColor = colorResource(R.color.primary_color),
+                    ),
+                    modifier = Modifier
+                        .width(200.dp)
+                        .height(50.dp)
+
+                        .border(1.dp, Color.DarkGray, RoundedCornerShape(10.dp)),
+                    shape = RoundedCornerShape(10.dp)
+
+                ) {
+                Text(text = buttonText, color = Color(0XFF111111), fontSize = 18.sp)
             }
         }
-    }
+    }}
 }
 
 fun saveImageToStorage(bitmap: Bitmap, file: File) {
@@ -276,8 +320,8 @@ fun DriverLicenseInfoSection() {
         // License Number Input
         LicenseTextField(label = "Driver License Number")
 
-        // Expiration Date Input
-        LicenseTextField(label = "Expiration Date (YYYY-MM-DD)")
+        // Expiration Date Picker
+        ExpirationDatePicker()
     }
 }
 
@@ -306,6 +350,49 @@ fun LicenseTextField(label: String) {
     }
 }
 
+@Composable
+fun ExpirationDatePicker() {
+    var selectedDate by remember { mutableStateOf("") }
+    val context = LocalContext.current
+    val calendar = Calendar.getInstance()
 
+    val datePickerDialog = DatePickerDialog(
+        context,
+        { _, year, month, dayOfMonth ->
+            selectedDate = "$year-${month + 1}-$dayOfMonth"
+        },
+        calendar.get(Calendar.YEAR),
+        calendar.get(Calendar.MONTH),
+        calendar.get(Calendar.DAY_OF_MONTH)
+    )
+
+    Column(
+        verticalArrangement = Arrangement.spacedBy(8.dp),
+        modifier = Modifier.fillMaxWidth()
+    ) {
+        Text(
+            text = "Expiration Date",
+            color = Color.Black,
+            fontSize = 16.sp,
+            fontWeight = FontWeight.Bold
+        )
+
+        androidx.compose.material3.OutlinedTextField(
+            value = selectedDate,
+            onValueChange = { },
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(horizontal = 16.dp),
+            readOnly = true,
+            trailingIcon = {
+                androidx.compose.material3.Icon(
+                    imageVector = androidx.compose.material.icons.Icons.Default.AddCircle,
+                    contentDescription = "Select Date",
+                    modifier = Modifier.clickable { datePickerDialog.show() }
+                )
+            }
+        )
+    }
+}
 
 

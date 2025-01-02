@@ -49,11 +49,11 @@ fun TripsHistoryScreen(navController: NavController) {
 fun Trips_History_Screen_Content(modifier: Modifier = Modifier, navController: NavController) {
     var voucher by remember { mutableStateOf("") }
     val context = LocalContext.current // Access the context safely
-    val backgroundColor = Color(ContextCompat.getColor(context, R.color.general))
+    val backgroundColor = Color(ContextCompat.getColor(context, R.color.primary_color))
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .background(Color((0XFF46C96B))),
+            .background(backgroundColor),
 
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Top
@@ -63,7 +63,7 @@ fun Trips_History_Screen_Content(modifier: Modifier = Modifier, navController: N
             modifier = Modifier
                 .fillMaxWidth()
                 .height(100.dp)
-                .background(Color((0XFF46C96B))),
+                .background(backgroundColor),
 
             ) {
             // Icon aligned to the start

@@ -1,12 +1,18 @@
-package com.example.capital_taxi.Presentation.ui.screens.Select_the_mode
-
+package com.example.capital_taxi.Presentation.ui.screens.modeDesign
 
 import androidx.compose.foundation.Canvas
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
-import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxHeight
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
@@ -14,7 +20,6 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.drawBehind
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
@@ -23,22 +28,17 @@ import androidx.compose.ui.graphics.SolidColor
 import androidx.compose.ui.graphics.drawOutline
 import androidx.compose.ui.graphics.drawscope.Fill
 import androidx.compose.ui.graphics.drawscope.clipPath
-
-import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.res.colorResource
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.LayoutDirection
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.example.capital_taxi.Navigation.Destination
-
 import com.example.capital_taxi.R
 
 @Composable
-fun SelectTheMode(navController: NavController) {
+fun modeDesign(navController: NavController) {
     Box(
         modifier = Modifier
             .fillMaxSize()
@@ -138,7 +138,7 @@ fun SelectTheMode(navController: NavController) {
                         )
                         .padding(6.dp),
                     colors = ButtonDefaults.buttonColors(containerColor = Color.White),
-                    onClick = {navController.navigate(Destination.FaceValidation.route)}
+                    onClick = {navController.navigate(Destination.driverLogin.route)}
                 ) {
                     Text(
                         text = "Captain",
@@ -161,7 +161,7 @@ fun SelectTheMode(navController: NavController) {
                         )
                         .padding(6.dp),
                     colors = ButtonDefaults.buttonColors(containerColor = Color.White),
-                    onClick = {navController.navigate(Destination.UserHomeScreen.route)}
+                    onClick = {navController.navigate(Destination.UserLogin.route)}
                 ) {
                     Text(
                         text = "Passenger",
@@ -182,24 +182,6 @@ fun SelectTheMode(navController: NavController) {
         }
     }
 
+
 }
 
-@Composable
-fun ModeOption(language: String, backgroundColor: Color, onClick: () -> Unit) {
-    Row(
-        modifier = Modifier
-            .fillMaxWidth(.7f)
-            .padding(8.dp)
-            .clickable { onClick() }
-            .border(2.dp, color = Color.DarkGray, RoundedCornerShape(30.dp))
-            .background(
-                backgroundColor,
-                RoundedCornerShape(30.dp)
-            )
-            .padding(16.dp),
-        horizontalArrangement = Arrangement.Center,
-        verticalAlignment = Alignment.CenterVertically
-    ) {
-        Text(text = language, fontWeight = FontWeight.Medium, fontSize = 16.sp)
-    }
-}

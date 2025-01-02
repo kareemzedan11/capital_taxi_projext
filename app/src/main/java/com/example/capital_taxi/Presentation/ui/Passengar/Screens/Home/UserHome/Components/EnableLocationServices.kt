@@ -28,6 +28,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.buildAnnotatedString
@@ -111,7 +112,7 @@ fun EnableLocationServices() {
                     .height(80.dp)
                     .fillMaxWidth()
                     .padding(vertical = 16.dp, horizontal = 30.dp),
-                colors = ButtonDefaults.buttonColors(Color(0xff46C96B))
+                colors = ButtonDefaults.buttonColors(colorResource(R.color.primary_color))
             ) {
                 Text("Enable in Settings",
                     fontSize = 18.sp, fontWeight = FontWeight.Bold, color = Color.White)

@@ -23,6 +23,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -82,7 +83,7 @@ fun HelpScreen(navController: NavController) {
 
                 Row(
                     modifier = Modifier
-                        .background(Color(0XFF46C96B).copy(alpha = 0.5f)) // Background with transparency
+                        .background(colorResource(R.color.secondary_color)) // Background with transparency
                         .border(2.dp, Color.Black, RoundedCornerShape(8.dp)) // Border with corner radius
 
                 ,

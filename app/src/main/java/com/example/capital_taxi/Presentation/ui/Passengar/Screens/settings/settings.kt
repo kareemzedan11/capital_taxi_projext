@@ -1,4 +1,5 @@
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
@@ -9,26 +10,43 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.*
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.Paint
 import androidx.compose.ui.graphics.painter.Painter
+import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
+import com.example.capital_taxi.Helper.PartialBottomSheet
+import com.example.capital_taxi.Navigation.Destination
 import com.example.capital_taxi.R
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun settings(navController: NavController) {
+
+    var isDark by remember { mutableStateOf(false) }
+    var showBottomSheet by remember { mutableStateOf(false) }
+
+    PartialBottomSheet(
+        showBottomSheet = showBottomSheet,
+        onDismissRequest = { showBottomSheet = false }) {
+
+        AppearanceBottomSheetContent(isDark, navController)
+    }
+
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .background(Color(0XFF46C96B)),
+            .background(colorResource(R.color.primary_color)),
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Top
     ) {
@@ -37,7 +55,7 @@ fun settings(navController: NavController) {
             modifier = Modifier
                 .fillMaxWidth()
                 .height(120.dp)
-                .background(Color(0XFF46C96B))
+                .background(colorResource(R.color.primary_color))
         ) {
             // Close Icon
             Icon(
@@ -88,72 +106,56 @@ fun settings(navController: NavController) {
                 SettingBox(
                     title = "Home",
                     icon = painterResource(R.drawable.home),
-                    color = Color(0XFF46C96B),
                     onClick = { /* Handle phone number click */ }
                 )
                 SettingBox(
                     title = "Add Work",
                     icon = painterResource(R.drawable.work),
-                    color = Color(0XFF46C96B),
                     onClick = { /* Handle phone number click */ }
                 )
                 SettingBox(
-                    title = "Phone Number",
-                    icon = painterResource(R.drawable.baseline_phone_24),
-                    color = Color(0XFF46C96B),
-                    onClick = { /* Handle phone number click */ }
+                    title = "Communication",
+                    icon = painterResource(R.drawable.messageicon),
+                    onClick = { /* Handle language change */ }
                 )
                 SettingBox(
                     title = "Saved Places",
                     icon = painterResource(R.drawable.baseline_place_24),
-                    color = Color(0XFF46C96B),
                     onClick = { /* Handle saved places click */ }
                 )
-                SettingBox(
-                    title = "Communication",
-                    color = Color(0XFF46C96B),
 
-                    icon = painterResource(R.drawable.messageicon),
-                    onClick = { /* Handle language change */ }
-                )
                 // Section 2: Preferences
                 SectionTitle(title = "Preferences")
                 SettingBox(
                     title = "Language",
                     icon = painterResource(R.drawable.language),
-                    color = Color(0XFF46C96B),
                     onClick = { /* Handle language change */ }
                 )
                 SettingBox(
-                    title = "Night Mode",
+                    title = "Appearance",
                     icon = painterResource(R.drawable.mode),
-                    color = Color(0XFF46C96B),
-                    onClick = { /* Handle night mode toggle */ }
+                    onClick = { showBottomSheet = true }
                 )
-// Inside the settings function, after the Security section
+                // Inside the settings function, after the Security section
                 SectionTitle(title = "Safety")
                 SettingBox(
                     title = "Two-Factor Authentication",
                     icon = painterResource(R.drawable.safety),
-                    color = Color(0xFF46C96B),
                     onClick = { /* Handle Two-Factor Authentication */ }
                 )
                 SettingBox(
                     title = "Privacy Settings",
                     icon = painterResource(R.drawable.settings_3524636),
-                    color = Color(0xFF46C96B),
                     onClick = { /* Handle Privacy Settings */ }
                 )
                 SettingBox(
                     title = "Security Notifications",
                     icon = painterResource(R.drawable.notification),
-                    color = Color(0xFF46C96B),
                     onClick = { /* Handle Security Notifications */ }
                 )
                 SettingBox(
                     title = "Emergency Contact",
                     icon = painterResource(R.drawable.emergency),
-                    color = Color(0xFF46C96B),
                     onClick = { /* Handle Emergency Contact */ }
                 )
 
@@ -161,13 +163,13 @@ fun settings(navController: NavController) {
                 SectionTitle(title = "Security")
                 SettingBox(
                     title = "Log Out",
-                    color = Color.Red,
+                    isred = true,
                     icon = painterResource(R.drawable.logout),
                     onClick = { /* Handle log out */ }
                 )
                 SettingBox(
                     title = "Delete Account",
-                    color = Color.Red,
+                    isred = true,
                     icon = painterResource(R.drawable.baseline_delete_24),
                     onClick = { /* Handle account deletion */ }
                 )
@@ -175,6 +177,172 @@ fun settings(navController: NavController) {
         }
     }
 }
+
+@Composable
+private fun AppearanceBottomSheetContent(isDark: Boolean, navController: NavController) {
+    var isDark1 = isDark
+    Column(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(16.dp),
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
+        Column(
+            modifier = Modifier.fillMaxSize(),
+            horizontalAlignment = Alignment.CenterHorizontally
+        ) {
+
+            Text(
+                text = "Appearance",
+                fontSize = 24.sp,
+                color = Color.Black,
+                fontWeight = FontWeight.W700
+            )
+            HorizontalDivider(
+                thickness = 2.dp,
+                modifier = Modifier.padding(vertical = 10.dp, horizontal = 30.dp)
+            )
+
+            Spacer(modifier = Modifier.padding(20.dp))
+
+            Card(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .height(60.dp)
+                    .background(Color.LightGray)
+                    .border(1.dp, color = Color.Gray),
+                elevation = CardDefaults.elevatedCardElevation(10.dp)
+            ) {
+                Row(
+                    modifier = Modifier
+                        .fillMaxSize()
+                        .clickable { isDark1 = false }
+                        .padding(horizontal = 10.dp),
+                    Arrangement.Start,
+                    Alignment.CenterVertically
+                ) {
+                    Box(
+                        modifier = Modifier
+                            .size(36.dp)
+                            .clip(CircleShape)
+                            .background(colorResource(R.color.secondary_color)),
+                        contentAlignment = Alignment.Center
+                    ) {
+                        Icon(
+                            painter = painterResource(R.drawable.baseline_light_mode_24),
+                            contentDescription = "light mode",
+                            tint = Color.Unspecified,
+                            modifier = Modifier.size(26.dp)
+                        )
+                    }
+                    Spacer(modifier = Modifier.width(16.dp))
+                    Text(
+                        "Light Mode",
+                        color = Color.Black,
+                        fontSize = 18.sp,
+                        fontWeight = FontWeight.W600
+                    )
+                    Spacer(modifier = Modifier.weight(1f))
+                    if (!isDark1) {
+                        Icon(
+                            painter = painterResource(R.drawable.selected),
+                            contentDescription = "light mode",
+                            tint = Color.Unspecified,
+                            modifier = Modifier.size(30.dp)
+                        )
+                    }
+
+                }
+            }
+
+            Spacer(modifier = Modifier.height(26.dp))
+
+            Card(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .height(60.dp)
+                    .background(Color.LightGray)
+                    .border(1.dp, color = Color.Gray),
+                elevation = CardDefaults.elevatedCardElevation(10.dp),
+            ) {
+                Row(
+                    modifier = Modifier
+                        .fillMaxSize()
+                        .clickable { isDark1 = true }
+                        .padding(horizontal = 10.dp),
+                    Arrangement.Start,
+                    Alignment.CenterVertically
+                ) {
+                    Box(
+                        modifier = Modifier
+                            .size(36.dp)
+                            .clip(CircleShape)
+                            .background(colorResource(R.color.secondary_color)),
+                        contentAlignment = Alignment.Center
+                    ) {
+
+                        Icon(
+                            painter = painterResource(R.drawable.baseline_dark_mode_24),
+                            contentDescription = "Dark mode",
+                            tint = Color.Unspecified,
+                            modifier = Modifier.size(26.dp)
+                        )
+                    }
+                    Spacer(modifier = Modifier.width(16.dp))
+                    Text(
+                        "Dark Mode",
+                        color = Color.Black,
+                        fontSize = 18.sp,
+                        fontWeight = FontWeight.W600
+                    )
+
+                    Spacer(modifier = Modifier.weight(1f))
+                    if (isDark1) {
+                        Icon(
+                            painter = painterResource(R.drawable.selected),
+                            contentDescription = "light mode",
+                            tint = Color.Unspecified,
+                            modifier = Modifier.size(30.dp)
+                        )
+                    }
+
+
+                }
+            }
+            Spacer(modifier = Modifier.padding(20.dp))
+
+
+            Button(
+                onClick = { navController.navigate(Destination.SelectTheMode.route) },
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(horizontal = 40.dp)
+
+
+                    .height(60.dp),
+                colors = ButtonDefaults.buttonColors(colorResource(R.color.primary_color)),
+                shape = RoundedCornerShape(8.dp)
+
+            ) {
+                Text(
+                    text = "Save",
+                    fontSize = 18.sp,
+                    color = Color.Black
+                )
+            }
+            Spacer(modifier = Modifier.height(16.dp))
+
+            Text(
+                text = "Cancel",
+                fontSize = 20.sp,
+                color = Color.Black,
+                fontWeight = FontWeight.W700
+            )
+
+        }
+    }
+}
+
 
 @Composable
 fun SectionTitle(title: String) {
@@ -193,7 +361,7 @@ fun SettingBox(
     title: String,
     icon: Painter,
     onClick: () -> Unit,
-    color: Color,
+    isred: Boolean? = null
 ) {
     Box(
         modifier = Modifier
@@ -208,7 +376,7 @@ fun SettingBox(
         SettingOptionWithArrow(
             title = title,
             icon = icon,
-            color = color,
+            isred = isred,
             onClick = onClick
         )
     }
@@ -217,7 +385,7 @@ fun SettingBox(
 @Composable
 fun SettingOptionWithArrow(
     title: String,
-    color: Color,
+    isred: Boolean? = null,
     icon: Painter,
     onClick: () -> Unit
 ) {
@@ -231,7 +399,7 @@ fun SettingOptionWithArrow(
         Icon(
             painter = icon,
             contentDescription = title,
-            tint = color,
+            tint = if (isred != null) Color.Red else colorResource(R.color.primary_color),
             modifier = Modifier.size(32.dp) // Larger icon size
         )
         Spacer(modifier = Modifier.width(20.dp))

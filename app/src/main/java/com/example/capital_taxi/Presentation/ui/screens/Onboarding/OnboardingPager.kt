@@ -5,26 +5,23 @@ import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
-import com.example.capital_taxi.Presentation.ui.screens.Onboarding.Components.GoogleAndPhone
-import com.example.capital_taxi.Presentation.ui.screens.Onboarding.Components.OnboardingScreen
-import com.google.accompanist.pager.HorizontalPagerIndicator
+import androidx.compose.foundation.border
+import androidx.compose.foundation.clickable
 
 
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.ButtonDefaults
-import androidx.compose.material3.ElevatedButton
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
-import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
@@ -49,7 +46,7 @@ fun OnboardingPager(navController: NavController, onSignInClick: () -> Unit) {
     val context = LocalContext.current
 
 
-    val backgroundColor = Color(ContextCompat.getColor(context, R.color.general))
+    val backgroundColor = Color(ContextCompat.getColor(context, R.color.primary_color))
     // Initialize FirebaseAuth instance
     val firebaseAuth = FirebaseAuth.getInstance()
 
@@ -99,7 +96,7 @@ fun OnboardingPager(navController: NavController, onSignInClick: () -> Unit) {
         rememberLauncherForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
             val task: Task<GoogleSignInAccount> =
                 GoogleSignIn.getSignedInAccountFromIntent(result.data)
-            handleSignInResult(task, firebaseAuth, navController) // Pass navController here
+            handleSignInResult(task, firebaseAuth, navController)
         }
 
 
@@ -108,136 +105,157 @@ fun OnboardingPager(navController: NavController, onSignInClick: () -> Unit) {
     Box(
         modifier = Modifier
             .fillMaxSize()
-            .background(Color((0XFF46C96B))),
+            .background(colorResource(R.color.primary_color)),
         contentAlignment = Alignment.Center
-
     ) {
         Column(
             modifier = Modifier
                 .fillMaxSize()
-                .padding(horizontal = 30.dp)
-                .background(Color((0XFF46C96B))),
+                .background(colorResource(R.color.primary_color)),
             verticalArrangement = Arrangement.Top,
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            Spacer(modifier = Modifier.weight(1f))
-
-            Text(
-                "Capital Taxi",
-                color = Color.Black,
-                fontWeight = FontWeight.W900,
-                fontSize = 40.sp
-            )
-
-            Spacer(modifier = Modifier.weight(1f))
             Box(
                 modifier = Modifier
-                    .clip(CircleShape)
+                    .fillMaxSize(0.53f)
 
-
-                    .background(Color.White)
-                    .height(150.dp),
+                    .background(colorResource(R.color.primary_color)),
                 contentAlignment = Alignment.Center
+
+
+            ) {
+                Column(modifier = Modifier.fillMaxWidth()) {
+                    Icon(
+
+                        painter = painterResource(R.drawable.logo),
+                        contentDescription = "Logo"
+
+                    )
+                    Spacer(modifier = Modifier.padding(10.dp))
+                    Row(
+                        modifier = Modifier.fillMaxWidth(),
+                        horizontalArrangement = Arrangement.Center,
+                        verticalAlignment = Alignment.CenterVertically
+                    ) {
+                        Text(
+                            "on time,",
+                            fontSize = 20.sp,
+                            color = Color.Black,
+                            fontWeight = FontWeight.Bold
+                        )
+                        Text("every time!", fontSize = 20.sp, color = Color.Black)
+
+                    }
+                }
+            }
+
+
+            Spacer(modifier = Modifier.weight(1f))
+
+            Box(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .fillMaxHeight(1f)
             ) {
                 Image(
+                    painter = painterResource(R.drawable.sec),
+                    contentDescription = "Logo",
+                    contentScale = ContentScale.Crop
+                )
+
+                Column(
                     modifier = Modifier
-                        .padding(top = 10.dp , end = 10.dp)
-                        .size(150.dp),
-                    painter = painterResource(R.drawable.logo),
-                    contentDescription = "logo"
-                )
+                        .align(Alignment.BottomCenter),
+                    verticalArrangement = Arrangement.spacedBy(12.dp),
+                    horizontalAlignment = Alignment.CenterHorizontally
+                ) {
+                    SignInButton(
+                        onSignInClick = {
+                            val signInIntent = googleSignInClient.signInIntent
+                            signInLauncher.launch(signInIntent)
+                        },
+                        navController,
+                        "Continue With Google",
+                        color = true,
+                        image = R.drawable.googleicon
+                    )
+                    SignInButton(
+                        onSignInClick = { navController.navigate(Destination.PhoneVerification.route) },
+                        navController, "Continue With Phone", R.drawable.phone2
+                    )
+
+                    Text(
+
+                        "Log in",
+                        fontSize = 20.sp,
+                        fontWeight = FontWeight.W500,
+                        color = Color(0XFF987200),
+                        modifier = Modifier
+                            .clickable { navController.navigate(Destination.modeDesign.route) },
+                    )
+
+                    Spacer(modifier = Modifier.padding(bottom = 10.dp))
+                }
             }
-
-            Spacer(modifier = Modifier.weight(1f))
-
-            Text("On Time, ", color = Color.Black, fontWeight = FontWeight.W900, fontSize = 40.sp)
-            Text(
-                " Every Time! ",
-                color = Color.Black,
-                fontWeight = FontWeight.W900,
-                fontSize = 40.sp
-            )
-
-            Spacer(modifier = Modifier.weight(1f))
-
-            ElevatedButton(
-                onClick = {
-                    // Launch the Google sign-in intent
-                    val signInIntent = googleSignInClient.signInIntent
-                    signInLauncher.launch(signInIntent)
-                },
-                modifier = Modifier
-                    .height(60.dp)
-                    .fillMaxWidth(),
-                colors = ButtonDefaults.buttonColors(Color.White),
-                shape = RoundedCornerShape(16.dp)
-            ) {
-
-                Icon(
-                    modifier = Modifier.size(30.dp),
-                    tint = Color.Unspecified,
-                    contentDescription = "Google icon",
-                    painter = painterResource(R.drawable.googleicon)
-                )
-                Spacer(modifier = Modifier.weight(1f))
-
-                Text(
-                    "Continue with Google",
-                    color = Color.Black,
-                    fontSize = 18.sp,
-                    fontWeight = FontWeight.Bold,
-                )
-                Spacer(modifier = Modifier.weight(1f))
-
-            }
-
-            Spacer(modifier = Modifier.height(20.dp))
-
-            ElevatedButton(
-                onClick = { navController.navigate("PhoneVerification") },
-                modifier = Modifier
-                    .height(60.dp)
-                    .fillMaxWidth(),
-                colors = ButtonDefaults.buttonColors(Color.Black),
-                shape = RoundedCornerShape(16.dp)
-            ) {
-                Icon(
-                    modifier = Modifier.size(30.dp)  ,
-                    tint = Color.Unspecified,
-                    contentDescription = "phone icon",
-                    painter = painterResource(R.drawable.mobile)
-                )
-                Spacer(modifier = Modifier.weight(1f))
-
-                Text(
-                    "Continue with phone",
-                    color = Color.White,
-                    fontSize = 18.sp,
-                    fontWeight = FontWeight.Bold,
-                )
-                Spacer(modifier = Modifier.weight(1f))
-
-            }
-            Spacer(modifier = Modifier.height(20.dp))
-
-            ElevatedButton(
-                onClick = { navController.navigate(Destination.SelectTheMode2.route) },
-                modifier = Modifier
-                    .height(60.dp)
-                    .fillMaxWidth(),
-                colors = ButtonDefaults.buttonColors(Color.White),
-                shape = RoundedCornerShape(16.dp)
-            ) {
-                Text(
-                    "Continue with Email and Password",
-                    color = Color.Black,
-                    fontSize = 18.sp,
-                    fontWeight = FontWeight.Bold,
-                )
-            }
-            Spacer(modifier = Modifier.weight(1f))
 
         }
 
+
+    }
+
+}
+
+@Composable
+private fun SignInButton(
+    onSignInClick: () -> Unit,
+    navController: NavController, text: String, image: Int, color: Boolean? = false
+) {
+
+    TextButton(
+        onClick = { onSignInClick() },
+        modifier = Modifier.Companion
+
+            .fillMaxWidth(0.57f)
+            .height(60.dp)
+            .border(
+                2.dp,
+                color = Color(0XFFf2edde),
+                RoundedCornerShape(10.dp)
+            ),
+        colors = ButtonDefaults.buttonColors(if (color ?: true) Color(0XFFf2edde) else Color.White),
+        shape = RoundedCornerShape(10.dp)
+    )
+    {
+        Row(
+            modifier = Modifier
+                .fillMaxWidth(),
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.Start
+        ) {
+
+            Icon(
+                modifier = Modifier.size(26.dp),
+                tint = Color(0XFF987200),
+                contentDescription = null,
+                painter = painterResource(image)
+            )
+            Spacer(modifier = Modifier.weight(1f))
+
+            Text(
+
+                text,
+                fontWeight = FontWeight.W500,
+                fontSize = 16.sp,
+                color = Color(0XFF987200),
+
+                )
+            Spacer(modifier = Modifier.weight(1f))
+
+        }
     }
 }
+
+
+
+
+

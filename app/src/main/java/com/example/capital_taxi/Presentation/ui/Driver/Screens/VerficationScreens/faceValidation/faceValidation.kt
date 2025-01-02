@@ -8,8 +8,10 @@ import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
@@ -18,6 +20,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.asImageBitmap
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
@@ -39,11 +42,21 @@ fun FaceValidation(navController: NavController) {
                 title = { Text("Face Validation", fontWeight = FontWeight.Bold, fontSize = 20.sp) },
                 navigationIcon = {
                     IconButton(onClick = { navController.popBackStack() }) {
-                        Icon(
-                            painter = painterResource(id = R.drawable.baseline_arrow_back_24),
-                            contentDescription = "Back",
-                            tint = Color.Black
-                        )
+                        Box(
+                            modifier = Modifier
+
+                                .size(36.dp)
+                                .background(Color.Transparent)
+                                .border(4.dp, color = Color.Black, RoundedCornerShape(30.dp)),
+                            contentAlignment = Alignment.Center
+                        ) {
+                            Icon(
+                                modifier = Modifier.size(26.dp),
+                                painter = painterResource(id = R.drawable.baseline_arrow_back_ios_new_24),
+                                contentDescription = "Back",
+                                tint = Color.Black
+                            )
+                        }
                     }
                 },
                 colors = TopAppBarDefaults.topAppBarColors(containerColor = Color.White)
@@ -187,26 +200,39 @@ fun DocumentButton(
 
         // Conditional button based on `isUploaded` state
         if (!isUploaded) {
-            Button(
-                onClick = onCapture,
-                colors = ButtonColors(
-                    containerColor = Color.White, contentColor = Color.Green,
-                    disabledContainerColor = Color.White, disabledContentColor = Color.Green
-                ),
-                modifier = Modifier
-                    .width(200.dp)
-                    .height(50.dp)
-                    .background(Color.Green)
+            Card(
+                elevation = CardDefaults.elevatedCardElevation(10.dp),
+                modifier = Modifier.background(Color.Transparent)
+
             ) {
-                Text(text = "Add a photo", color = Color.Green, fontSize = 18.sp)
+                Button(
+                    onClick = onCapture,
+                    colors = ButtonColors(
+                        containerColor = colorResource(R.color.primary_color),
+                        contentColor = colorResource(R.color.primary_color),
+                        disabledContainerColor = colorResource(R.color.primary_color),
+                        disabledContentColor = colorResource(R.color.primary_color),
+                    ),
+                    modifier = Modifier
+                        .width(200.dp)
+                        .height(50.dp)
+
+                        .border(1.dp, Color.DarkGray, RoundedCornerShape(10.dp)),
+                     shape = RoundedCornerShape(10.dp)
+
+                ) {
+                    Text(text = "Add a photo", color = Color(0XFF111111), fontSize = 18.sp)
+                }
             }
         } else {
             Button(
+
                 onClick = { /* Handle upload confirmation */ },
-                colors = ButtonDefaults.buttonColors(containerColor = Color.Gray),
+                colors = ButtonDefaults.buttonColors(containerColor = Color.Transparent),
                 modifier = Modifier
                     .width(200.dp)
-                    .height(50.dp),
+                    .height(50.dp)
+                     ,
                 enabled = false // Disabled once photo is uploaded
             ) {
                 Text(text = "Photo is uploaded", color = Color.White, fontSize = 18.sp)
@@ -245,7 +271,7 @@ fun DocumentButton(
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(horizontal = 40.dp)
-                .background(Color.Red),
+                .background(Color.Black),
             onClick = {navController.navigate(Destination.DriverLicence.route)}
         ) {
             Text("Continue", fontSize = 20.sp, color = Color.White)

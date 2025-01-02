@@ -21,8 +21,10 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.capital_taxi.R
 
 
 @Composable
@@ -63,13 +65,13 @@ fun confirmPickup() {
                         .fillMaxWidth()
                         .padding(horizontal = 10.dp, vertical = 10.dp)
                         .height(60.dp),
-                    colors = ButtonDefaults.buttonColors(Color(0XFF46C96B)),
+                    colors = ButtonDefaults.buttonColors(colorResource(R.color.primary_color)),
                     shape = RoundedCornerShape(8.dp)
                 ) {
                     Text(
                         text = "Confirm Pickup",
                         fontSize = 18.sp,
-                        color = Color.White
+                        color = Color.Black
                     )
                 }
             }

@@ -77,6 +77,7 @@ import androidx.compose.ui.graphics.ColorMatrix
 import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalDensity
+import androidx.compose.ui.res.colorResource
 import androidx.navigation.NavController
 import com.example.capital_taxi.Navigation.Destination
 import kotlin.math.roundToInt
@@ -469,7 +470,7 @@ navController.navigate(Destination.chatbot.route)
                 modifier = Modifier
                     .size(iconSize)
                     .padding(8.dp),
-                        colorFilter = ColorFilter.tint(Color(0XFF46C96B)) // Apply a green tint to the icon
+                        colorFilter = ColorFilter.tint(colorResource(R.color.primary_color)) // Apply a green tint to the icon
 
             )
         }

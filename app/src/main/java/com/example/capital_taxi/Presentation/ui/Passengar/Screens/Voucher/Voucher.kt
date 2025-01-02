@@ -33,6 +33,7 @@ import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.core.content.ContextCompat
@@ -52,11 +53,11 @@ fun voucherScreen(navController: NavController) {
 fun VoucherScreenContent(modifier: Modifier = Modifier, navController: NavController) {
     var voucher by remember { mutableStateOf("") }
     val context = LocalContext.current // Access the context safely
-    val backgroundColor = Color(ContextCompat.getColor(context, R.color.general))
+    val backgroundColor = Color(ContextCompat.getColor(context, R.color.primary_color))
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .background(Color((0XFF46C96B))),
+            .background(colorResource(R.color.primary_color)),
 
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Top
@@ -66,7 +67,7 @@ fun VoucherScreenContent(modifier: Modifier = Modifier, navController: NavContro
             modifier = Modifier
                 .fillMaxWidth()
                 .height(100.dp)
-                .background(Color((0XFF46C96B))),
+                .background(backgroundColor),
 
             ) {
             // Icon aligned to the start

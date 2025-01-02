@@ -41,6 +41,9 @@ sealed class Destination(val route: String) {
     object HelpScreen : Destination("HelpScreen")
     object SafetyScreen : Destination("SafetyScreen")
     object userNotification : Destination("userNotification")
+    object modeDesign : Destination("modeDesign")
+    object NewPasswordScreen : Destination("NewPasswordScreen")
+
 
 
 
