@@ -81,10 +81,19 @@ import androidx.compose.ui.res.colorResource
 import androidx.navigation.NavController
 import com.example.capital_taxi.Navigation.Destination
 import kotlin.math.roundToInt
-
+import android.location.Geocoder
+import android.widget.TextView
+import androidx.compose.material3.Text
+import java.util.Locale
 @Composable
-fun GoogleMapsDesign(context: Context, modifier: Modifier = Modifier) {
+fun GoogleMapsDesign(
+    context: Context,
+    modifier: Modifier = Modifier,
+    navController: NavController,
+    onLocationFetched: (String) -> Unit // Receive the callback here
+) {
     var userLocation by remember { mutableStateOf<LatLng?>(null) }
+    var locationName by remember { mutableStateOf<String?>(null) }
     val context = LocalContext.current
 
     // Initialize the camera position state
@@ -92,9 +101,8 @@ fun GoogleMapsDesign(context: Context, modifier: Modifier = Modifier) {
         position = CameraPosition.fromLatLngZoom(LatLng(0.0, 0.0), 15f) // Default camera position
     }
 
-    // Fetch user's location when composable is launched
+    // Fetch user's location and address when composable is launched
     LaunchedEffect(Unit) {
-        // Check for location permission
         if (ContextCompat.checkSelfPermission(
                 context,
                 Manifest.permission.ACCESS_FINE_LOCATION
@@ -105,8 +113,14 @@ fun GoogleMapsDesign(context: Context, modifier: Modifier = Modifier) {
                 if (location != null) {
                     val latLng = LatLng(location.latitude, location.longitude)
                     userLocation = latLng
+                    val geocoder = Geocoder(context, Locale.getDefault())
+                    val addresses = geocoder.getFromLocation(location.latitude, location.longitude, 1)
+                    locationName = addresses?.firstOrNull()?.getAddressLine(0) ?: "Unknown location"
                     // Update camera position to user's location
                     cameraPositionState.position = CameraPosition.fromLatLngZoom(latLng, 15f)
+
+                    // Call the callback with the location name
+                    onLocationFetched(locationName ?: "Unknown location")
                 } else {
                     Toast.makeText(context, "Unable to fetch location", Toast.LENGTH_SHORT).show()
                 }
@@ -150,37 +164,10 @@ fun GoogleMapsDesign(context: Context, modifier: Modifier = Modifier) {
                 )
             }
         }
+    }
+}
 
-        Box(
-            modifier = Modifier
-                .padding(16.dp)
-                .align(Alignment.BottomEnd)
-        ) {
-            // Box for custom location button with white background
-            Box(
-                modifier = Modifier
-                    .size(56.dp) // Adjust the size of the button
-                    .background(Color.White, shape = CircleShape) // White circular background
-                    .border(2.dp, Color.White, shape = CircleShape) // Optional border
-                    .clickable {
-                        // Handle location button click (e.g., move to user's location)
-                        userLocation?.let { location ->
-                            cameraPositionState.position =
-                                CameraPosition.fromLatLngZoom(location, 15f)
-                        }
-                    },
-                contentAlignment = Alignment.Center // Center the icon inside the button
-            ) {
-                Icon(
-                    painter = painterResource(R.drawable.getlocation), // Your custom location icon
-                    contentDescription = "My Location",
-                    modifier = Modifier.size(32.dp), // Adjust icon size
-                    tint = Color.Unspecified // Icon color
-                )
-            }
-        }
 
-    }}
         @Composable
 fun GoogleMapsWithSimulatedMovement(
     context: Context,
@@ -382,9 +369,8 @@ fun decodePoly(encoded: String): List<LatLng> {
     }
     return poly
 }
-
 @Composable
-fun MapSection(modifier: Modifier=Modifier) {
+fun MapSection(modifier: Modifier = Modifier, navController: NavController) {
     val origin = LatLng(30.1508, 31.2357) // Example origin
     val destinations = listOf(
         LatLng(30.0444, 31.2357), // Destination 1
@@ -392,7 +378,19 @@ fun MapSection(modifier: Modifier=Modifier) {
     )
     val apiKey = "AIzaSyArzERc9xBRprPePwc4uTopBW9WMBymX74"
 
-    GoogleMapsDesign(modifier = modifier, context = LocalContext.current)
+    // Define a function to handle the fetched location name
+    val onLocationFetched: (String) -> Unit = { locationName ->
+        // Handle the fetched location name (you can store it or use it as needed)
+        println("Fetched Location: $locationName")
+    }
+
+    // Pass the callback to GoogleMapsDesign
+    GoogleMapsDesign(
+        modifier = modifier,
+        context = LocalContext.current,
+        navController = navController,
+        onLocationFetched = onLocationFetched
+    )
 }
 
 

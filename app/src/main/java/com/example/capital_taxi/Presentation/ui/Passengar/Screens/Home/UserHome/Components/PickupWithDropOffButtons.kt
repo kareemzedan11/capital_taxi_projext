@@ -50,7 +50,7 @@ import com.example.capital_taxi.R
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun PickupWithDropOffButtons(navController: NavController) {
+fun PickupWithDropOffButtons(navController: NavController, locationName: String?="Select Pickup Location") {
     var showBottomSheet by remember { mutableStateOf(false) }
     val sheetState = rememberModalBottomSheetState(
         skipPartiallyExpanded = true,
@@ -75,8 +75,6 @@ fun PickupWithDropOffButtons(navController: NavController) {
         verticalArrangement = Arrangement.spacedBy(1.dp),
         horizontalAlignment = Alignment.Start
     ) {
-
-
         androidx.compose.material3.Text(
             text = "Where are you going today?",
             style = MaterialTheme.typography.titleLarge.copy(
@@ -89,9 +87,10 @@ fun PickupWithDropOffButtons(navController: NavController) {
                 .padding(bottom = 16.dp)
         )
 
+        // Use locationName if available
         PickupDropOffRow(
             iconRes = R.drawable.circle,
-            text = "Select Pickup Location",
+            text = locationName ?: "Select Pickup Location", // Display the location name or default text
             onClick = { showBottomSheet = true }
         )
 

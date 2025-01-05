@@ -2,6 +2,7 @@ package com.example.capital_taxi.Presentation.ui.Passengar.Screens.Home.UserHome
 
 import TopBar
 import android.content.Context
+import android.location.Geocoder
 import android.location.LocationManager
 import android.util.Log
 import androidx.compose.foundation.background
@@ -66,11 +67,17 @@ import androidx.compose.material.BottomSheetScaffold
 import androidx.compose.material.Divider
 import androidx.compose.material3.Icon
 import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberUpdatedState
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.res.painterResource
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.capital_taxi.Helper.PermissionViewModel
 import com.example.capital_taxi.Helper.checkLocationPermission
+import com.google.android.gms.location.LocationServices
+import java.util.Locale
+
 @OptIn(ExperimentalMaterial3Api::class, ExperimentalMaterialApi::class)
 @Composable
 fun homeScreenContent(navController: NavController) {
@@ -103,9 +110,26 @@ fun homeScreenContent(navController: NavController) {
     val currentIsLocationEnabled = rememberUpdatedState(isLocationEnabled)
     val currentIsLocationGranted = rememberUpdatedState(isLocationGranted)
 
-    // Refresh UI when location service state changes
-    LaunchedEffect(currentIsLocationEnabled.value, currentIsLocationGranted.value) {
-        // This will be triggered when either isLocationEnabled or isLocationGranted changes
+    // FusedLocationProviderClient to get current location
+    val fusedLocationClient = LocationServices.getFusedLocationProviderClient(context)
+    var locationName by remember { mutableStateOf("Fetching location...") }
+
+    LaunchedEffect(Unit) {
+        // Get the last known location
+        fusedLocationClient.lastLocation.addOnSuccessListener { location ->
+            location?.let {
+
+                val geocoder = Geocoder(context, Locale.getDefault())
+                val addressList = geocoder.getFromLocation(it.latitude, it.longitude, 1)
+                locationName = if (addressList != null && addressList.isNotEmpty()) {
+                    addressList[0].getAddressLine(0) // الحصول على العنوان الكامل
+                } else {
+                    "Unable to fetch location"
+                }
+            } ?: run {
+                locationName = "Unable to fetch location"
+            }
+        }
     }
 
     // Main Container
@@ -130,7 +154,7 @@ fun homeScreenContent(navController: NavController) {
                             .padding(padding)
                     ) {
                         if (isLocationGranted) {
-                            MapSection()
+                            MapSection(navController = navController)
                         } else {
                             Text("Location permission is required to view the map.")
                         }
@@ -170,16 +194,21 @@ fun homeScreenContent(navController: NavController) {
                     ) {
                         // Use the current state to check if location is enabled and permission granted
                         if (currentIsLocationEnabled.value && currentIsLocationGranted.value) {
-                            PickupWithDropOffButtons(navController)
+                            // Pass the locationName to the PickupWithDropOffButtons
+                            PickupWithDropOffButtons(
+                                navController = navController,
+                                locationName = locationName // هنا يتم تمرير اسم الموقع
+                            )
                         } else {
                             EnableLocationServices(
                                 permissionViewModel = permissionViewModel,
-                                context
+                                context = context
                             )
                         }
                     }
                 }
             )
+
             if (currentIsLocationEnabled.value && currentIsLocationGranted.value) {
 
                 Box(
@@ -250,3 +279,4 @@ fun homeScreenContent(navController: NavController) {
         }
     }
 }
+

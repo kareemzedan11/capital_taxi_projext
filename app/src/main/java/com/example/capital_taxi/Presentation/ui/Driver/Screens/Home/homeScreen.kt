@@ -101,7 +101,7 @@ fun driverHomeScreen(navController: NavController) {
                         contentAlignment = Alignment.Center
                     ) {
                        // TripArrivedCard()
-                        MapSection()
+                        MapSection(navController=navController)
                     //  PassengerConnectionCard()
                     //   tripDetailsCard(light = false)
                     //  TripArrivedCard()
