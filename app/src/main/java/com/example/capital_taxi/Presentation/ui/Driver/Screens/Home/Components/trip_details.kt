@@ -21,6 +21,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
@@ -109,7 +110,7 @@ fun tripDetailsCard(light: Boolean) {
                     progress = progress,
                     modifier = Modifier
                         .fillMaxWidth(),
-                    color = Color(0XFF46C96B),
+                    color = colorResource(R.color.primary_color),
                     Color(0XFFF2F2F2)
                 )
 
@@ -164,9 +165,9 @@ fun tripDetailsCard(light: Boolean) {
                     modifier = Modifier
                         .fillMaxWidth()
                         .height(50.dp),
-                    colors = ButtonDefaults.buttonColors(Color(0XFF46C96B))
+                    colors = ButtonDefaults.buttonColors(colorResource(R.color.primary_color))
                 ) {
-                    Text(text = "Accept Trip", color = Color.White, fontSize = 16.sp)
+                    Text(text = "Accept Trip", color = Color.Black, fontSize = 16.sp)
                 }
                 HorizontalDivider(
                     thickness = 2.dp,
@@ -183,11 +184,14 @@ fun tripDetailsCard(light: Boolean) {
                             colors = ButtonDefaults.buttonColors(
                                 Color.Transparent // بدون خلفية
                             ),
-                            border = BorderStroke(1.dp, Color(0XFF46C96B)) // لون الحدود
+                            border = BorderStroke(
+                                1.dp,
+                                colorResource(R.color.primary_color)
+                            ) // لون الحدود
                         ) {
                             Text(
                                 text = "150 EGP",
-                                color = Color(0xFF46C96B), // لون النص
+                                color = Color.Black,
                                 fontSize = 16.sp
                             )
                         }
@@ -223,7 +227,10 @@ fun RidePointDetails(
 
         ) {
 
-            Row (horizontalArrangement = Arrangement.Start, verticalAlignment = Alignment.CenterVertically){
+            Row(
+                horizontalArrangement = Arrangement.Start,
+                verticalAlignment = Alignment.CenterVertically
+            ) {
 
                 androidx.compose.material.Icon(
                     modifier = Modifier.size(26.dp),
@@ -289,16 +296,19 @@ fun RidePointDetails(
                 }
 
             }
-            Row (horizontalArrangement = Arrangement.Start, verticalAlignment = Alignment.CenterVertically){
+            Row(
+                horizontalArrangement = Arrangement.Start,
+                verticalAlignment = Alignment.CenterVertically
+            ) {
 
 
-            androidx.compose.material.Icon(
+                androidx.compose.material.Icon(
                     modifier = Modifier.size(26.dp),
                     painter = painterResource(Destinationicon),
                     contentDescription = null,
                     tint = Color.Unspecified
                 )
-                if (isDestance == false) {
+                if (!isDestance) {
 
                     Button(
                         onClick = onClick,
@@ -321,7 +331,6 @@ fun RidePointDetails(
 
                     Column {
 
-                        if (isDestance) {
                             distance2?.let {
                                 Text(
                                     modifier = Modifier.padding(horizontal = 10.dp),
@@ -331,7 +340,7 @@ fun RidePointDetails(
                                     color = Color.Black
                                 )
                             }
-                        }
+
 
 
 

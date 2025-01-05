@@ -1,6 +1,6 @@
 package com.example.capital_taxi.Presentation.ui.Driver.Screens.Home.Components
 
-import androidx.compose.foundation.BorderStroke
+
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
@@ -43,6 +43,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
@@ -68,8 +69,12 @@ fun TripDetailsForDriver(navController: NavController) {
         }
     }
 
-    Box(modifier = Modifier.fillMaxSize().background(Color.LightGray)) {
-        Column {
+    Box(
+        modifier = Modifier
+            .fillMaxSize()
+            .background(colorResource(R.color.secondary_color))
+    ) {
+        Column(modifier = Modifier.background(colorResource(R.color.secondary_color))) {
             // إضافة أيقونة العودة للخلف
             Row(
                 modifier = Modifier
@@ -78,13 +83,25 @@ fun TripDetailsForDriver(navController: NavController) {
                     .padding(16.dp),
                 verticalAlignment = Alignment.CenterVertically
             ) {
+
                 IconButton(onClick = { navController.popBackStack() }) {
-                    Icon(
-                        painter = painterResource(id = R.drawable.baseline_arrow_back_24),
-                        contentDescription = "Back",
-                        tint = Color.Black
-                    )
+                    Box(
+                        modifier = Modifier
+
+                            .size(36.dp)
+                            .background(Color.Transparent)
+                            .border(4.dp, color = Color.Black, RoundedCornerShape(30.dp)),
+                        contentAlignment = Alignment.Center
+                    ) {
+                        Icon(
+                            modifier = Modifier.size(26.dp),
+                            painter = painterResource(id = R.drawable.baseline_arrow_back_ios_new_24),
+                            contentDescription = "Back",
+                            tint = Color.Black
+                        )
+                    }
                 }
+
                 Spacer(modifier = Modifier.width(8.dp))
                 Text(
                     text = "Trip Details",
@@ -216,7 +233,7 @@ fun TripDetailsForDriver(navController: NavController) {
                                     modifier = Modifier
                                         .weight(.1f)
                                         .background(
-                                            Color(0XFF46C96B),
+                                            colorResource(R.color.primary_color),
                                             RoundedCornerShape(topEnd = 30.dp, bottomEnd = 30.dp)
                                         ) // خلفية مربعة
                                         .padding(10.dp),  // المسافة داخل المربع
@@ -378,10 +395,6 @@ fun RideRequestCard() {
         }
     }
 }
-
-
-
-
 
 
 @Composable

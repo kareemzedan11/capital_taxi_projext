@@ -1,6 +1,9 @@
 package com.example.capital_taxi.Presentation.ui.Passengar.Screens.Home.UserHome.Components
 
 import TopBar
+import android.content.Context
+import android.location.LocationManager
+import android.util.Log
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
@@ -62,11 +65,25 @@ import androidx.compose.material.rememberBottomSheetScaffoldState
 import androidx.compose.material.BottomSheetScaffold
 import androidx.compose.material.Divider
 import androidx.compose.material3.Icon
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.rememberUpdatedState
 import androidx.compose.ui.res.painterResource
-
+import androidx.lifecycle.viewmodel.compose.viewModel
+import com.example.capital_taxi.Helper.PermissionViewModel
+import com.example.capital_taxi.Helper.checkLocationPermission
 @OptIn(ExperimentalMaterial3Api::class, ExperimentalMaterialApi::class)
 @Composable
 fun homeScreenContent(navController: NavController) {
+    val permissionViewModel: PermissionViewModel = viewModel()
+    val context = LocalContext.current
+
+    // تأكد من التحقق من الصلاحية عند تحميل الشاشة
+    LaunchedEffect(context) {
+        checkLocationPermission(context, permissionViewModel)
+    }
+
+    val isLocationGranted by permissionViewModel.isLocationGranted.collectAsState()
+
     val scope = rememberCoroutineScope()
 
     // BottomSheetScaffoldState
@@ -76,13 +93,19 @@ fun homeScreenContent(navController: NavController) {
 
     // DrawerState
     val drawerState = rememberDrawerState(initialValue = DrawerValue.Closed)
-
     val gesturesEnabled = drawerState.isOpen
-    val context = LocalContext.current
 
-    // Ensure the state is maintained when navigating back
-    LaunchedEffect(context) {
-        bottomSheetState.bottomSheetState.targetValue
+    // Check if location service is enabled
+    val locationManager = context.getSystemService(Context.LOCATION_SERVICE) as LocationManager
+    val isLocationEnabled = locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)
+
+    // Remember updated state of location enabled and granted
+    val currentIsLocationEnabled = rememberUpdatedState(isLocationEnabled)
+    val currentIsLocationGranted = rememberUpdatedState(isLocationGranted)
+
+    // Refresh UI when location service state changes
+    LaunchedEffect(currentIsLocationEnabled.value, currentIsLocationGranted.value) {
+        // This will be triggered when either isLocationEnabled or isLocationGranted changes
     }
 
     // Main Container
@@ -106,7 +129,11 @@ fun homeScreenContent(navController: NavController) {
                             .fillMaxSize()
                             .padding(padding)
                     ) {
-                        MapSection()
+                        if (isLocationGranted) {
+                            MapSection()
+                        } else {
+                            Text("Location permission is required to view the map.")
+                        }
 
                         // TopBar and DraggableIcon
                         Box(
@@ -131,8 +158,6 @@ fun homeScreenContent(navController: NavController) {
                     }
                 },
                 sheetContent = {
-
-
                     Box(
                         modifier = Modifier
                             .fillMaxSize()
@@ -143,79 +168,81 @@ fun homeScreenContent(navController: NavController) {
                                 shape = RoundedCornerShape(16.dp) // Rounded corners
                             )
                     ) {
-                       // pickAndGoDesign(navController)
-                        //searchAboutADriver()
-                        PickupWithDropOffButtons(navController)
-                       // RideDetailsScreen(navController)
-                        //TripDetailsLiveTracker()
-
+                        // Use the current state to check if location is enabled and permission granted
+                        if (currentIsLocationEnabled.value && currentIsLocationGranted.value) {
+                            PickupWithDropOffButtons(navController)
+                        } else {
+                            EnableLocationServices(
+                                permissionViewModel = permissionViewModel,
+                                context
+                            )
+                        }
                     }
-
-
                 }
             )
+            if (currentIsLocationEnabled.value && currentIsLocationGranted.value) {
 
-
-            Box(
-                modifier = Modifier
-                    .fillMaxSize()
-                    .padding(16.dp)
-            ) {
-                Card(
+                Box(
                     modifier = Modifier
-                        .fillMaxWidth()
-                        .align(Alignment.BottomCenter) // Ensures it's at the bottom
-                        .padding(16.dp),
-                    elevation = CardDefaults.elevatedCardElevation(10.dp),
-                    shape = RoundedCornerShape(16.dp)
+                        .fillMaxSize()
+                        .padding(16.dp)
                 ) {
-                    Box(
+                    Card(
                         modifier = Modifier
                             .fillMaxWidth()
-                            .height(80.dp),
-                        contentAlignment = Alignment.Center
+                            .align(Alignment.BottomCenter)
+                            .padding(16.dp),
+                        elevation = CardDefaults.elevatedCardElevation(10.dp),
+                        shape = RoundedCornerShape(16.dp)
                     ) {
-                        Row(
+                        Box(
                             modifier = Modifier
                                 .fillMaxWidth()
-                                .padding(horizontal = 10.dp),
-                            Arrangement.Start,
-                            Alignment.CenterVertically
+                                .height(80.dp),
+                            contentAlignment = Alignment.Center
                         ) {
-                            Icon(
-                                modifier = Modifier.size(26.dp),
-                                painter = painterResource(R.drawable.dollar),
-                                tint = Color.Unspecified,
-
-                                contentDescription = null
-                            )
-                            Spacer(modifier = Modifier.weight(1f))
-
-                            Button(
-                                onClick = { /* TODO */ },
-                                colors = ButtonDefaults.buttonColors(
-                                    containerColor = colorResource(
-                                        R.color.primary_color
-                                    )
-                                ),
+                            Row(
                                 modifier = Modifier
-                                    .width(200.dp)
-                                    .height(50.dp),
-                                contentPadding = PaddingValues(0.dp)
+                                    .fillMaxWidth()
+                                    .padding(horizontal = 10.dp),
+                                Arrangement.Start,
+                                Alignment.CenterVertically
                             ) {
+                                Icon(
+                                    modifier = Modifier.size(26.dp),
+                                    painter = painterResource(R.drawable.dollar),
+                                    tint = Color.Unspecified,
+                                    contentDescription = null
+                                )
+                                Spacer(modifier = Modifier.weight(1f))
 
-                                Text(text = "Find a driver", color = Color.Black, fontSize = 16.sp)
+                                Button(
+                                    onClick = { /* TODO */ },
+                                    colors = ButtonDefaults.buttonColors(
+                                        containerColor = colorResource(
+                                            R.color.primary_color
+                                        )
+                                    ),
+                                    modifier = Modifier
+                                        .width(200.dp)
+                                        .height(50.dp),
+                                    contentPadding = PaddingValues(0.dp)
+                                ) {
+                                    Text(
+                                        text = "Find a driver",
+                                        color = Color.Black,
+                                        fontSize = 16.sp
+                                    )
+                                }
+                                Spacer(modifier = Modifier.weight(1f))
 
-
+                                Icon(
+                                    modifier = Modifier.size(26.dp),
+                                    painter = painterResource(R.drawable.tools),
+                                    tint = Color.Black,
+                                    contentDescription = null
+                                )
                             }
-                            Spacer(modifier = Modifier.weight(1f))
-
-                            Icon(
-                                modifier = Modifier.size(26.dp),
-                                painter = painterResource(R.drawable.tools),
-                                tint = Color.Black,
-                                contentDescription = null
-                            )
                         }
                     }
                 }
@@ -223,4 +250,3 @@ fun homeScreenContent(navController: NavController) {
         }
     }
 }
-

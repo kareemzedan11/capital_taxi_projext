@@ -11,14 +11,16 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.drawscope.Stroke
+import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.capital_taxi.R
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
 @Composable
 fun passengerAcceptPrice() {
-    Box(modifier = Modifier.fillMaxSize()) {
+     Box(modifier = Modifier.fillMaxSize()) {
         Card(
             modifier = Modifier
                 .fillMaxWidth()
@@ -66,6 +68,8 @@ fun passengerAcceptPrice() {
 
 @Composable
 fun CircularCountdown() {
+    val backgroundcolor= colorResource(R.color.primary_color)
+
     val countdownTime = 15 // Total countdown seconds
     var currentTime by remember { mutableStateOf(countdownTime) }
     val animatedProgress = remember { Animatable(1f) }
@@ -94,7 +98,7 @@ fun CircularCountdown() {
                 style = Stroke(width = 8.dp.toPx())
             )
             drawArc(
-                color = Color(0xFF46C96B),
+                color = backgroundcolor,
                 startAngle = -90f,
                 sweepAngle = 360 * animatedProgress.value,
                 useCenter = false,

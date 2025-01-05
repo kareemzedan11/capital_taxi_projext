@@ -1,6 +1,7 @@
 package com.example.capital_taxi.Presentation.ui.Driver.Screens.Home.drawerTabs.income
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.rememberScrollState
@@ -16,8 +17,10 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.filled.KeyboardArrowRight
+import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.ui.graphics.painter.Painter
+import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
@@ -37,12 +40,22 @@ fun IncomePage(navController: NavController) {
                     )
                 },
                 navigationIcon = {
-                    IconButton(onClick = { navController.popBackStack() }) {
-                        Icon(
-                            imageVector = Icons.Default.ArrowBack,
-                            contentDescription = "Back",
-                            tint = Color.Black
-                        )
+                    androidx.compose.material3.IconButton(onClick = { navController.popBackStack() }) {
+                        Box(
+                            modifier = Modifier
+
+                                .size(36.dp)
+                                .background(Color.Transparent)
+                                .border(4.dp, color = Color.Black, RoundedCornerShape(30.dp)),
+                            contentAlignment = Alignment.Center
+                        ) {
+                            androidx.compose.material3.Icon(
+                                modifier = Modifier.size(26.dp),
+                                painter = painterResource(id = R.drawable.baseline_arrow_back_ios_new_24),
+                                contentDescription = "Back",
+                                tint = Color.Black
+                            )
+                        }
                     }
                 },
                 backgroundColor = Color.White,
@@ -57,13 +70,13 @@ fun IncomePage(navController: NavController) {
                     .padding(16.dp)
                     .verticalScroll(rememberScrollState())
                     .background(Color.White)
-            )  {
+            ) {
                 // Total Income and Filter
                 TotalIncomeSection()
-               Spacer(modifier = Modifier.height(20.dp))
+                Spacer(modifier = Modifier.height(20.dp))
                 dataBoxList()
 
-       }
+            }
         }
     )
 }
@@ -71,92 +84,129 @@ fun IncomePage(navController: NavController) {
 
 @Composable
 fun TotalIncomeSection() {
-
-    Box(
-        modifier = Modifier
-            .fillMaxWidth()
-            .height(400.dp)
-            .background(Color(0XFF873117), shape = RoundedCornerShape(8.dp)),
-        contentAlignment = Alignment.TopCenter
-    ) {
-        Column(
-            modifier = Modifier.padding(15.dp),
-            horizontalAlignment = Alignment.CenterHorizontally ) {
-            Row (   modifier = Modifier.fillMaxWidth(),
-                horizontalArrangement = Arrangement.Center,
-                verticalAlignment = Alignment.Top){
-                Text("1 july - ", fontSize = 18.sp ,color = Color.White, fontWeight = FontWeight.Bold)
-
-                Text("7 july", fontSize = 18.sp, color = Color.White, fontWeight = FontWeight.Bold)
-
-            }
-            Spacer(modifier = Modifier.height(18.dp))
-            Text("0:00 EGB",  fontSize = 50.sp,style = MaterialTheme.typography.h4, color = Color.White, fontWeight = FontWeight.Bold)
-
-            Spacer(modifier = Modifier.height(18.dp))
-
-            Card(
-                modifier = Modifier
-                    .fillMaxWidth()  ,
-                elevation = 20.dp,
-                shape = RoundedCornerShape(8.dp),
-                backgroundColor = Color.White
+    Card(elevation = 10.dp) {
+        Box(
+            modifier = Modifier
+                .fillMaxWidth()
+                .height(400.dp)
+                .background(colorResource(R.color.Icons_color), shape = RoundedCornerShape(8.dp)),
+            contentAlignment = Alignment.TopCenter
+        ) {
+            Column(
+                modifier = Modifier.padding(15.dp),
+                horizontalAlignment = Alignment.CenterHorizontally
             ) {
-                 Column {
-                     Row(
-                         modifier = Modifier.fillMaxWidth().padding(horizontal = 10.dp),
+                Row(
+                    modifier = Modifier.fillMaxWidth(),
+                    horizontalArrangement = Arrangement.Center,
+                    verticalAlignment = Alignment.Top
+                ) {
+                    Text(
+                        "1 july - ",
+                        fontSize = 18.sp,
+                        color = Color.White,
+                        fontWeight = FontWeight.Bold
+                    )
 
-                         horizontalArrangement = Arrangement.SpaceBetween,
-                         verticalAlignment = Alignment.CenterVertically
-                     ) {
-                         Text(
-                             " Trips",
-                             style = MaterialTheme.typography.h5,
-                             fontWeight = FontWeight.Bold
-                         )
+                    Text(
+                        "7 july",
+                        fontSize = 18.sp,
+                        color = Color.White,
+                        fontWeight = FontWeight.Bold
+                    )
+
+                }
+                Spacer(modifier = Modifier.height(18.dp))
+                Text(
+                    "0:00 EGB",
+                    fontSize = 50.sp,
+                    style = MaterialTheme.typography.h4,
+                    color = Color.White,
+                    fontWeight = FontWeight.Bold
+                )
+
+                Spacer(modifier = Modifier.height(18.dp))
+
+                Card(
+                    modifier = Modifier
+                        .fillMaxWidth(),
+                    elevation = 20.dp,
+                    shape = RoundedCornerShape(8.dp),
+                    backgroundColor = Color.White
+                ) {
+                    Column {
+                        Row(
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .padding(horizontal = 10.dp),
+
+                            horizontalArrangement = Arrangement.SpaceBetween,
+                            verticalAlignment = Alignment.CenterVertically
+                        ) {
+                            Text(
+                                " Trips",
+                                style = MaterialTheme.typography.h5,
+                                fontWeight = FontWeight.Bold
+                            )
 
 
-                         Text("0", style = MaterialTheme.typography.button)
-                     }
+                            Text("0", style = MaterialTheme.typography.button)
+                        }
 
 
-                     Spacer(modifier = Modifier.height(18.dp))
+                        Spacer(modifier = Modifier.height(18.dp))
 
-                     Row(
-                         modifier = Modifier.fillMaxWidth().padding(horizontal = 10.dp),
+                        Row(
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .padding(horizontal = 10.dp),
 
-                         horizontalArrangement = Arrangement.SpaceBetween,
-                         verticalAlignment = Alignment.CenterVertically,
+                            horizontalArrangement = Arrangement.SpaceBetween,
+                            verticalAlignment = Alignment.CenterVertically,
 
-                         ) {
-                         Text(" Call duration", style = MaterialTheme.typography.h5, fontWeight = FontWeight.Bold)
-
-
-                         Text("0", style = MaterialTheme.typography.button)
-
-                     }
-                     Spacer(modifier = Modifier.height(18.dp))
-
-                     Row(
-                         modifier = Modifier.fillMaxWidth().padding(horizontal = 10.dp),
-                         horizontalArrangement = Arrangement.SpaceBetween,
-                         verticalAlignment = Alignment.CenterVertically
-                     ) {
-                         Text(" Points", style = MaterialTheme.typography.h5, fontWeight = FontWeight.Bold)
+                            ) {
+                            Text(
+                                " Call duration",
+                                style = MaterialTheme.typography.h5,
+                                fontWeight = FontWeight.Bold
+                            )
 
 
-                         Text("0", style = MaterialTheme.typography.button)
+                            Text("0", style = MaterialTheme.typography.button)
 
-                     }
+                        }
+                        Spacer(modifier = Modifier.height(18.dp))
 
-                 }
+                        Row(
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .padding(horizontal = 10.dp),
+                            horizontalArrangement = Arrangement.SpaceBetween,
+                            verticalAlignment = Alignment.CenterVertically
+                        ) {
+                            Text(
+                                " Points",
+                                style = MaterialTheme.typography.h5,
+                                fontWeight = FontWeight.Bold
+                            )
+
+
+                            Text("0", style = MaterialTheme.typography.button)
+
+                        }
+
+                    }
+
+                }
+                Spacer(modifier = Modifier.height(18.dp))
+
+                WithdrawButton("Withdraw Earnings", colorResource(R.color.primary_color))
+            }
 
         }
-            Spacer(modifier = Modifier.height(18.dp))
+    }
 
-            WithdrawButton("Withdraw Earnings", Color(0xff46C96B))}
-
-}}
+}
 
 @Composable
 fun dataBox(text: String, painter: Painter) {
@@ -175,11 +225,13 @@ fun dataBox(text: String, painter: Painter) {
             contentAlignment = Alignment.Center
         ) {
             Row(
-                modifier = Modifier.fillMaxWidth().padding(horizontal = 10.dp),
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(horizontal = 10.dp),
                 horizontalArrangement = Arrangement.Start
             ) {
                 Icon(
-                    tint = Color(0XFF46C96B),
+                    tint = colorResource(R.color.primary_color),
                     modifier = Modifier.size(26.dp),
                     painter = painter,
                     contentDescription = null
@@ -204,16 +256,16 @@ fun dataBoxList() {
     dataBox("Withdraw Method", painter = painterResource(R.drawable.bank))
     Spacer(modifier = Modifier.padding(vertical = 10.dp))
 
- Box(modifier = Modifier.background(Color.White)){
-     Column(modifier = Modifier.fillMaxWidth()) {
-         dataBox("Invite Offers", painter = painterResource(R.drawable.share))
-         HorizontalDivider(thickness = 1.dp, modifier = Modifier.fillMaxWidth())
+    Box(modifier = Modifier.background(Color.White)) {
+        Column(modifier = Modifier.fillMaxWidth()) {
+            dataBox("Invite Offers", painter = painterResource(R.drawable.share))
+            HorizontalDivider(thickness = 1.dp, modifier = Modifier.fillMaxWidth())
 
 
-         dataBox("Income Opportunities", painter = painterResource(R.drawable.income))
-         Spacer(modifier = Modifier.padding(vertical = 10.dp))
-     }
- }
+            dataBox("Income Opportunities", painter = painterResource(R.drawable.income))
+            Spacer(modifier = Modifier.padding(vertical = 10.dp))
+        }
+    }
 
     dataBox("Trip Log", painter = painterResource(R.drawable.note))
     Spacer(modifier = Modifier.padding(vertical = 10.dp))
@@ -253,12 +305,17 @@ fun IncomeItem(name: String, date: String, amount: String) {
             Text(name, style = MaterialTheme.typography.subtitle1, fontWeight = FontWeight.Bold)
             Text(date, style = MaterialTheme.typography.body2, color = Color.Gray)
         }
-        Text(amount, style = MaterialTheme.typography.subtitle1, fontWeight = FontWeight.Bold, color = Color.Green)
+        Text(
+            amount,
+            style = MaterialTheme.typography.subtitle1,
+            fontWeight = FontWeight.Bold,
+            color = Color.Green
+        )
     }
 }
 
 @Composable
-fun WithdrawButton(text: String,color: Color) {
+fun WithdrawButton(text: String, color: Color) {
     Button(
         onClick = { /* TODO: Handle withdraw action */ },
         modifier = Modifier

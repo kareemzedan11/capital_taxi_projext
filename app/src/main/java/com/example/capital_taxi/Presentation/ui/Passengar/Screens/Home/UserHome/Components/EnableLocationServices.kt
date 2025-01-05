@@ -42,22 +42,19 @@ import com.airbnb.lottie.compose.LottieConstants
 import com.airbnb.lottie.compose.animateLottieCompositionAsState
 import com.airbnb.lottie.compose.rememberLottieComposition
 import com.airbnb.lottie.model.content.CircleShape
+import com.example.capital_taxi.Helper.PermissionViewModel
 import com.example.capital_taxi.R
-
-
+import android.content.Context
+import android.content.Intent
+import android.provider.Settings
 @Composable
-fun EnableLocationServices() {
+fun EnableLocationServices(permissionViewModel: PermissionViewModel, context: Context) {
     Box(
         modifier = Modifier
-
             .fillMaxWidth()
             .background(Color.White), contentAlignment = Alignment.Center
     ) {
-
-
-        Column (horizontalAlignment = Alignment.Start){
-
-
+        Column(horizontalAlignment = Alignment.Start) {
 
             // Lottie Animation
             val composition by rememberLottieComposition(LottieCompositionSpec.RawRes(R.raw.findlocation))
@@ -72,7 +69,6 @@ fun EnableLocationServices() {
                     .size(250.dp)
                     .background(Color.Transparent)
                     .clip(CircleShape)
-
             ) {
                 LottieAnimation(
                     composition = composition,
@@ -82,9 +78,6 @@ fun EnableLocationServices() {
                         .padding(vertical = 16.dp)
                 )
             }
-
-
-
 
             Spacer(Modifier.height(20.dp))
 
@@ -104,11 +97,13 @@ fun EnableLocationServices() {
             Spacer(Modifier.height(20.dp))
 
             Button(
-                onClick = { /* Handle new method */ },
+                onClick = {
+                    // Open location settings screen
+                    val intent = Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS)
+                    context.startActivity(intent)
+                },
                 shape = RoundedCornerShape(50.dp),
                 modifier = Modifier
-
-
                     .height(80.dp)
                     .fillMaxWidth()
                     .padding(vertical = 16.dp, horizontal = 30.dp),

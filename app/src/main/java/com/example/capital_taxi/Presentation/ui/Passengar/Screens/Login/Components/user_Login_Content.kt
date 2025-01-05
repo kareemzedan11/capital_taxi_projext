@@ -32,14 +32,18 @@ import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
@@ -50,8 +54,13 @@ import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
+import com.example.capital_taxi.Helper.PermissionViewModel
+import com.example.capital_taxi.Helper.checkLocationPermission
 import com.example.capital_taxi.Navigation.Destination
+import com.example.capital_taxi.Presentation.ui.Passengar.Screens.Home.UserHome.Components.EnableLocationServices
+import com.example.capital_taxi.Presentation.ui.Passengar.Screens.Home.UserHome.Components.PickupWithDropOffButtons
 import com.example.capital_taxi.R
 
 
@@ -62,7 +71,17 @@ fun userLoginContent(
 
     navController: NavController
 ) {
+    val permissionViewModel: PermissionViewModel = viewModel()
+    val context = LocalContext.current
 
+    // تأكد من التحقق من الصلاحية عند تحميل الشاشة
+    LaunchedEffect(context) {
+        checkLocationPermission(context, permissionViewModel)
+    }
+
+    val isLocationGranted by permissionViewModel.isLocationGranted.collectAsState()
+
+    val scope = rememberCoroutineScope()
     var email1 by remember { mutableStateOf("") }
     var password1 by remember { mutableStateOf("") }
     var passwordVisible1 by remember { mutableStateOf(false) }
@@ -166,7 +185,7 @@ fun userLoginContent(
             text = "Forget Password",
             modifier = Modifier
                 .align(alignment = Alignment.End)
-                .clickable {navController.navigate( Destination.NewPasswordScreen.route) },
+                .clickable { navController.navigate(Destination.NewPasswordScreen.route) },
             color = colorResource(R.color.primary_color),
             fontWeight = FontWeight.Bold, fontSize = 18.sp,
 
@@ -175,7 +194,16 @@ fun userLoginContent(
         Spacer(modifier = Modifier.height(24.dp))
 
         Button(
-            onClick = { navController.navigate(Destination.UserHomeScreen.route) },
+            onClick = {
+                if (isLocationGranted) {
+                    navController.navigate(Destination.UserHomeScreen.route)
+                } else {
+                    navController.navigate(Destination.searchForLocation.route)
+
+                }
+
+
+            },
             modifier = Modifier
                 .fillMaxWidth()
 

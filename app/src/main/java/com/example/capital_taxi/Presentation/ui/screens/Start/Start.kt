@@ -36,33 +36,42 @@ fun StartScreen(navController: NavController) {
             .background(colorResource(R.color.secondary_color))
 
     ) {
-Column {
-    Box (modifier = Modifier.weight(6f).background(colorResource(R.color.secondary_color))){
-        Image(
-            modifier = Modifier
-                .fillMaxSize()
-                .align(Alignment.Center),
-            painter = painterResource(R.drawable.test5),
-            contentDescription = "Introduction image",
-            contentScale = ContentScale.Crop
-        )
+        Column(
+            modifier = Modifier.fillMaxSize()
+        ) {
+            Box(
+                modifier = Modifier
+                    .weight(6f)
+                    .fillMaxWidth()
+                    .background(colorResource(R.color.secondary_color))
+            ) {
+                Image(
+                    modifier = Modifier.fillMaxSize(),
+                    painter = painterResource(R.drawable.start),
+                    contentDescription = "Introduction image",
+                    contentScale = ContentScale.Crop
+                )
+            }
 
-    }
-    Box(modifier = Modifier.weight(2f).background(colorResource(R.color.secondary_color),),
-
-
-
-    ){
- Column(verticalArrangement = Arrangement.Top , horizontalAlignment = Alignment.Start) {
-     Text("Let's Get Started",
-         modifier = Modifier.padding(start = 20.dp),
-         fontWeight = FontWeight.Bold, fontSize = 32.sp)
-
-
-     StartButtonDesign(navController)
- }
-    }
-}
-
-    }
-}
+            Box(
+                modifier = Modifier
+                    .weight(2f)
+                    .fillMaxWidth()
+                    .background(Color.White)
+            ) {
+                Column(
+                    verticalArrangement = Arrangement.Top,
+                    horizontalAlignment = Alignment.Start,
+                    modifier = Modifier.fillMaxHeight()
+                ) {
+                    Text(
+                        "Let's Get Started",
+                        modifier = Modifier.padding(start = 20.dp),
+                        fontWeight = FontWeight.Bold,
+                        fontSize = 32.sp
+                    )
+                    StartButtonDesign(navController)
+                }
+            }
+        }
+    }}

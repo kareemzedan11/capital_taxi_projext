@@ -45,33 +45,34 @@ import com.google.android.gms.tasks.Task
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.GoogleAuthProvider
 
-class MainActivity : ComponentActivity() {
-    // Location permission request launcher
-    private val locationPermissionLauncher =
-        registerForActivityResult(ActivityResultContracts.RequestPermission()) { isGranted: Boolean ->
-            if (!isGranted) {
-                Toast.makeText(this, "Location permission is required", Toast.LENGTH_SHORT).show()
-            }
-        }
 
-    // Camera permission request launcher
-    private val cameraPermissionLauncher =
-        registerForActivityResult(ActivityResultContracts.RequestPermission()) { isGranted: Boolean ->
-            if (!isGranted) {
+
+
+class MainActivity : ComponentActivity() {
+
+    private val multiplePermissionsLauncher =
+        registerForActivityResult(ActivityResultContracts.RequestMultiplePermissions()) { permissions ->
+            val cameraGranted = permissions[Manifest.permission.CAMERA] ?: false
+            val locationGranted = permissions[Manifest.permission.ACCESS_FINE_LOCATION] ?: false
+
+            if (!cameraGranted) {
                 Toast.makeText(this, "Camera permission is required to capture photos", Toast.LENGTH_SHORT).show()
             }
 
+            if (!locationGranted) {
+                Toast.makeText(this, "Location permission is required", Toast.LENGTH_SHORT).show()
+            }
+
         }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
 
         requestPermissions()
 
         setContent {
             // Define your light color scheme
             val lightColors = lightColorScheme(
-
                 primary = LightPrimary,
                 secondary = LightSecondary,
                 background = LightBackground,
@@ -89,31 +90,30 @@ class MainActivity : ComponentActivity() {
                 onSecondary = DarkOnSecondary
             )
 
-
             MaterialTheme(
-
                 colorScheme = lightColors,
                 content = {
-
                     val navController = rememberNavController()
                     AppNavGraph(navController = navController)
                 }
-
             )
-
         }
-
     }
 
-    // Request both Location and Camera permissions
+
     private fun requestPermissions() {
-        // Check and request camera permission
+        val permissionsToRequest = mutableListOf<String>()
+
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
-            cameraPermissionLauncher.launch(Manifest.permission.CAMERA)
+            permissionsToRequest.add(Manifest.permission.CAMERA)
         }
-        // Check and request location permission
+
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            locationPermissionLauncher.launch(Manifest.permission.ACCESS_FINE_LOCATION)
+            permissionsToRequest.add(Manifest.permission.ACCESS_FINE_LOCATION)
+        }
+
+        if (permissionsToRequest.isNotEmpty()) {
+            multiplePermissionsLauncher.launch(permissionsToRequest.toTypedArray())
         }
     }
 }

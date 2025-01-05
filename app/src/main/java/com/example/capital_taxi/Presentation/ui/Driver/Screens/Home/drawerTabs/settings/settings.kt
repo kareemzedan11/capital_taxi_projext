@@ -1,6 +1,7 @@
 package com.example.capital_taxi.Presentation.ui.Driver.Screens.Home.drawerTabs.settings
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
@@ -19,6 +20,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Paint
 import androidx.compose.ui.graphics.painter.Painter
+import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
@@ -45,12 +47,22 @@ fun driversettings(navController: NavController) {
                     )
                 },
                 navigationIcon = {
-                    androidx.compose.material.IconButton(onClick = { navController.popBackStack() }) {
-                        androidx.compose.material.Icon(
-                            imageVector = Icons.Default.ArrowBack,
-                            contentDescription = "Back",
-                            tint = Color.Black
-                        )
+                    IconButton(onClick = { navController.popBackStack() }) {
+                        Box(
+                            modifier = Modifier
+
+                                .size(36.dp)
+                                .background(Color.Transparent)
+                                .border(4.dp, color = Color.Black, RoundedCornerShape(30.dp)),
+                            contentAlignment = Alignment.Center
+                        ) {
+                            Icon(
+                                modifier = Modifier.size(26.dp),
+                                painter = painterResource(id = R.drawable.baseline_arrow_back_ios_new_24),
+                                contentDescription = "Back",
+                                tint = Color.Black
+                            )
+                        }
                     }
                 },
                 backgroundColor = Color.White,
@@ -111,13 +123,13 @@ fun driversettings(navController: NavController) {
                         SettingBox(
                             title = "Language",
                             icon = painterResource(R.drawable.language),
-                            color = Color(0XFF46C96B),
+
                             onClick = { /* Handle language change */ }
                         )
                         SettingBox(
                             title = "Night Mode",
                             icon = painterResource(R.drawable.mode),
-                            color = Color(0XFF46C96B),
+
                             onClick = { /* Handle night mode toggle */ }
                         )
 
@@ -125,19 +137,19 @@ fun driversettings(navController: NavController) {
                         SettingBox(
                             title = "Documents",
                             icon = painterResource(R.drawable.note),
-                            color = Color(0xFF46C96B),
+
                             onClick = { /* Handle Two-Factor Authentication */ }
                         )
                         SettingBox(
                             title = "Terms and Conditions",
                             icon = painterResource(R.drawable.termsandconditions),
-                            color = Color(0xFF46C96B),
+
                             onClick = { /* Handle Privacy Settings */ }
                         )
                         SettingBox(
                             title = " About the App",
                             icon = painterResource(R.drawable.abouttheapp),
-                            color = Color(0xFF46C96B),
+
                             onClick = { }
                         )
 
@@ -182,7 +194,7 @@ fun driversettings(navController: NavController) {
             title: String,
             icon: Painter,
             onClick: () -> Unit,
-            color: Color,
+
         ) {
             Box(
                 modifier = Modifier
@@ -197,7 +209,7 @@ fun driversettings(navController: NavController) {
                 SettingOptionWithArrow(
                     title = title,
                     icon = icon,
-                    color = color,
+
                     onClick = onClick
                 )
             }
@@ -206,7 +218,7 @@ fun driversettings(navController: NavController) {
         @Composable
         fun SettingOptionWithArrow(
             title: String,
-            color: Color,
+
             icon: Painter,
             onClick: () -> Unit
         ) {
@@ -220,7 +232,7 @@ fun driversettings(navController: NavController) {
                 Icon(
                     painter = icon,
                     contentDescription = title,
-                    tint = color,
+                    tint = colorResource(R.color.Icons_color),
                     modifier = Modifier.size(32.dp) // Larger icon size
                 )
                 Spacer(modifier = Modifier.width(20.dp))

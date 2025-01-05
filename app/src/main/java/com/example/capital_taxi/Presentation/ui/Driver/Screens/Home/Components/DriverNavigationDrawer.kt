@@ -30,6 +30,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
@@ -46,7 +47,7 @@ fun DriverNavigationDrawer(navController: NavController) {
             modifier = Modifier
                 .fillMaxWidth()
                 .fillMaxHeight(0.2f)
-                .background(Color(0XFF46C96B)),
+                .background(colorResource(R.color.primary_color)),
             contentAlignment = Alignment.Center // Center the Row horizontally and vertically
         ) {
             Row(

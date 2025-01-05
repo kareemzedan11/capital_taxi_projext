@@ -160,7 +160,7 @@ fun driverLoginContent(
         Spacer(modifier = Modifier.height(24.dp))
 
         Button(
-            onClick = { navController.navigate(Destination.UserHomeScreen.route)},
+            onClick = { navController.navigate(Destination.DriverHomeScreen.route)},
             modifier = Modifier
                 .fillMaxWidth()
 

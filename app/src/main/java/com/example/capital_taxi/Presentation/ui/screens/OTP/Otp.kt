@@ -240,6 +240,7 @@ fun OtpInputBox(
     modifier: Modifier = Modifier
 ) {
     OutlinedTextField(
+        colors =OutlinedTextFieldDefaults.colors(focusedBorderColor = colorResource(R.color.primary_color), cursorColor = colorResource(R.color.primary_color)),
         value = value,
         onValueChange = { newValue ->
             // Allow only digits and a single character

@@ -177,10 +177,11 @@ fun settings(navController: NavController) {
         }
     }
 }
-
 @Composable
 private fun AppearanceBottomSheetContent(isDark: Boolean, navController: NavController) {
-    var isDark1 = isDark
+
+    var isDark1 by remember { mutableStateOf(isDark) }
+
     Column(
         modifier = Modifier
             .fillMaxWidth()
@@ -191,7 +192,6 @@ private fun AppearanceBottomSheetContent(isDark: Boolean, navController: NavCont
             modifier = Modifier.fillMaxSize(),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-
             Text(
                 text = "Appearance",
                 fontSize = 24.sp,
@@ -205,6 +205,7 @@ private fun AppearanceBottomSheetContent(isDark: Boolean, navController: NavCont
 
             Spacer(modifier = Modifier.padding(20.dp))
 
+            // Light Mode Card
             Card(
                 modifier = Modifier
                     .fillMaxWidth()
@@ -216,10 +217,9 @@ private fun AppearanceBottomSheetContent(isDark: Boolean, navController: NavCont
                 Row(
                     modifier = Modifier
                         .fillMaxSize()
-                        .clickable { isDark1 = false }
+                        .clickable { isDark1 = false } // تحديث القيمة
                         .padding(horizontal = 10.dp),
-                    Arrangement.Start,
-                    Alignment.CenterVertically
+                    verticalAlignment = Alignment.CenterVertically
                 ) {
                     Box(
                         modifier = Modifier
@@ -246,17 +246,17 @@ private fun AppearanceBottomSheetContent(isDark: Boolean, navController: NavCont
                     if (!isDark1) {
                         Icon(
                             painter = painterResource(R.drawable.selected),
-                            contentDescription = "light mode",
+                            contentDescription = "Selected Light Mode",
                             tint = Color.Unspecified,
                             modifier = Modifier.size(30.dp)
                         )
                     }
-
                 }
             }
 
             Spacer(modifier = Modifier.height(26.dp))
 
+            // Dark Mode Card
             Card(
                 modifier = Modifier
                     .fillMaxWidth()
@@ -268,10 +268,9 @@ private fun AppearanceBottomSheetContent(isDark: Boolean, navController: NavCont
                 Row(
                     modifier = Modifier
                         .fillMaxSize()
-                        .clickable { isDark1 = true }
+                        .clickable { isDark1 = true } // تحديث القيمة
                         .padding(horizontal = 10.dp),
-                    Arrangement.Start,
-                    Alignment.CenterVertically
+                    verticalAlignment = Alignment.CenterVertically
                 ) {
                     Box(
                         modifier = Modifier
@@ -280,7 +279,6 @@ private fun AppearanceBottomSheetContent(isDark: Boolean, navController: NavCont
                             .background(colorResource(R.color.secondary_color)),
                         contentAlignment = Alignment.Center
                     ) {
-
                         Icon(
                             painter = painterResource(R.drawable.baseline_dark_mode_24),
                             contentDescription = "Dark mode",
@@ -295,34 +293,28 @@ private fun AppearanceBottomSheetContent(isDark: Boolean, navController: NavCont
                         fontSize = 18.sp,
                         fontWeight = FontWeight.W600
                     )
-
                     Spacer(modifier = Modifier.weight(1f))
                     if (isDark1) {
                         Icon(
                             painter = painterResource(R.drawable.selected),
-                            contentDescription = "light mode",
+                            contentDescription = "Selected Dark Mode",
                             tint = Color.Unspecified,
                             modifier = Modifier.size(30.dp)
                         )
                     }
-
-
                 }
             }
-            Spacer(modifier = Modifier.padding(20.dp))
 
+            Spacer(modifier = Modifier.padding(20.dp))
 
             Button(
                 onClick = { navController.navigate(Destination.SelectTheMode.route) },
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(horizontal = 40.dp)
-
-
                     .height(60.dp),
                 colors = ButtonDefaults.buttonColors(colorResource(R.color.primary_color)),
                 shape = RoundedCornerShape(8.dp)
-
             ) {
                 Text(
                     text = "Save",
@@ -338,10 +330,10 @@ private fun AppearanceBottomSheetContent(isDark: Boolean, navController: NavCont
                 color = Color.Black,
                 fontWeight = FontWeight.W700
             )
-
         }
     }
 }
+
 
 
 @Composable
