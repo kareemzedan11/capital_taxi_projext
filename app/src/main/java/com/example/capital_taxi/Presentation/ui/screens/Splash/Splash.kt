@@ -70,7 +70,7 @@ fun SplashScreen(navController: NavHostController) {
         ) {
             Spacer(modifier = Modifier.weight(1f))
 
-            // Logo with scale and fade in effect based on progress
+
             Icon(
                 modifier = Modifier
                     .size(320.dp)

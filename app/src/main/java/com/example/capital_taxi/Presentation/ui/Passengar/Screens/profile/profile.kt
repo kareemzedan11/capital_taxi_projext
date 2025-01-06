@@ -90,7 +90,7 @@ fun Profile(navController: NavController) {
 
                             painter = painterResource(R.drawable.baseline_add_circle_outline_24), // Replace with your icon resource
                             contentDescription = "Upload Picture",
-                            tint = Color((0XFF46B96C))
+                            tint = colorResource(R.color.primary_color),
                         )
                     }
                 }
@@ -104,6 +104,7 @@ fun Profile(navController: NavController) {
                     onValueChange = { firstName = it },
                     leadingIcon = {
                         Icon(
+                            tint = colorResource(R.color.primary_color),
                             painter = painterResource(id = R.drawable.baseline_person_outline_24),
                             contentDescription = "First Name Icon"
                         )
@@ -115,6 +116,7 @@ fun Profile(navController: NavController) {
                     onValueChange = { lastName = it },
                     leadingIcon = {
                         Icon(
+                            tint = colorResource(R.color.primary_color),
                             painter = painterResource(id = R.drawable.baseline_person_outline_24),
                             contentDescription = "Last Name Icon"
                         )
@@ -126,6 +128,7 @@ fun Profile(navController: NavController) {
                     onValueChange = { email = it },
                     leadingIcon = {
                         Icon(
+                            tint = colorResource(R.color.primary_color),
                             painter = painterResource(id = R.drawable.baseline_email_24),
                             contentDescription = "Email Icon"
                         )
@@ -137,6 +140,7 @@ fun Profile(navController: NavController) {
                     onValueChange = { phone = it },
                     leadingIcon = {
                         Icon(
+                            tint = colorResource(R.color.primary_color),
                             painter = painterResource(id = R.drawable.baseline_phone_24),
                             contentDescription = "phone Icon"
                         )

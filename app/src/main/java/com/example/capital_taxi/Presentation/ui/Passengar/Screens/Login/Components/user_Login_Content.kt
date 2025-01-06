@@ -1,5 +1,8 @@
 package com.example.capital_taxi.Presentation.ui.Passengar.Screens.Login.Components
 
+import android.net.Uri
+import androidx.activity.compose.rememberLauncherForActivityResult
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -56,12 +59,20 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
+import com.example.capital_taxi.Helper.GoogleAuthentication
 import com.example.capital_taxi.Helper.PermissionViewModel
 import com.example.capital_taxi.Helper.checkLocationPermission
+import com.example.capital_taxi.Helper.handleSignInResult
 import com.example.capital_taxi.Navigation.Destination
 import com.example.capital_taxi.Presentation.ui.Passengar.Screens.Home.UserHome.Components.EnableLocationServices
 import com.example.capital_taxi.Presentation.ui.Passengar.Screens.Home.UserHome.Components.PickupWithDropOffButtons
 import com.example.capital_taxi.R
+import com.google.android.gms.auth.api.signin.GoogleSignIn
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions
+import com.google.android.gms.tasks.Task
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.GoogleAuthProvider
 
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -85,7 +96,59 @@ fun userLoginContent(
     var email1 by remember { mutableStateOf("") }
     var password1 by remember { mutableStateOf("") }
     var passwordVisible1 by remember { mutableStateOf(false) }
+    var isGoogleSignInVisible by remember { mutableStateOf(false) }
 
+    // Initialize FirebaseAuth instance
+    val firebaseAuth = FirebaseAuth.getInstance()
+
+    // Configure Google Sign-In options
+    val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+        .requestIdToken(context.getString(R.string.default_web_client_id))
+        .requestEmail()
+        .build()
+
+    // Initialize GoogleSignInClient
+    val googleSignInClient = GoogleSignIn.getClient(context, gso)
+    fun handleSignInResult(
+        task: Task<GoogleSignInAccount>,
+        firebaseAuth: FirebaseAuth,
+        navController: NavController
+    ) {
+        try {
+            val account = task.getResult(Exception::class.java)
+            val idToken = account?.idToken
+            val photoUrl = account?.photoUrl?.toString() // Convert Uri to String
+            val displayName = account?.displayName ?: "Unknown User"
+            val email = account?.email ?: "Unknown Email"
+
+            // Authenticate with Firebase
+            val credential = GoogleAuthProvider.getCredential(idToken, null)
+            firebaseAuth.signInWithCredential(credential)
+                .addOnCompleteListener { authTask ->
+                    if (authTask.isSuccessful) {
+                        // Encode the values for safe navigation
+                        val encodedName = Uri.encode(displayName)
+                        val encodedEmail = Uri.encode(email)
+                        val encodedPhotoUrl = Uri.encode(photoUrl ?: "")
+
+                        // Navigate to ConfirmInformation
+                        navController.navigate("ConfirmInformation?name=$encodedName&email=$encodedEmail&photoUrl=$encodedPhotoUrl")
+                    } else {
+                        println("Firebase Sign-In Failed: ${authTask.exception?.message}")
+                    }
+                }
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+    }
+
+
+    val signInLauncher =
+        rememberLauncherForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+            val task: Task<GoogleSignInAccount> =
+                GoogleSignIn.getSignedInAccountFromIntent(result.data)
+            handleSignInResult(task, firebaseAuth, navController)
+        }
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -242,7 +305,9 @@ fun userLoginContent(
             Box(
                 modifier = Modifier
                     .size(50.dp)
-
+                    .clickable {     // Launch the Google sign-in intent
+                        val signInIntent = googleSignInClient.signInIntent
+                        signInLauncher.launch(signInIntent) }
                     .background(
                         colorResource(R.color.secondary_color),
                         shape = RoundedCornerShape(10.dp) // For rounded corners with 8.dp radius
@@ -257,8 +322,11 @@ fun userLoginContent(
                     painter = painterResource(R.drawable.googleicon),
                     contentDescription = "Google Logo"
                 )
-            }
 
+            }
+            if (isGoogleSignInVisible) {
+                GoogleAuthentication(navController)
+            }
             Spacer(Modifier.width(30.dp))
 
             Row {
@@ -278,8 +346,8 @@ fun userLoginContent(
                         modifier = Modifier
                             .size(30.dp)
                             .clip(CircleShape),
-                        painter = painterResource(R.drawable.twitter),
-                        contentDescription = "Google Logo"
+                        painter = painterResource(R.drawable.xicon),
+                        contentDescription = "X Logo"
                     )
                 }
                 Spacer(Modifier.width(30.dp))

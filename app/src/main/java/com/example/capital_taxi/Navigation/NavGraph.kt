@@ -114,9 +114,7 @@ fun AppNavGraph(navController: NavHostController) {
         composable(Destination.settings.route) {
             settings(navController)
         }
-        composable(Destination.PickupWithPickoffPoints.route) {
-            PickupWithPickoffPoints(navController)
-        }
+
         composable(Destination.OtpScreen.route) {
             OtpScreen(navController)
         }

@@ -4,6 +4,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.material3.Button
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.ModalBottomSheet
@@ -23,11 +24,13 @@ import androidx.compose.ui.unit.dp
 fun PartialBottomSheet(showBottomSheet: Boolean, onDismissRequest: () -> Unit, content: @Composable () -> Unit) {
     val sheetState = rememberModalBottomSheetState(
         skipPartiallyExpanded = false,
+
     )
 
     if (showBottomSheet) {
         ModalBottomSheet(
-            modifier = Modifier.fillMaxHeight(),
+
+            modifier = Modifier.wrapContentHeight(),
             sheetState = sheetState,
             onDismissRequest = { onDismissRequest() }
         ) {

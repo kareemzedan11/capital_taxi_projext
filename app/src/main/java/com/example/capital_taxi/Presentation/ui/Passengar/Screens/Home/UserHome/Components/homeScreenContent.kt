@@ -7,6 +7,7 @@ import android.location.LocationManager
 import android.util.Log
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -23,6 +24,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.wrapContentHeight
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.BottomSheetValue
 import androidx.compose.material.ExperimentalMaterialApi
@@ -65,22 +67,32 @@ import androidx.compose.material.rememberBottomSheetScaffoldState
 
 import androidx.compose.material.BottomSheetScaffold
 import androidx.compose.material.Divider
+import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberUpdatedState
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.font.FontWeight
 import androidx.lifecycle.viewmodel.compose.viewModel
+import com.example.capital_taxi.Helper.PartialBottomSheet
 import com.example.capital_taxi.Helper.PermissionViewModel
 import com.example.capital_taxi.Helper.checkLocationPermission
+import com.example.capital_taxi.Presentation.ui.screens.Confirm_information.ConfirmInformation
 import com.google.android.gms.location.LocationServices
 import java.util.Locale
 
 @OptIn(ExperimentalMaterial3Api::class, ExperimentalMaterialApi::class)
 @Composable
 fun homeScreenContent(navController: NavController) {
+
+
+    var isConfirmed by remember { mutableStateOf(false) }
+    var isSearch by remember { mutableStateOf(false) }
+
     val permissionViewModel: PermissionViewModel = viewModel()
     val context = LocalContext.current
 
@@ -132,6 +144,87 @@ fun homeScreenContent(navController: NavController) {
         }
     }
 
+    var showBottomSheet by remember { mutableStateOf(false) }
+
+    PartialBottomSheet(
+        showBottomSheet = showBottomSheet,
+        onDismissRequest = { showBottomSheet = false }) {
+
+        Column(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(16.dp),
+            horizontalAlignment = Alignment.CenterHorizontally
+        ) {
+            Column(
+                modifier = Modifier.wrapContentHeight(),
+                horizontalAlignment = Alignment.CenterHorizontally
+            ) {
+                Text(
+                    text = "Payment method",
+                    fontSize = 24.sp,
+                    color = Color.Black,
+                    fontWeight = FontWeight.W700
+                )
+                HorizontalDivider(
+                    thickness = 2.dp,
+                    modifier = Modifier.padding(vertical = 10.dp, horizontal = 30.dp)
+                )
+
+                Spacer(modifier = Modifier.padding(20.dp))
+
+                // Light Mode Card
+                Card(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .height(60.dp)
+                        .background(Color.LightGray)
+                        .border(1.dp, color = Color.Gray),
+                    elevation = CardDefaults.elevatedCardElevation(10.dp)
+                ) {
+                    Row(
+                        modifier = Modifier
+                            .fillMaxSize()
+
+                            .padding(horizontal = 10.dp),
+                        verticalAlignment = Alignment.CenterVertically
+                    ) {
+                        Box(
+                            modifier = Modifier
+                                .size(36.dp)
+                                .clip(CircleShape)
+                                .background(colorResource(R.color.secondary_color)),
+                            contentAlignment = Alignment.Center
+                        ) {
+                            Icon(
+                                painter = painterResource(R.drawable.dollar),
+                                contentDescription = "Cash",
+                                tint = Color.Unspecified,
+                                modifier = Modifier.size(26.dp)
+                            )
+                        }
+                        Spacer(modifier = Modifier.width(16.dp))
+                        Text(
+                            "Cash",
+                            color = Color.Black,
+                            fontSize = 18.sp,
+                            fontWeight = FontWeight.W600
+                        )
+                        Spacer(modifier = Modifier.weight(1f))
+
+                        Icon(
+                            painter = painterResource(R.drawable.selected),
+                            contentDescription = "Selected Light Mode",
+                            tint = Color.Unspecified,
+                            modifier = Modifier.size(30.dp)
+                        )
+
+                    }
+                }
+            }
+        }
+
+    }
     // Main Container
     Box(modifier = Modifier.fillMaxSize()) {
         // Drawer
@@ -146,7 +239,8 @@ fun homeScreenContent(navController: NavController) {
         ) {
             BottomSheetScaffold(
                 scaffoldState = bottomSheetState,
-                sheetPeekHeight = 500.dp,
+                sheetPeekHeight = if (isConfirmed) 200.dp else 500.dp,
+
                 content = { padding ->
                     Box(
                         modifier = Modifier
@@ -194,11 +288,19 @@ fun homeScreenContent(navController: NavController) {
                     ) {
                         // Use the current state to check if location is enabled and permission granted
                         if (currentIsLocationEnabled.value && currentIsLocationGranted.value) {
-                            // Pass the locationName to the PickupWithDropOffButtons
-                            PickupWithDropOffButtons(
-                                navController = navController,
-                                locationName = locationName // هنا يتم تمرير اسم الموقع
-                            )
+                            if (!isConfirmed) {
+                                PickupWithDropOffButtons(
+                                    navController = navController,
+                                    locationName = locationName
+                                )
+                            } else if (isConfirmed) {
+                                confirmPickup(onclick = { isSearch = true })
+
+                            }
+                            if (isSearch) {
+                                isConfirmed = false
+                                searchAboutADriver()
+                            }
                         } else {
                             EnableLocationServices(
                                 permissionViewModel = permissionViewModel,
@@ -209,7 +311,7 @@ fun homeScreenContent(navController: NavController) {
                 }
             )
 
-            if (currentIsLocationEnabled.value && currentIsLocationGranted.value) {
+            if (currentIsLocationEnabled.value && currentIsLocationGranted.value && !isConfirmed && !isSearch) {
 
                 Box(
                     modifier = Modifier
@@ -238,7 +340,9 @@ fun homeScreenContent(navController: NavController) {
                                 Alignment.CenterVertically
                             ) {
                                 Icon(
-                                    modifier = Modifier.size(26.dp),
+                                    modifier = Modifier
+                                        .size(26.dp)
+                                        .clickable { showBottomSheet = true },
                                     painter = painterResource(R.drawable.dollar),
                                     tint = Color.Unspecified,
                                     contentDescription = null
@@ -246,7 +350,7 @@ fun homeScreenContent(navController: NavController) {
                                 Spacer(modifier = Modifier.weight(1f))
 
                                 Button(
-                                    onClick = { /* TODO */ },
+                                    onClick = { isConfirmed = true },
                                     colors = ButtonDefaults.buttonColors(
                                         containerColor = colorResource(
                                             R.color.primary_color
@@ -264,13 +368,13 @@ fun homeScreenContent(navController: NavController) {
                                     )
                                 }
                                 Spacer(modifier = Modifier.weight(1f))
-
-                                Icon(
-                                    modifier = Modifier.size(26.dp),
-                                    painter = painterResource(R.drawable.tools),
-                                    tint = Color.Black,
-                                    contentDescription = null
-                                )
+//
+//                                Icon(
+//                                    modifier = Modifier.size(26.dp),
+//                                    painter = painterResource(R.drawable.tools),
+//                                    tint = Color.Black,
+//                                    contentDescription = null
+//                                )
                             }
                         }
                     }

@@ -234,8 +234,8 @@ fun driverLoginContent(
                         modifier = Modifier
                             .size(30.dp)
                             .clip(CircleShape),
-                        painter = painterResource(R.drawable.twitter),
-                        contentDescription = "Google Logo"
+                        painter = painterResource(R.drawable.xicon),
+                        contentDescription = "X Logo"
                     )
                 }
                 Spacer(Modifier.width(30.dp))
@@ -258,7 +258,7 @@ fun driverLoginContent(
                                 .size(30.dp)
                                 .clip(CircleShape),
                             painter = painterResource(R.drawable.facelogo),
-                            contentDescription = "Google Logo"
+                            contentDescription = "facelogo Logo"
                         )
                     }
 

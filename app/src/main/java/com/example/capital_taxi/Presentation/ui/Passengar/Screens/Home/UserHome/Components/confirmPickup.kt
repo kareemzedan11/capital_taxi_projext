@@ -28,7 +28,7 @@ import com.example.capital_taxi.R
 
 
 @Composable
-fun confirmPickup() {
+fun confirmPickup(onclick:()->Unit) {
     Box(
         modifier = Modifier
             .fillMaxWidth()
@@ -41,7 +41,7 @@ fun confirmPickup() {
             ),
         contentAlignment = Alignment.Center
     ) {
-        // Inner Box with white background
+
         Box(
             modifier = Modifier
                 .fillMaxSize()
@@ -60,7 +60,7 @@ fun confirmPickup() {
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
                 Button(
-                    onClick = { },
+                    onClick = onclick  ,
                     modifier = Modifier
                         .fillMaxWidth()
                         .padding(horizontal = 10.dp, vertical = 10.dp)

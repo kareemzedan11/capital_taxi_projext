@@ -74,7 +74,7 @@ fun driverHomeScreen(navController: NavController) {
             gesturesEnabled = gesturesEnabled,
             modifier = Modifier.fillMaxSize()
         ) {
-            confirmPickup()
+            confirmPickup(onclick = {})
 
             BottomSheetScaffold(
                 scaffoldState = bottomSheetState,

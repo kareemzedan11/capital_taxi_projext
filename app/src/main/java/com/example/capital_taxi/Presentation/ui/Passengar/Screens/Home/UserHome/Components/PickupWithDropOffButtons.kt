@@ -220,23 +220,7 @@ fun PickupWithDropOffButtons(navController: NavController, locationName: String?
 //            }
             IntercityCard()
 
-            Spacer(modifier = Modifier.padding(top = 15.dp))
 
-            Button(
-                onClick = { /* Perform action */ },
-                colors = ButtonDefaults.buttonColors(colorResource(R.color.primary_color)),
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .height(60.dp)
-                    .clip(RoundedCornerShape(10.dp))
-            ) {
-                Text(
-                    text = "Order Now",
-                    color = Color.White,
-                    fontSize = 18.sp,
-                    fontWeight = FontWeight.Bold
-                )
-            }
         }
 
     }

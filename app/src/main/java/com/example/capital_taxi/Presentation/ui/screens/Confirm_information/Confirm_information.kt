@@ -1,5 +1,6 @@
 package com.example.capital_taxi.Presentation.ui.screens.Confirm_information
 
+import CountryCodePickerView
 import android.net.Uri
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.compose.foundation.background
@@ -30,6 +31,7 @@ import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.text.font.FontWeight
 import coil.compose.rememberImagePainter
 import com.example.capital_taxi.Navigation.Destination
+import com.google.firebase.auth.FirebaseAuth
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -42,6 +44,9 @@ fun ConfirmInformation(navController: NavController, Name: String, Email: String
     var email by remember { mutableStateOf(Email) }
     var phone by remember { mutableStateOf("") }
 
+    var phoneNumber by remember { mutableStateOf("") }
+
+    var selectedCountry by remember { mutableStateOf("+1") }
     // For picking an image from the gallery
     val context = LocalContext.current
     val getContent = rememberLauncherForActivityResult(ActivityResultContracts.GetContent()) { uri: Uri? ->
@@ -132,13 +137,31 @@ fun ConfirmInformation(navController: NavController, Name: String, Email: String
                 )
                 Spacer(modifier = Modifier.height(20.dp))
 
-                OutlinedTextField(
-                    value = phone,
-                    onValueChange = { phone = it },
-                    label = { Text("Phone") },
-                    modifier = Modifier.fillMaxWidth(),
-                    singleLine = true,
-                )
+
+                // Country Code Picker and Phone Number Input Row
+                Row(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .background(Color.White.copy(alpha = .2f)),
+                    verticalAlignment = androidx.compose.ui.Alignment.CenterVertically
+                ) {
+                    CountryCodePickerView(onCountrySelected = { selectedCountry = it })
+
+                    Spacer(modifier = Modifier.width(8.dp))
+
+                    OutlinedTextField(
+                        value = phoneNumber,
+                        onValueChange = { phoneNumber = it.trim() },
+                        label = { Text("Phone Number") },
+                        placeholder = { Text("Enter your phone number") },
+                        modifier = Modifier
+                            .weight(1f)
+                            .background(Color.White.copy(alpha = .2f)),
+                        singleLine = true,
+                        keyboardOptions = KeyboardOptions.Default.copy(imeAction = ImeAction.Done),
+
+                    )
+                }
                 Spacer(modifier = Modifier.height(20.dp))
 
                 Button(
