@@ -44,6 +44,9 @@ sealed class Destination(val route: String) {
     object modeDesign : Destination("modeDesign")
     object NewPasswordScreen : Destination("NewPasswordScreen")
     object searchForLocation : Destination("searchForLocation")
+    object SavedPlaces : Destination("SavedPlaces")
+    object WorkPlace : Destination("WorkPlace")
+    object HomePlace : Destination("HomePlace")
 
 
 

@@ -1,3 +1,5 @@
+import android.content.Context
+import android.content.SharedPreferences
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -6,7 +8,6 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxHeight
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
@@ -23,14 +24,18 @@ import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.NavigationDrawerItem
-import androidx.compose.material3.NavigationDrawerItemDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.painter.Painter
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
@@ -41,8 +46,19 @@ import com.example.capital_taxi.Navigation.Destination
 import com.example.capital_taxi.R
 
 @Composable
-fun drawerContent( navController: NavController) {
-    Column(     horizontalAlignment = Alignment.CenterHorizontally) {
+fun drawerContent(navController: NavController) {
+
+    // Initialize SharedPreferences
+    val context = LocalContext.current
+    val sharedPreferences: SharedPreferences =
+        context.getSharedPreferences("user_preferences", Context.MODE_PRIVATE)
+
+    // Retrieve the saved first name from SharedPreferences
+    val savedName = sharedPreferences.getString("user_name", "") ?: ""
+    var Name by remember { mutableStateOf(savedName) }
+
+
+    Column(horizontalAlignment = Alignment.CenterHorizontally) {
         Box(
             modifier = Modifier
                 .fillMaxWidth()
@@ -51,7 +67,9 @@ fun drawerContent( navController: NavController) {
             contentAlignment = Alignment.Center // Center the Row horizontally and vertically
         ) {
             Row(
-                modifier = Modifier.padding(5.dp).clickable { navController.navigate( Destination.Profile.route )},
+                modifier = Modifier
+                    .padding(5.dp)
+                    .clickable { navController.navigate(Destination.Profile.route) },
                 horizontalArrangement = Arrangement.Center,
                 verticalAlignment = Alignment.CenterVertically
             ) {
@@ -64,8 +82,8 @@ fun drawerContent( navController: NavController) {
                     painter = painterResource(R.drawable.person)
                 )
                 Spacer(Modifier.width(10.dp))
-                Column(modifier = Modifier.padding(vertical = 10.dp) ) {
-                    Text("Kareem", fontSize = 18.sp, fontWeight = FontWeight.Bold)
+                Column(modifier = Modifier.padding(vertical = 10.dp)) {
+                    Text(Name, fontSize = 18.sp, fontWeight = FontWeight.Bold)
                     Row {
                         // Rating Stars
                         repeat(5) {
@@ -92,92 +110,90 @@ fun drawerContent( navController: NavController) {
         HorizontalDivider()
         Box(modifier = Modifier.fillMaxWidth()) {
 
-              Column(
-                  modifier = Modifier.verticalScroll(rememberScrollState()),
-                  horizontalAlignment = Alignment.CenterHorizontally
-              ) {
+            Column(
+                modifier = Modifier.verticalScroll(rememberScrollState()),
+                horizontalAlignment = Alignment.CenterHorizontally
+            ) {
 
-                  navigationDrawerItem(
-                      onClick = { navController.navigate(Destination.TripsHistoryScreen.route) },
-                      painter = painterResource(R.drawable.history_3949611),
-                      text = "Trips History"
-                  )
+                navigationDrawerItem(
+                    onClick = { navController.navigate(Destination.TripsHistoryScreen.route) },
+                    painter = painterResource(R.drawable.history_3949611),
+                    text = "Trips History"
+                )
 
-                  Spacer(Modifier.height(10.dp))
-
-
-                  navigationDrawerItem(
-                      onClick = { navController.navigate(Destination.PaymentScreen.route) },
-                      painter = painterResource(R.drawable.operation_3080541),
-                      text = "Payment"
-                  )
-
-                  Spacer(Modifier.height(10.dp))
+                Spacer(Modifier.height(10.dp))
 
 
+                navigationDrawerItem(
+                    onClick = { navController.navigate(Destination.PaymentScreen.route) },
+                    painter = painterResource(R.drawable.operation_3080541),
+                    text = "Payment"
+                )
 
-                  navigationDrawerItem(
-                      onClick = { navController.navigate(Destination.voucherScreen.route) },
-                      painter = painterResource(R.drawable.voucher_3837379),
-                      text = "Coupons"
-
-                  )
-                  Spacer(Modifier.height(10.dp))
-
-                  navigationDrawerItem(
-                      onClick = { navController.navigate(Destination.userNotification.route) },
-                      painter = painterResource(R.drawable.notification),
-                      text = "Notifications"
-                  )
-                   Spacer(Modifier.height(10.dp))
-
-                  navigationDrawerItem(
-                      onClick = { navController.navigate(Destination.SafetyScreen.route) },
-                      painter = painterResource(R.drawable.safety),
-                      text = "Safety"
-                  )
-                  Spacer(Modifier.height(10.dp))
-       navigationDrawerItem(
-                      onClick = { navController.navigate(Destination.settings.route) },
-                      painter = painterResource(R.drawable.settings_3524636),
-                      text = "Settings"
-                  )
-
-                  Spacer(Modifier.height(10.dp))
-
-                  navigationDrawerItem(
-                      onClick = {navController.navigate(Destination.HelpScreen.route) },
-                      painter = painterResource(R.drawable.headphone_18080416),
-                      text = "Help"
-                  )
-                  Spacer(Modifier.height(10.dp))
-
-                  navigationDrawerItem(
-                      onClick = { navController.navigate(Destination.voucherScreen.route) },
-                      painter = painterResource(R.drawable.helpme2),
-                      text = "Support"
-                  )
-                  Spacer(Modifier.height(10.dp))
-
-
-                  navigationDrawerItem(
-                      onClick = { navController.navigate(Destination.InviteFriendsPage.route) },
-                      painter = painterResource(R.drawable.invite),
-                      text = "Invite Friends"
-                  )
+                Spacer(Modifier.height(10.dp))
 
 
 
-          }
+                navigationDrawerItem(
+                    onClick = { navController.navigate(Destination.voucherScreen.route) },
+                    painter = painterResource(R.drawable.voucher_3837379),
+                    text = "Coupons"
+
+                )
+                Spacer(Modifier.height(10.dp))
+
+                navigationDrawerItem(
+                    onClick = { navController.navigate(Destination.userNotification.route) },
+                    painter = painterResource(R.drawable.notification),
+                    text = "Notifications"
+                )
+                Spacer(Modifier.height(10.dp))
+
+                navigationDrawerItem(
+                    onClick = { navController.navigate(Destination.SafetyScreen.route) },
+                    painter = painterResource(R.drawable.safety),
+                    text = "Safety"
+                )
+                Spacer(Modifier.height(10.dp))
+                navigationDrawerItem(
+                    onClick = { navController.navigate(Destination.settings.route) },
+                    painter = painterResource(R.drawable.settings_3524636),
+                    text = "Settings"
+                )
+
+                Spacer(Modifier.height(10.dp))
+
+                navigationDrawerItem(
+                    onClick = { navController.navigate(Destination.HelpScreen.route) },
+                    painter = painterResource(R.drawable.headphone_18080416),
+                    text = "Help"
+                )
+                Spacer(Modifier.height(10.dp))
+
+                navigationDrawerItem(
+                    onClick = { navController.navigate(Destination.voucherScreen.route) },
+                    painter = painterResource(R.drawable.helpme2),
+                    text = "Support"
+                )
+                Spacer(Modifier.height(10.dp))
+
+
+                navigationDrawerItem(
+                    onClick = { navController.navigate(Destination.InviteFriendsPage.route) },
+                    painter = painterResource(R.drawable.invite),
+                    text = "Invite Friends"
+                )
+
+
+            }
         }
 
         Spacer(Modifier.weight(1f))
 
         Button(
-            onClick = { navController.navigate(Destination.UserHomeScreen.route)},
+            onClick = { navController.navigate(Destination.UserHomeScreen.route) },
             modifier = Modifier
                 .fillMaxWidth(.9f)
-
 
 
                 .height(60.dp),
@@ -193,27 +209,27 @@ fun drawerContent( navController: NavController) {
         }
         Spacer(Modifier.height(20.dp))
     }
-    }
+}
 
 
 @Composable
-fun navigationDrawerItem(onClick: () -> Unit, painter: Painter?=null, text: String) {
+fun navigationDrawerItem(onClick: () -> Unit, painter: Painter? = null, text: String) {
     NavigationDrawerItem(
 
         onClick = { onClick() },
         icon = {
-        if(painter!=null){
-            Icon(
-                modifier = Modifier
+            if (painter != null) {
+                Icon(
+                    modifier = Modifier
 
-                    .padding(start = 5.dp, end = 3.dp) // Apply padding inside the background
-                    .size(28.dp), // Set the size of the icon
-                contentDescription = "menu",
-                painter =painter , tint = Color.Unspecified
+                        .padding(start = 5.dp, end = 3.dp) // Apply padding inside the background
+                        .size(28.dp), // Set the size of the icon
+                    contentDescription = "menu",
+                    painter = painter, tint = Color.Unspecified
 
-            )
+                )
 
-        }
+            }
         },
         selected = false,
         label = {

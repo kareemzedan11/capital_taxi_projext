@@ -32,28 +32,31 @@ import androidx.compose.ui.text.font.FontWeight
 import coil.compose.rememberImagePainter
 import com.example.capital_taxi.Navigation.Destination
 import com.google.firebase.auth.FirebaseAuth
+import android.content.Context
+import android.content.SharedPreferences
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun ConfirmInformation(navController: NavController, Name: String, Email: String, PhotoUrl: String?) {
-    // Default values if PhotoUrl is not provided
     val defaultPhotoUrl = "https://www.example.com/default_profile_picture.png"
     val photo = remember { mutableStateOf(Uri.parse(PhotoUrl ?: defaultPhotoUrl)) }
 
     var name by remember { mutableStateOf(Name) }
     var email by remember { mutableStateOf(Email) }
-    var phone by remember { mutableStateOf("") }
-
     var phoneNumber by remember { mutableStateOf("") }
 
     var selectedCountry by remember { mutableStateOf("+1") }
-    // For picking an image from the gallery
+
     val context = LocalContext.current
+    val sharedPreferences: SharedPreferences = context.getSharedPreferences("user_preferences", Context.MODE_PRIVATE)
+    val editor = sharedPreferences.edit()
+
     val getContent = rememberLauncherForActivityResult(ActivityResultContracts.GetContent()) { uri: Uri? ->
         uri?.let {
             photo.value = it
         }
     }
+    val savedName = sharedPreferences.getString("user_name", "")
 
     Scaffold(
         modifier = Modifier.fillMaxSize(),
@@ -64,7 +67,6 @@ fun ConfirmInformation(navController: NavController, Name: String, Email: String
                     IconButton(onClick = { navController.popBackStack() }) {
                         Box(
                             modifier = Modifier
-
                                 .size(36.dp)
                                 .background(Color.Transparent)
                                 .border(4.dp, color = Color.Black, RoundedCornerShape(30.dp)),
@@ -105,7 +107,6 @@ fun ConfirmInformation(navController: NavController, Name: String, Email: String
 
                 Spacer(modifier = Modifier.height(20.dp))
 
-
                 Box(modifier = Modifier.height(80.dp).width(80.dp).clip(CircleShape)) {
                     AsyncImage(
                         model = photo.value,
@@ -113,11 +114,10 @@ fun ConfirmInformation(navController: NavController, Name: String, Email: String
                         modifier = Modifier
                             .size(100.dp)
                             .clip(CircleShape).clickable { getContent.launch("image/*") }
-                            .background(Color.Gray) // Default background if no image
+                            .background(Color.Gray)
                     )
-
-
                 }
+
                 OutlinedTextField(
                     value = name,
                     onValueChange = { name = it },
@@ -137,8 +137,6 @@ fun ConfirmInformation(navController: NavController, Name: String, Email: String
                 )
                 Spacer(modifier = Modifier.height(20.dp))
 
-
-                // Country Code Picker and Phone Number Input Row
                 Row(
                     modifier = Modifier
                         .fillMaxWidth()
@@ -158,14 +156,19 @@ fun ConfirmInformation(navController: NavController, Name: String, Email: String
                             .weight(1f)
                             .background(Color.White.copy(alpha = .2f)),
                         singleLine = true,
-                        keyboardOptions = KeyboardOptions.Default.copy(imeAction = ImeAction.Done),
-
                     )
                 }
                 Spacer(modifier = Modifier.height(20.dp))
 
                 Button(
-                    onClick = { navController.navigate(Destination.OtpScreen.route)
+                    onClick = {
+                        // Save the name to SharedPreferences when button is clicked
+                        editor.putString("user_name", name)
+                        editor.apply()
+
+
+                        // Navigate to the next screen
+                        navController.navigate(Destination.OtpScreen.route)
                     },
                     modifier = Modifier
                         .fillMaxWidth()

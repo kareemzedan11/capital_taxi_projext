@@ -1,30 +1,42 @@
-package com.example.capital_taxi.Presentation.ui.Passengar.Screens.Home.UserHome.Components
+package com.example.capital_taxi.Presentation.ui.Passengar.Screens.chat_bot
 
-import android.os.Bundle
-import androidx.activity.ComponentActivity
-import androidx.activity.compose.setContent
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
+import androidx.compose.foundation.gestures.scrollable
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateListOf
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.example.capital_taxi.R
+
+
 @Composable
 fun CapitalTaxiChatScreen(navController: NavController) {
+
+    val messages = remember { mutableStateListOf<Pair<String, Boolean>>() }
+
     androidx.compose.material.Scaffold(
+
         topBar = {
             androidx.compose.material.TopAppBar(
                 title = {
@@ -57,11 +69,17 @@ fun CapitalTaxiChatScreen(navController: NavController) {
                 verticalArrangement = Arrangement.SpaceBetween,
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
-                // القسم العلوي: الرسائل والخيارات
+                // Upper section: Messages and Options
                 Column(
+                    modifier = Modifier
+                        .fillMaxHeight(.9f)
+                        .fillMaxWidth()
+                        .verticalScroll(rememberScrollState()),
+
                     horizontalAlignment = Alignment.CenterHorizontally,
                     verticalArrangement = Arrangement.spacedBy(8.dp)
                 ) {
+                    // Show initial assistant messages
                     ChatBubble(
                         text = "Welcome to Capital Taxi Assistant!",
                         isUser = false
@@ -72,19 +90,52 @@ fun CapitalTaxiChatScreen(navController: NavController) {
                     )
 
                     OptionsList(
-                        options = listOf("Book a Ride", "View Rates", "FAQ", "Contact Support")
+                        options = listOf("Book a Ride", "View Rates", "FAQ", "Contact Support"),
+                        onOptionClick = { selectedOption ->
+                            messages.add(selectedOption to true)
+                        }
                     )
+
+
+                    messages.forEach { (text, isUser) ->
+                        ChatBubble(
+                            text = text,
+                            isUser = isUser
+                        )
+                        if (text == "Book a Ride") {
+                            ChatBubble(
+                                text = "How can I assist you today?hhhhhhhhh",
+                                isUser = false
+                            )
+                        }
+                        else{
+                            ChatBubble(
+                                text = "How can I assist you today?",
+                                isUser = false
+                            )
+                        }
+
+                    }
+
                 }
 
-                // القسم السفلي: حقل إدخال وزر
-                MessageInputField()
+
+                Box(
+                    modifier = Modifier
+                        .wrapContentHeight()
+                        .fillMaxWidth()
+                ) {
+                    MessageInputField(messages = messages)
+                }
             }
         }
     )
 }
 
+
 @Composable
 fun ChatBubble(text: String, isUser: Boolean) {
+
     Row(
         modifier = Modifier.fillMaxWidth(),
         horizontalArrangement = if (isUser) Arrangement.End else Arrangement.Start
@@ -94,7 +145,7 @@ fun ChatBubble(text: String, isUser: Boolean) {
             horizontalArrangement = Arrangement.Start
         ) {
             if (!isUser) {
-                // أيقونة المساعد الذكي
+
                 Card(
                     elevation = CardDefaults.cardElevation(8.dp),
                     shape = CircleShape,
@@ -114,7 +165,7 @@ fun ChatBubble(text: String, isUser: Boolean) {
                         )
                     }
                 }
-                Spacer(Modifier.width(8.dp)) // مسافة بين الأيقونة والفقاعة
+                Spacer(Modifier.width(8.dp))
             }
 
             Box(
@@ -132,7 +183,7 @@ fun ChatBubble(text: String, isUser: Boolean) {
 }
 
 @Composable
-fun OptionsList(options: List<String>) {
+fun OptionsList(options: List<String>, onOptionClick: (String) -> Unit) {
     Box(
         modifier = Modifier
             .background(Color.LightGray.copy(alpha = .5f))
@@ -151,16 +202,16 @@ fun OptionsList(options: List<String>) {
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             options.forEach { option ->
-                OptionButton(option)
+                OptionButton(option, onOptionClick)
             }
         }
     }
 }
 
 @Composable
-fun OptionButton(text: String) {
+fun OptionButton(text: String, onClick: (String) -> Unit) {
     Button(
-        onClick = { /* Handle click */ },
+        onClick = { onClick(text) },
         shape = CircleShape,
         colors = ButtonDefaults.buttonColors(containerColor = Color.White),
         modifier = Modifier
@@ -173,7 +224,9 @@ fun OptionButton(text: String) {
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun MessageInputField() {
+fun MessageInputField(messages: MutableList<Pair<String, Boolean>>) {
+    var message by remember { mutableStateOf("") }
+
     Row(
         modifier = Modifier
             .fillMaxWidth()
@@ -182,14 +235,15 @@ fun MessageInputField() {
         verticalAlignment = Alignment.CenterVertically
     ) {
         OutlinedTextField(
-            value = "",
-            onValueChange = { /* Handle text input */ },
+            textStyle = TextStyle(Color.Black),
+            value = message,
+            onValueChange = { message = it },
             placeholder = { Text("Type your message here...") },
             modifier = Modifier
                 .weight(1f)
                 .height(56.dp),
             colors = TextFieldDefaults.outlinedTextFieldColors(
-             Color.Transparent,
+                Color.Transparent,
                 focusedBorderColor = Color.LightGray,
                 unfocusedBorderColor = Color.LightGray
             )
@@ -198,7 +252,14 @@ fun MessageInputField() {
         Spacer(modifier = Modifier.width(8.dp))
 
         IconButton(
-            onClick = { /* Handle send action */ },
+            onClick = {
+                if (message.isNotEmpty()) {
+                    // Add the new user message to the list
+                    messages.add(message to true)
+                    // Clear the message input field after sending
+                    message = ""
+                }
+            },
             modifier = Modifier.size(26.dp)
         ) {
             Icon(

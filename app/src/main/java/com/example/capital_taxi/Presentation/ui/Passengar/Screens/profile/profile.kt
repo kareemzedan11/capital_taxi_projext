@@ -21,10 +21,21 @@ import androidx.navigation.NavController
 import coil.compose.AsyncImage
 import com.example.capital_taxi.Navigation.Destination
 import com.example.capital_taxi.R
+import android.content.Context
+import android.content.SharedPreferences
+import androidx.compose.ui.platform.LocalContext
+
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun Profile(navController: NavController) {
-    var firstName by remember { mutableStateOf("") }
+    // Initialize SharedPreferences
+    val context = LocalContext.current
+    val sharedPreferences: SharedPreferences = context.getSharedPreferences("user_preferences", Context.MODE_PRIVATE)
+
+    // Retrieve the saved first name from SharedPreferences
+    val savedFirstName = sharedPreferences.getString("user_name", "") ?: ""
+    var firstName by remember { mutableStateOf(savedFirstName) }
+
     var lastName by remember { mutableStateOf("") }
     var email by remember { mutableStateOf("") }
     var phone by remember { mutableStateOf("") }
@@ -82,13 +93,12 @@ fun Profile(navController: NavController) {
                         },
                         modifier = Modifier
                             .align(Alignment.BottomEnd)
-                            .size(26.dp) // Adjust icon size as needed
+                            .size(26.dp)
                             .background(Color.White, CircleShape)
                     ) {
                         Icon(
-                            modifier = Modifier .size(32.dp),
-
-                            painter = painterResource(R.drawable.baseline_add_circle_outline_24), // Replace with your icon resource
+                            modifier = Modifier.size(32.dp),
+                            painter = painterResource(R.drawable.baseline_add_circle_outline_24),
                             contentDescription = "Upload Picture",
                             tint = colorResource(R.color.primary_color),
                         )
@@ -142,7 +152,7 @@ fun Profile(navController: NavController) {
                         Icon(
                             tint = colorResource(R.color.primary_color),
                             painter = painterResource(id = R.drawable.baseline_phone_24),
-                            contentDescription = "phone Icon"
+                            contentDescription = "Phone Icon"
                         )
                     }
                 )
@@ -150,27 +160,27 @@ fun Profile(navController: NavController) {
                 Spacer(modifier = Modifier.height(24.dp))
 
                 Button(
-                    onClick = { navController.navigate(Destination.UserHomeScreen.route)},
+                    onClick = {
+                        // Save new information if needed or navigate to the next screen
+                        navController.navigate(Destination.UserHomeScreen.route)
+                    },
                     modifier = Modifier
-                        .fillMaxWidth(.9f)
-
-
+                        .fillMaxWidth(0.9f)
                         .height(60.dp),
                     colors = ButtonDefaults.buttonColors(colorResource(R.color.primary_color)),
                     shape = RoundedCornerShape(16.dp)
-
                 ) {
                     Text(
                         text = "Save ",
                         fontSize = 18.sp,
                         color = Color.Black
-
-                        )
+                    )
                 }
             }
         }
     )
 }
+
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun ProfileTextField(

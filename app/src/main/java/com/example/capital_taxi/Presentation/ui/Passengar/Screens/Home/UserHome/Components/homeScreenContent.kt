@@ -150,79 +150,8 @@ fun homeScreenContent(navController: NavController) {
         showBottomSheet = showBottomSheet,
         onDismissRequest = { showBottomSheet = false }) {
 
-        Column(
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(16.dp),
-            horizontalAlignment = Alignment.CenterHorizontally
-        ) {
-            Column(
-                modifier = Modifier.wrapContentHeight(),
-                horizontalAlignment = Alignment.CenterHorizontally
-            ) {
-                Text(
-                    text = "Payment method",
-                    fontSize = 24.sp,
-                    color = Color.Black,
-                    fontWeight = FontWeight.W700
-                )
-                HorizontalDivider(
-                    thickness = 2.dp,
-                    modifier = Modifier.padding(vertical = 10.dp, horizontal = 30.dp)
-                )
+        PaymentMethodContent()
 
-                Spacer(modifier = Modifier.padding(20.dp))
-
-                // Light Mode Card
-                Card(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .height(60.dp)
-                        .background(Color.LightGray)
-                        .border(1.dp, color = Color.Gray),
-                    elevation = CardDefaults.elevatedCardElevation(10.dp)
-                ) {
-                    Row(
-                        modifier = Modifier
-                            .fillMaxSize()
-
-                            .padding(horizontal = 10.dp),
-                        verticalAlignment = Alignment.CenterVertically
-                    ) {
-                        Box(
-                            modifier = Modifier
-                                .size(36.dp)
-                                .clip(CircleShape)
-                                .background(colorResource(R.color.secondary_color)),
-                            contentAlignment = Alignment.Center
-                        ) {
-                            Icon(
-                                painter = painterResource(R.drawable.dollar),
-                                contentDescription = "Cash",
-                                tint = Color.Unspecified,
-                                modifier = Modifier.size(26.dp)
-                            )
-                        }
-                        Spacer(modifier = Modifier.width(16.dp))
-                        Text(
-                            "Cash",
-                            color = Color.Black,
-                            fontSize = 18.sp,
-                            fontWeight = FontWeight.W600
-                        )
-                        Spacer(modifier = Modifier.weight(1f))
-
-                        Icon(
-                            painter = painterResource(R.drawable.selected),
-                            contentDescription = "Selected Light Mode",
-                            tint = Color.Unspecified,
-                            modifier = Modifier.size(30.dp)
-                        )
-
-                    }
-                }
-            }
-        }
 
     }
     // Main Container
@@ -281,9 +210,9 @@ fun homeScreenContent(navController: NavController) {
                             .fillMaxSize()
                             .background(Color.Transparent)
                             .border(
-                                width = 2.dp,              // Thickness of the border
-                                color = Color.Gray,        // Color of the border
-                                shape = RoundedCornerShape(16.dp) // Rounded corners
+                                width = 2.dp,
+                                color = Color.Gray,
+                                shape = RoundedCornerShape(16.dp)
                             )
                     ) {
                         // Use the current state to check if location is enabled and permission granted
@@ -313,61 +242,81 @@ fun homeScreenContent(navController: NavController) {
 
             if (currentIsLocationEnabled.value && currentIsLocationGranted.value && !isConfirmed && !isSearch) {
 
-                Box(
-                    modifier = Modifier
-                        .fillMaxSize()
-                        .padding(16.dp)
-                ) {
-                    Card(
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .align(Alignment.BottomCenter)
-                            .padding(16.dp),
-                        elevation = CardDefaults.elevatedCardElevation(10.dp),
-                        shape = RoundedCornerShape(16.dp)
-                    ) {
-                        Box(
-                            modifier = Modifier
-                                .fillMaxWidth()
-                                .height(80.dp),
-                            contentAlignment = Alignment.Center
-                        ) {
-                            Row(
-                                modifier = Modifier
-                                    .fillMaxWidth()
-                                    .padding(horizontal = 10.dp),
-                                Arrangement.Start,
-                                Alignment.CenterVertically
-                            ) {
-                                Icon(
-                                    modifier = Modifier
-                                        .size(26.dp)
-                                        .clickable { showBottomSheet = true },
-                                    painter = painterResource(R.drawable.dollar),
-                                    tint = Color.Unspecified,
-                                    contentDescription = null
-                                )
-                                Spacer(modifier = Modifier.weight(1f))
+                FindDriverCard(onclick = { isConfirmed = true })
+            }
+        }
+    }
+}
 
-                                Button(
-                                    onClick = { isConfirmed = true },
-                                    colors = ButtonDefaults.buttonColors(
-                                        containerColor = colorResource(
-                                            R.color.primary_color
-                                        )
-                                    ),
-                                    modifier = Modifier
-                                        .width(200.dp)
-                                        .height(50.dp),
-                                    contentPadding = PaddingValues(0.dp)
-                                ) {
-                                    Text(
-                                        text = "Find a driver",
-                                        color = Color.Black,
-                                        fontSize = 16.sp
-                                    )
-                                }
-                                Spacer(modifier = Modifier.weight(1f))
+@Composable
+private fun FindDriverCard(onclick: () -> Unit) {
+
+
+    var showBottomSheet by remember { mutableStateOf(false) }
+
+    PartialBottomSheet(
+        showBottomSheet = showBottomSheet,
+        onDismissRequest = { showBottomSheet = false }) {
+
+        PaymentMethodContent()
+
+
+    }
+    Box(
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(16.dp)
+    ) {
+        Card(
+            modifier = Modifier
+                .fillMaxWidth()
+                .align(Alignment.BottomCenter)
+                .padding(16.dp),
+            elevation = CardDefaults.elevatedCardElevation(10.dp),
+            shape = RoundedCornerShape(16.dp)
+        ) {
+            Box(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .height(80.dp),
+                contentAlignment = Alignment.Center
+            ) {
+                Row(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(horizontal = 10.dp),
+                    Arrangement.Start,
+                    Alignment.CenterVertically
+                ) {
+                    Icon(
+                        modifier = Modifier
+                            .size(26.dp)
+                            .clickable { showBottomSheet = true },
+                        painter = painterResource(R.drawable.dollar),
+                        tint = Color.Unspecified,
+                        contentDescription = null
+                    )
+                    Spacer(modifier = Modifier.weight(1f))
+
+                    Button(
+                        onClick = { onclick() },
+                        colors = ButtonDefaults.buttonColors(
+                            containerColor = colorResource(
+                                R.color.primary_color
+                            )
+                        ),
+                        modifier = Modifier
+                            .width(200.dp)
+                            .height(50.dp),
+                        contentPadding = PaddingValues(0.dp)
+                    ) {
+                        Text(
+                            text = "Find a driver",
+                            color = Color.Black,
+                            fontSize = 16.sp
+                        )
+                    }
+                    Spacer(modifier = Modifier.weight(1f))
 //
 //                                Icon(
 //                                    modifier = Modifier.size(26.dp),
@@ -375,12 +324,81 @@ fun homeScreenContent(navController: NavController) {
 //                                    tint = Color.Black,
 //                                    contentDescription = null
 //                                )
-                            }
-                        }
-                    }
                 }
             }
         }
     }
 }
 
+
+@Composable
+fun PaymentMethodContent() {
+    Column(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(16.dp),
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
+        Text(
+            text = "Payment method",
+            fontSize = 24.sp,
+            color = Color.Black,
+            fontWeight = FontWeight.W700
+        )
+        Divider(
+            thickness = 2.dp,
+            modifier = Modifier.padding(vertical = 10.dp, horizontal = 30.dp)
+        )
+        Spacer(modifier = Modifier.padding(20.dp))
+        PaymentCard()
+    }
+}
+
+
+@Composable
+fun PaymentCard() {
+    Card(
+        modifier = Modifier
+            .fillMaxWidth()
+            .height(60.dp)
+            .background(Color.LightGray)
+            .border(1.dp, color = Color.Gray),
+        elevation = CardDefaults.elevatedCardElevation(10.dp)
+    ) {
+        Row(
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(horizontal = 10.dp),
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            Box(
+                modifier = Modifier
+                    .size(36.dp)
+                    .clip(CircleShape)
+                    .background(colorResource(R.color.secondary_color)),
+                contentAlignment = Alignment.Center
+            ) {
+                Icon(
+                    painter = painterResource(R.drawable.dollar),
+                    contentDescription = "Cash",
+                    tint = Color.Unspecified,
+                    modifier = Modifier.size(26.dp)
+                )
+            }
+            Spacer(modifier = Modifier.width(16.dp))
+            Text(
+                "Cash",
+                color = Color.Black,
+                fontSize = 18.sp,
+                fontWeight = FontWeight.W600
+            )
+            Spacer(modifier = Modifier.weight(1f))
+            Icon(
+                painter = painterResource(R.drawable.selected),
+                contentDescription = "Selected",
+                tint = Color.Unspecified,
+                modifier = Modifier.size(30.dp)
+            )
+        }
+    }
+}

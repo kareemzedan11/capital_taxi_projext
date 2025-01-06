@@ -20,11 +20,13 @@ import com.example.capital_taxi.Presentation.ui.Driver.Screens.VerficationScreen
 import com.example.capital_taxi.Presentation.ui.Driver.Screens.VerficationScreens.faceValidation.FaceValidation
 import com.example.capital_taxi.Presentation.ui.Passengar.Screens.HelpScreen.HelpDetailScreen
 import com.example.capital_taxi.Presentation.ui.Passengar.Screens.HelpScreen.HelpScreen
-import com.example.capital_taxi.Presentation.ui.Passengar.Screens.Home.UserHome.Components.CapitalTaxiChatScreen
+import com.example.capital_taxi.Presentation.ui.Passengar.Screens.chat_bot.CapitalTaxiChatScreen
 import com.example.capital_taxi.Presentation.ui.Passengar.Screens.TripHistory.TripsHistoryScreen
-import com.example.capital_taxi.Presentation.ui.Passengar.Screens.Home.UserHome.Components.PickupWithPickoffPoints
 import com.example.capital_taxi.Presentation.ui.Passengar.Screens.Home.UserHome.Components.TripDestination
-import com.example.capital_taxi.Presentation.ui.Passengar.Screens.Home.UserHome.Components.chatbot
+import com.example.capital_taxi.Presentation.ui.Passengar.Screens.Home.UserHome.Components.savedPlaces.HomePlace
+import com.example.capital_taxi.Presentation.ui.Passengar.Screens.Home.UserHome.Components.savedPlaces.SavedPlaces
+import com.example.capital_taxi.Presentation.ui.Passengar.Screens.Home.UserHome.Components.savedPlaces.WorkPlace
+import com.example.capital_taxi.Presentation.ui.Passengar.Screens.chat_bot.chatbot
 import com.example.capital_taxi.Presentation.ui.Passengar.Screens.Home.UserHome.UserHomeScreen
 import com.example.capital_taxi.Presentation.ui.Passengar.Screens.Voucher.voucherScreen
 import com.example.capital_taxi.Presentation.ui.Passengar.Screens.payment.PaymentScreen
@@ -51,7 +53,7 @@ import settings
 
 @Composable
 fun AppNavGraph(navController: NavHostController) {
-    NavHost(navController = navController, startDestination = Destination.UserHomeScreen.route) {
+    NavHost(navController = navController, startDestination = Destination.SplashScreen.route) {
 
         composable(Destination.SplashScreen.route) {
             SplashScreen(navController)
@@ -165,6 +167,16 @@ fun AppNavGraph(navController: NavHostController) {
         }
         composable(Destination.searchForLocation.route) {
             searchForLocation(navController)
+        }
+        composable(Destination.SavedPlaces.route) {
+            SavedPlaces(navController)
+        }
+        composable(Destination.HomePlace.route) {
+            HomePlace(navController)
+        }
+
+        composable(Destination.WorkPlace.route) {
+            WorkPlace(navController)
         }
 
 

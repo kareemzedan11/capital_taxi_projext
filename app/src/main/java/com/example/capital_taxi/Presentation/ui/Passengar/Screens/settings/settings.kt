@@ -106,12 +106,12 @@ fun settings(navController: NavController) {
                 SettingBox(
                     title = "Home",
                     icon = painterResource(R.drawable.home),
-                    onClick = { /* Handle phone number click */ }
+                    onClick = {navController.navigate(Destination.HomePlace.route) }
                 )
                 SettingBox(
                     title = "Add Work",
                     icon = painterResource(R.drawable.work),
-                    onClick = { /* Handle phone number click */ }
+                    onClick = {navController.navigate(Destination.WorkPlace.route) }
                 )
                 SettingBox(
                     title = "Communication",
@@ -121,7 +121,7 @@ fun settings(navController: NavController) {
                 SettingBox(
                     title = "Saved Places",
                     icon = painterResource(R.drawable.baseline_place_24),
-                    onClick = { /* Handle saved places click */ }
+                    onClick = {navController.navigate(Destination.SavedPlaces.route) }
                 )
 
                 // Section 2: Preferences
