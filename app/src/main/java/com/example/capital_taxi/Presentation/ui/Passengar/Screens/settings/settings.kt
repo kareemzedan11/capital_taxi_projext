@@ -178,7 +178,7 @@ fun settings(navController: NavController) {
     }
 }
 @Composable
-private fun AppearanceBottomSheetContent(isDark: Boolean, navController: NavController) {
+  fun AppearanceBottomSheetContent(isDark: Boolean, navController: NavController) {
 
     var isDark1 by remember { mutableStateOf(isDark) }
 

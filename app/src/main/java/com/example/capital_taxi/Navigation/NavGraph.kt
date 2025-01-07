@@ -20,6 +20,7 @@ import com.example.capital_taxi.Presentation.ui.Driver.Screens.VerficationScreen
 import com.example.capital_taxi.Presentation.ui.Driver.Screens.VerficationScreens.faceValidation.FaceValidation
 import com.example.capital_taxi.Presentation.ui.Passengar.Screens.HelpScreen.HelpDetailScreen
 import com.example.capital_taxi.Presentation.ui.Passengar.Screens.HelpScreen.HelpScreen
+
 import com.example.capital_taxi.Presentation.ui.Passengar.Screens.chat_bot.CapitalTaxiChatScreen
 import com.example.capital_taxi.Presentation.ui.Passengar.Screens.TripHistory.TripsHistoryScreen
 import com.example.capital_taxi.Presentation.ui.Passengar.Screens.Home.UserHome.Components.TripDestination
@@ -53,7 +54,7 @@ import settings
 
 @Composable
 fun AppNavGraph(navController: NavHostController) {
-    NavHost(navController = navController, startDestination = Destination.SplashScreen.route) {
+    NavHost(navController = navController, startDestination = Destination.DriverHomeScreen.route) {
 
         composable(Destination.SplashScreen.route) {
             SplashScreen(navController)
@@ -179,13 +180,12 @@ fun AppNavGraph(navController: NavHostController) {
             WorkPlace(navController)
         }
 
-
         composable(Destination.NewPasswordScreen.route) {
             NewPasswordScreen(navController)
         }
 
         composable("help_detail/{topic}") { backStackEntry ->
-            HelpDetailScreen(
+          HelpDetailScreen(
                 navController = navController,
                 topic = backStackEntry.arguments?.getString("topic") ?: ""
             )

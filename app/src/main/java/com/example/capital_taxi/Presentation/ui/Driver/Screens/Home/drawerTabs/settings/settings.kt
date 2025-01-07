@@ -1,5 +1,6 @@
 package com.example.capital_taxi.Presentation.ui.Driver.Screens.Home.drawerTabs.settings
 
+import AppearanceBottomSheetContent
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
@@ -14,6 +15,9 @@ import androidx.compose.material.icons.filled.*
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -31,11 +35,21 @@ import com.airbnb.lottie.compose.LottieCompositionSpec
 import com.airbnb.lottie.compose.LottieConstants
 import com.airbnb.lottie.compose.animateLottieCompositionAsState
 import com.airbnb.lottie.compose.rememberLottieComposition
+import com.example.capital_taxi.Helper.PartialBottomSheet
 import com.example.capital_taxi.R
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun driversettings(navController: NavController) {
+    var showBottomSheet by remember { mutableStateOf(false) }
+    var isDark by remember { mutableStateOf(false) }
+
+    PartialBottomSheet(
+        showBottomSheet = showBottomSheet,
+        onDismissRequest = { showBottomSheet = false }) {
+
+        AppearanceBottomSheetContent(isDark, navController)
+    }
     androidx.compose.material.Scaffold(
         topBar = {
             androidx.compose.material.TopAppBar(
@@ -130,7 +144,7 @@ fun driversettings(navController: NavController) {
                             title = "Night Mode",
                             icon = painterResource(R.drawable.mode),
 
-                            onClick = { /* Handle night mode toggle */ }
+                            onClick = { showBottomSheet = true }
                         )
 
 

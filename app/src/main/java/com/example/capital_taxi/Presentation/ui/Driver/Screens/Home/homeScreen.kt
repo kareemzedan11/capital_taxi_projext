@@ -39,28 +39,12 @@ import passengerAcceptPrice
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun driverHomeScreen(navController: NavController) {
+    var isStart by remember { mutableStateOf(false) }
     val scope = rememberCoroutineScope()
-    val bottomSheetState = rememberBottomSheetScaffoldState()
+
     val drawerState = rememberDrawerState(initialValue = DrawerValue.Closed)
-    var showBottomSheet by remember { mutableStateOf(false) }
-    val sheetState = rememberModalBottomSheetState(
-        skipPartiallyExpanded = false,
-    )
 
 
-    if (showBottomSheet) {
-        ModalBottomSheet(
-            modifier = Modifier
-                .fillMaxHeight()
-                .padding(bottom = 20.dp),
-            sheetState = sheetState,
-            onDismissRequest = { showBottomSheet = false },
-
-
-            ) {
-
-        }
-    }
     val gesturesEnabled = drawerState.isOpen
 
     Box(modifier = Modifier.fillMaxSize()) {
@@ -74,155 +58,149 @@ fun driverHomeScreen(navController: NavController) {
             gesturesEnabled = gesturesEnabled,
             modifier = Modifier.fillMaxSize()
         ) {
-            confirmPickup(onclick = {})
 
-            BottomSheetScaffold(
-                scaffoldState = bottomSheetState,
-                sheetPeekHeight = 300.dp,
-                sheetContent = {
-                    // Bottom Sheet Content
-                    Box(
-                        modifier = Modifier
-                            .fillMaxSize()
-                            .background(Color.White)
-                    ) {
-                        driverHomeScreenContent(navController)
+
+            driverHomeScreenContent(navController)
+
+            Box(
+                modifier = Modifier
+                    .fillMaxSize()
+
+            ) {
+                // Map Section and Animation
+                Box(
+                    modifier = Modifier.fillMaxSize(),
+                    contentAlignment = Alignment.Center
+                ) {
+                    // TripArrivedCard()
+                    MapSection(navController = navController)
+                    //  PassengerConnectionCard()
+                    if (isStart) {
+                      tripDetailsCard(light = false)
+                        //TripArrivedCard()
                     }
+
+
                 }
-            ) { padding ->
+
                 Box(
                     modifier = Modifier
-                        .fillMaxSize()
-                        .padding(padding),
+                        .fillMaxWidth()
+                        .wrapContentHeight()
+                        .align(Alignment.TopStart)
                 ) {
-                    // Map Section and Animation
-                    Box(
-                        modifier = Modifier.fillMaxSize(),
-                        contentAlignment = Alignment.Center
+                    Row(
+                        horizontalArrangement = Arrangement.Center,
+                        verticalAlignment = Alignment.CenterVertically
                     ) {
-                       // TripArrivedCard()
-                        MapSection(navController=navController)
-                    //  PassengerConnectionCard()
-                    //   tripDetailsCard(light = false)
-                    //  TripArrivedCard()
-
-                    }
-
-                    Box(
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .wrapContentHeight()
-                            .align(Alignment.TopStart)
-                    ) {
-                        Row(
-                            horizontalArrangement = Arrangement.Center,
-                            verticalAlignment = Alignment.CenterVertically
-                        ) {
-                            TopBar(
-                                onOpenDrawer = {
-                                    scope.launch {
-                                        if (drawerState.isClosed) {
-                                            drawerState.open()
-                                        } else {
-                                            drawerState.close()
-                                        }
+                        TopBar(
+                            onOpenDrawer = {
+                                scope.launch {
+                                    if (drawerState.isClosed) {
+                                        drawerState.open()
+                                    } else {
+                                        drawerState.close()
                                     }
-                                },
-                                navController = navController
-                            )
-                            Spacer(modifier = Modifier.weight(1f))
-
-                            Button(
-                                colors = ButtonDefaults.buttonColors(containerColor = Color.Black),
-                                onClick = {
-                                    showBottomSheet = true
-                                },
-
-                                modifier = Modifier
-                                    .wrapContentWidth()
-                                    .height(60.dp)
-                                    .padding(end = 80.dp)
-                            ) {
-                                Row(
-
-
-                                    horizontalArrangement = Arrangement.Center,
-                                    verticalAlignment = Alignment.CenterVertically
-                                ) {
-
-                                    Icon(
-
-                                        contentDescription = null,
-                                        imageVector = Icons.Default.ArrowDropDown,
-                                        tint = Color.White
-                                    )
-                                    Spacer(modifier = Modifier.width(4.dp))
-
-                                    Text(text = "0.00 EGB", fontSize = 18.sp)
                                 }
+                            },
+                            navController = navController
+                        )
+                        Spacer(modifier = Modifier.weight(1f))
 
+                        Button(
+                            colors = ButtonDefaults.buttonColors(containerColor = Color.Black),
+                            onClick = {
+
+                            },
+
+                            modifier = Modifier
+                                .wrapContentWidth()
+                                .height(60.dp)
+                                .padding(end = 80.dp)
+                        ) {
+                            Row(
+
+
+                                horizontalArrangement = Arrangement.Center,
+                                verticalAlignment = Alignment.CenterVertically
+                            ) {
+
+
+                                Text(text = "0.00 EGB", fontSize = 18.sp)
                             }
-                            Spacer(modifier = Modifier.weight(1f))
 
                         }
+                        Spacer(modifier = Modifier.weight(1f))
+
                     }
                 }
             }
         }
 
-     //   captainToPassengar(navController)
 
-        Card(
-            modifier = Modifier
-                .fillMaxWidth()
-                .background(Color.White)
-                .height(100.dp)
-                .align(Alignment.BottomCenter)
-                .padding(16.dp),
+        if (!isStart) {
+            Card(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .background(Color.White)
+                    .height(100.dp)
+                    .align(Alignment.BottomCenter)
+                    .padding(16.dp),
 
-            elevation = CardDefaults.cardElevation(defaultElevation = 20.dp),
+                elevation = CardDefaults.cardElevation(defaultElevation = 20.dp),
 
-            ) {
-
-            Row(  modifier = Modifier.fillMaxSize().padding(horizontal =
-            10.dp),
-                horizontalArrangement = Arrangement.SpaceBetween,
-                verticalAlignment = Alignment.CenterVertically
-            ) {
-
-
-                Icon(
-
-                    modifier = Modifier.size(26.dp),
-                    painter = painterResource(R.drawable.note), contentDescription = null
-                    , tint = colorResource(R.color.Icons_color)
-                )
-
-                Spacer(modifier = Modifier.weight(1f))
-
-                Button(
-                    colors = ButtonDefaults.buttonColors(containerColor = colorResource(R.color.primary_color)),
-                    onClick = {
-                        // Handle button click here
-                    },
-                    modifier = Modifier.fillMaxWidth(0.4f).fillMaxHeight(.8f)
                 ) {
-                    Text(text = "Start", fontSize = 18.sp, color = Color.Black)
-                }
-                Spacer(modifier = Modifier.weight(1f))
-                Icon(
 
-                    tint =    colorResource(R.color.Icons_color) ,
-                    modifier = Modifier.size(26.dp),
-                    painter = painterResource(R.drawable.tools), contentDescription = null
-                )
+                Row(
+                    modifier = Modifier
+                        .fillMaxSize()
+                        .padding(
+                            horizontal =
+                            10.dp
+                        ),
+                    horizontalArrangement = Arrangement.SpaceBetween,
+                    verticalAlignment = Alignment.CenterVertically
+                ) {
+
+
+                    Icon(
+
+                        modifier = Modifier.size(26.dp),
+                        painter = painterResource(R.drawable.note),
+                        contentDescription = null,
+                        tint = colorResource(R.color.Icons_color)
+                    )
+
+                    Spacer(modifier = Modifier.weight(1f))
+
+                    Button(
+                        colors = ButtonDefaults.buttonColors(containerColor = colorResource(R.color.primary_color)),
+                        onClick = {
+                            isStart = true
+                        },
+                        modifier = Modifier
+                            .fillMaxWidth(0.4f)
+                            .fillMaxHeight(.8f)
+                    ) {
+                        Text(text = "Start", fontSize = 18.sp, color = Color.Black)
+                    }
+                    Spacer(modifier = Modifier.weight(1f))
+                    Icon(
+
+                        tint = colorResource(R.color.Icons_color),
+                        modifier = Modifier.size(26.dp),
+                        painter = painterResource(R.drawable.tools), contentDescription = null
+                    )
+                }
             }
+        } else if (isStart) {
+            captainToPassengar(navController)
 
         }
     }
+
+
 }
-
-
 @Composable
 fun PassengerConnectionCard() {
     Column(

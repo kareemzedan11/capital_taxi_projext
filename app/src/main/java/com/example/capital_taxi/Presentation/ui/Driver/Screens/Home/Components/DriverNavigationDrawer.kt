@@ -137,7 +137,7 @@ fun DriverNavigationDrawer(navController: NavController) {
                 Spacer(Modifier.height(10.dp))
                 navigationDrawerItem(
                     onClick = { navController.navigate(Destination.driversettings.route) },
-                    text = "Setting"
+                    text = "Settings"
                 )
 
             }
