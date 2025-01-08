@@ -1,5 +1,6 @@
 package com.example.capital_taxi.Presentation.ui.Passengar.Screens.chat_bot
 
+import ChatResponse
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.gestures.scrollable
@@ -15,6 +16,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -28,35 +30,36 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.example.capital_taxi.R
+import kotlinx.coroutines.launch
+import sendChatMessage
 
-
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun CapitalTaxiChatScreen(navController: NavController) {
 
-    val messages = remember { mutableStateListOf<Pair<String, Boolean>>() }
+    val messages = remember { mutableStateListOf<Pair<String, Boolean>>() }  // Track all messages
+    var message by remember { mutableStateOf("") }
+    val coroutineScope = rememberCoroutineScope()
 
-    androidx.compose.material.Scaffold(
-
+    Scaffold(
         topBar = {
-            androidx.compose.material.TopAppBar(
+            TopAppBar(
                 title = {
-                    androidx.compose.material.Text(
+                    Text(
                         "Back",
                         fontWeight = FontWeight.Bold,
                         color = Color.Black
                     )
                 },
                 navigationIcon = {
-                    androidx.compose.material.IconButton(onClick = { navController.popBackStack() }) {
-                        androidx.compose.material.Icon(
+                    IconButton(onClick = { navController.popBackStack() }) {
+                        Icon(
                             imageVector = Icons.Default.ArrowBack,
                             contentDescription = "Back",
                             tint = Color.Black
                         )
                     }
                 },
-                backgroundColor = Color.White,
-                contentColor = Color.Black
             )
         },
         content = { paddingValues ->
@@ -69,17 +72,15 @@ fun CapitalTaxiChatScreen(navController: NavController) {
                 verticalArrangement = Arrangement.SpaceBetween,
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
-                // Upper section: Messages and Options
+                // Show previous messages (user and assistant)
                 Column(
                     modifier = Modifier
                         .fillMaxHeight(.9f)
                         .fillMaxWidth()
                         .verticalScroll(rememberScrollState()),
-
                     horizontalAlignment = Alignment.CenterHorizontally,
                     verticalArrangement = Arrangement.spacedBy(8.dp)
                 ) {
-                    // Show initial assistant messages
                     ChatBubble(
                         text = "Welcome to Capital Taxi Assistant!",
                         isUser = false
@@ -89,49 +90,17 @@ fun CapitalTaxiChatScreen(navController: NavController) {
                         isUser = false
                     )
 
-                    OptionsList(
-                        options = listOf("Book a Ride", "View Rates", "FAQ", "Contact Support"),
-                        onOptionClick = { selectedOption ->
-                            messages.add(selectedOption to true)
-                        }
-                    )
-
-
                     messages.forEach { (text, isUser) ->
-                        ChatBubble(
-                            text = text,
-                            isUser = isUser
-                        )
-                        if (text == "Book a Ride") {
-                            ChatBubble(
-                                text = "How can I assist you today?hhhhhhhhh",
-                                isUser = false
-                            )
-                        }
-                        else{
-                            ChatBubble(
-                                text = "How can I assist you today?",
-                                isUser = false
-                            )
-                        }
-
+                        ChatBubble(text = text, isUser = isUser)
                     }
-
                 }
 
-
-                Box(
-                    modifier = Modifier
-                        .wrapContentHeight()
-                        .fillMaxWidth()
-                ) {
-                    MessageInputField(messages = messages)
-                }
+                // Message input and send button
+                MessageInputField(messages = messages)
             }
         }
     )
 }
-
 
 @Composable
 fun ChatBubble(text: String, isUser: Boolean) {
@@ -221,11 +190,11 @@ fun OptionButton(text: String, onClick: (String) -> Unit) {
         Text(text = text, fontWeight = FontWeight.Bold, color = Color.Black)
     }
 }
-
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun MessageInputField(messages: MutableList<Pair<String, Boolean>>) {
     var message by remember { mutableStateOf("") }
+    val scope = rememberCoroutineScope()
 
     Row(
         modifier = Modifier
@@ -235,7 +204,7 @@ fun MessageInputField(messages: MutableList<Pair<String, Boolean>>) {
         verticalAlignment = Alignment.CenterVertically
     ) {
         OutlinedTextField(
-            textStyle = TextStyle(Color.Black),
+            textStyle = TextStyle(color = Color.Black),
             value = message,
             onValueChange = { message = it },
             placeholder = { Text("Type your message here...") },
@@ -243,7 +212,7 @@ fun MessageInputField(messages: MutableList<Pair<String, Boolean>>) {
                 .weight(1f)
                 .height(56.dp),
             colors = TextFieldDefaults.outlinedTextFieldColors(
-                Color.Transparent,
+                containerColor = Color.Transparent,
                 focusedBorderColor = Color.LightGray,
                 unfocusedBorderColor = Color.LightGray
             )
@@ -253,10 +222,21 @@ fun MessageInputField(messages: MutableList<Pair<String, Boolean>>) {
 
         IconButton(
             onClick = {
-                if (message.isNotEmpty()) {
-                    // Add the new user message to the list
-                    messages.add(message to true)
-                    // Clear the message input field after sending
+                scope.launch {
+                    // Send the user's message to the server
+                    val messageResponse = sendChatMessage(message)
+
+                    // Add the user's message to the list
+                    messages.add(Pair(message, true))
+
+                    // Check if the response is null or empty
+                    if (messageResponse.isNullOrEmpty()) {
+                        messages.add(Pair("Sorry, I didn't understand you", false))
+                    } else {
+                        messages.add(Pair(messageResponse, false))
+                    }
+
+                    // Clear the input field
                     message = ""
                 }
             },
@@ -270,3 +250,4 @@ fun MessageInputField(messages: MutableList<Pair<String, Boolean>>) {
         }
     }
 }
+
