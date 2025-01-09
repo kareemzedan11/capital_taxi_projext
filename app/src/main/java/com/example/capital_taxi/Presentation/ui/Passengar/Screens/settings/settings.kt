@@ -129,7 +129,7 @@ fun settings(navController: NavController) {
                 SettingBox(
                     title = "Language",
                     icon = painterResource(R.drawable.language),
-                    onClick = { /* Handle language change */ }
+                    onClick = { navController.navigate(Destination.LanguageDScreen.route) }
                 )
                 SettingBox(
                     title = "Appearance",

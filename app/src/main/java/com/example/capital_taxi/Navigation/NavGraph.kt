@@ -1,7 +1,9 @@
 package com.example.capital_taxi.Navigation
 
+import LanguageDScreen
 import PhoneVerification
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.platform.LocalContext
 import androidx.navigation.NavHostController
 import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
@@ -45,7 +47,7 @@ import com.example.capital_taxi.Presentation.ui.screens.Select_the_mode.SelectTh
 import com.example.capital_taxi.Presentation.ui.screens.Start.StartScreen
 import com.example.capital_taxi.Presentation.ui.screens.modeDesign.modeDesign
 import com.example.capital_taxi.Presentation.ui.screens.new_password.NewPasswordScreen
-import com.example.capital_taxi.Presentation.ui.screens.search_for_location.searchForLocation
+import com.example.capital_taxi.Presentation.ui.screens.search_for_location.SearchForLocation
 import com.example.capital_taxi.ui.screens.Driver.VerficationScreens.CertificateOfVehicleRegistration
 import com.example.capital_taxi.ui.screens.Driver.VerficationScreens.DriverLicence
 import com.example.capital_taxi.ui.screens.Driver.VerficationScreens.NationalIDValidation
@@ -54,6 +56,8 @@ import settings
 
 @Composable
 fun AppNavGraph(navController: NavHostController) {
+
+    var context = LocalContext.current
     NavHost(navController = navController, startDestination = Destination.SplashScreen.route) {
 
         composable(Destination.SplashScreen.route) {
@@ -167,7 +171,7 @@ fun AppNavGraph(navController: NavHostController) {
             modeDesign(navController)
         }
         composable(Destination.searchForLocation.route) {
-            searchForLocation(navController)
+            SearchForLocation(navController)
         }
         composable(Destination.SavedPlaces.route) {
             SavedPlaces(navController)
@@ -182,6 +186,9 @@ fun AppNavGraph(navController: NavHostController) {
 
         composable(Destination.NewPasswordScreen.route) {
             NewPasswordScreen(navController)
+        }
+        composable(Destination.LanguageDScreen.route) {
+            LanguageDScreen(navController,{}, context)
         }
 
         composable("help_detail/{topic}") { backStackEntry ->

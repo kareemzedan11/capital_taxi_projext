@@ -14,6 +14,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 
 import android.os.Bundle
+import android.view.View
 import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -34,18 +35,9 @@ import com.example.capital_taxi.Presentation.Theme.LightPrimary
 import com.example.capital_taxi.Presentation.Theme.LightSecondary
 import com.example.capital_taxi.Presentation.Theme.LightSurface
 import com.example.capital_taxi.Presentation.ui.Passengar.Screens.Home.UserHome.Components.DraggableIcon
-import com.example.capital_taxi.Presentation.ui.screens.Onboarding.Components.GoogleAndPhone
-import com.google.android.gms.auth.api.signin.GoogleSignIn
-
-import com.google.android.gms.auth.api.signin.GoogleSignInAccount
-import com.google.android.gms.auth.api.signin.GoogleSignInClient
-
-import com.google.android.gms.auth.api.signin.GoogleSignInOptions
-import com.google.android.gms.tasks.Task
-import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.GoogleAuthProvider
-
-
+import com.example.capital_taxi.Presentation.ui.screens.Language.components.LanguagePreference
+import updateLocale
+import java.util.Locale
 
 
 class MainActivity : ComponentActivity() {
@@ -56,7 +48,11 @@ class MainActivity : ComponentActivity() {
             val locationGranted = permissions[Manifest.permission.ACCESS_FINE_LOCATION] ?: false
 
             if (!cameraGranted) {
-                Toast.makeText(this, "Camera permission is required to capture photos", Toast.LENGTH_SHORT).show()
+                Toast.makeText(
+                    this,
+                    "Camera permission is required to capture photos",
+                    Toast.LENGTH_SHORT
+                ).show()
             }
 
             if (!locationGranted) {
@@ -68,10 +64,21 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        val languageCode = LanguagePreference.getSavedLanguage(this)
+        updateLocale(this, languageCode)
+
         requestPermissions()
 
+
         setContent {
-            // Define your light color scheme
+            // Dynamically set the layout direction based on language preference
+            if (languageCode == "ar") {
+                // For Arabic, set the layout direction to RTL
+                window.decorView.layoutDirection = View.LAYOUT_DIRECTION_RTL
+            } else {
+                // For English (or other languages), set the layout direction to LTR
+                window.decorView.layoutDirection = View.LAYOUT_DIRECTION_LTR
+            }
             val lightColors = lightColorScheme(
                 primary = LightPrimary,
                 secondary = LightSecondary,
@@ -100,15 +107,40 @@ class MainActivity : ComponentActivity() {
         }
     }
 
+    // Function to handle language change
+    fun OnLanguageSelected(languageCode: String) {
+        // Save the new language to preferences
+        LanguagePreference.saveLanguage(this, languageCode)
 
+        // Update the locale and layout direction
+        updateLocale(this, languageCode)
+
+        // Dynamically set the layout direction based on selected language
+        if (languageCode == "ar") {
+            window.decorView.layoutDirection = View.LAYOUT_DIRECTION_RTL
+        } else {
+            window.decorView.layoutDirection = View.LAYOUT_DIRECTION_LTR
+        }
+
+        // Recreate activity to apply the changes
+        recreate()
+    }
     private fun requestPermissions() {
         val permissionsToRequest = mutableListOf<String>()
 
-        if (ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
+        if (ContextCompat.checkSelfPermission(
+                this,
+                Manifest.permission.CAMERA
+            ) != PackageManager.PERMISSION_GRANTED
+        ) {
             permissionsToRequest.add(Manifest.permission.CAMERA)
         }
 
-        if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+        if (ContextCompat.checkSelfPermission(
+                this,
+                Manifest.permission.ACCESS_FINE_LOCATION
+            ) != PackageManager.PERMISSION_GRANTED
+        ) {
             permissionsToRequest.add(Manifest.permission.ACCESS_FINE_LOCATION)
         }
 

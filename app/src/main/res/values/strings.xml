@@ -1,11 +1,155 @@
 <resources>
-    <string name="app_name">Capital_Taxi</string>
-    <string name="login">login</string>
-    <string name="SignUp">SignUp</string>
+    <!-- App Name -->
+    <string name="app_name">Capital Taxi</string>
 
+    <!-- Start Screen Texts -->
+    <string name="get_started">Let\'s Get Started</string>
+    <string name="get_started_button">Get Started</string>
+    <string name="introduction_image_description">Introduction image</string>
+
+    <!-- Select The Mode Screen -->
+    <string name="select_the_mode_title">Please Select: </string>
+    <string name="mode_instruction">You can switch to another mode later if you wish.</string>
+    <string name="captain_button">Captain</string>
+    <string name="passenger_button">Passenger</string>
+
+    <!-- Search for Location Screen -->
+    <string name="location_permission_message">We need to know your location, \nPlease allow us to access it</string>
+    <string name="access_location_button">Access My Location</string>
+
+    <!-- Language Selection Screen -->
+    <string name="select_language_title">Select Language</string>
+    <string name="english_language">English</string>
+    <string name="arabic_language">Arabic</string>
+
+    <!-- OTP Screen -->
+    <string name="otp_verification_title">OTP Verification</string>
+    <string name="otp_enter_message">Enter OTP sent to +0123456789</string>
+    <string name="resend_code_message">Resend code in %1$s seconds</string>
+    <string name="resend_code_now_message">Resend code now</string>
+    <string name="verify_now_button">Verify Now</string>
+
+    <!-- Phone Verification Screen -->
+    <string name="phone_verification_title">Join us via Phone</string>
+    <string name="phone_verification_message">We\'ll text a code to verify your phone</string>
+    <string name="phone_number_placeholder">Enter your phone number</string>
+    <string name="send_code_button">Send code</string>
+    <string name="otp_placeholder">Enter OTP sent to your phone</string>
+    <string name="verify_otp_button">Verify OTP</string>
+
+    <!-- Onboarding Page -->
+    <string name="onboarding_message1">on time,</string>
+    <string name="onboarding_message2">every time!</string>
+    <string name="continue_with_google">Continue With Google</string>
+    <string name="continue_with_phone">Continue With Phone</string>
+    <string name="log_in">Log in</string>
+
+    <!-- New Password Screen -->
+    <string name="new_password_title">Create New \n \nPassword</string>
+    <string name="new_password_message">This password should be different from previous password</string>
+    <string name="new_password_placeholder">Enter your new password</string>
+    <string name="save_button">Save</string>
+
+
+    <!-- Confirm Information Screen -->
+    <string name="confirm_information_title">Confirm your information</string>
+    <string name="name_label">Name</string>
+    <string name="email_label">Email</string>
+    <string name="phone_number_label">Phone Number</string>
+    <string name="enter_phone_number">Enter your phone number</string>
+    <string name="next_button">Next</string>
+
+
+    <!-- Voucher Screen -->
+    <string name="voucher_screen_title">Voucher</string>
+    <string name="voucher_promo_code_placeholder">Have a promo code? Enter it here</string>
+    <string name="no_vouchers_available">No Vouchers Available</string>
+
+    <!-- Trips History Screen -->
+    <string name="trips_history_screen_title">Trip History</string>
+    <string name="no_trip_history_available">No Trip History Available Now</string>
+
+
+    <!-- Settings Screen -->
+    <string name="settings_title">Settings</string>
+    <string name="home_title">Home</string>
+    <string name="add_work_title">Add Work</string>
+    <string name="communication_title">Communication</string>
+    <string name="saved_places_title">Saved Places</string>
+
+    <!-- Appearance -->
+    <string name="appearance_title">Appearance</string>
+    <string name="light_mode">Light Mode</string>
+    <string name="dark_mode">Dark Mode</string>
+
+    <string name="cancel_button">Cancel</string>
+
+
+    <!-- user register -->
+
+    <string name="sign_up">Sign Up</string>
+    <string name="create_user">Create a new User</string>
+    <string name="user_name">User Name</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="confirm_password">Confirm Password</string>
+    <string name="phone">Phone</string>
+    <string name="terms_conditions">I agree to terms&amp;conditions</string>
+    <string name="sign_up_with">Or sign up With</string>
+    <string name="google_logo_desc">Google Logo</string>
+    <string name="x_logo_desc">X Logo</string>
+    <string name="facebook_logo_desc">Facebook Logo</string>
+    <string name="already_have_account">Already have an account?</string>
+    <string name="signin">SignIn</string>
+    <string name="back">Back</string>
+    <string name="password_icon_desc">Password icon</string>
+    <string name="phone_icon_desc">Phone icon</string>
+    <string name="email_icon_desc">Email icon</string>
+    <string name="person_icon_desc">Person icon</string>
+    <string name="hide_password">Hide password</string>
+    <string name="show_password">Show password</string>
+    <string name="passenger_Mode">passenger Mode</string>
+
+
+
+
+    <!-- Profile Screen -->
+    <string name="profile_settings_title">Profile Settings</string>
+    <string name="first_name_label">First Name</string>
+    <string name="last_name_label">Last Name</string>
+
+    <string name="phone_label">Phone</string>
+
+
+    <!-- Payment Screen -->
+    <string name="payment_method_title">Payment Method</string>
+    <string name="choose_payment_method">Choose Payment Method</string>
+    <string name="add_new_method_button">+ Add New Method</string>
+    <string name="payment_method_click">Click</string>
+    <string name="payment_method_balance">Balance: 250,000 UZS</string>
+    <string name="payment_method_discount">Get 5% discount</string>
+    <string name="payment_method_cash">Cash</string>
+    <string name="payment_method_prepare_cash">Prepare your cash</string>
+    <string name="payment_method_credit_card">Credit Card</string>
+    <string name="payment_method_visa_mastercard">Visa or MasterCard</string>
+    <string name="payment_method_payme">Payme</string>
+    <string name="payment_method_paypal">Pay with your PayPal balance</string>
+
+
+    <!-- Notification Screen -->
+    <string name="notification_title">Notification</string>
+    <string name="no_notification_message">No Notification Available Now</string>
+
+
+
+    <!-- user Login -->
     <string name="Email_label">Email</string>
     <string name="Password_label">Password</string>
-    <string name="Dont_have_an_account"> Don\'t have an account?</string>
-    <string name="api_Key">AIzaSyArzERc9xBRprPePwc4uTopBW9WMBymX74</string>
+    <string name="ForgetPassword">Forget Password</string>
+    <string name="SignIn">Sign In</string>
+    <string name="OrSignInWith">Or sign in With</string>
+    <string name="Dont_have_an_account">Don\'t have an account?</string>
+    <string name="SignUp">Sign Up</string>
+    <string name="sign_in_with">Or sign in With</string>
 
 </resources>

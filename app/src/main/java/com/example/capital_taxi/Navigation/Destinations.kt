@@ -47,6 +47,8 @@ sealed class Destination(val route: String) {
     object SavedPlaces : Destination("SavedPlaces")
     object WorkPlace : Destination("WorkPlace")
     object HomePlace : Destination("HomePlace")
+    object LanguageDScreen : Destination("LanguageDScreen")
+
 
 
 

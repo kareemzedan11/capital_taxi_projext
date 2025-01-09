@@ -23,6 +23,7 @@ import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Path
 import androidx.compose.ui.graphics.drawscope.clipPath
 import androidx.compose.ui.res.colorResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import com.example.capital_taxi.Presentation.ui.Passengar.Screens.Login.Components.userLoginContent
 
@@ -38,7 +39,7 @@ fun UserLogin(navController: NavController) {
         topBar = {
             TopAppBar(
 
-                title = { Text("Passenger Mode",
+                title = { Text(   text = stringResource(R.string.passenger_Mode),
                     fontWeight = FontWeight.Bold, fontSize = 20.sp) },
                 navigationIcon = {
                     IconButton(onClick = { navController.popBackStack() }) {

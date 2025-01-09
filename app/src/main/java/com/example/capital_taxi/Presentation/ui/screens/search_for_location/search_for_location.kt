@@ -33,25 +33,28 @@ import androidx.core.content.ContextCompat
 import androidx.navigation.NavController
 import com.example.capital_taxi.Navigation.Destination
 import com.example.capital_taxi.R
+
+
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun searchForLocation(navController: NavController) {
+fun SearchForLocation(navController: NavController) {
     val context = LocalContext.current
 
-    // ActivityResultLauncher لطلب إذن الوصول للموقع
+    // ActivityResultLauncher for requesting location permission
     val permissionLauncher = rememberLauncherForActivityResult(
         contract = ActivityResultContracts.RequestPermission(),
         onResult = { isGranted ->
             if (isGranted) {
-                // إذا تم منح الإذن، قم بالتنقل إلى الشاشة الرئيسية
+                // If permission is granted, navigate to the home screen
                 navController.navigate(Destination.UserHomeScreen.route)
             } else {
-                // هنا، يمكنك إظهار رسالة للمستخدم أو عمل إجراء آخر إذا لم يتم منح الإذن
+                // Handle the case where permission is denied
+                // You can show a message or prompt for retry
             }
         }
     )
 
-    // تحقق من إذن الوصول للموقع قبل عرض الزر
+    // Check for location permission
     val locationPermission = ContextCompat.checkSelfPermission(
         context,
         Manifest.permission.ACCESS_FINE_LOCATION
@@ -108,7 +111,7 @@ fun searchForLocation(navController: NavController) {
                 Spacer(modifier = Modifier.height(16.dp))
 
                 Text(
-                    "We need to know your location , \n Please allow us to access it",
+                    text = "We need to know your location,\nPlease allow us to access it",
                     color = Color.Black,
                     fontSize = 24.sp,
                     fontWeight = FontWeight.Bold,
@@ -117,12 +120,13 @@ fun searchForLocation(navController: NavController) {
 
                 Spacer(modifier = Modifier.weight(1f))
 
-                // تحقق إذا كان الإذن قد تم منحه مسبقاً
+                // If location permission is already granted, navigate to the home screen
                 if (locationPermission == PackageManager.PERMISSION_GRANTED) {
-                    // إذا كان الإذن قد تم منحه مسبقاً، التنقل تلقائيًا
-                    navController.navigate(Destination.UserHomeScreen.route)
+                    LaunchedEffect(true) {
+                        navController.navigate(Destination.UserHomeScreen.route)
+                    }
                 } else {
-                    // إذا لم يتم منح الإذن، أطلب الإذن
+                    // Request permission if not granted
                     Button(
                         onClick = {
                             permissionLauncher.launch(Manifest.permission.ACCESS_FINE_LOCATION)

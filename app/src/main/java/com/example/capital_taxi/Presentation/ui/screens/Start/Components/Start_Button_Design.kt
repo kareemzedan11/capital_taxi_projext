@@ -25,6 +25,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -58,14 +59,14 @@ fun StartButtonDesign(navController: NavController) {
 
             ) {
                 Text(
-                    "Get Started",
+                    stringResource(R.string.get_started_button),
                     fontWeight = FontWeight.Bold,
                     fontSize = 18.sp,
                     color = Color.White
                 )
                 Spacer(modifier = Modifier.width(8.dp))
                 Icon(
-                    tint = Color.Black,
+                    tint = Color.White,
                     contentDescription = null,
                     painter = painterResource(R.drawable.baseline_arrow_right_alt_24)
                 )

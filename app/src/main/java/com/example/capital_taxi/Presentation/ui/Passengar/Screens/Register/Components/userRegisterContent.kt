@@ -48,6 +48,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
@@ -55,6 +56,7 @@ import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
+import com.example.capital_taxi.Helper.GoogleAuthentication
 import com.example.capital_taxi.R
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
@@ -144,118 +146,54 @@ fun userRegisterContent(
             .fillMaxWidth()
             .padding(16.dp)
             .verticalScroll(rememberScrollState()),
-        horizontalAlignment = Alignment.CenterHorizontally// This ensures scrolling when keyboard appears
+        horizontalAlignment = Alignment.CenterHorizontally
     ) {
         // Title
         Text(
-
-            text = "Sign Up",
+            text = stringResource(id = R.string.sign_up),
             fontSize = 32.sp,
             fontWeight = FontWeight.Bold,
             color = Color.Black,
             style = MaterialTheme.typography.headlineMedium
         )
         Spacer(modifier = Modifier.height(16.dp))
-        Text(
 
-            text = "Create a new User",
+        Text(
+            text = stringResource(id = R.string.create_user),
             fontSize = 24.sp,
             fontWeight = FontWeight.W500,
             color = Color.Black,
             style = MaterialTheme.typography.headlineMedium
         )
-        // First Name & Last Name Row
+
+        // User Name
         Spacer(modifier = Modifier.height(24.dp))
-
         OutlinedTextField(
-
             value = name,
             onValueChange = { name = it },
-            colors = TextFieldDefaults.outlinedTextFieldColors(
-                // Setting the container background color to #F2F2F2
-                containerColor = Color(0xFFF2F2F2), // Use the Color class to set the color
-                focusedBorderColor = Color.Gray,
-                unfocusedBorderColor = Color.Gray,
-
-                ),
-            shape = RoundedCornerShape(12.dp),
-            leadingIcon = {
-                Icon(
-                    imageVector = Icons.Default.Person,
-                    tint = colorResource(R.color.primary_color),
-
-                    contentDescription = "person icon",
-                    modifier = Modifier
-                        .clip(CircleShape)
-                        .size(20.dp)
-
-                )
-            },
-            label = { Text("User Name") },
-            modifier = Modifier
-
-                .fillMaxWidth(),
+            label = { Text(stringResource(id = R.string.user_name)) },
+            modifier = Modifier.fillMaxWidth(),
             keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Text)
         )
 
         Spacer(modifier = Modifier.height(24.dp))
 
-        // Email TextField
+        // Email
         OutlinedTextField(
             value = email1,
             onValueChange = { email1 = it },
-            colors = TextFieldDefaults.outlinedTextFieldColors(
-                // Setting the container background color to #F2F2F2
-                containerColor = Color(0xFFF2F2F2), // Use the Color class to set the color
-                focusedBorderColor = Color.Gray,
-                unfocusedBorderColor = Color.Gray,
-
-                ),
-            shape = RoundedCornerShape(12.dp),
-            leadingIcon = {
-                Icon(
-                    imageVector = Icons.Default.Email,
-                    tint = colorResource(R.color.primary_color),
-
-                    contentDescription = "Email icon",
-                    modifier = Modifier
-                        .clip(CircleShape)
-                        .size(20.dp)
-
-                )
-            },
-            label = { Text("Email") },
+            label = { Text(stringResource(id = R.string.email)) },
             modifier = Modifier.fillMaxWidth(),
             keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Email)
         )
 
         Spacer(modifier = Modifier.height(16.dp))
 
-        // Password TextField with trailing icon
+        // Password
         OutlinedTextField(
             value = password1,
             onValueChange = { password1 = it },
-            colors = TextFieldDefaults.outlinedTextFieldColors(
-                // Setting the container background color to #F2F2F2
-                containerColor = Color(0xFFF2F2F2), // Use the Color class to set the color
-                focusedBorderColor = Color.Gray,
-                unfocusedBorderColor = Color.Gray,
-
-                ),
-            shape = RoundedCornerShape(12.dp),
-            leadingIcon = {
-                Icon(
-                    imageVector = Icons.Default.Lock,
-                    tint = colorResource(R.color.primary_color),
-
-                    contentDescription = "passord icon",
-                    modifier = Modifier
-                        .clip(CircleShape)
-                        .size(20.dp)
-
-                )
-            },
-            label = { Text("Password") },
+            label = { Text(stringResource(id = R.string.password)) },
             modifier = Modifier.fillMaxWidth(),
             visualTransformation = if (passwordVisible1) VisualTransformation.None else PasswordVisualTransformation(),
             trailingIcon = {
@@ -264,7 +202,7 @@ fun userRegisterContent(
                         painter = painterResource(
                             if (passwordVisible1) R.drawable.baseline_visibility_24 else R.drawable.baseline_visibility_off_24
                         ),
-                        contentDescription = if (passwordVisible1) "Hide password" else "Show password"
+                        contentDescription = if (passwordVisible1) stringResource(id = R.string.hide_password) else stringResource(id = R.string.show_password)
                     )
                 }
             },
@@ -273,31 +211,11 @@ fun userRegisterContent(
 
         Spacer(modifier = Modifier.height(24.dp))
 
-        // Confirm Password TextField with trailing icon
+        // Confirm Password
         OutlinedTextField(
             value = Confirmpassword1,
             onValueChange = { Confirmpassword1 = it },
-            colors = TextFieldDefaults.outlinedTextFieldColors(
-                // Setting the container background color to #F2F2F2
-                containerColor = Color(0xFFF2F2F2), // Use the Color class to set the color
-                focusedBorderColor = Color.Gray,
-                unfocusedBorderColor = Color.Gray,
-
-                ),
-            shape = RoundedCornerShape(12.dp),
-            leadingIcon = {
-                Icon(
-                    imageVector = Icons.Default.Lock,
-                    tint = colorResource(R.color.primary_color),
-
-                    contentDescription = "password icon",
-                    modifier = Modifier
-                        .clip(CircleShape)
-                        .size(20.dp)
-
-                )
-            },
-            label = { Text("Confirm Password") },
+            label = { Text(stringResource(id = R.string.confirm_password)) },
             modifier = Modifier.fillMaxWidth(),
             visualTransformation = if (Confirmpasswordvisible1) VisualTransformation.None else PasswordVisualTransformation(),
             trailingIcon = {
@@ -306,7 +224,7 @@ fun userRegisterContent(
                         painter = painterResource(
                             if (Confirmpasswordvisible1) R.drawable.baseline_visibility_24 else R.drawable.baseline_visibility_off_24
                         ),
-                        contentDescription = if (Confirmpasswordvisible1) "Hide password" else "Show password"
+                        contentDescription = if (Confirmpasswordvisible1) stringResource(id = R.string.hide_password) else stringResource(id = R.string.show_password)
                     )
                 }
             },
@@ -315,97 +233,70 @@ fun userRegisterContent(
 
         Spacer(modifier = Modifier.height(24.dp))
 
-        // Phone TextField with trailing icon
+        // Phone Number
         OutlinedTextField(
             value = phone1,
             onValueChange = { phone1 = it },
-            colors = TextFieldDefaults.outlinedTextFieldColors(
-                // Setting the container background color to #F2F2F2
-                containerColor = Color(0xFFF2F2F2), // Use the Color class to set the color
-                focusedBorderColor = Color.Gray,
-                unfocusedBorderColor = Color.Gray,
-
-                ),
-            shape = RoundedCornerShape(12.dp),
-            leadingIcon = {
-                Icon(
-                    imageVector = Icons.Default.Phone,
-                    tint = colorResource(R.color.primary_color),
-                    contentDescription = "Phone icon",
-                    modifier = Modifier
-                        .clip(CircleShape)
-                        .size(20.dp)
-
-                )
-            },
-            label = { Text("Phone") },
+            label = { Text(stringResource(id = R.string.phone)) },
             modifier = Modifier.fillMaxWidth(),
-
             keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Phone)
         )
 
         Spacer(modifier = Modifier.height(24.dp))
 
+        // Checkbox and Terms & Conditions
         Row(
             modifier = Modifier.align(alignment = Alignment.Start),
-
-            verticalAlignment = Alignment.CenterVertically,
-            horizontalArrangement = Arrangement.Start
+            verticalAlignment = Alignment.CenterVertically
         ) {
             Checkbox(
-
                 checked = isChecked1,
                 onCheckedChange = { isChecked1 = it },
                 modifier = Modifier.padding(end = 8.dp)
             )
             Text(
-                text = "I agree to terms&conditions",
+                text = stringResource(id = R.string.terms_conditions),
                 fontSize = 16.sp,
-                modifier = Modifier.clickable {
-
-                }
+                modifier = Modifier.clickable {}
             )
         }
 
         Spacer(modifier = Modifier.height(24.dp))
+
+        // Sign Up Button
         Button(
             onClick = { /* Handle Sign Up */ },
-            modifier = Modifier
-                .fillMaxWidth()
-                .height(60.dp),
-            colors = ButtonDefaults.buttonColors(
-                containerColor = if (isChecked1) colorResource(R.color.primary_color) else Color.Gray // Change color based on checkbox state
-            ),
+            modifier = Modifier.fillMaxWidth().height(60.dp),
             enabled = isChecked1,
-            shape = RoundedCornerShape(8.dp)
+            shape = RoundedCornerShape(8.dp),
+            colors = ButtonDefaults.buttonColors(colorResource(R.color.primary_color)),
+
         ) {
             Text(
-                text = "Sign up",
+                text = stringResource(id = R.string.sign_up),
                 fontSize = 18.sp,
+
                 color = Color.Black
             )
         }
 
-
         Spacer(modifier = Modifier.height(60.dp))
 
-
         Text(
-            text = "Or sign up With",
+            text = stringResource(id = R.string.sign_up_with),
             color = Color.Black,
             fontSize = 18.sp,
             fontWeight = FontWeight.Bold
         )
 
         Spacer(modifier = Modifier.height(40.dp))
-
-        // Social Media Login Options
         Row {
 
             Box(
                 modifier = Modifier
                     .size(50.dp)
-                    .clickable {          val signInIntent = googleSignInClient.signInIntent
+                    .clickable {     // Launch the Google sign-in intent
+                        val signInIntent = googleSignInClient.signInIntent
                         signInLauncher.launch(signInIntent) }
                     .background(
                         colorResource(R.color.secondary_color),
@@ -421,6 +312,7 @@ fun userRegisterContent(
                     painter = painterResource(R.drawable.googleicon),
                     contentDescription = "Google Logo"
                 )
+
             }
 
             Spacer(Modifier.width(30.dp))
@@ -467,8 +359,10 @@ fun userRegisterContent(
                                 .size(30.dp)
                                 .clip(CircleShape),
                             painter = painterResource(R.drawable.facelogo),
-                            contentDescription = "Google Logo"
-                        )
+                            contentDescription = "Google Logo",
+
+
+                            )
                     }
 
 
@@ -479,22 +373,23 @@ fun userRegisterContent(
 
         Spacer(modifier = Modifier.height(60.dp))
 
-        // SignUp Text
+        // SignIn Text
         Row {
             Text(
-                text = "Already have an account ?",
+                text = stringResource(id = R.string.already_have_account),
                 fontSize = 18.sp,
             )
 
             Spacer(modifier = Modifier.width(4.dp))
 
             Text(
-                text = "SignIn",
-                color = Color(0xFF6200EE),
+                text = stringResource(id = R.string.signin),
+                color = colorResource(R.color.primary_color),
                 fontSize = 18.sp,
                 modifier = Modifier.clickable {
                     navController.popBackStack()
                 }
             )
         }
-    }}
+    }
+}

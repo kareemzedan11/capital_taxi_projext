@@ -24,6 +24,7 @@ import androidx.compose.ui.graphics.Path
 import androidx.compose.ui.graphics.drawscope.clipPath
 
 import androidx.compose.ui.res.colorResource
+import androidx.compose.ui.res.stringResource
 import com.example.capital_taxi.Presentation.ui.Passengar.Screens.Register.Components.userRegisterContent
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -53,7 +54,7 @@ fun UserRegister(navController: NavController) {
                         }
                     }
                 },
-                title = { Text("Passenger Mode", fontWeight = FontWeight.Bold, fontSize = 20.sp) },
+                title = { Text(stringResource(R.string.passenger_Mode), fontWeight = FontWeight.Bold, fontSize = 20.sp) },
                 colors = TopAppBarDefaults.topAppBarColors(containerColor = generalColor)
             )
         }

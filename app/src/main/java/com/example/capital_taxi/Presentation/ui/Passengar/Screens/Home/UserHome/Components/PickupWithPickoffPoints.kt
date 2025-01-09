@@ -152,7 +152,7 @@ fun PickupWithPickoffPoints(navController: NavController ) {
                 query = locationName,
                 onQueryChanged = { locationName = it },
                 onLocationSelected = { locationName = it },
-                apiKey = stringResource(id = R.string.api_Key)
+                apiKey = stringResource(id = R.string.SignUp)
             )
 
             // Divider with Add Button
@@ -199,7 +199,7 @@ fun PickupWithPickoffPoints(navController: NavController ) {
                 query = destinationPoint,
                 onQueryChanged = { destinationPoint = it },
                 onLocationSelected = { destinationPoint = it },
-                apiKey = stringResource(id = R.string.api_Key)
+                apiKey = stringResource(id = R.string.SignUp)
             )
         }
     }

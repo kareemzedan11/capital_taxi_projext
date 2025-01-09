@@ -1,6 +1,5 @@
 package com.example.capital_taxi.Presentation.ui.screens.Select_the_mode
 
-
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -16,25 +15,20 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.drawBehind
-import androidx.compose.ui.graphics.Brush
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.Path
-import androidx.compose.ui.graphics.SolidColor
-import androidx.compose.ui.graphics.drawOutline
+import androidx.compose.ui.graphics.*
 import androidx.compose.ui.graphics.drawscope.Fill
 import androidx.compose.ui.graphics.drawscope.clipPath
-
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.LayoutDirection
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.example.capital_taxi.Navigation.Destination
-
 import com.example.capital_taxi.R
 
 @Composable
@@ -42,11 +36,10 @@ fun SelectTheMode(navController: NavController) {
     Box(
         modifier = Modifier
             .fillMaxSize()
-            .background(colorResource(R.color.primary_color).copy(alpha = .3f)),
+            .background(colorResource(R.color.primary_color).copy(alpha = .3f))
+    ) {
 
-        ) {
-
-        val generalColor = colorResource(id = R.color.primary_color) // استدعاء اللون داخل دالة Composable
+        val generalColor = colorResource(id = R.color.primary_color)
 
         Box(
             modifier = Modifier
@@ -59,7 +52,6 @@ fun SelectTheMode(navController: NavController) {
                     shape = RoundedCornerShape(bottomStart = 222.dp)
                 )
                 .drawBehind {
-                    // رسم اللون داخل الـ border فقط باستخدام اللون من resources
                     val shape = RoundedCornerShape(bottomStart = 222.dp)
                     val path = shape.createOutline(size, LayoutDirection.Ltr, this)
 
@@ -80,20 +72,18 @@ fun SelectTheMode(navController: NavController) {
                 val width = size.width
                 val height = size.height
 
-                // Define the curved path
                 val path = Path().apply {
-                    moveTo(0f, height * 0.6f) // نقطة البداية (يسار منتصف السفلي)
+                    moveTo(0f, height * 0.6f)
                     cubicTo(
                         width * 0.3f, height * 0.8f,
                         width * 1f, height * 1f,
                         width, height * 1f
                     )
-                    lineTo(width, height) // الزاوية السفلية اليمنى (خط تأكيدي)
-                    lineTo(0f, height)    // الزاوية السفلية اليسرى
+                    lineTo(width, height)
+                    lineTo(0f, height)
                     close()
                 }
 
-                // Draw a gradient inside the path
                 clipPath(path) {
                     drawRect(
                         brush = Brush.verticalGradient(
@@ -109,18 +99,21 @@ fun SelectTheMode(navController: NavController) {
                 }
             }
 
-
-
             Column(
                 modifier = Modifier.padding(top = 80.dp, start = 20.dp),
                 verticalArrangement = Arrangement.Center
             ) {
                 Spacer(modifier = Modifier.weight(1f))
 
-                Text("Please Select: ", fontSize = 24.sp, fontWeight = FontWeight.Bold)
+                // Updated to use string resources
+                Text(
+                    text = stringResource(R.string.select_the_mode_title),
+                    fontSize = 24.sp,
+                    fontWeight = FontWeight.Bold
+                )
                 Spacer(modifier = Modifier.padding(top = 16.dp))
                 Text(
-                    "You can switch to another mode later if you wish.",
+                    text = stringResource(R.string.mode_instruction),
                     fontSize = 20.sp,
                     fontWeight = FontWeight.W600
                 )
@@ -130,18 +123,14 @@ fun SelectTheMode(navController: NavController) {
                     modifier = Modifier
                         .fillMaxWidth(.95f)
                         .padding(8.dp)
-
                         .border(2.dp, color = Color.Transparent, RoundedCornerShape(30.dp))
-                        .background(
-                            Color.White,
-                            RoundedCornerShape(30.dp)
-                        )
+                        .background(Color.White, RoundedCornerShape(30.dp))
                         .padding(6.dp),
                     colors = ButtonDefaults.buttonColors(containerColor = Color.White),
-                    onClick = {navController.navigate(Destination.FaceValidation.route)}
+                    onClick = { navController.navigate(Destination.FaceValidation.route) }
                 ) {
                     Text(
-                        text = "Captain",
+                        text = stringResource(R.string.captain_button),
                         fontWeight = FontWeight.Medium,
                         fontSize = 18.sp,
                         color = Color(0XFF111111)
@@ -153,35 +142,25 @@ fun SelectTheMode(navController: NavController) {
                     modifier = Modifier
                         .fillMaxWidth(.95f)
                         .padding(8.dp)
-
                         .border(2.dp, color = Color.Transparent, RoundedCornerShape(30.dp))
-                        .background(
-                            Color.White,
-                            RoundedCornerShape(30.dp)
-                        )
+                        .background(Color.White, RoundedCornerShape(30.dp))
                         .padding(6.dp),
                     colors = ButtonDefaults.buttonColors(containerColor = Color.White),
-                    onClick = {navController.navigate(Destination.UserHomeScreen.route)}
+                    onClick = { navController.navigate(Destination.UserHomeScreen.route) }
                 ) {
                     Text(
-                        text = "Passenger",
+                        text = stringResource(R.string.passenger_button),
                         fontWeight = FontWeight.Medium,
                         fontSize = 18.sp,
                         color = Color(0XFF111111)
                     )
                 }
 
-
-
-
                 Spacer(modifier = Modifier.weight(1f))
-
-
             }
 
         }
     }
-
 }
 
 @Composable

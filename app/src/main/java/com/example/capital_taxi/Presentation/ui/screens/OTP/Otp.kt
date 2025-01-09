@@ -29,6 +29,7 @@ import androidx.compose.ui.focus.focusRequester
 import androidx.compose.ui.focus.onFocusEvent
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.navigation.NavController
 import com.example.capital_taxi.Navigation.Destination
@@ -63,10 +64,9 @@ fun OtpScreen(navController: NavController) {
     Scaffold(
         topBar = {
             TopAppBar(
-
                 title = {
                     Text(
-                        "OTP Verification",
+                        stringResource(R.string.otp_verification_title),
                         fontWeight = FontWeight.Bold,
                         fontSize = 20.sp
                     )
@@ -75,7 +75,6 @@ fun OtpScreen(navController: NavController) {
                     IconButton(onClick = { navController.popBackStack() }) {
                         Box(
                             modifier = Modifier
-
                                 .size(36.dp)
                                 .background(Color.Transparent)
                                 .border(4.dp, color = Color.Black, RoundedCornerShape(30.dp)),
@@ -84,7 +83,7 @@ fun OtpScreen(navController: NavController) {
                             Icon(
                                 modifier = Modifier.size(26.dp),
                                 painter = painterResource(id = R.drawable.baseline_arrow_back_ios_new_24),
-                                contentDescription = "Back",
+                                contentDescription = stringResource(R.string.back),
                                 tint = Color.Black
                             )
                         }
@@ -106,24 +105,24 @@ fun OtpScreen(navController: NavController) {
                 verticalArrangement = Arrangement.Top
             ) {
                 Image(
-
                     modifier = Modifier
                         .size(200.dp)
                         .clip(CircleShape),
-                    painter = painterResource(R.drawable.otp), contentDescription = null
+                    painter = painterResource(R.drawable.otp),
+                    contentDescription = null
                 )
 
                 Spacer(modifier = Modifier.height(60.dp))
 
                 Text(
-                    text = "OTP",
+                    text = stringResource(R.string.otp_verification_title),
                     fontSize = 32.sp,
                     fontWeight = FontWeight.Bold
                 )
 
                 Spacer(modifier = Modifier.height(16.dp))
                 Text(
-                    text = "Enter OTP sent to +0123456789",
+                    text = stringResource(R.string.otp_placeholder),
                     fontSize = 18.sp,
                     color = Color(0XFFF2F2F2),
                     fontWeight = FontWeight.Bold
@@ -143,13 +142,10 @@ fun OtpScreen(navController: NavController) {
                     modifier = Modifier
                         .fillMaxHeight(.6f)
                         .fillMaxWidth()
-
-
                         .clip(RoundedCornerShape(topStart = 100.dp))
                         .background(Color.White),
                 ) {
                     Column(horizontalAlignment = Alignment.CenterHorizontally) {
-
 
                         Spacer(modifier = Modifier.height(60.dp))
                         // OTP Input Boxes
@@ -183,15 +179,11 @@ fun OtpScreen(navController: NavController) {
 
                         Text(
                             textDecoration = TextDecoration.Underline,
-                            text = if (timer > 0) "Resend code in $timer seconds" else "Resend code now",
+                            text = if (timer > 0) stringResource(R.string.resend_code_message, timer) else stringResource(R.string.resend_code_now_message),
                             style = MaterialTheme.typography.bodyMedium
                         )
 
-
-
-
                         Spacer(modifier = Modifier.height(16.dp))
-
 
                         // Linear Progress Indicator
                         LinearProgressIndicator(
@@ -199,36 +191,31 @@ fun OtpScreen(navController: NavController) {
                             modifier = Modifier
                                 .fillMaxWidth()
                                 .padding(horizontal = 32.dp),
-                            color = colorResource(R .color.primary_color)
+                            color = colorResource(R.color.primary_color)
                         )
 
                         Spacer(modifier = Modifier.weight(1f))
-
 
                         Button(
                             onClick = { navController.navigate(Destination.SelectTheMode.route) },
                             modifier = Modifier
                                 .fillMaxWidth()
                                 .padding(horizontal = 20.dp)
-
-
                                 .height(60.dp),
                             colors = ButtonDefaults.buttonColors(colorResource(R.color.primary_color)),
                             shape = RoundedCornerShape(8.dp)
 
                         ) {
                             Text(
-                                text = "Verify Now",
+                                text = stringResource(R.string.verify_now_button),
                                 fontSize = 18.sp,
                                 color = Color.Black
                             )
                         }
                         Spacer(modifier = Modifier.weight(1f))
                     }
-
                 }
             }
-
         }
     }
 }
@@ -240,7 +227,7 @@ fun OtpInputBox(
     modifier: Modifier = Modifier
 ) {
     OutlinedTextField(
-        colors =OutlinedTextFieldDefaults.colors(focusedBorderColor = colorResource(R.color.primary_color), cursorColor = colorResource(R.color.primary_color)),
+        colors = OutlinedTextFieldDefaults.colors(focusedBorderColor = colorResource(R.color.primary_color), cursorColor = colorResource(R.color.primary_color)),
         value = value,
         onValueChange = { newValue ->
             // Allow only digits and a single character

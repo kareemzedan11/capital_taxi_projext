@@ -13,6 +13,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.unit.dp
@@ -26,7 +27,6 @@ import com.google.firebase.auth.*
 import com.google.firebase.auth.PhoneAuthProvider.OnVerificationStateChangedCallbacks
 import com.hbb20.CountryCodePicker
 import java.util.concurrent.TimeUnit
-
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -100,18 +100,21 @@ fun PhoneVerification(navController: NavController) {
             )
         }
     ) { paddingValues ->
-        Box(modifier = Modifier
-            .fillMaxSize()
-            .padding(paddingValues)) {
+        Box(
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(paddingValues)
+        ) {
             Column(modifier = Modifier.padding(16.dp)) {
                 Text(
-                    "Join us via Phone",
+                    stringResource(R.string.phone_verification_title),
                     fontWeight = FontWeight.W900,
                     fontSize = 24.sp,
                     modifier = Modifier.padding(bottom = 8.dp)
                 )
                 Text(
-                    "We'll text a code to verify your phone",
+                    stringResource(R.string.phone_verification_message),
+
                     fontWeight = FontWeight.W600,
                     fontSize = 18.sp,
                     modifier = Modifier.padding(bottom = 20.dp)
@@ -131,7 +134,11 @@ fun PhoneVerification(navController: NavController) {
                     OutlinedTextField(
                         value = phoneNumber,
                         onValueChange = { phoneNumber = it.trim() },
-                        label = { Text("Phone Number") },
+                        label = {
+                            Text(
+                                stringResource(R.string.phone_number_label),
+                            )
+                        },
                         placeholder = { Text("Enter your phone number") },
                         modifier = Modifier
                             .weight(1f)
@@ -153,7 +160,8 @@ fun PhoneVerification(navController: NavController) {
 
                 ) {
                     Text(
-                        text = "Send code",
+                        text = stringResource(R.string.send_code_button),
+
                         fontSize = 18.sp,
                         color = Color.Black
                     )
@@ -193,6 +201,7 @@ fun PhoneVerification(navController: NavController) {
         }
     }
 }
+
 @Composable
 fun CountryCodePickerView(onCountrySelected: (String) -> Unit) {
     AndroidView(factory = { context ->

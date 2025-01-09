@@ -23,6 +23,7 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -37,6 +38,8 @@ import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.tasks.Task
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.GoogleAuthProvider
+
+
 
 @Composable
 fun OnboardingPager(navController: NavController, onSignInClick: () -> Unit) {
@@ -138,12 +141,15 @@ fun OnboardingPager(navController: NavController, onSignInClick: () -> Unit) {
                         verticalAlignment = Alignment.CenterVertically
                     ) {
                         Text(
-                            "on time,",
+                            stringResource(R.string.onboarding_message1),
                             fontSize = 20.sp,
                             color = Color.Black,
                             fontWeight = FontWeight.Bold
                         )
-                        Text("every time!", fontSize = 20.sp, color = Color.Black)
+                        Text(
+                            stringResource(R.string.onboarding_message2),
+                            fontSize = 20.sp, color = Color.Black
+                        )
 
                     }
                 }
@@ -175,18 +181,21 @@ fun OnboardingPager(navController: NavController, onSignInClick: () -> Unit) {
                             signInLauncher.launch(signInIntent)
                         },
                         navController,
-                        "Continue With Google",
+                        stringResource(R.string.continue_with_google),
+
                         color = true,
                         image = R.drawable.googleicon
                     )
                     SignInButton(
                         onSignInClick = { navController.navigate(Destination.PhoneVerification.route) },
-                        navController, "Continue With Phone", R.drawable.phone2
+                        navController, stringResource(R.string.continue_with_phone),
+                        R.drawable.phone2
                     )
 
                     Text(
 
-                        "Log in",
+                        stringResource(R.string.log_in),
+
                         fontSize = 20.sp,
                         fontWeight = FontWeight.W500,
                         color = Color(0XFF987200),

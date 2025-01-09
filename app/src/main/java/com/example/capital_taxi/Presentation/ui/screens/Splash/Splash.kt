@@ -14,8 +14,10 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.platform.LocalConfiguration
+import androidx.compose.ui.platform.LocalLayoutDirection
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.unit.LayoutDirection
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.times
 import androidx.navigation.NavHostController
@@ -26,6 +28,9 @@ import kotlinx.coroutines.delay
 fun SplashScreen(navController: NavHostController) {
     var progress by remember { mutableStateOf(0f) }
     val screenWidth = LocalConfiguration.current.screenWidthDp.dp
+
+    // Detect the current layout direction (LTR or RTL)
+    val layoutDirection = LocalLayoutDirection.current
 
     // Animate logo size with scale based on progress
     val logoScale by animateFloatAsState(
@@ -69,7 +74,6 @@ fun SplashScreen(navController: NavHostController) {
             verticalArrangement = Arrangement.Center
         ) {
             Spacer(modifier = Modifier.weight(1f))
-
 
             Icon(
                 modifier = Modifier
@@ -115,9 +119,17 @@ fun SplashScreen(navController: NavHostController) {
                         )
                     )
 
-                    // Car Icon
+                    // Change car icon based on layout direction (RTL or LTR)
+                    val carIcon = if (layoutDirection == LayoutDirection.Rtl) {
+                        // Use a different icon for RTL (Arabic)
+                        R.drawable.ar_car
+                    } else {
+                        // Use the default car icon for LTR (English)
+                        R.drawable.splashcar
+                    }
+
                     Icon(
-                        painter = painterResource(R.drawable.splashcar),
+                        painter = painterResource(carIcon),
                         contentDescription = "Car Icon",
                         tint = Color.Black,
                         modifier = Modifier

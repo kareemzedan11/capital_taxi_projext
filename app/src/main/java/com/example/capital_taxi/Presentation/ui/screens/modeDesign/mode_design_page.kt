@@ -29,6 +29,7 @@ import androidx.compose.ui.graphics.drawOutline
 import androidx.compose.ui.graphics.drawscope.Fill
 import androidx.compose.ui.graphics.drawscope.clipPath
 import androidx.compose.ui.res.colorResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.LayoutDirection
 import androidx.compose.ui.unit.dp
@@ -46,7 +47,8 @@ fun modeDesign(navController: NavController) {
 
         ) {
 
-        val generalColor = colorResource(id = R.color.primary_color) // استدعاء اللون داخل دالة Composable
+        val generalColor =
+            colorResource(id = R.color.primary_color) // استدعاء اللون داخل دالة Composable
 
         Box(
             modifier = Modifier
@@ -117,10 +119,14 @@ fun modeDesign(navController: NavController) {
             ) {
                 Spacer(modifier = Modifier.weight(1f))
 
-                Text("Please Select: ", fontSize = 24.sp, fontWeight = FontWeight.Bold)
+                Text(
+                    stringResource(R.string.select_the_mode_title),
+                    fontSize = 24.sp,
+                    fontWeight = FontWeight.Bold
+                )
                 Spacer(modifier = Modifier.padding(top = 16.dp))
                 Text(
-                    "You can switch to another mode later if you wish.",
+                    stringResource(R.string.mode_instruction),
                     fontSize = 20.sp,
                     fontWeight = FontWeight.W600
                 )
@@ -138,10 +144,10 @@ fun modeDesign(navController: NavController) {
                         )
                         .padding(6.dp),
                     colors = ButtonDefaults.buttonColors(containerColor = Color.White),
-                    onClick = {navController.navigate(Destination.driverLogin.route)}
+                    onClick = { navController.navigate(Destination.driverLogin.route) }
                 ) {
                     Text(
-                        text = "Captain",
+                        text = stringResource(R.string.captain_button),
                         fontWeight = FontWeight.Medium,
                         fontSize = 18.sp,
                         color = Color(0XFF111111)
@@ -161,10 +167,10 @@ fun modeDesign(navController: NavController) {
                         )
                         .padding(6.dp),
                     colors = ButtonDefaults.buttonColors(containerColor = Color.White),
-                    onClick = {navController.navigate(Destination.UserLogin.route)}
+                    onClick = { navController.navigate(Destination.UserLogin.route) }
                 ) {
                     Text(
-                        text = "Passenger",
+                        text = stringResource(R.string.passenger_button),
                         fontWeight = FontWeight.Medium,
                         fontSize = 18.sp,
                         color = Color(0XFF111111)

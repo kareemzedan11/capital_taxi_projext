@@ -161,7 +161,7 @@ fun userLoginContent(
 
 
         Text(
-            text = "Sign In",
+            text = stringResource(R.string.signin),
             fontSize = 32.sp,
             fontWeight = FontWeight.Bold,
             color = Color.Black,
@@ -245,7 +245,7 @@ fun userLoginContent(
         Spacer(modifier = Modifier.height(16.dp))
         Text(
             textDecoration = TextDecoration.Underline,
-            text = "Forget Password",
+            text = stringResource(R.string.ForgetPassword),
             modifier = Modifier
                 .align(alignment = Alignment.End)
                 .clickable { navController.navigate(Destination.NewPasswordScreen.route) },
@@ -278,7 +278,7 @@ fun userLoginContent(
 
         ) {
             Text(
-                text = "Sign In",
+                text = stringResource(R.string.signin),
                 fontSize = 18.sp,
                 color = Color.Black
 
@@ -291,7 +291,7 @@ fun userLoginContent(
 
 
         Text(
-            text = "Or sign in With",
+            text = stringResource(R.string.sign_in_with),
             color = Color.Black,
             fontSize = 18.sp,
             fontWeight = FontWeight.Bold
@@ -396,7 +396,7 @@ fun userLoginContent(
 
             Text(
                 text = stringResource(id = R.string.SignUp),
-                color = Color(0xFF6200EE),
+               color =  colorResource(R.color.primary_color),
                 fontSize = 18.sp,
                 modifier = Modifier.clickable {
                     navController.navigate(Destination.UserRegister.route)
