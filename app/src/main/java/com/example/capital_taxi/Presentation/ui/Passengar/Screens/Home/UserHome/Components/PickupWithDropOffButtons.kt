@@ -42,6 +42,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -76,7 +77,7 @@ fun PickupWithDropOffButtons(navController: NavController, locationName: String?
         horizontalAlignment = Alignment.Start
     ) {
         androidx.compose.material3.Text(
-            text = "Where are you going today?",
+            text = stringResource(R.string.Where_are_you_going_today),
             style = MaterialTheme.typography.titleLarge.copy(
                 fontWeight = FontWeight.Bold,
                 fontSize = 22.sp,
@@ -90,7 +91,7 @@ fun PickupWithDropOffButtons(navController: NavController, locationName: String?
         // Use locationName if available
         PickupDropOffRow(
             iconRes = R.drawable.circle,
-            text = locationName ?: "Select Pickup Location", // Display the location name or default text
+            text = locationName ?: stringResource(R.string.Select_Pickup_Location), // Display the location name or default text
             onClick = { showBottomSheet = true }
         )
 
@@ -107,7 +108,7 @@ fun PickupWithDropOffButtons(navController: NavController, locationName: String?
         // Drop-Off Location Row
         PickupDropOffRow(
             iconRes = R.drawable.travel,
-            text = "Select Drop-Off Location",
+            text = stringResource(R.string.Select_Drop_Off_Location),
             onClick = { showBottomSheet = true }
         )
 

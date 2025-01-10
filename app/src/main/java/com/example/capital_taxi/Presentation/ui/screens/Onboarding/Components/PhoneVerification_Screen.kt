@@ -139,7 +139,7 @@ fun PhoneVerification(navController: NavController) {
                                 stringResource(R.string.phone_number_label),
                             )
                         },
-                        placeholder = { Text("Enter your phone number") },
+                        placeholder = { Text(stringResource(R.string.phone_number_placeholder)) },
                         modifier = Modifier
                             .weight(1f)
                             .background(Color.White.copy(alpha = .2f)),

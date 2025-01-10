@@ -1,5 +1,7 @@
+import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Context
+import android.content.Intent
 import android.content.res.Configuration
 import android.view.View
 import androidx.compose.foundation.background
@@ -52,6 +54,7 @@ import com.example.capital_taxi.Presentation.ui.screens.Language.components.Lang
 import kotlinx.coroutines.delay
 import java.util.*
 
+@SuppressLint("SuspiciousIndentation")
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun LanguageDScreen(
@@ -59,6 +62,7 @@ fun LanguageDScreen(
     onLanguageSelected: (String) -> Unit,
     context: Context
 ) {
+
     val generalColor = colorResource(id = R.color.primary_color)
     val secondColor = colorResource(id = R.color.secondary_color)
 
@@ -68,90 +72,90 @@ fun LanguageDScreen(
         rememberUpdatedState(selectedLanguage)  // Remember current selected language
 
 
-        Scaffold(
-            topBar = {
-                TopAppBar(
-                    navigationIcon = {
-                        IconButton(onClick = { navController.popBackStack() }) {
-                            Box(
-                                modifier = Modifier
-                                    .size(36.dp)
-                                    .background(Color.Transparent)
-                                    .border(4.dp, color = Color.Black, RoundedCornerShape(30.dp)),
-                                contentAlignment = Alignment.Center
-                            ) {
-                                Icon(
-                                    modifier = Modifier.size(26.dp),
-                                    painter = painterResource(id = R.drawable.baseline_arrow_back_ios_new_24),
-                                    contentDescription = "Back",
-                                    tint = Color.Black
-                                )
-                            }
+    Scaffold(
+        topBar = {
+            TopAppBar(
+                navigationIcon = {
+                    IconButton(onClick = { navController.popBackStack() }) {
+                        Box(
+                            modifier = Modifier
+                                .size(36.dp)
+                                .background(Color.Transparent)
+                                .border(4.dp, color = Color.Black, RoundedCornerShape(30.dp)),
+                            contentAlignment = Alignment.Center
+                        ) {
+                            Icon(
+                                modifier = Modifier.size(26.dp),
+                                painter = painterResource(id = R.drawable.baseline_arrow_back_ios_new_24),
+                                contentDescription = "Back",
+                                tint = Color.Black
+                            )
                         }
-                    },
-                    title = {
-                        Text(
-                            "Select Language",
-                            fontWeight = FontWeight.Bold,
-                            fontSize = 20.sp
-                        )
-                    },
-                    colors = TopAppBarDefaults.topAppBarColors(containerColor = generalColor)
-                )
-            }
-        ) { innerPadding ->
+                    }
+                },
+                title = {
+                    Text(
+                        "Select Language",
+                        fontWeight = FontWeight.Bold,
+                        fontSize = 20.sp
+                    )
+                },
+                colors = TopAppBarDefaults.topAppBarColors(containerColor = generalColor)
+            )
+        }
+    ) { innerPadding ->
 
-            Box(
+        Box(
+            modifier = Modifier
+                .fillMaxSize()
+                .background(Color.White)
+                .padding(innerPadding)
+                .imePadding()
+        ) {
+            Column(
                 modifier = Modifier
                     .fillMaxSize()
-                    .background(Color.White)
-                    .padding(innerPadding)
-                    .imePadding()
+                    .padding(top = 16.dp),
+                verticalArrangement = Arrangement.Top,
+                horizontalAlignment = Alignment.CenterHorizontally
             ) {
-                Column(
-                    modifier = Modifier
-                        .fillMaxSize()
-                        .padding(top = 16.dp),
-                    verticalArrangement = Arrangement.Top,
-                    horizontalAlignment = Alignment.CenterHorizontally
-                ) {
-                    LanguageButton(
-                        language = "English",
-                        color = secondColor,
-                        painter = R.drawable.us,
-                        check = if (selectedLanguage == "en") R.drawable.baseline_check_circle_outline_24 else R.drawable.baseline_radio_button_unchecked_24,
-                        isSelected = selectedLanguage == "en",
-                        isLoading = isLoading,
-                        onClick = {
-                            onLanguageSelected("en")
-                            isLoading = true
-                            selectedLanguage = "en"
-                            LanguagePreference.saveLanguage(context, "en")
-                            updateLocale(context, "en")
-                            onLanguageSelected("en")
-                        }
-                    )
+                LanguageButton(
+                    language = "English",
+                    color = secondColor,
+                    painter = R.drawable.us,
+                    check = if (selectedLanguage == "en") R.drawable.baseline_check_circle_outline_24 else R.drawable.baseline_radio_button_unchecked_24,
+                    isSelected = selectedLanguage == "en",
+                    isLoading = isLoading,
+                    onClick = {
+                        onLanguageSelected("en")
+                        isLoading = true
+                        selectedLanguage = "en"
+                        LanguagePreference.saveLanguage(context, "en")
+                        updateLocale(context, "en")
+                        onLanguageSelected("en")
+                    }
+                )
 
-                    LanguageButton(
-                        language = "Arabic",
-                        color = secondColor,
-                        painter = R.drawable.egypt,
-                        check = if (selectedLanguage == "ar") R.drawable.baseline_check_circle_outline_24 else R.drawable.baseline_radio_button_unchecked_24,
-                        isSelected = selectedLanguage == "ar",
-                        isLoading = isLoading,
-                        onClick = {
-                            onLanguageSelected("ar")
-                            isLoading = true
-                            selectedLanguage = "ar"
-                            LanguagePreference.saveLanguage(context, "ar")
-                            updateLocale(context, "ar")
+                LanguageButton(
+                    language = "Arabic",
+                    color = secondColor,
+                    painter = R.drawable.egypt,
+                    check = if (selectedLanguage == "ar") R.drawable.baseline_check_circle_outline_24 else R.drawable.baseline_radio_button_unchecked_24,
+                    isSelected = selectedLanguage == "ar",
+                    isLoading = isLoading,
+                    onClick = {
+                        onLanguageSelected("ar")
+                        isLoading = true
+                        selectedLanguage = "ar"
+                        LanguagePreference.saveLanguage(context, "ar")
+                        updateLocale(context, "ar")
 
 
-                        }
-                    )
-                }
+                    }
+                )
             }
         }
+    }
 
 
     // Force UI recomposition when language changes
@@ -176,22 +180,25 @@ fun updateLocale(context: Context, languageCode: String) {
 
     val config = context.resources.configuration
     config.setLocale(locale)
-    if (Locale.getDefault().language.equals("ar"))
-        View.LAYOUT_DIRECTION_RTL else View.LAYOUT_DIRECTION_LTR
+
     if (languageCode == "ar") {
-        config.setLayoutDirection(Locale("ar"))
 
         config.setLayoutDirection(Locale("ar"))
+        View.LAYOUT_DIRECTION_RTL
+        println("View is View.LAYOUT_DIRECTION_RTL ${View.LAYOUT_DIRECTION_RTL}")
     } else {
         config.setLayoutDirection(Locale("en"))
-        config.setLayoutDirection(Locale("en"))
-
-        config.layoutDirection
+        View.LAYOUT_DIRECTION_LTR
+        println("View is View.LAYOUT_DIRECTION_LTR ${View.LAYOUT_DIRECTION_LTR}")
     }
 
-    // Update the configuration for the context
+    // Update configuration
     context.resources.updateConfiguration(config, context.resources.displayMetrics)
+
+
 }
+
+
 
 @Composable
 fun LanguageButton(
@@ -200,7 +207,7 @@ fun LanguageButton(
     painter: Int,
     check: Int,
     isSelected: Boolean,
-    isLoading: Boolean,  // Added loading state
+    isLoading: Boolean,
     onClick: () -> Unit,
 ) {
     Card(elevation = CardDefaults.elevatedCardElevation(10.dp)) {

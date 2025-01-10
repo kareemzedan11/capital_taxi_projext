@@ -111,8 +111,6 @@
     <string name="passenger_Mode">passenger Mode</string>
 
 
-
-
     <!-- Profile Screen -->
     <string name="profile_settings_title">Profile Settings</string>
     <string name="first_name_label">First Name</string>
@@ -134,12 +132,17 @@
     <string name="payment_method_visa_mastercard">Visa or MasterCard</string>
     <string name="payment_method_payme">Payme</string>
     <string name="payment_method_paypal">Pay with your PayPal balance</string>
-
+    <string name="Balance_250000_UZS">Balance: 250,000 UZS</string>
+    <string name="Get_5_percent_discount">Get 5% discount</string>
+    <string name="Prepare_your_cash">Prepare your cash</string>
+    <string name="Get_7_percent_discount">Get 7% discount</string>
+    <string name="Visa_or_MasterCard">Visa or MasterCard</string>
+    <string name="Pay_with_your_PayPal_balance">Pay with your PayPal balance</string>
+    <string name="Get_3_percent_discount">Get 3% discount</string>
 
     <!-- Notification Screen -->
     <string name="notification_title">Notification</string>
     <string name="no_notification_message">No Notification Available Now</string>
-
 
 
     <!-- user Login -->
@@ -151,5 +154,124 @@
     <string name="Dont_have_an_account">Don\'t have an account?</string>
     <string name="SignUp">Sign Up</string>
     <string name="sign_in_with">Or sign in With</string>
+
+
+    <!-- user HomeScreen -->
+    <string name="Find_a_driver">Find a driver</string>
+    <string name="Payment_method">Payment method</string>
+    <string name="Cash">Cash</string>
+    <string name="Click">Click</string>
+
+    <string name="Credit_card">Credit card</string>
+    <string name="Payme">Payme</string>
+    <string name="Paypal">Paypal</string>
+    <string name="Trip_History">Trip History</string>
+    <string name="Payment">Payment</string>
+    <string name="Coupons">Coupons</string>
+    <string name="Notifications">Notifications</string>
+    <string name="Safety">Safety</string>
+    <string name="Settings">Settings</string>
+    <string name="Help">Help</string>
+    <string name="Support">Support</string>
+    <string name="Invite_Friends">Invite Friends</string>
+
+    <string name="No_Trip_Message">No Trip History Available Now</string>
+    <string name="No_Notification_Message">No Notification Available Now</string>
+    <string name="No_Vouchers_Message">No Vouchers Available</string>
+
+    <string name="promo_code_placeholder">Have a promo code? Enter it here</string>
+
+
+    <string name="Account_Settings">Account Settings</string>
+    <string name="Home">Home</string>
+    <string name="Add_Work">Add Work</string>
+    <string name="Communication">Communication</string>
+
+    <string name="Saved_Places">Saved Places</string>
+    <string name="Appearance">Appearance</string>
+    <string name="Language">Language</string>
+
+    <string name="Preferences">Preferences</string>
+    <string name="Two_Factor_Authentication">Two Factor Authentication</string>
+    <string name="Privacy">Privacy Settings</string>
+    <string name="Security_Notifications">Security Notifications</string>
+    <string name="Emergency">Emergency Contact</string>
+
+    <string name="Logout">Log Out</string>
+    <string name="Delete_Account">Delete Account</string>
+
+    <string name="Become_driver">Become a driver</string>
+
+
+
+
+    <!-- General UI Texts -->
+    <string name="Trips">Trips</string>
+    <string name="Payment_and_Billing">Payment and Billing</string>
+    <string name="Ride_Safety">Ride Safety</string>
+    <string name="Account">Account</string>
+    <string name="Rate_and_Feedback">Rate and Feedback</string>
+    <string name="Was_this_helpful">Was this helpful?</string>
+    <string name="Yes">Yes</string>
+    <string name="No">No</string>
+
+    <!-- Help Section Titles for Trips -->
+    <string name="Trip_Routes_and_Navigation">Trip Routes and Navigation</string>
+    <string name="Trip_Scheduling_and_Cancellations">Trip Scheduling and Cancellations</string>
+    <string name="Trip_Fare_Estimation">Trip Fare Estimation</string>
+    <string name="Trip_Issues_and_Disputes">Trip Issues and Disputes</string>
+    <string name="Tracking_Your_Trip">Tracking Your Trip</string>
+    <string name="Ride_Comfort_and_Preferences">Ride Comfort and Preferences</string>
+    <string name="Safety_During_Trips">Safety During Trips</string>
+    <string name="What_to_Do_if_Your_Driver_is_Lost">What to Do if Your Driver is Lost</string>
+
+    <!-- Help Section Titles for Payment -->
+    <string name="How_to_Add_a_Payment_Method">How to Add a Payment Method</string>
+    <string name="How_to_Remove_a_Payment_Method">How to Remove a Payment Method</string>
+    <string name="How_to_Update_Your_Payment_Details">How to Update Your Payment Details</string>
+    <string name="Checking_Your_Payment_History">Checking Your Payment History</string>
+    <string name="Understanding_Payment_Receipts">Understanding Payment Receipts</string>
+    <string name="What_to_Do_If_Your_Payment_Fails">What to Do If Your Payment Fails</string>
+    <string name="Payment_Refunds_and_Disputes">Payment Refunds and Disputes</string>
+
+    <!-- Help Section Titles for Ride Safety -->
+    <string name="In_Ride_Safety">In-Ride Safety</string>
+    <string name="Accident_Reporting">Accident Reporting</string>
+    <string name="Lost_Items">Lost Items</string>
+    <string name="Safety_Measures_and_Policies">Safety Measures and Policies</string>
+    <string name="Data_Privacy_and_Security">Data Privacy and Security</string>
+
+    <!-- Help Section Titles for Account -->
+    <string name="Updating_Personal_Information">Updating Personal Information</string>
+    <string name="Password_Management">Password Management</string>
+    <string name="Notification_Preferences">Notification Preferences</string>
+    <string name="Linked_Accounts">Linked Accounts</string>
+    <string name="Language_and_Region_Settings">Language and Region Settings</string>
+    <string name="Account_Deactivation_or_Deletion">Account Deactivation or Deletion</string>
+
+    <!-- Help Section Titles for Rate and Feedback -->
+    <string name="How_to_Rate_Your_Ride">How to Rate Your Ride</string>
+    <string name="Leaving_Comments">Leaving Comments</string>
+    <string name="Driver_Compliments">Driver Compliments</string>
+    <string name="Reporting_Issues">Reporting Issues</string>
+    <string name="Anonymous_Feedback">Anonymous Feedback</string>
+    <string name="Customer_Support_Follow_Up">Customer Support Follow-Up</string>
+
+    <string name="Content_coming_soon">Content coming soon</string>
+
+    <string name="Details_about">Details about</string>
+
+    <string name="How_can_we_help_you">How can we help you?</string>
+    <string name="Select_Topic">Select a topic to learn more : </string>
+
+    <string name="search_for_Topics">Search for topics</string>">
+
+    <string name="Welcome_to_chatbot">Welcome to our chatbot! Feel free to ask anything.</string>
+    <string name="Lets_Chat">Let\'s Chat</string>
+
+
+    <string name="Where_are_you_going_today">Where are you going today?</string>">
+    <string name="Select_Drop_Off_Location">Select Drop Off Location</string>
+    <string name="Select_Pickup_Location">Select Pickup Location</string>
 
 </resources>

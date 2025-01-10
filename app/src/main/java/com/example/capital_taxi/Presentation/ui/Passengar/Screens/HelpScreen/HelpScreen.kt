@@ -24,6 +24,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.colorResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -44,7 +45,8 @@ fun HelpScreen(navController: NavController) {
             TopAppBar(
                 title = {
                     Text(
-                        text = "Help",
+                        text = stringResource(R.string.Help),
+
                         fontWeight = FontWeight.Bold,
                         fontSize = 20.sp,
                         color = Color.Black
@@ -92,7 +94,8 @@ fun HelpScreen(navController: NavController) {
 
                Text(
                    modifier = Modifier.padding(start = 5.dp),
-                   text = "How can we help you?",
+                   text = stringResource(R.string.How_can_we_help_you),
+
                    fontWeight = FontWeight.Medium,
                    fontSize = 18.sp,
                    color = Color.Black
@@ -115,7 +118,7 @@ fun HelpScreen(navController: NavController) {
            }
 
                 Text(
-                    text = "Select a topic to learn more:",
+                    text = stringResource(R.string.Select_Topic),
                     fontWeight = FontWeight.Bold,
                     fontSize = 20.sp,
                     color = Color.Black
@@ -145,7 +148,8 @@ fun HelpScreen(navController: NavController) {
                             modifier = Modifier.padding(end = 8.dp)
                         )
                         Text(
-                            text = "Search for Topics",
+                            text = stringResource(R.string.search_for_Topics),
+
                             color = Color.DarkGray
                         )
                     }
@@ -153,11 +157,11 @@ fun HelpScreen(navController: NavController) {
 
 
                 val helpTopics = listOf(
-                    "Trips",
-                    "Payment and Billing",
-                    "Ride Safety",
-                    "Account",
-                    "Rate and Feedback"
+                    stringResource(R.string.Trips),
+                    stringResource(R.string.Payment_and_Billing),
+                    stringResource(R.string.Ride_Safety),
+                    stringResource(R.string.Account),
+                    stringResource(R.string.Rate_and_Feedback),
                 )
 
                 helpTopics.forEach { topic ->

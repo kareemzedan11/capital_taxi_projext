@@ -43,6 +43,7 @@ import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.colorResource
+import androidx.compose.ui.res.stringResource
 import androidx.core.content.ContextCompat
 
 
@@ -62,7 +63,6 @@ fun PaymentScreen(navController: NavController) {
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun PaymentScreenContent(
-
     modifier: Modifier = Modifier,
     navController: NavController
 ) {
@@ -71,14 +71,29 @@ fun PaymentScreenContent(
     val backgroundColor = Color(ContextCompat.getColor(context, R.color.primary_color))
     val paymentMethods = listOf(
         PaymentMethod(
-            "Click",
-            "Balance: 250,000 UZS",
-            "Get 5% discount",
+            stringResource(R.string.Click),
+            stringResource(R.string.Balance_250000_UZS), // Update this string in `strings.xml` if needed
+            stringResource(R.string.Get_5_percent_discount), // Add this string to `strings.xml`
             R.drawable.click
-        ), // Replace with your actual drawable resource
-        PaymentMethod("Cash", "Prepare your cash", "Get 7% discount", R.drawable.cash),
-        PaymentMethod("Credit Card", "Visa or MasterCard", "Get 5% discount", R.drawable.card),
-        PaymentMethod("payme", "Pay with your PayPal balance", "Get 3% discount", R.drawable.paypal)
+        ),
+        PaymentMethod(
+            stringResource(R.string.Cash),
+            stringResource(R.string.Prepare_your_cash), // Add this string to `strings.xml`
+            stringResource(R.string.Get_7_percent_discount), // Add this string to `strings.xml`
+            R.drawable.cash
+        ),
+        PaymentMethod(
+            stringResource(R.string.Credit_card),
+            stringResource(R.string.Visa_or_MasterCard), // Add this string to `strings.xml`
+            stringResource(R.string.Get_5_percent_discount),
+            R.drawable.card
+        ),
+        PaymentMethod(
+            stringResource(R.string.Payme),
+            stringResource(R.string.Pay_with_your_PayPal_balance), // Add this string to `strings.xml`
+            stringResource(R.string.Get_3_percent_discount),
+            R.drawable.paypal
+        )
     )
 
     Column(
@@ -94,8 +109,7 @@ fun PaymentScreenContent(
                 .fillMaxWidth()
                 .height(100.dp)
                 .background(backgroundColor),
-
-            ) {
+        ) {
             // Close Icon
             Icon(
                 modifier = Modifier
@@ -106,13 +120,13 @@ fun PaymentScreenContent(
                     .background(Color.White)
                     .clickable { navController.popBackStack() },
                 imageVector = Icons.Default.Close,
-                contentDescription = "Close Icon",
+                contentDescription = null,
                 tint = Color.Black
             )
 
             // Header Text
             Text(
-                "Payment Method",
+                stringResource(R.string.Payment_method),
                 modifier = Modifier
                     .align(Alignment.Center)
                     .padding(top = 40.dp),
@@ -134,19 +148,14 @@ fun PaymentScreenContent(
         ) {
             item {
                 Text(
-                    "Choose Payment Method",
-                    modifier = Modifier
-
-                        .padding(top = 20.dp),
+                    stringResource(R.string.choose_payment_method), // Add this string to `strings.xml`
+                    modifier = Modifier.padding(top = 20.dp),
                     fontSize = 24.sp,
                     fontWeight = FontWeight.Bold,
                     color = Color.Black
                 )
             }
-            item {
-                Spacer(modifier = Modifier.height(20.dp))
-
-            }
+            item { Spacer(modifier = Modifier.height(20.dp)) }
             items(paymentMethods) { method ->
                 PaymentMethodCard(
                     paymentMethod = method,
@@ -154,12 +163,8 @@ fun PaymentScreenContent(
                     onSelect = { selectedMethod = method }
                 )
             }
+            item { Spacer(modifier = Modifier.height(20.dp)) }
             item {
-                Spacer(modifier = Modifier.height(20.dp))
-
-            }
-            item {
-
                 Button(
                     onClick = { /* Handle new method */ },
                     shape = RoundedCornerShape(50.dp),
@@ -169,7 +174,11 @@ fun PaymentScreenContent(
                         .padding(vertical = 16.dp, horizontal = 30.dp),
                     colors = ButtonDefaults.buttonColors(Color.Black)
                 ) {
-                    Text("+ Add New Method", fontSize = 18.sp, fontWeight = FontWeight.Bold)
+                    Text(
+                        stringResource(R.string.add_new_method_button), // Add this string to `strings.xml`
+                        fontSize = 18.sp,
+                        fontWeight = FontWeight.Bold
+                    )
                 }
             }
         }

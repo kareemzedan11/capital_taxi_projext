@@ -25,6 +25,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Path
 import androidx.compose.ui.res.colorResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -131,7 +132,7 @@ fun chatbot(navController: NavController) {
                         ) {
                             // نص تعريفي
                             Text(
-                                text = "Welcome to our chatbot! Feel free to ask anything.",
+                                text = stringResource(R.string.Welcome_to_chatbot),
                                 fontSize = 18.sp,
                                 fontWeight = FontWeight.Bold,
                                 color = Color.Black,
@@ -149,7 +150,7 @@ fun chatbot(navController: NavController) {
                                colors = ButtonDefaults.buttonColors( Color.LightGray)
                             ) {
                                 Text(
-                                    text = "Let's Chat",
+                                    text = stringResource(R.string.Lets_Chat),
                                     color = Color.Black,
                                     fontWeight = FontWeight.Bold,
                                     fontSize = 16.sp

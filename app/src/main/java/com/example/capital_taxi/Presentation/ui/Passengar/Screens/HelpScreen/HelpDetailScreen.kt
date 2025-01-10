@@ -2,8 +2,6 @@ package com.example.capital_taxi.Presentation.ui.Passengar.Screens.HelpScreen
 
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
-
-
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -17,6 +15,8 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
+import androidx.compose.ui.res.stringResource
+import com.example.capital_taxi.R
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -36,7 +36,7 @@ fun HelpDetailScreen(navController: NavController, topic: String) {
                     IconButton(onClick = { navController.popBackStack() }) {
                         Icon(
                             imageVector = Icons.Default.ArrowBack,
-                            contentDescription = "Back"
+                            contentDescription =null
                         )
                     }
                 },
@@ -54,7 +54,7 @@ fun HelpDetailScreen(navController: NavController, topic: String) {
                     .padding(16.dp)
             ) {
                 Text(
-                    text = "Details about $topic",
+                    text = stringResource(id = R.string.Details_about, topic),
                     fontWeight = FontWeight.Medium,
                     fontSize = 18.sp,
                     color = Color.Black
@@ -63,19 +63,18 @@ fun HelpDetailScreen(navController: NavController, topic: String) {
                 Spacer(modifier = Modifier.height(20.dp))
 
                 when (topic) {
-                    "Trips" -> TripHelpSectionList()
-                    "Payment and Billing" -> PaymentHelpSectionList()
-                    "Ride Safety" -> RideSafetySectionList()
-                    "Account" -> ManageAccountList()
-                    "Rate and Feedback" -> RateFeedbackList()
-                    else -> Text("Content coming soon...")
+                    stringResource(id = R.string.Trips) -> TripHelpSectionList()
+                    stringResource(id = R.string.Payment_and_Billing) -> PaymentHelpSectionList()
+                    stringResource(id = R.string.Ride_Safety) -> RideSafetySectionList()
+                    stringResource(id = R.string.Account) -> ManageAccountList()
+                    stringResource(id = R.string.Rate_and_Feedback) -> RateFeedbackList()
+                    else -> Text(stringResource(id = R.string.Content_coming_soon))
                 }
 
                 Spacer(modifier = Modifier.weight(1f))
 
-                // Adding the "Was this helpful?" text at the bottom
                 Text(
-                    text = "Was this helpful?",
+                    text = stringResource(id = R.string.Was_this_helpful),
                     fontWeight = FontWeight.Medium,
                     fontSize = 16.sp,
                     color = Color.Black,
@@ -88,22 +87,20 @@ fun HelpDetailScreen(navController: NavController, topic: String) {
                     modifier = Modifier.fillMaxWidth(),
                     horizontalArrangement = Arrangement.SpaceEvenly
                 ) {
-                    // Yes button
                     Button(
                         onClick = { /* Handle Yes click */ },
                         shape = RoundedCornerShape(50),
                         colors = ButtonDefaults.buttonColors(containerColor = Color(0xFF4CAF50))
                     ) {
-                        Text("Yes", color = Color.White)
+                        Text(stringResource(id = R.string.Yes), color = Color.White)
                     }
 
-                    // No button
                     Button(
                         onClick = { /* Handle No click */ },
                         shape = RoundedCornerShape(50),
                         colors = ButtonDefaults.buttonColors(containerColor = Color(0xFFF44336))
                     ) {
-                        Text("No", color = Color.White)
+                        Text(stringResource(id = R.string.No), color = Color.White)
                     }
                 }
             }
@@ -111,50 +108,45 @@ fun HelpDetailScreen(navController: NavController, topic: String) {
     )
 }
 
-
-
-
 @Composable
 fun TripHelpSectionList() {
     Box(modifier = Modifier.fillMaxSize().background(Color.White)) {
         Column(
             modifier = Modifier
-                .fillMaxWidth() // Ensure the column fills the width
-                .padding(16.dp), // Add padding for better visual spacing
-            verticalArrangement = Arrangement.spacedBy(12.dp) // Add space between items
+                .fillMaxWidth()
+                .padding(16.dp),
+            verticalArrangement = Arrangement.spacedBy(12.dp)
         ) {
-            HelpSection("Trip Routes and Navigation")
-            HelpSection("Trip Scheduling and Cancellations")
-            HelpSection("Trip Fare Estimation")
-            HelpSection("Trip Issues and Disputes")
-            HelpSection("Tracking Your Trip")
-            HelpSection("Ride Comfort and Preferences")
-            HelpSection("Safety During Trips")
-            HelpSection("What to Do if Your Driver is Lost")
+            HelpSection(stringResource(id = R.string.Trip_Routes_and_Navigation))
+            HelpSection(stringResource(id = R.string.Trip_Scheduling_and_Cancellations))
+            HelpSection(stringResource(id = R.string.Trip_Fare_Estimation))
+            HelpSection(stringResource(id = R.string.Trip_Issues_and_Disputes))
+            HelpSection(stringResource(id = R.string.Tracking_Your_Trip))
+            HelpSection(stringResource(id = R.string.Ride_Comfort_and_Preferences))
+            HelpSection(stringResource(id = R.string.Safety_During_Trips))
+            HelpSection(stringResource(id = R.string.What_to_Do_if_Your_Driver_is_Lost))
         }
     }
 }
-
-
 
 @Composable
 fun HelpSection(text: String) {
     Column(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(vertical =  10.dp, horizontal = 5.dp)
-            .background(Color.White)
-            , horizontalAlignment = Alignment.CenterHorizontally
+            .padding(vertical = 10.dp, horizontal = 5.dp)
+            .background(Color.White),
+        horizontalAlignment = Alignment.CenterHorizontally
     ) {
         Row(
             modifier = Modifier.padding(horizontal = 3.dp),
             horizontalArrangement = Arrangement.SpaceBetween
         ) {
             Text(text, fontSize = 18.sp, fontWeight = FontWeight.Bold)
-Spacer(modifier = Modifier.weight(1f))
+            Spacer(modifier = Modifier.weight(1f))
             Icon(
                 imageVector = Icons.Default.KeyboardArrowRight,
-                contentDescription = "Go to Details",
+                contentDescription = null,
                 tint = Color.Gray,
                 modifier = Modifier.size(24.dp)
             )
@@ -169,43 +161,40 @@ Spacer(modifier = Modifier.weight(1f))
     }
 }
 
-
 @Composable
 fun PaymentHelpSectionList() {
     Box(modifier = Modifier.fillMaxSize().background(Color.White)) {
         Column(
             modifier = Modifier
-                .fillMaxWidth() // Ensure the column fills the width
-                .padding(16.dp), // Add padding for better visual spacing
-            verticalArrangement = Arrangement.spacedBy(12.dp) // Add space between items
+                .fillMaxWidth()
+                .padding(16.dp),
+            verticalArrangement = Arrangement.spacedBy(12.dp)
         ) {
-            HelpSection("How to Add a Payment Method")
-            HelpSection("How to Remove a Payment Method")
-            HelpSection("How to Update Your Payment Details")
-            HelpSection("Checking Your Payment History")
-            HelpSection("Understanding Payment Receipts")
-            HelpSection("What to Do If Your Payment Fails")
-            HelpSection("Payment Refunds and Disputes")
+            HelpSection(stringResource(id = R.string.How_to_Add_a_Payment_Method))
+            HelpSection(stringResource(id = R.string.How_to_Remove_a_Payment_Method))
+            HelpSection(stringResource(id = R.string.How_to_Update_Your_Payment_Details))
+            HelpSection(stringResource(id = R.string.Checking_Your_Payment_History))
+            HelpSection(stringResource(id = R.string.Understanding_Payment_Receipts))
+            HelpSection(stringResource(id = R.string.What_to_Do_If_Your_Payment_Fails))
+            HelpSection(stringResource(id = R.string.Payment_Refunds_and_Disputes))
         }
     }
 }
-
 
 @Composable
 fun RideSafetySectionList() {
     Box(modifier = Modifier.fillMaxSize().background(Color.White)) {
         Column(
             modifier = Modifier
-                .fillMaxWidth() // Ensure the column fills the width
-                .padding(16.dp), // Add padding for better visual spacing
-            verticalArrangement = Arrangement.spacedBy(12.dp) // Add space between items
+                .fillMaxWidth()
+                .padding(16.dp),
+            verticalArrangement = Arrangement.spacedBy(12.dp)
         ) {
-            HelpSection("In-Ride Safety")
-            HelpSection("Accident Reporting")
-            HelpSection("Lost Items")
-            HelpSection("Safety Measures and Policies")
-            HelpSection("Data Privacy and Security")
-
+            HelpSection(stringResource(id = R.string.In_Ride_Safety))
+            HelpSection(stringResource(id = R.string.Accident_Reporting))
+            HelpSection(stringResource(id = R.string.Lost_Items))
+            HelpSection(stringResource(id = R.string.Safety_Measures_and_Policies))
+            HelpSection(stringResource(id = R.string.Data_Privacy_and_Security))
         }
     }
 }
@@ -215,40 +204,35 @@ fun ManageAccountList() {
     Box(modifier = Modifier.fillMaxSize().background(Color.White)) {
         Column(
             modifier = Modifier
-                .fillMaxWidth() // Ensure the column fills the width
-                .padding(16.dp), // Add padding for better visual spacing
-            verticalArrangement = Arrangement.spacedBy(12.dp) // Add space between items
+                .fillMaxWidth()
+                .padding(16.dp),
+            verticalArrangement = Arrangement.spacedBy(12.dp)
         ) {
-            HelpSection("Updating Personal Information")
-            HelpSection("Password Management")
-            HelpSection("Notification Preferences")
-            HelpSection("Linked Accounts")
-            HelpSection("Language and Region Settings")
-            HelpSection("Account Deactivation or Deletion")
-
-
+            HelpSection(stringResource(id = R.string.Updating_Personal_Information))
+            HelpSection(stringResource(id = R.string.Password_Management))
+            HelpSection(stringResource(id = R.string.Notification_Preferences))
+            HelpSection(stringResource(id = R.string.Linked_Accounts))
+            HelpSection(stringResource(id = R.string.Language_and_Region_Settings))
+            HelpSection(stringResource(id = R.string.Account_Deactivation_or_Deletion))
         }
     }
 }
-
 
 @Composable
 fun RateFeedbackList() {
     Box(modifier = Modifier.fillMaxSize().background(Color.White)) {
         Column(
             modifier = Modifier
-                .fillMaxWidth() // Ensure the column fills the width
-                .padding(16.dp), // Add padding for better visual spacing
-            verticalArrangement = Arrangement.spacedBy(12.dp) // Add space between items
+                .fillMaxWidth()
+                .padding(16.dp),
+            verticalArrangement = Arrangement.spacedBy(12.dp)
         ) {
-            HelpSection("How to Rate Your Ride")
-            HelpSection("Leaving Comments")
-            HelpSection("Driver Compliments")
-            HelpSection("Reporting Issues")
-            HelpSection("Anonymous Feedback")
-            HelpSection("Customer Support Follow-Up")
-
-
+            HelpSection(stringResource(id = R.string.How_to_Rate_Your_Ride))
+            HelpSection(stringResource(id = R.string.Leaving_Comments))
+            HelpSection(stringResource(id = R.string.Driver_Compliments))
+            HelpSection(stringResource(id = R.string.Reporting_Issues))
+            HelpSection(stringResource(id = R.string.Anonymous_Feedback))
+            HelpSection(stringResource(id = R.string.Customer_Support_Follow_Up))
         }
     }
 }

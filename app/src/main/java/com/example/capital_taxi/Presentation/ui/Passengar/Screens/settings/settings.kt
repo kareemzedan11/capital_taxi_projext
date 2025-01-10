@@ -21,6 +21,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -29,10 +30,8 @@ import com.example.capital_taxi.Helper.PartialBottomSheet
 import com.example.capital_taxi.Navigation.Destination
 import com.example.capital_taxi.R
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun settings(navController: NavController) {
-
     var isDark by remember { mutableStateOf(false) }
     var showBottomSheet by remember { mutableStateOf(false) }
 
@@ -67,13 +66,13 @@ fun settings(navController: NavController) {
                     .background(Color.White)
                     .clickable { navController.popBackStack() },
                 imageVector = Icons.Default.Close,
-                contentDescription = "Close Icon",
+                contentDescription = "close",
                 tint = Color.Black
             )
 
             // Title
             Text(
-                "Settings",
+                stringResource(R.string.Settings),
                 modifier = Modifier
                     .align(Alignment.Center)
                     .padding(top = 60.dp),
@@ -97,78 +96,79 @@ fun settings(navController: NavController) {
                 modifier = Modifier
                     .fillMaxSize()
                     .padding(16.dp)
-                    .verticalScroll(rememberScrollState()), // Enable scrolling
+                    .verticalScroll(rememberScrollState()),
                 verticalArrangement = Arrangement.Top,
                 horizontalAlignment = Alignment.Start
             ) {
                 // Section 1: Account Settings
-                SectionTitle(title = "Account Settings")
+                SectionTitle(title = stringResource(R.string.Account_Settings))
                 SettingBox(
-                    title = "Home",
+                    title = stringResource(R.string.Home),
                     icon = painterResource(R.drawable.home),
-                    onClick = {navController.navigate(Destination.HomePlace.route) }
+                    onClick = { navController.navigate(Destination.HomePlace.route) }
                 )
                 SettingBox(
-                    title = "Add Work",
+                    title = stringResource(R.string.Add_Work),
                     icon = painterResource(R.drawable.work),
-                    onClick = {navController.navigate(Destination.WorkPlace.route) }
+                    onClick = { navController.navigate(Destination.WorkPlace.route) }
                 )
                 SettingBox(
-                    title = "Communication",
+                    title = stringResource(R.string.Communication),
                     icon = painterResource(R.drawable.messageicon),
-                    onClick = { /* Handle language change */ }
+                    onClick = { /* Handle communication */ }
                 )
                 SettingBox(
-                    title = "Saved Places",
+                    title = stringResource(R.string.Saved_Places),
                     icon = painterResource(R.drawable.baseline_place_24),
-                    onClick = {navController.navigate(Destination.SavedPlaces.route) }
+                    onClick = { navController.navigate(Destination.SavedPlaces.route) }
                 )
 
                 // Section 2: Preferences
-                SectionTitle(title = "Preferences")
+                SectionTitle(title = stringResource(R.string.Preferences))
                 SettingBox(
-                    title = "Language",
+                    title = stringResource(R.string.Language),
                     icon = painterResource(R.drawable.language),
                     onClick = { navController.navigate(Destination.LanguageDScreen.route) }
                 )
                 SettingBox(
-                    title = "Appearance",
+                    title = stringResource(R.string.Appearance),
                     icon = painterResource(R.drawable.mode),
                     onClick = { showBottomSheet = true }
                 )
-                // Inside the settings function, after the Security section
-                SectionTitle(title = "Safety")
+
+                // Section 3: Safety
+                SectionTitle(title = stringResource(R.string.Safety))
                 SettingBox(
-                    title = "Two-Factor Authentication",
+                    title = stringResource(R.string.Two_Factor_Authentication),
                     icon = painterResource(R.drawable.safety),
                     onClick = { /* Handle Two-Factor Authentication */ }
                 )
                 SettingBox(
-                    title = "Privacy Settings",
+                    title = stringResource(R.string.Privacy),
                     icon = painterResource(R.drawable.settings_3524636),
                     onClick = { /* Handle Privacy Settings */ }
                 )
                 SettingBox(
-                    title = "Security Notifications",
+                    title = stringResource(R.string.Security_Notifications),
                     icon = painterResource(R.drawable.notification),
                     onClick = { /* Handle Security Notifications */ }
                 )
                 SettingBox(
-                    title = "Emergency Contact",
+                    title = stringResource(R.string.Emergency),
                     icon = painterResource(R.drawable.emergency),
                     onClick = { /* Handle Emergency Contact */ }
                 )
 
-                // Section 3: Security
-                SectionTitle(title = "Security")
+                // Section 4: Security
+                SectionTitle(title = stringResource(R.string.Account_Settings))
                 SettingBox(
-                    title = "Log Out",
+                    title = stringResource(R.string.Logout),
                     isred = true,
                     icon = painterResource(R.drawable.logout),
                     onClick = { /* Handle log out */ }
                 )
                 SettingBox(
-                    title = "Delete Account",
+                    title = stringResource(R.string.Delete_Account),
                     isred = true,
                     icon = painterResource(R.drawable.baseline_delete_24),
                     onClick = { /* Handle account deletion */ }
@@ -178,7 +178,7 @@ fun settings(navController: NavController) {
     }
 }
 @Composable
-  fun AppearanceBottomSheetContent(isDark: Boolean, navController: NavController) {
+fun AppearanceBottomSheetContent(isDark: Boolean, navController: NavController) {
 
     var isDark1 by remember { mutableStateOf(isDark) }
 
@@ -193,7 +193,7 @@ fun settings(navController: NavController) {
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             Text(
-                text = "Appearance",
+                text = stringResource(id = R.string.Appearance),
                 fontSize = 24.sp,
                 color = Color.Black,
                 fontWeight = FontWeight.W700
@@ -217,7 +217,7 @@ fun settings(navController: NavController) {
                 Row(
                     modifier = Modifier
                         .fillMaxSize()
-                        .clickable { isDark1 = false } // تحديث القيمة
+                        .clickable { isDark1 = false }
                         .padding(horizontal = 10.dp),
                     verticalAlignment = Alignment.CenterVertically
                 ) {
@@ -230,14 +230,14 @@ fun settings(navController: NavController) {
                     ) {
                         Icon(
                             painter = painterResource(R.drawable.baseline_light_mode_24),
-                            contentDescription = "light mode",
+                            contentDescription = stringResource(id = R.string.light_mode),
                             tint = Color.Unspecified,
                             modifier = Modifier.size(26.dp)
                         )
                     }
                     Spacer(modifier = Modifier.width(16.dp))
                     Text(
-                        "Light Mode",
+                        stringResource(id = R.string.light_mode),
                         color = Color.Black,
                         fontSize = 18.sp,
                         fontWeight = FontWeight.W600
@@ -246,7 +246,7 @@ fun settings(navController: NavController) {
                     if (!isDark1) {
                         Icon(
                             painter = painterResource(R.drawable.selected),
-                            contentDescription = "Selected Light Mode",
+                            contentDescription = null,
                             tint = Color.Unspecified,
                             modifier = Modifier.size(30.dp)
                         )
@@ -268,7 +268,7 @@ fun settings(navController: NavController) {
                 Row(
                     modifier = Modifier
                         .fillMaxSize()
-                        .clickable { isDark1 = true } // تحديث القيمة
+                        .clickable { isDark1 = true }
                         .padding(horizontal = 10.dp),
                     verticalAlignment = Alignment.CenterVertically
                 ) {
@@ -281,14 +281,14 @@ fun settings(navController: NavController) {
                     ) {
                         Icon(
                             painter = painterResource(R.drawable.baseline_dark_mode_24),
-                            contentDescription = "Dark mode",
+                            contentDescription = stringResource(id = R.string.dark_mode),
                             tint = Color.Unspecified,
                             modifier = Modifier.size(26.dp)
                         )
                     }
                     Spacer(modifier = Modifier.width(16.dp))
                     Text(
-                        "Dark Mode",
+                        stringResource(id = R.string.dark_mode),
                         color = Color.Black,
                         fontSize = 18.sp,
                         fontWeight = FontWeight.W600
@@ -297,7 +297,7 @@ fun settings(navController: NavController) {
                     if (isDark1) {
                         Icon(
                             painter = painterResource(R.drawable.selected),
-                            contentDescription = "Selected Dark Mode",
+                            contentDescription = stringResource(id = R.string.dark_mode),
                             tint = Color.Unspecified,
                             modifier = Modifier.size(30.dp)
                         )
@@ -317,7 +317,7 @@ fun settings(navController: NavController) {
                 shape = RoundedCornerShape(8.dp)
             ) {
                 Text(
-                    text = "Save",
+                    text = stringResource(id = R.string.save_button),
                     fontSize = 18.sp,
                     color = Color.Black
                 )
@@ -325,7 +325,7 @@ fun settings(navController: NavController) {
             Spacer(modifier = Modifier.height(16.dp))
 
             Text(
-                text = "Cancel",
+                text = stringResource(id = R.string.cancel_button),
                 fontSize = 20.sp,
                 color = Color.Black,
                 fontWeight = FontWeight.W700

@@ -30,6 +30,7 @@ import androidx.compose.ui.unit.sp
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.core.content.ContextCompat
@@ -39,22 +40,19 @@ import com.example.capital_taxi.R
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun TripsHistoryScreen(navController: NavController) {
-
-
     Trips_History_Screen_Content(navController = navController)
 }
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun Trips_History_Screen_Content(modifier: Modifier = Modifier, navController: NavController) {
-    var voucher by remember { mutableStateOf("") }
     val context = LocalContext.current // Access the context safely
     val backgroundColor = Color(ContextCompat.getColor(context, R.color.primary_color))
+
     Column(
         modifier = Modifier
             .fillMaxSize()
             .background(backgroundColor),
-
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Top
     ) {
@@ -64,8 +62,7 @@ fun Trips_History_Screen_Content(modifier: Modifier = Modifier, navController: N
                 .fillMaxWidth()
                 .height(100.dp)
                 .background(backgroundColor),
-
-            ) {
+        ) {
             // Icon aligned to the start
             Icon(
                 modifier = Modifier
@@ -74,15 +71,15 @@ fun Trips_History_Screen_Content(modifier: Modifier = Modifier, navController: N
                     .align(Alignment.TopStart) // Align icon to the top-start of the Box
                     .clip(CircleShape)
                     .background(Color.White)
-                    .clickable { navController.popBackStack()},
+                    .clickable { navController.popBackStack() },
                 imageVector = Icons.Default.Close,
-                contentDescription = "Close Icon",
+                contentDescription = "close", // Use a string resource for content description
                 tint = Color.Black
             )
 
             // Text centered in the Box
             Text(
-                "Trip History",
+                text = stringResource(id = R.string.Trip_History), // Use the localized string
                 modifier = Modifier
                     .align(Alignment.Center) // Align text in the center of the Box
                     .padding(top = 60.dp), // Add padding from the top
@@ -92,8 +89,7 @@ fun Trips_History_Screen_Content(modifier: Modifier = Modifier, navController: N
             )
         }
 
-
-        Spacer(modifier=Modifier.height(40.dp))
+        Spacer(modifier = Modifier.height(40.dp))
         Box(
             modifier = Modifier
                 .fillMaxSize()
@@ -102,7 +98,7 @@ fun Trips_History_Screen_Content(modifier: Modifier = Modifier, navController: N
             contentAlignment = Alignment.Center // Align content in the center of the Box
         ) {
             Text(
-                "No Trip History Available Now",
+                text = stringResource(id = R.string.No_Trip_Message), // Use the localized string
                 fontSize = 16.sp,
                 fontWeight = FontWeight.Medium,
                 color = Color.Black
@@ -110,4 +106,3 @@ fun Trips_History_Screen_Content(modifier: Modifier = Modifier, navController: N
         }
     }
 }
-

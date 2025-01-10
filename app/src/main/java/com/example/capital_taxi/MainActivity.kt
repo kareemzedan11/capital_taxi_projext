@@ -19,9 +19,13 @@ import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.compose.foundation.isSystemInDarkTheme
+import androidx.compose.ui.platform.LocalLayoutDirection
+import androidx.compose.ui.unit.LayoutDirection
 import androidx.core.content.ContextCompat
 import androidx.navigation.compose.rememberNavController
 import com.example.capital_taxi.Navigation.AppNavGraph
+import com.example.capital_taxi.Presentation.Theme.AppTheme
 import com.example.capital_taxi.Presentation.Theme.DarkBackground
 import com.example.capital_taxi.Presentation.Theme.DarkOnPrimary
 import com.example.capital_taxi.Presentation.Theme.DarkOnSecondary
@@ -36,6 +40,7 @@ import com.example.capital_taxi.Presentation.Theme.LightSecondary
 import com.example.capital_taxi.Presentation.Theme.LightSurface
 import com.example.capital_taxi.Presentation.ui.Passengar.Screens.Home.UserHome.Components.DraggableIcon
 import com.example.capital_taxi.Presentation.ui.screens.Language.components.LanguagePreference
+import com.google.android.datatransport.backend.cct.BuildConfig
 import updateLocale
 import java.util.Locale
 
@@ -65,67 +70,33 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
 
         val languageCode = LanguagePreference.getSavedLanguage(this)
-        updateLocale(this, languageCode)
+        updateLocale(this , languageCode) // Dynamically applies the locale and layout direction
+
 
         requestPermissions()
 
-
-        setContent {
-            // Dynamically set the layout direction based on language preference
-            if (languageCode == "ar") {
-                // For Arabic, set the layout direction to RTL
-                window.decorView.layoutDirection = View.LAYOUT_DIRECTION_RTL
-            } else {
-                // For English (or other languages), set the layout direction to LTR
-                window.decorView.layoutDirection = View.LAYOUT_DIRECTION_LTR
-            }
-            val lightColors = lightColorScheme(
-                primary = LightPrimary,
-                secondary = LightSecondary,
-                background = LightBackground,
-                surface = LightSurface,
-                onPrimary = LightOnPrimary,
-                onSecondary = LightOnSecondary
-            )
-
-            val darkcolors = darkColorScheme(
-                primary = DarkPrimary,
-                secondary = DarkSecondary,
-                background = DarkBackground,
-                surface = DarkSurface,
-                onPrimary = DarkOnPrimary,
-                onSecondary = DarkOnSecondary
-            )
-
-            MaterialTheme(
-                colorScheme = lightColors,
-                content = {
-                    val navController = rememberNavController()
-                    AppNavGraph(navController = navController)
-                }
-            )
-        }
-    }
-
-    // Function to handle language change
-    fun OnLanguageSelected(languageCode: String) {
-        // Save the new language to preferences
-        LanguagePreference.saveLanguage(this, languageCode)
-
-        // Update the locale and layout direction
-        updateLocale(this, languageCode)
-
-        // Dynamically set the layout direction based on selected language
-        if (languageCode == "ar") {
+        if ( LanguagePreference.getSavedLanguage(this) == "ar") {
             window.decorView.layoutDirection = View.LAYOUT_DIRECTION_RTL
         } else {
             window.decorView.layoutDirection = View.LAYOUT_DIRECTION_LTR
         }
 
-        // Recreate activity to apply the changes
-        recreate()
+        setContent {
+
+            CompositionLocalProvider(
+                LocalLayoutDirection provides if (languageCode == "ar") LayoutDirection.Rtl else LayoutDirection.Ltr
+            ) {
+                MaterialTheme(
+
+                    content = {
+                        val navController = rememberNavController()
+                        AppNavGraph(navController = navController)
+                    }
+                )
+            }
+        }
     }
-    private fun requestPermissions() {
+     private fun requestPermissions() {
         val permissionsToRequest = mutableListOf<String>()
 
         if (ContextCompat.checkSelfPermission(

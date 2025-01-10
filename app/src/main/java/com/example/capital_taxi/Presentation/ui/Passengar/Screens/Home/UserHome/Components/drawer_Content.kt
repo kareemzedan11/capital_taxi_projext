@@ -38,6 +38,7 @@ import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -118,7 +119,7 @@ fun drawerContent(navController: NavController) {
                 navigationDrawerItem(
                     onClick = { navController.navigate(Destination.TripsHistoryScreen.route) },
                     painter = painterResource(R.drawable.history_3949611),
-                    text = "Trips History"
+                    text = stringResource(R.string.Trip_History)
                 )
 
                 Spacer(Modifier.height(10.dp))
@@ -127,7 +128,8 @@ fun drawerContent(navController: NavController) {
                 navigationDrawerItem(
                     onClick = { navController.navigate(Destination.PaymentScreen.route) },
                     painter = painterResource(R.drawable.operation_3080541),
-                    text = "Payment"
+                    text = stringResource(R.string.Payment)
+
                 )
 
                 Spacer(Modifier.height(10.dp))
@@ -137,7 +139,8 @@ fun drawerContent(navController: NavController) {
                 navigationDrawerItem(
                     onClick = { navController.navigate(Destination.voucherScreen.route) },
                     painter = painterResource(R.drawable.voucher_3837379),
-                    text = "Coupons"
+                    text = stringResource(R.string.Coupons)
+
 
                 )
                 Spacer(Modifier.height(10.dp))
@@ -145,20 +148,23 @@ fun drawerContent(navController: NavController) {
                 navigationDrawerItem(
                     onClick = { navController.navigate(Destination.userNotification.route) },
                     painter = painterResource(R.drawable.notification),
-                    text = "Notifications"
+                    text = stringResource(R.string.Notifications)
+
                 )
                 Spacer(Modifier.height(10.dp))
 
                 navigationDrawerItem(
                     onClick = { navController.navigate(Destination.SafetyScreen.route) },
                     painter = painterResource(R.drawable.safety),
-                    text = "Safety"
+                    text = stringResource(R.string.Safety)
+
                 )
                 Spacer(Modifier.height(10.dp))
                 navigationDrawerItem(
                     onClick = { navController.navigate(Destination.settings.route) },
                     painter = painterResource(R.drawable.settings_3524636),
-                    text = "Settings"
+                    text = stringResource(R.string.Settings)
+
                 )
 
                 Spacer(Modifier.height(10.dp))
@@ -166,14 +172,16 @@ fun drawerContent(navController: NavController) {
                 navigationDrawerItem(
                     onClick = { navController.navigate(Destination.HelpScreen.route) },
                     painter = painterResource(R.drawable.headphone_18080416),
-                    text = "Help"
+                    text = stringResource(R.string.Help)
+
                 )
                 Spacer(Modifier.height(10.dp))
 
                 navigationDrawerItem(
                     onClick = { navController.navigate(Destination.voucherScreen.route) },
                     painter = painterResource(R.drawable.helpme2),
-                    text = "Support"
+                    text = stringResource(R.string.Support)
+
                 )
                 Spacer(Modifier.height(10.dp))
 
@@ -181,7 +189,8 @@ fun drawerContent(navController: NavController) {
                 navigationDrawerItem(
                     onClick = { navController.navigate(Destination.InviteFriendsPage.route) },
                     painter = painterResource(R.drawable.invite),
-                    text = "Invite Friends"
+                    text = stringResource(R.string.Invite_Friends)
+
                 )
 
 
@@ -202,7 +211,7 @@ fun drawerContent(navController: NavController) {
 
         ) {
             Text(
-                text = "Become a Driver",
+                text = stringResource(R.string.Become_driver),
                 fontSize = 18.sp,
 
                 )

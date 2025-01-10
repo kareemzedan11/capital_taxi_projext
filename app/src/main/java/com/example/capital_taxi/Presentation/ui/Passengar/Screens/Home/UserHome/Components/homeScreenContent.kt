@@ -76,6 +76,7 @@ import androidx.compose.runtime.rememberUpdatedState
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.capital_taxi.Helper.PartialBottomSheet
@@ -311,7 +312,7 @@ private fun FindDriverCard(onclick: () -> Unit) {
                         contentPadding = PaddingValues(0.dp)
                     ) {
                         Text(
-                            text = "Find a driver",
+                            text = stringResource(R.string.Find_a_driver),
                             color = Color.Black,
                             fontSize = 16.sp
                         )

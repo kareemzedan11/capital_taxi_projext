@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">تاكسي العاصمة</string>
-    <string name="get_started">لنبدأ</string>
+    <string name="get_started">ابدأ العمل مع تاكسي العاصمه</string>
     <string name="get_started_button">ابدأ الآن</string>
     <string name="introduction_image_description">صورة تقديمية</string>
     <string name="select_the_mode_title">الرجاء الاختيار:</string>
@@ -102,6 +102,122 @@
     <string name="passenger_Mode">وضع الراكب</string>
 
     <string name="sign_in_with">أو تسجيل الدخول باستخدام</string>
+    <!-- user HomeScreen -->
+    <string name="Find_a_driver">ابحث عن سائق</string>
+    <string name="Payment_method">طريقة الدفع</string>
+    <string name="Cash">نقداً</string>
+    <string name="Payme">باي مي</string>
+    <string name="Paypal">باي بال</string>
+    <string name="Trip_History">سجل الرحلات</string>
+    <string name="Payment">الدفع</string>
+    <string name="Coupons">القسائم</string>
+    <string name="Notifications">الإشعارات</string>
+    <string name="Safety">الأمان</string>
+    <string name="Settings">الإعدادات</string>
+    <string name="Help">المساعدة</string>
+    <string name="Support">الدعم</string>
+    <string name="Invite_Friends">دعوة الأصدقاء</string>
 
+    <string name="No_Trip_Message">لا يوجد سجل رحلات حالياً</string>
+    <string name="No_Notification_Message">لا توجد إشعارات حالياً</string>
+    <string name="No_Vouchers_Message">لا توجد قسائم</string>
+
+    <string name="promo_code_placeholder">لديك رمز ترويجي؟ أدخله هنا</string>
+
+    <string name="Account_Settings">إعدادات الحساب</string>
+    <string name="Home">الرئيسية</string>
+    <string name="Add_Work">إضافة العمل</string>
+    <string name="Communication">التواصل</string>
+
+    <string name="Saved_Places">الأماكن المحفوظة</string>
+    <string name="Appearance">المظهر</string>
+    <string name="Language">اللغة</string>
+
+    <string name="Preferences">التفضيلات</string>
+    <string name="Two_Factor_Authentication">المصادقة الثنائية</string>
+    <string name="Privacy">إعدادات الخصوصية</string>
+    <string name="Security_Notifications">إشعارات الأمان</string>
+    <string name="Emergency">جهة اتصال للطوارئ</string>
+
+    <string name="Logout">تسجيل الخروج</string>
+    <string name="Delete_Account">حذف الحساب</string>
+    <string name="Become_driver">كن سائقًا</string>
+    <string name="Click">اضفط</string>
+    <string name="Balance_250000_UZS">الرصيد: 250,000 سوم</string>
+    <string name="Get_5_percent_discount">احصل على خصم 5%</string>
+    <string name="Prepare_your_cash">جهز النقود</string>
+    <string name="Get_7_percent_discount">احصل على خصم 7%</string>
+    <string name="Credit_card">بطاقة ائتمان</string>
+    <string name="Visa_or_MasterCard">فيزا أو ماستركارد</string>
+    <string name="Pay_with_your_PayPal_balance">ادفع برصيد باي بال</string>
+    <string name="Get_3_percent_discount">احصل على خصم 3%</string>
+
+
+
+    <!-- General UI Texts -->
+    <string name="Trips">الرحلات</string>
+    <string name="Payment_and_Billing">الدفع والفواتير</string>
+    <string name="Ride_Safety">سلامة الرحلة</string>
+    <string name="Account">الحساب</string>
+    <string name="Rate_and_Feedback">التقييم والملاحظات</string>
+    <string name="Was_this_helpful">هل كانت هذه المعلومات مفيدة؟</string>
+    <string name="Yes">نعم</string>
+    <string name="No">لا</string>
+
+    <!-- Help Section Titles for Trips -->
+    <string name="Trip_Routes_and_Navigation">طرق الرحلات والملاحة</string>
+    <string name="Trip_Scheduling_and_Cancellations">جدولة الرحلات والإلغاء</string>
+    <string name="Trip_Fare_Estimation">تقدير تكلفة الرحلة</string>
+    <string name="Trip_Issues_and_Disputes">مشاكل الرحلة والنزاعات</string>
+    <string name="Tracking_Your_Trip">تتبع رحلتك</string>
+    <string name="Ride_Comfort_and_Preferences">راحة الرحلة والتفضيلات</string>
+    <string name="Safety_During_Trips">السلامة أثناء الرحلات</string>
+    <string name="What_to_Do_if_Your_Driver_is_Lost">ماذا تفعل إذا ضاع سائقك؟</string>
+
+    <!-- Help Section Titles for Payment -->
+    <string name="How_to_Add_a_Payment_Method">كيفية إضافة وسيلة دفع</string>
+    <string name="How_to_Remove_a_Payment_Method">كيفية إزالة وسيلة دفع</string>
+    <string name="How_to_Update_Your_Payment_Details">كيفية تحديث تفاصيل الدفع الخاصة بك</string>
+    <string name="Checking_Your_Payment_History">التحقق من تاريخ الدفع</string>
+    <string name="Understanding_Payment_Receipts">فهم إيصالات الدفع</string>
+    <string name="What_to_Do_If_Your_Payment_Fails">ماذا تفعل إذا فشل الدفع</string>
+    <string name="Payment_Refunds_and_Disputes">استرداد المدفوعات والنزاعات</string>
+
+    <!-- Help Section Titles for Ride Safety -->
+    <string name="In_Ride_Safety">سلامة أثناء الرحلة</string>
+    <string name="Accident_Reporting">إبلاغ الحوادث</string>
+    <string name="Lost_Items">الأشياء المفقودة</string>
+    <string name="Safety_Measures_and_Policies">إجراءات وسياسات السلامة</string>
+    <string name="Data_Privacy_and_Security">خصوصية البيانات والأمان</string>
+
+    <!-- Help Section Titles for Account -->
+    <string name="Updating_Personal_Information">تحديث المعلومات الشخصية</string>
+    <string name="Password_Management">إدارة كلمة المرور</string>
+    <string name="Notification_Preferences">تفضيلات الإشعارات</string>
+    <string name="Linked_Accounts">الحسابات المرتبطة</string>
+    <string name="Language_and_Region_Settings">إعدادات اللغة والمنطقة</string>
+    <string name="Account_Deactivation_or_Deletion">إلغاء الحساب أو حذفه</string>
+
+    <!-- Help Section Titles for Rate and Feedback -->
+    <string name="How_to_Rate_Your_Ride">كيفية تقييم رحلتك</string>
+    <string name="Leaving_Comments">ترك التعليقات</string>
+    <string name="Driver_Compliments">إطراء السائق</string>
+    <string name="Reporting_Issues">الإبلاغ عن المشاكل</string>
+    <string name="Anonymous_Feedback">التعليقات المجهولة</string>
+    <string name="Customer_Support_Follow_Up">متابعة دعم العملاء</string>
+
+    <string name="Content_coming_soon">المحتوى قادم قريباً</string>
+    <string name="Details_about">تفاصيل عن</string>
+
+    <string name="How_can_we_help_you">كيف يمكننا مساعدتك؟</string>
+    <string name="Select_Topic">اختر موضوعاً للتعرف عليه أكثر:</string>
+    <string name="search_for_Topics">ابحث عن المواضيع</string>
+
+    <string name="Welcome_to_chatbot">مرحباً بك في روبوت الدردشة لدينا! لا تتردد في طرح أي سؤال.</string>
+    <string name="Lets_Chat">لنبدأ الدردشة</string>
+
+    <string name="Where_are_you_going_today">إلى أين تذهب اليوم؟</string>
+    <string name="Select_Drop_Off_Location">اختر موقع الوصول</string>
+    <string name="Select_Pickup_Location">اختر موقع الالتقاء</string>
 
 </resources>

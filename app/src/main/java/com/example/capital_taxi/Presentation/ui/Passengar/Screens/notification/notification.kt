@@ -26,6 +26,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -45,7 +46,7 @@ fun userNotification(navController: NavController) {
             TopAppBar(
                 title = {
                     Text(
-                        "Notification",
+                        stringResource(R.string.Notifications),
                         fontWeight = FontWeight.Bold,
                         color = Color.Black
                     )
@@ -116,7 +117,8 @@ fun userNotification(navController: NavController) {
 
 
                         Text(
-                            "No Notification Available Now",
+                            stringResource(R.string.No_Notification_Message)
+                            ,
                             color = Color.Black,
                             fontSize = 20.sp,
                             fontWeight = FontWeight.Bold
