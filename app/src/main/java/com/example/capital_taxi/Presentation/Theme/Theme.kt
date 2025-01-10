@@ -7,7 +7,7 @@ import androidx.compose.material3.darkColorScheme
 import androidx.compose.material3.lightColorScheme
 
 import androidx.compose.runtime.Composable
-import com.example.app.ui.theme.AppTypography
+
 
 // Define your color palettes
 private val LightColorPalette = lightColorScheme(
@@ -26,22 +26,25 @@ private val DarkColorPalette = darkColorScheme(
     background = DarkBackground,
     surface = DarkSurface,
     onPrimary = DarkOnPrimary,
-    onSecondary = DarkOnSecondary
+    onSecondary = DarkOnSecondary,
+
 )
+
 
 @Composable
 fun AppTheme(
     darkTheme: Boolean = isSystemInDarkTheme(),
     content: @Composable () -> Unit
 ) {
-    // Use the appropriate color palette based on the theme
     val colors = if (darkTheme) DarkColorPalette else LightColorPalette
 
-    // Use Material3 Theme for styling
     MaterialTheme(
         colorScheme = colors,
-        typography = AppTypography,
+
 
         content = content
     )
 }
+
+
+

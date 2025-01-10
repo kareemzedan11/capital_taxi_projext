@@ -176,6 +176,7 @@ fun homeScreenContent(navController: NavController) {
                         modifier = Modifier
                             .fillMaxSize()
                             .padding(padding)
+
                     ) {
                         if (isLocationGranted) {
                             MapSection(navController = navController)
@@ -209,7 +210,8 @@ fun homeScreenContent(navController: NavController) {
                     Box(
                         modifier = Modifier
                             .fillMaxSize()
-                            .background(Color.Transparent)
+
+
                             .border(
                                 width = 2.dp,
                                 color = Color.Gray,
@@ -343,7 +345,7 @@ fun PaymentMethodContent() {
         Text(
             text = "Payment method",
             fontSize = 24.sp,
-            color = Color.Black,
+
             fontWeight = FontWeight.W700
         )
         Divider(
@@ -362,7 +364,7 @@ fun PaymentCard() {
         modifier = Modifier
             .fillMaxWidth()
             .height(60.dp)
-            .background(Color.LightGray)
+
             .border(1.dp, color = Color.Gray),
         elevation = CardDefaults.elevatedCardElevation(10.dp)
     ) {
@@ -389,7 +391,7 @@ fun PaymentCard() {
             Spacer(modifier = Modifier.width(16.dp))
             Text(
                 "Cash",
-                color = Color.Black,
+
                 fontSize = 18.sp,
                 fontWeight = FontWeight.W600
             )

@@ -14,6 +14,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.activity.ComponentActivity
@@ -70,33 +71,39 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
 
         val languageCode = LanguagePreference.getSavedLanguage(this)
-        updateLocale(this , languageCode) // Dynamically applies the locale and layout direction
+        updateLocale(this, languageCode) // Dynamically applies the locale and layout direction
 
 
         requestPermissions()
 
-        if ( LanguagePreference.getSavedLanguage(this) == "ar") {
+        if (LanguagePreference.getSavedLanguage(this) == "ar") {
             window.decorView.layoutDirection = View.LAYOUT_DIRECTION_RTL
         } else {
             window.decorView.layoutDirection = View.LAYOUT_DIRECTION_LTR
         }
+try {
+
 
         setContent {
 
             CompositionLocalProvider(
                 LocalLayoutDirection provides if (languageCode == "ar") LayoutDirection.Rtl else LayoutDirection.Ltr
             ) {
-                MaterialTheme(
+                AppTheme(
+                    darkTheme = isSystemInDarkTheme(), // أو أي طريقة لتحديد إذا كان الوضع داكن أو فاتح
+                ) {
+                    val navController = rememberNavController()
+                    AppNavGraph(navController = navController)
 
-                    content = {
-                        val navController = rememberNavController()
-                        AppNavGraph(navController = navController)
-                    }
-                )
+                }
             }
-        }
+        }}
+catch (e: Exception) {
+    Log.e("AppThemeError", "Error initializing theme", e)
+}
     }
-     private fun requestPermissions() {
+
+    private fun requestPermissions() {
         val permissionsToRequest = mutableListOf<String>()
 
         if (ContextCompat.checkSelfPermission(

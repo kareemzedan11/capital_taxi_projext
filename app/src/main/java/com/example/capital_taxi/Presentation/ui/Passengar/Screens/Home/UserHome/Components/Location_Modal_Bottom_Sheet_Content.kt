@@ -96,7 +96,7 @@ fun LocationModalBottomSheetContent(navController: NavController) {
             style = MaterialTheme.typography.titleMedium.copy(
                 fontWeight = FontWeight.Bold,
                 fontSize = 20.sp,
-                color = Color.Black
+
             )
         )
 
