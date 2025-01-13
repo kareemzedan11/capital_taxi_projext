@@ -5,6 +5,7 @@ import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
@@ -26,8 +27,10 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.colorResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.lerp
 import androidx.compose.ui.unit.sp
 import com.airbnb.lottie.compose.LottieAnimation
 import com.airbnb.lottie.compose.LottieCompositionSpec
@@ -40,7 +43,7 @@ import kotlinx.coroutines.delay
 
 @Composable
 fun searchAboutADriver() {
-    Column  {
+    Column {
         Box(
             modifier = Modifier
                 .fillMaxWidth()
@@ -94,7 +97,7 @@ fun searchAboutADriver() {
                     Spacer(modifier = Modifier.height(8.dp))
 
                     Text(
-                        "Ride requested. Please wait for the driver.",
+                        stringResource(R.string.Ride_requested),
                         fontSize = 18.sp,
                         fontWeight = FontWeight.SemiBold
                     )
@@ -117,8 +120,7 @@ fun searchAboutADriver() {
                     LinearProgressIndicator(
                         progress = progress,
                         modifier = Modifier
-                            .fillMaxWidth()
-                        ,
+                            .fillMaxWidth(),
                         color = colorResource(R.color.primary_color), // Customize color if needed
                         Color(0XFFF2F2F2)
                     )
@@ -133,12 +135,26 @@ fun searchAboutADriver() {
                             .background(Color.LightGray),
                         contentAlignment = Alignment.Center
                     ) {
-                        Text(
-                            "Drop off time : 3:45am",
-                            fontSize = 18.sp,
-                            fontWeight = FontWeight.W600
-                        )
+                        Row {
+                            Text(
+                                stringResource(R.string.Drop_off_time),
+
+                                fontSize = 18.sp,
+                                fontWeight = FontWeight.W600
+                            )
+
+                            Spacer(modifier = Modifier.padding(start = 10.dp))
+
+                                Text(
+                                    "3:24 Pm",
+
+                                    fontSize = 18.sp,
+                                    fontWeight = FontWeight.W600
+                                )
+
+                        }
                     }
+
 
                     val composition by rememberLottieComposition(
                         spec = LottieCompositionSpec.RawRes(R.raw.loadinganimation)

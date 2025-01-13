@@ -97,6 +97,10 @@
     <string name="ForgetPassword">نسيت كلمة المرور</string>
     <string name="SignIn">تسجيل الدخول</string>
     <string name="OrSignInWith">أو سجل باستخدام</string>
+    <string name="OrSignUpWith">أو اشترك باستخدام</string>
+
+    <string name="Continue">استمرار</string>
+
     <string name="Dont_have_an_account">لا تملك حساباً؟</string>
     <string name="SignUp">سجل</string>
     <string name="passenger_Mode">وضع الراكب</string>
@@ -142,7 +146,7 @@
     <string name="Logout">تسجيل الخروج</string>
     <string name="Delete_Account">حذف الحساب</string>
     <string name="Become_driver">كن سائقًا</string>
-    <string name="Click">اضفط</string>
+    <string name="Click">اضغط</string>
     <string name="Balance_250000_UZS">الرصيد: 250,000 سوم</string>
     <string name="Get_5_percent_discount">احصل على خصم 5%</string>
     <string name="Prepare_your_cash">جهز النقود</string>
@@ -151,7 +155,6 @@
     <string name="Visa_or_MasterCard">فيزا أو ماستركارد</string>
     <string name="Pay_with_your_PayPal_balance">ادفع برصيد باي بال</string>
     <string name="Get_3_percent_discount">احصل على خصم 3%</string>
-
 
 
     <!-- General UI Texts -->
@@ -219,5 +222,84 @@
     <string name="Where_are_you_going_today">إلى أين تذهب اليوم؟</string>
     <string name="Select_Drop_Off_Location">اختر موقع الوصول</string>
     <string name="Select_Pickup_Location">اختر موقع الالتقاء</string>
+    <string name="Pickup_Now">استلام الآن</string>
+    <string name="For_Me">لي</string>
+    <string name="For_a_group">لمجموعة</string>
 
+    <string name="When_do_you_need_a_ride">متى تحتاج إلى رحلة؟</string>
+
+    <string name="Now">الآن</string>
+    <string name="Later">لاحقًا</string>
+
+    <string name="Done_Button">تم</string>
+
+    <string name="Who_is_the_ride_for">لمن الرحلة؟</string>
+
+    <string name="Work">العمل</string>
+    <string name="Favorite">المفضلة</string>
+    <string name="Confirm_Pickup">تأكيد الاستلام</string>
+    <string name="drivers_are_view_request">من السائقون يشاهدون طلبك</string>
+    <string name="Ride_requested">تم طلب الرحلة، يرجى انتظار السائق.</string>
+    <string name="Drop_off_time">وقت النزول</string>
+
+    <!-- دعوة الأصدقاء -->
+
+    <string name="Invitations">الدعوات</string>
+    <string name="offers">العروض</string>
+    <string name="Invite">دعوة</string>
+    <string name="You_not_have_any_offers">ليس لديك أي عروض</string>
+    <string name="You_not_have_any_invitations">ليس لديك أي دعوات</string>
+
+
+    <string name="Pickup_Point">نقطة الاستلام</string>
+    <string name="Arrange_your_trip">رتب رحلتك</string>
+
+    <string name="PickOff_Point">نقطة النزول</string>
+    <string name="select_language">اختر اللغة</string>
+    <string name="Arabic">العربية</string>
+    <string name="English">English</string>
+
+    <string name="create_new_password">إنشاء كلمة مرور جديدة</string>
+    <string name="password_hint">يجب أن تكون هذه الكلمة مختلفة عن كلمة المرور السابقة</string>
+    <string name="new_password_label">كلمة المرور الجديدة</string>
+    <string name="dialog_title">تنبيه</string>
+    <string name="ok_button">موافق</string>
+    <string name="password_changed_successfully">تم تغيير كلمة المرور بنجاح</string>
+    <string name="please_enter_valid_password">يرجى إدخال كلمة مرور صالحة</string>
+
+    <string name="back_button_description">عودة</string>
+    <string name="Driver_Mode">وضع السائق</string>
+
+
+    <string name="face_validation_title">التحقق من الوجه</string>
+    <string name="photo">صورة</string>
+    <string name="add_a_photo">أضف صورة</string>
+    <string name="photo_is_uploaded">تم رفع الصورة</string>
+    <string name="clear_face">- وجه واضح</string>
+    <string name="no_sunglasses">- بدون نظارات شمسية</string>
+    <string name="good_lighting">- إضاءة جيدة وبدون فلاتر</string>
+
+
+    <string name="certificate_of_vehicle_registration">شهادة تسجيل المركبة</string>
+    <string name="upload_vehicle_registration">رفع تسجيل المركبة</string>
+    <string name="front_of_vehicle_registration">واجهة تسجيل المركبة</string>
+    <string name="back_of_vehicle_registration">خلفية تسجيل المركبة</string>
+    <string name="add_front_photo">أضف صورة أمامية</string>
+    <string name="add_back_photo">أضف صورة خلفية</string>
+
+
+    <string name="national_id_card">بطاقة الهوية الوطنية</string>
+    <string name="front_of_national_id">واجهة بطاقة الهوية الوطنية</string>
+    <string name="back_of_national_id">خلفية بطاقة الهوية الوطنية</string>
+
+    <string name="driver_licence">رخصة القيادة</string>
+    <string name="front_of_license">واجهة الرخصة</string>
+    <string name="back_of_license">خلفية الرخصة</string>
+
+    <string name="selfie_with_license">سيلفي مع الرخصة</string>
+    <string name="add_selfie">أضف سيلفي</string>
+
+
+    <string name="driver_license_number">رقم رخصة القيادة</string>
+    <string name="expiration_date">تاريخ الانتهاء</string>
 </resources>

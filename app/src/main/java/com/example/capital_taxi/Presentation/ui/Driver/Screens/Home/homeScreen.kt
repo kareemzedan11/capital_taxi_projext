@@ -2,10 +2,12 @@ package com.example.capital_taxi.Presentation.ui.Driver.Screens.Home
 
 import TopBar
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowDropDown
+import androidx.compose.material.icons.filled.Star
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -23,7 +25,9 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
+import com.example.capital_taxi.Presentation.ui.Driver.Screens.Home.Components.DriverArrivedCard
 import com.example.capital_taxi.Presentation.ui.Driver.Screens.Home.Components.DriverNavigationDrawer
+import com.example.capital_taxi.Presentation.ui.Driver.Screens.Home.Components.RideInfoCard
 import com.example.capital_taxi.Presentation.ui.Driver.Screens.Home.Components.RideRequestCard
 import com.example.capital_taxi.Presentation.ui.Driver.Screens.Home.Components.captainToPassengar
 import com.example.capital_taxi.Presentation.ui.Driver.Screens.Home.Components.driverHomeScreenContent
@@ -72,12 +76,18 @@ fun driverHomeScreen(navController: NavController) {
                     modifier = Modifier.fillMaxSize(),
                     contentAlignment = Alignment.Center
                 ) {
-                    // TripArrivedCard()
+                    TripArrivedCard()
                     MapSection(navController = navController)
                     //  PassengerConnectionCard()
                     if (isStart) {
-                      tripDetailsCard(light = false)
-                        //TripArrivedCard()
+                     //   TripInProgressCardSimplified()
+                           // DriverArrivedCard()
+                        // RideInfoCard()
+                        // StartTripScreen(onStartTrip = {})
+                        //  TripArrivedCard()
+                        //  tripDetailsCard(light = false)
+                        // TripArrivedCard()
+                       TripArrivedCard2()
                     }
 
 
@@ -194,13 +204,51 @@ fun driverHomeScreen(navController: NavController) {
                 }
             }
         } else if (isStart) {
-            captainToPassengar(navController)
+
 
         }
     }
 
 
 }
+
+@Composable
+fun StartTripScreen(onStartTrip: () -> Unit) {
+    Box(
+        modifier = Modifier
+            .fillMaxSize()
+            .background(Color.White)
+            .padding(16.dp),
+        contentAlignment = Alignment.Center
+    ) {
+        Column(
+            horizontalAlignment = Alignment.CenterHorizontally,
+            verticalArrangement = Arrangement.Center
+        ) {
+            Text(
+                text = "You've arrived at the passenger's location",
+                style = MaterialTheme.typography.titleLarge,
+                textAlign = TextAlign.Center
+            )
+            Spacer(modifier = Modifier.height(16.dp))
+            Button(
+                onClick = onStartTrip,
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .height(56.dp),
+                colors = ButtonDefaults.buttonColors(Color.Green)
+            ) {
+                Text(
+                    text = "Start Trip",
+                    color = Color.White,
+                    style = MaterialTheme.typography.titleLarge
+                )
+            }
+        }
+    }
+}
+
+
 @Composable
 fun PassengerConnectionCard() {
     Column(
@@ -320,6 +368,283 @@ fun TripArrivedCard() {
         }
     }
 }
+
+@Composable
+fun TripInProgressCardSimplified() {
+    Card(
+        shape = RoundedCornerShape(16.dp),
+        elevation = CardDefaults.cardElevation(8.dp),
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(16.dp)
+    ) {
+        Column(
+            modifier = Modifier
+                .background(Color.White)
+                .padding(16.dp)
+        ) {
+            // Header Section
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.SpaceBetween,
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                Column {
+                    Text(
+                        text = "Trip In Progress",
+                        fontWeight = FontWeight.Bold,
+                        fontSize = 16.sp,
+                        color = colorResource(R.color.primary_color)
+                    )
+                    Spacer(modifier = Modifier.height(4.dp))
+                    Text(
+                        text = "Destination:",
+                        fontSize = 14.sp,
+                        fontWeight = FontWeight.Bold
+                    )
+                    Text(
+                        text = "Abbas El-Akkad Strt",
+                        fontSize = 14.sp
+                    )
+                }
+
+                Text(
+                    text = "15 mins left",
+                    fontSize = 12.sp,
+                    color = Color.Gray
+                )
+            }
+
+            Spacer(modifier = Modifier.height(8.dp))
+            Divider(color = Color.Gray, thickness = 1.dp)
+
+            Spacer(modifier = Modifier.height(8.dp))
+
+            // Fare and Distance Section
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.SpaceBetween,
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                Column {
+                    Text(
+                        text = "Distance:",
+                        fontWeight = FontWeight.Bold,
+                        fontSize = 14.sp
+                    )
+                    Text(
+                        text = "5.2 km",
+                        fontSize = 14.sp
+                    )
+                }
+                Column {
+                    Text(
+                        text = "Estimated Fare:",
+                        fontWeight = FontWeight.Bold,
+                        fontSize = 14.sp
+                    )
+                    Text(
+                        text = "30.00 EGP",
+                        fontSize = 14.sp,
+                        color = colorResource(R.color.primary_color)
+                    )
+                }
+            }
+
+            Spacer(modifier = Modifier.height(8.dp))
+
+            // Action Buttons
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.Center,
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                Button(
+                    onClick = { /* Handle End Trip action */ },
+                    colors = ButtonDefaults.buttonColors(containerColor = Color.Red)
+                ) {
+                    Text(text = "End Trip", color = Color.White)
+                }
+            }
+        }
+    }
+}@Composable
+fun TripArrivedCard2() {
+    var rating by remember { mutableStateOf(0f) } // Store the rating value
+    var comment by remember { mutableStateOf("") } // Store the comment
+    var showDialog by remember { mutableStateOf(false) } // Show dialog after submission
+
+    Card(
+        shape = RoundedCornerShape(16.dp),
+        elevation = CardDefaults.cardElevation(8.dp),
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(16.dp)
+    ) {
+        Column(
+            modifier = Modifier
+                .background(Color.White)
+                .padding(16.dp)
+        ) {
+            // Header Section
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.SpaceBetween,
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                Column {
+                    Text(
+                        text = "Trip Arrived",
+                        fontWeight = FontWeight.Bold,
+                        fontSize = 16.sp,
+                        color =  colorResource(R.color.primary_color)
+                    )
+                    Spacer(modifier = Modifier.height(4.dp))
+                    Text(
+                        text = "Destination: ",
+                        fontSize = 14.sp,
+                        fontWeight = FontWeight.Bold
+                    )
+                    Text(
+                        text = "Abbas El-Akkad Strt",
+                        fontSize = 14.sp
+                    )
+                }
+
+                Text(
+                    text = "Arrived",
+                    fontSize = 12.sp,
+                    color = Color.Gray
+                )
+            }
+
+            Spacer(modifier = Modifier.height(8.dp))
+            Divider(color = Color.Gray, thickness = 1.dp)
+
+            Spacer(modifier = Modifier.height(8.dp))
+
+            // Fare and Distance Section (optional)
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.SpaceBetween,
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                Column {
+                    Text(
+                        text = "Distance:",
+                        fontWeight = FontWeight.Bold,
+                        fontSize = 14.sp
+                    )
+                    Text(
+                        text = "5.2 km", // Optional
+                        fontSize = 14.sp
+                    )
+                }
+                Column {
+                    Text(
+                        text = "Fare:",
+                        fontWeight = FontWeight.Bold,
+                        fontSize = 14.sp
+                    )
+                    Text(
+                        text = "30.00 EGP",
+                        fontSize = 14.sp,
+                        color = Color(0xFF4CAF50)
+                    )
+                }
+            }
+
+            Spacer(modifier = Modifier.height(8.dp))
+
+            // Rating Section - Driver Rating User
+            Text(
+                text = "Rate the User:",
+                fontWeight = FontWeight.Bold,
+                fontSize = 14.sp
+            )
+            Spacer(modifier = Modifier.height(4.dp))
+
+            // Rating Bar (Stars)
+            RatingBar(rating = rating, onRatingChanged = { newRating -> rating = newRating })
+
+            Spacer(modifier = Modifier.height(16.dp))
+
+            // Comment Section
+            Text(
+                text = "Leave a comment (optional):",
+                fontWeight = FontWeight.Bold,
+                fontSize = 14.sp
+            )
+            Spacer(modifier = Modifier.height(4.dp))
+
+            TextField(
+                value = comment,
+                onValueChange = { comment = it },
+                label = { Text("Your comment...") },
+                modifier = Modifier.fillMaxWidth(),
+                maxLines = 3
+            )
+
+            Spacer(modifier = Modifier.height(16.dp))
+
+            // Submit Button (Gray until rating and/or comment provided)
+            Button(
+                onClick = {
+                    showDialog = true // Show dialog after submission
+                },
+                enabled = rating > 0f || comment.isNotEmpty(), // Button enabled if rating or comment provided
+                colors = ButtonDefaults.buttonColors(
+                    containerColor = if (rating > 0f || comment.isNotEmpty())  colorResource(R.color.primary_color)else Color.Gray
+                ),
+                modifier = Modifier.fillMaxWidth()
+            ) {
+                Text(text = "Submit Rating", color = Color.Black)
+            }
+
+            Spacer(modifier = Modifier.height(8.dp))
+
+            // Go to Home Button
+            Button(
+                onClick = { /* Handle Go to Home action */ },
+                colors = ButtonDefaults.buttonColors(containerColor = colorResource(R.color.primary_color)),
+                modifier = Modifier.fillMaxWidth()
+            ) {
+                Text(text = "Go to Home", color = Color.Black)
+            }
+        }
+    }
+
+    // Show Dialog when rating is submitted
+    if (showDialog) {
+        AlertDialog(
+            onDismissRequest = { showDialog = false },
+            title = { Text("Rating Submitted") },
+            text = { Text("Your rating and comment have been submitted.") },
+            confirmButton = {
+                TextButton(onClick = { showDialog = false }) {
+                    Text("OK")
+                }
+            }
+        )
+    }
+}
+
+@Composable
+fun RatingBar(rating: Float, onRatingChanged: (Float) -> Unit) {
+    Row(horizontalArrangement = Arrangement.Start) {
+        for (i in 1..5) {
+            Icon(
+                imageVector = if (i <= rating) Icons.Default.Star else Icons.Default.Star,
+                contentDescription = "Rating Star",
+                tint = if (i <= rating) Color.Yellow else Color.Gray, // Yellow for selected stars
+                modifier = Modifier
+                    .padding(end = 4.dp)
+                    .clickable { onRatingChanged(i.toFloat()) }
+            )
+        }
+    }
+}
+
 
 @Composable
 fun InfoRow(icon: Int, label: String) {

@@ -52,6 +52,7 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -73,12 +74,17 @@ fun DriverLicence(navController: NavController) {
     Scaffold(
         topBar = {
             TopAppBar(
-                title = { Text("Driver License", fontWeight = FontWeight.Bold, fontSize = 20.sp) },
+                title = {
+                    Text(
+                        stringResource(R.string.driver_licence),
+                        fontWeight = FontWeight.Bold,
+                        fontSize = 20.sp
+                    )
+                },
                 navigationIcon = {
                     IconButton(onClick = { navController.popBackStack() }) {
                         Box(
                             modifier = Modifier
-
                                 .size(36.dp)
                                 .background(Color.Transparent)
                                 .border(4.dp, color = Color.Black, RoundedCornerShape(30.dp)),
@@ -115,7 +121,7 @@ fun DriverLicence(navController: NavController) {
             ) {
                 Spacer(modifier = Modifier.height(60.dp))
                 Text(
-                    text = "Driver Licence",
+                    text = stringResource(R.string.driver_licence),
                     color = Color.Black,
                     fontSize = 30.sp,
                     fontWeight = FontWeight.Bold
@@ -125,8 +131,8 @@ fun DriverLicence(navController: NavController) {
 
                 // Front of License Section
                 DriverLicenseCaptureSection(
-                    title = "Front of License",
-                    buttonText = "Add Front Photo",
+                    title = stringResource(R.string.front_of_license),
+                    buttonText = stringResource(R.string.add_front_photo),
                     backgroundColor = Color(0xFFE0F7FA), // Light Blue
                     capturedBitmap = frontImageBitmap,
                     onBitmapCaptured = { frontImageBitmap = it },
@@ -138,8 +144,8 @@ fun DriverLicence(navController: NavController) {
 
                 // Back of License Section
                 DriverLicenseCaptureSection(
-                    title = "Back of License",
-                    buttonText = "Add Back Photo",
+                    title = stringResource(R.string.back_of_license),
+                    buttonText = stringResource(R.string.add_back_photo),
                     backgroundColor = Color(0xFFFCE4EC), // Light Pink
                     capturedBitmap = backImageBitmap,
                     onBitmapCaptured = { backImageBitmap = it },
@@ -156,8 +162,8 @@ fun DriverLicence(navController: NavController) {
 
                 // Selfie with License Section
                 DriverLicenseCaptureSection(
-                    title = "Selfie with License",
-                    buttonText = "Add Selfie",
+                    title = stringResource(R.string.selfie_with_license),
+                    buttonText = stringResource(R.string.add_selfie),
                     backgroundColor = Color(0xFFE8F5E9), // Light Green
                     capturedBitmap = selfieImageBitmap,
                     onBitmapCaptured = { selfieImageBitmap = it },
@@ -175,7 +181,7 @@ fun DriverLicence(navController: NavController) {
                         .background(Color.Black),
                     onClick = { navController.navigate(Destination.NationalIDValidation.route) }
                 ) {
-                    Text("Continue", fontSize = 20.sp, color = Color.White)
+                    Text(stringResource(R.string.Continue), fontSize = 20.sp, color = Color.White)
                 }
             }
         }
@@ -318,7 +324,7 @@ fun DriverLicenseInfoSection() {
         modifier = Modifier.fillMaxWidth()
     ) {
         // License Number Input
-        LicenseTextField(label = "Driver License Number")
+        LicenseTextField(label = stringResource(R.string.driver_license_number))
 
         // Expiration Date Picker
         ExpirationDatePicker()
@@ -371,7 +377,7 @@ fun ExpirationDatePicker() {
         modifier = Modifier.fillMaxWidth()
     ) {
         Text(
-            text = "Expiration Date",
+            text =stringResource(R.string.expiration_date),
             color = Color.Black,
             fontSize = 16.sp,
             fontWeight = FontWeight.Bold

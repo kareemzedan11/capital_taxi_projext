@@ -15,6 +15,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.example.capital_taxi.R
 
@@ -26,7 +27,7 @@ fun MostVisitedPlaces(){
                 contentDescription = "home icon")
             Spacer(modifier = Modifier.padding(start = 5.dp))
 
-            Text("Home")
+            Text(stringResource(R.string.Home))
             Spacer(modifier = Modifier.padding(start = 8.dp))
 
             Icon(imageVector = Icons.Default.KeyboardArrowRight,
@@ -41,7 +42,8 @@ fun MostVisitedPlaces(){
                 contentDescription = "work icon")
             Spacer(modifier = Modifier.padding(start = 5.dp))
 
-            Text("Work")
+            Text(stringResource(R.string.Work))
+
             Spacer(modifier = Modifier.padding(start = 8.dp))
             Icon(imageVector = Icons.Default.KeyboardArrowRight,
                 contentDescription = "KeyboardArrowRight icon")
@@ -53,7 +55,8 @@ fun MostVisitedPlaces(){
                 contentDescription = "favorite icon")
             Spacer(modifier = Modifier.padding(start = 5.dp))
 
-            Text("Favorite")
+            Text(stringResource(R.string.Favorite))
+
             Spacer(modifier = Modifier.padding(start = 8.dp))
             Icon(imageVector = Icons.Default.KeyboardArrowRight,
                 contentDescription = "KeyboardArrowRight icon")

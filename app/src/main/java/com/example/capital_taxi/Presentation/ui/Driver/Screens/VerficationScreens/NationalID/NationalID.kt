@@ -50,6 +50,7 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -68,7 +69,7 @@ fun NationalIDValidation(navController: NavController) {
             TopAppBar(
                 title = {
                     Text(
-                        "National ID Validation",
+                        stringResource(R.string.national_id_card),
                         fontWeight = FontWeight.Bold,
                         fontSize = 20.sp
                     )
@@ -77,7 +78,6 @@ fun NationalIDValidation(navController: NavController) {
                     IconButton(onClick = { navController.popBackStack() }) {
                         Box(
                             modifier = Modifier
-
                                 .size(36.dp)
                                 .background(Color.Transparent)
                                 .border(4.dp, color = Color.Black, RoundedCornerShape(30.dp)),
@@ -108,14 +108,13 @@ fun NationalIDValidation(navController: NavController) {
                     .verticalScroll(rememberScrollState())
                     .windowInsetsPadding(WindowInsets.navigationBars)
                     .fillMaxSize()
-
                     .padding(16.dp),
                 verticalArrangement = Arrangement.Center,
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
                 Spacer(modifier = Modifier.height(60.dp))
                 Text(
-                    text = "National ID Card",
+                    text = stringResource(R.string.national_id_card),
                     color = Color.Black,
                     fontSize = 30.sp,
                     fontWeight = FontWeight.Bold
@@ -125,8 +124,8 @@ fun NationalIDValidation(navController: NavController) {
 
                 // Front of National ID Card Section
                 DriverNationalIDCaptureSection(
-                    title = "Front of National ID Card",
-                    buttonText = "Add Front Photo",
+                    title = stringResource(R.string.front_of_national_id),
+                    buttonText = stringResource(R.string.add_front_photo),
                     backgroundColor = Color(0xFFE0F7FA) // Light Blue
                 )
 
@@ -134,8 +133,8 @@ fun NationalIDValidation(navController: NavController) {
 
                 // Back of National ID Card Section
                 DriverNationalIDCaptureSection(
-                    title = "Back of National ID Card",
-                    buttonText = "Add Back Photo",
+                    title = stringResource(R.string.back_of_national_id),
+                    buttonText = stringResource(R.string.add_back_photo),
                     backgroundColor = Color(0xFFFCE4EC) // Light Pink
                 )
 
@@ -147,16 +146,15 @@ fun NationalIDValidation(navController: NavController) {
                         .fillMaxWidth()
                         .padding(horizontal = 40.dp)
                         .background(Color.Black),
-                    onClick = {navController.navigate(Destination.CertificateOfVehicleRegistration.route)
-
-            } // Replace with actual route
+                    onClick = { navController.navigate(Destination.CertificateOfVehicleRegistration.route) }
                 ) {
-                    Text("Continue", fontSize = 20.sp, color = Color.White)
+                    Text(stringResource(R.string.Continue), fontSize = 20.sp, color = Color.White)
                 }
             }
         }
     }
 }
+
 
 @Composable
 fun DriverNationalIDCaptureSection(

@@ -44,6 +44,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
@@ -81,7 +82,7 @@ fun userSignupContent(navController: NavController) {
         // Title
         Text(
 
-            text = "Sign Up",
+            text = stringResource(R.string.SignUp),
             fontSize = 32.sp,
             fontWeight = FontWeight.Bold,
             color = Color.Black,
@@ -90,7 +91,7 @@ fun userSignupContent(navController: NavController) {
         Spacer(modifier = Modifier.height(16.dp))
         Text(
 
-            text = "Create a new User",
+            text = stringResource(R.string.create_user),
             fontSize = 24.sp,
             fontWeight = FontWeight.W500,
             color = Color.Black,
@@ -123,7 +124,7 @@ fun userSignupContent(navController: NavController) {
 
                 )
             },
-            label = { Text("User Name") },
+            label = { Text(stringResource(R.string.user_name)) },
             modifier = Modifier
 
                 .fillMaxWidth(),
@@ -155,7 +156,7 @@ fun userSignupContent(navController: NavController) {
 
                 )
             },
-            label = { Text("Email") },
+            label = { Text(stringResource(R.string.Email_label)) },
             modifier = Modifier.fillMaxWidth(),
             keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Email)
         )
@@ -186,7 +187,7 @@ fun userSignupContent(navController: NavController) {
 
                 )
             },
-            label = { Text("Password") },
+            label = { Text(stringResource(R.string.password)) },
             modifier = Modifier.fillMaxWidth(),
             visualTransformation = if (passwordVisible) VisualTransformation.None else PasswordVisualTransformation(),
             trailingIcon = {
@@ -227,7 +228,7 @@ fun userSignupContent(navController: NavController) {
 
                 )
             },
-            label = { Text("Confirm Password") },
+            label = { Text(stringResource(R.string.confirm_password) )},
             modifier = Modifier.fillMaxWidth(),
             visualTransformation = if (Confirmpasswordvisible) VisualTransformation.None else PasswordVisualTransformation(),
             trailingIcon = {
@@ -269,7 +270,7 @@ fun userSignupContent(navController: NavController) {
 
                 )
             },
-            label = { Text("Phone") },
+            label = { Text(stringResource(R.string.phone)) },
             modifier = Modifier.fillMaxWidth(),
 
             keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Phone)
@@ -290,7 +291,7 @@ fun userSignupContent(navController: NavController) {
                 modifier = Modifier.padding(end = 8.dp)
             )
             Text(
-                text = "I agree to terms&conditions",
+                text = stringResource(R.string.terms_conditions),
                 fontSize = 16.sp,
                 modifier = Modifier.clickable {
 
@@ -311,7 +312,7 @@ fun userSignupContent(navController: NavController) {
             shape = RoundedCornerShape(8.dp) // Rounded corners
         ) {
             Text(
-                text = "Continue",
+                text = stringResource(R.string.Continue),
                 fontSize = 18.sp,
                 color = Color.White
             )
@@ -322,7 +323,7 @@ fun userSignupContent(navController: NavController) {
 
 
         Text(
-            text = "Or sign up With",
+            text = stringResource(R.string.OrSignUpWith),
             color = Color.Black,
             fontSize = 18.sp,
             fontWeight = FontWeight.Bold
@@ -413,15 +414,15 @@ fun userSignupContent(navController: NavController) {
         // SignUp Text
         Row {
             Text(
-                text = "Already have an account ?",
+                text = stringResource(R.string.already_have_account),
                 fontSize = 18.sp,
             )
 
             Spacer(modifier = Modifier.width(4.dp))
 
             Text(
-                text = "SignIn",
-                color = Color(0xFF6200EE),
+                text = stringResource(R.string.SignIn),
+                color = colorResource(R.color.primary_color),
                 fontSize = 18.sp,
                 modifier = Modifier.clickable {
                     navController.popBackStack()

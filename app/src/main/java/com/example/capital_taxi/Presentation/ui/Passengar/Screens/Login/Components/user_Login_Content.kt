@@ -398,6 +398,7 @@ fun userLoginContent(
                 text = stringResource(id = R.string.SignUp),
                color =  colorResource(R.color.primary_color),
                 fontSize = 18.sp,
+
                 modifier = Modifier.clickable {
                     navController.navigate(Destination.UserRegister.route)
                 }

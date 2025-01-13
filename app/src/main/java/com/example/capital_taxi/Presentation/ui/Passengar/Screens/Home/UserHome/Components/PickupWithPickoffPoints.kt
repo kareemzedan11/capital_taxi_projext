@@ -146,7 +146,7 @@ fun PickupWithPickoffPoints(navController: NavController ) {
                     )
                 },
                 onClick = {},
-                hint = "Pickup Point",
+                hint = stringResource(R.string.Pickup_Point),
 
                 initialText = locationName,
                 query = locationName,
@@ -194,8 +194,8 @@ fun PickupWithPickoffPoints(navController: NavController ) {
                     )
                 },
                 onClick = {},
-                initialText = "Pickup Point",
-                hint = "PickOff Point",
+                initialText = stringResource(R.string.PickOff_Point),
+                hint = stringResource(R.string.PickOff_Point),
                 query = destinationPoint,
                 onQueryChanged = { destinationPoint = it },
                 onLocationSelected = { destinationPoint = it },

@@ -31,6 +31,7 @@ import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Path
 import androidx.compose.ui.graphics.drawscope.clipPath
 import androidx.compose.ui.res.colorResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import com.example.capital_taxi.Presentation.ui.Driver.Screens.Login.Components.driverLoginContent
 
@@ -49,7 +50,7 @@ fun DriverLoginIn(navController: NavController) {
 
                 title = {
                     Text(
-                        "Driver Mode",
+                        stringResource(R.string.Driver_Mode),
                         color = Color.Black,
                         fontWeight = FontWeight.Bold
                     )

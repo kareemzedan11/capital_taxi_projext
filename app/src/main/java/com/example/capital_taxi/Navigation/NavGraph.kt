@@ -39,15 +39,15 @@ import com.example.capital_taxi.Presentation.ui.Passengar.Screens.Register.UserR
 import com.example.capital_taxi.Presentation.ui.Passengar.Screens.Safety.SafetyScreen
 import com.example.capital_taxi.Presentation.ui.Passengar.Screens.notification.userNotification
 import com.example.capital_taxi.Presentation.ui.Passengar.Screens.profile.Profile
-import com.example.capital_taxi.Presentation.ui.screens.Confirm_information.ConfirmInformation
-import com.example.capital_taxi.Presentation.ui.screens.OTP.OtpScreen
-import com.example.capital_taxi.Presentation.ui.screens.Onboarding.Components.SelectTheMode2
-import com.example.capital_taxi.Presentation.ui.screens.Onboarding.OnboardingPager
-import com.example.capital_taxi.Presentation.ui.screens.Select_the_mode.SelectTheMode
-import com.example.capital_taxi.Presentation.ui.screens.Start.StartScreen
-import com.example.capital_taxi.Presentation.ui.screens.modeDesign.modeDesign
-import com.example.capital_taxi.Presentation.ui.screens.new_password.NewPasswordScreen
-import com.example.capital_taxi.Presentation.ui.screens.search_for_location.SearchForLocation
+import com.example.capital_taxi.Presentation.ui.shared.Confirm_information.ConfirmInformation
+import com.example.capital_taxi.Presentation.ui.shared.OTP.OtpScreen
+import com.example.capital_taxi.Presentation.ui.shared.Onboarding.Components.SelectTheMode2
+import com.example.capital_taxi.Presentation.ui.shared.Onboarding.OnboardingPager
+import com.example.capital_taxi.Presentation.ui.shared.Select_the_mode.SelectTheMode
+import com.example.capital_taxi.Presentation.ui.shared.Start.StartScreen
+import com.example.capital_taxi.Presentation.ui.shared.modeDesign.modeDesign
+import com.example.capital_taxi.Presentation.ui.shared.new_password.NewPasswordScreen
+import com.example.capital_taxi.Presentation.ui.shared.search_for_location.SearchForLocation
 import com.example.capital_taxi.ui.screens.Driver.VerficationScreens.CertificateOfVehicleRegistration
 import com.example.capital_taxi.ui.screens.Driver.VerficationScreens.DriverLicence
 import com.example.capital_taxi.ui.screens.Driver.VerficationScreens.NationalIDValidation
@@ -58,7 +58,7 @@ import settings
 fun AppNavGraph(navController: NavHostController) {
 
     var context = LocalContext.current
-    NavHost(navController = navController, startDestination = Destination.UserHomeScreen.route) {
+    NavHost(navController = navController, startDestination = Destination.DriverHomeScreen.route) {
 
         composable(Destination.SplashScreen.route) {
             SplashScreen(navController)

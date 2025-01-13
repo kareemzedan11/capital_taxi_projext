@@ -11,6 +11,6 @@ data class VehicleOption(
 val vehicleOptions = listOf(
     VehicleOption("Standard", 8.50, R.drawable.uber),
     VehicleOption("Comfort", 10.50, R.drawable.uber),
-    VehicleOption("Minivan", 13.50, R.drawable.uber)
+    VehicleOption("Luxury", 13.50, R.drawable.uber)
 )
 

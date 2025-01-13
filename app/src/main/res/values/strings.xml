@@ -151,9 +151,12 @@
     <string name="ForgetPassword">Forget Password</string>
     <string name="SignIn">Sign In</string>
     <string name="OrSignInWith">Or sign in With</string>
+    <string name="OrSignUpWith">Or sign in With</string>
+
     <string name="Dont_have_an_account">Don\'t have an account?</string>
     <string name="SignUp">Sign Up</string>
     <string name="sign_in_with">Or sign in With</string>
+    <string name="Continue">Continue</string>
 
 
     <!-- user HomeScreen -->
@@ -273,5 +276,91 @@
     <string name="Where_are_you_going_today">Where are you going today?</string>">
     <string name="Select_Drop_Off_Location">Select Drop Off Location</string>
     <string name="Select_Pickup_Location">Select Pickup Location</string>
+
+
+    <string name="Pickup_Now">Pickup Now</string>">
+    <string name="PickOff_Point">PickOff Point</string>">
+    <string name="Pickup_Point">Pickup Point</string>
+
+    <string name="For_Me">For Me</string>
+    <string name="For_a_group">For a Group</string>
+
+    <string name="When_do_you_need_a_ride">When do you need a ride?</string>
+    <string name="Now">Now</string>
+    <string name="Later">Later</string>
+
+    <string name="Done_Button">Done</string>
+
+    <string name="Who_is_the_ride_for">Who is the ride for?</string>
+
+    <string name="Work">Work</string>
+    <string name="Favorite">Favorite</string>
+    <string name="Confirm_Pickup">Confirm Pickup</string>
+    <string name="drivers_are_view_request">drivers are viewing your request</string>
+    <string name="Ride_requested">Ride requested, Please wait for the driver.</string>
+    <string name="Drop_off_time">Drop off time</string>
+
+    <!-- Invite Friends -->
+
+    <string name="Invitations">Invitations</string>
+    <string name="offers">Offers</string>
+    <string name="Invite">Invite</string>
+    <string name="You_not_have_any_offers">You haven\'t any offers</string>
+    <string name="You_not_have_any_invitations">You haven\'t any invitations</string>
+
+
+    <string name="Arrange_your_trip">Arrange your trip</string>
+
+
+    <string name="create_new_password">Create New \n \nPassword</string>
+    <string name="password_hint">This password should be different from the previous password</string>
+    <string name="new_password_label">New Password</string>
+
+    <string name="back_button_description">Back</string>
+
+
+    <string name="dialog_title">Notice</string>
+    <string name="ok_button">OK</string>
+    <string name="password_changed_successfully">Password changed successfully</string>
+    <string name="please_enter_valid_password">please_enter_valid_password</string>
+
+    <string name="select_language">Select language</string>
+    <string name="Arabic">العربيه</string>
+    <string name="English">English</string>
+    <string name="Driver_Mode"> Driver Mode</string>
+
+
+    <string name="face_validation_title">Face Validation</string>
+    <string name="photo">Photo</string>
+    <string name="add_a_photo">Add a photo</string>
+    <string name="photo_is_uploaded">Photo is uploaded</string>
+    <string name="clear_face">- Clearly visible face</string>
+    <string name="no_sunglasses">- Without sunglasses</string>
+    <string name="good_lighting">- Good lighting and without filters</string>
+
+
+    <string name="certificate_of_vehicle_registration">Certificate Of Vehicle Registration</string>
+    <string name="upload_vehicle_registration">Upload Vehicle Registration</string>
+    <string name="front_of_vehicle_registration">Front of Vehicle Registration</string>
+    <string name="back_of_vehicle_registration">Back of Vehicle Registration</string>
+
+
+
+    <string name="driver_licence">Driver License</string>
+    <string name="front_of_license">Front of License</string>
+    <string name="back_of_license">Back of License</string>
+
+    <string name="selfie_with_license">Selfie with License</string>
+    <string name="add_selfie">Add Selfie</string>
+
+
+    <string name="national_id_card">National ID Card</string>
+    <string name="front_of_national_id">Front of National ID Card</string>
+    <string name="back_of_national_id">Back of National ID Card</string>
+    <string name="add_front_photo">Add Front Photo</string>
+    <string name="add_back_photo">Add Back Photo</string>
+
+    <string name="driver_license_number">Driver License Number</string>
+    <string name="expiration_date">Expiration Date</string>
 
 </resources>

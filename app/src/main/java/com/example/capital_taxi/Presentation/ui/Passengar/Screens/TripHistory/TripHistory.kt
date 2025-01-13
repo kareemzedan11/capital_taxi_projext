@@ -35,6 +35,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.core.content.ContextCompat
 import androidx.navigation.NavController
+import com.example.capital_taxi.Presentation.ui.Passengar.Components.RideHistoryList
 import com.example.capital_taxi.R
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -97,12 +98,7 @@ fun Trips_History_Screen_Content(modifier: Modifier = Modifier, navController: N
                 .background(Color.White),
             contentAlignment = Alignment.Center // Align content in the center of the Box
         ) {
-            Text(
-                text = stringResource(id = R.string.No_Trip_Message), // Use the localized string
-                fontSize = 16.sp,
-                fontWeight = FontWeight.Medium,
-                color = Color.Black
-            )
+            RideHistoryList()
         }
     }
 }

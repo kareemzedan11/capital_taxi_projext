@@ -69,7 +69,7 @@ fun driverLoginContent(
 
 
         Text(
-            text = "Sign In",
+            text = stringResource(R.string.SignIn),
             fontSize = 32.sp,
             fontWeight = FontWeight.Bold,
             color = Color.Black,
@@ -152,7 +152,7 @@ fun driverLoginContent(
         Text(
             textDecoration = TextDecoration.Underline,
 
-            text = "Forget Password",
+            text = stringResource(R.string.ForgetPassword),
             modifier = Modifier.align(alignment = Alignment.End),
             color = colorResource(id = R.color.primary_color),
             fontWeight = FontWeight.Bold, fontSize = 18.sp,
@@ -172,7 +172,7 @@ fun driverLoginContent(
 
         ) {
             Text(
-                text = "Sign In",
+                text = stringResource(R.string.SignIn),
                 fontSize = 18.sp,
                 color = Color.Black
 
@@ -185,7 +185,7 @@ fun driverLoginContent(
 
 
         Text(
-            text = "Or sign in With",
+            text = stringResource(R.string.OrSignInWith),
             color = Color.Black,
             fontSize = 18.sp,
             fontWeight = FontWeight.Bold
@@ -281,7 +281,7 @@ fun driverLoginContent(
 
             Text(
                 text = stringResource(id = R.string.SignUp),
-                color = Color(0xFF6200EE),
+                color = colorResource(R.color.primary_color),
                 fontSize = 18.sp,
                 modifier = Modifier.clickable {
                     navController.navigate(Destination.driverSignUp.route)

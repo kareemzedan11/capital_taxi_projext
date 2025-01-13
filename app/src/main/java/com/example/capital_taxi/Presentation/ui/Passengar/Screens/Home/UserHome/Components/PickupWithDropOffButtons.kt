@@ -219,7 +219,7 @@ fun PickupWithDropOffButtons(navController: NavController, locationName: String?
 //                )
 //
 //            }
-            IntercityCard()
+          IntercityCard()
 
 
         }

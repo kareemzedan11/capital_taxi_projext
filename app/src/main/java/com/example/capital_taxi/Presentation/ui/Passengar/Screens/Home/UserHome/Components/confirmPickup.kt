@@ -22,6 +22,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.colorResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.capital_taxi.R
@@ -69,7 +70,7 @@ fun confirmPickup(onclick:()->Unit) {
                     shape = RoundedCornerShape(8.dp)
                 ) {
                     Text(
-                        text = "Confirm Pickup",
+                        text = stringResource(R.string.Confirm_Pickup),
                         fontSize = 18.sp,
                         color = Color.Black
                     )

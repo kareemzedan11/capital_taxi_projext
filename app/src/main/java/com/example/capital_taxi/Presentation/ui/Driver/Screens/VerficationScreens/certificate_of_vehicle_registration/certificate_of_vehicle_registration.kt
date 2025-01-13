@@ -50,13 +50,13 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.example.capital_taxi.R
 import java.io.File
-
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun CertificateOfVehicleRegistration(navController: NavController) {
@@ -65,7 +65,7 @@ fun CertificateOfVehicleRegistration(navController: NavController) {
             TopAppBar(
                 title = {
                     Text(
-                        "Certificate Of Vehicle Registration",
+                        stringResource(R.string.certificate_of_vehicle_registration),
                         fontWeight = FontWeight.Bold,
                         fontSize = 20.sp
                     )
@@ -74,7 +74,6 @@ fun CertificateOfVehicleRegistration(navController: NavController) {
                     IconButton(onClick = { navController.popBackStack() }) {
                         Box(
                             modifier = Modifier
-
                                 .size(36.dp)
                                 .background(Color.Transparent)
                                 .border(4.dp, color = Color.Black, RoundedCornerShape(30.dp)),
@@ -111,7 +110,7 @@ fun CertificateOfVehicleRegistration(navController: NavController) {
             ) {
                 Spacer(modifier = Modifier.height(60.dp))
                 Text(
-                    text = "Upload Vehicle Registration",
+                    text = stringResource(R.string.upload_vehicle_registration),
                     color = Color.Black,
                     fontSize = 30.sp,
                     fontWeight = FontWeight.Bold
@@ -119,19 +118,19 @@ fun CertificateOfVehicleRegistration(navController: NavController) {
 
                 Spacer(modifier = Modifier.height(24.dp))
 
-                // Front of National ID Card Section
+                // Front of Vehicle Registration Section
                 VehicleRegistrationCaptureSection(
-                    title = "Front of Vehicle Registration",
-                    buttonText = "Add Front Photo",
+                    title = stringResource(R.string.front_of_vehicle_registration),
+                    buttonText = stringResource(R.string.add_front_photo),
                     backgroundColor = Color(0xFFE0F7FA) // Light Blue
                 )
 
                 Spacer(modifier = Modifier.height(24.dp))
 
-                // Back of National ID Card Section
+                // Back of Vehicle Registration Section
                 VehicleRegistrationCaptureSection(
-                    title = "Back of Vehicle Registration",
-                    buttonText = "Add Back Photo",
+                    title = stringResource(R.string.back_of_vehicle_registration),
+                    buttonText = stringResource(R.string.add_back_photo),
                     backgroundColor = Color(0xFFFCE4EC) // Light Pink
                 )
 
@@ -145,12 +144,13 @@ fun CertificateOfVehicleRegistration(navController: NavController) {
                         .background(Color.Black),
                     onClick = { } // Replace with actual route
                 ) {
-                    Text("Continue", fontSize = 20.sp, color = Color.White)
+                    Text(stringResource(R.string.Continue), fontSize = 20.sp, color = Color.White)
                 }
             }
         }
     }
 }
+
 
 @Composable
 fun VehicleRegistrationCaptureSection(

@@ -17,6 +17,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -32,8 +33,8 @@ fun PickupNowForMeUI(navController: NavController) {
 
     if (showPickupSheet) {
         RideSelectionBottomSheet(
-            title = "When do you need a ride?",
-            options = listOf("Now" to R.drawable.baseline_access_time_24, "Later" to R.drawable.baseline_punch_clock_24),
+            title = stringResource(R.string.When_do_you_need_a_ride),
+            options = listOf(stringResource(R.string.Now) to R.drawable.baseline_access_time_24,stringResource(R.string.Later) to R.drawable.baseline_punch_clock_24),
             selectedOption = remember { mutableStateOf("Now") },
             onDone = { navController.navigate(Destination.SelectTheMode.route) },
             onDismiss = { showPickupSheet = false }
@@ -42,8 +43,8 @@ fun PickupNowForMeUI(navController: NavController) {
 
     if (showForMeSheet) {
         RideSelectionBottomSheet(
-            title = "Who is the ride for?",
-            options = listOf("For Me" to R.drawable.baseline_person_24, "For a Group" to R.drawable.baseline_groups_24),
+            title =  stringResource(R.string.Who_is_the_ride_for),
+            options = listOf(stringResource(R.string.For_Me) to R.drawable.baseline_person_24, stringResource(R.string.For_a_group) to R.drawable.baseline_groups_24),
             selectedOption = remember { mutableStateOf("For Me") },
             onDone = { /* Navigate or handle selection */ },
             onDismiss = { showForMeSheet = false }
@@ -53,19 +54,19 @@ fun PickupNowForMeUI(navController: NavController) {
     Row(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(16.dp),
-        horizontalArrangement = Arrangement.SpaceBetween
+            .padding(vertical = 16.dp, horizontal = 3.dp),
+        horizontalArrangement = Arrangement.Start
     ) {
         OptionButtonWithMenu(
             icon = Icons.Default.AddCircle,
-            text = "Pickup Now",
+            text =  stringResource(R.string.Pickup_Now),
             onMenuClick = { showPickupSheet = true },
             showIcon = true
         )
         Spacer(modifier = Modifier.width(8.dp))
         OptionButtonWithMenu(
             icon = Icons.Default.Person,
-            text = "For Me",
+            text = stringResource(R.string.For_Me),
             onMenuClick = { showForMeSheet = true },
             showIcon = true
         )
@@ -126,7 +127,7 @@ fun RideSelectionBottomSheet(
                 shape = RoundedCornerShape(8.dp)
             ) {
                 Text(
-                    text = "Done",
+                    text = stringResource(R.string.Done_Button),
                     fontSize = 18.sp,
                     color = Color.Black
                 )

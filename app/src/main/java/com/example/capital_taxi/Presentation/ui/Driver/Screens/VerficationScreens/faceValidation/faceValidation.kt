@@ -22,6 +22,7 @@ import androidx.compose.ui.graphics.asImageBitmap
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -39,7 +40,7 @@ fun FaceValidation(navController: NavController) {
     Scaffold(
         topBar = {
             TopAppBar(
-                title = { Text("Face Validation", fontWeight = FontWeight.Bold, fontSize = 20.sp) },
+                title = { Text(stringResource(R.string.face_validation_title), fontWeight = FontWeight.Bold, fontSize = 20.sp) },
                 navigationIcon = {
                     IconButton(onClick = { navController.popBackStack() }) {
                         Box(
@@ -167,7 +168,7 @@ fun DocumentButton(
     ) {
         Spacer(modifier = Modifier.height(90.dp))
 
-        Text(text = "Photo", color = Color.Black, fontSize = 25.sp, fontWeight = FontWeight.W900)
+        Text(text = stringResource(R.string.photo), color = Color.Black, fontSize = 25.sp, fontWeight = FontWeight.W900)
         Spacer(modifier = Modifier.height(50.dp))
 
         Box(
@@ -182,7 +183,7 @@ fun DocumentButton(
                 // Show captured image
                 Image(
                     bitmap = capturedBitmap.asImageBitmap(),
-                    contentDescription = "Captured Photo",
+                    contentDescription = stringResource(R.string.photo),
                     modifier = Modifier.fillMaxSize()
                 )
             } else {
@@ -203,7 +204,6 @@ fun DocumentButton(
             Card(
                 elevation = CardDefaults.elevatedCardElevation(10.dp),
                 modifier = Modifier.background(Color.Transparent)
-
             ) {
                 Button(
                     onClick = onCapture,
@@ -216,26 +216,22 @@ fun DocumentButton(
                     modifier = Modifier
                         .width(200.dp)
                         .height(50.dp)
-
                         .border(1.dp, Color.DarkGray, RoundedCornerShape(10.dp)),
-                     shape = RoundedCornerShape(10.dp)
-
+                    shape = RoundedCornerShape(10.dp)
                 ) {
-                    Text(text = "Add a photo", color = Color(0XFF111111), fontSize = 18.sp)
+                    Text(text = stringResource(R.string.add_a_photo), color = Color(0XFF111111), fontSize = 18.sp)
                 }
             }
         } else {
             Button(
-
                 onClick = { /* Handle upload confirmation */ },
                 colors = ButtonDefaults.buttonColors(containerColor = Color.Transparent),
                 modifier = Modifier
                     .width(200.dp)
-                    .height(50.dp)
-                     ,
+                    .height(50.dp),
                 enabled = false // Disabled once photo is uploaded
             ) {
-                Text(text = "Photo is uploaded", color = Color.White, fontSize = 18.sp)
+                Text(text = stringResource(R.string.photo_is_uploaded), color = Color.White, fontSize = 18.sp)
             }
         }
 
@@ -244,24 +240,9 @@ fun DocumentButton(
         Column(
             modifier = Modifier.fillMaxWidth()
         ) {
-            Text(
-                text = "- Clearly visible face",
-                color = Color.Black,
-                fontWeight = FontWeight.Bold,
-                fontSize = 18.sp
-            )
-            Text(
-                text = "- Without sunglasses",
-                fontWeight = FontWeight.Bold,
-                color = Color.Black,
-                fontSize = 18.sp
-            )
-            Text(
-                text = "- Good lighting and without filters",
-                fontWeight = FontWeight.Bold,
-                color = Color.Black,
-                fontSize = 18.sp
-            )
+            Text(text = stringResource(R.string.clear_face), color = Color.Black, fontWeight = FontWeight.Bold, fontSize = 18.sp)
+            Text(text = stringResource(R.string.no_sunglasses), fontWeight = FontWeight.Bold, color = Color.Black, fontSize = 18.sp)
+            Text(text = stringResource(R.string.good_lighting), fontWeight = FontWeight.Bold, color = Color.Black, fontSize = 18.sp)
         }
 
         Spacer(modifier = Modifier.height(90.dp))
@@ -272,9 +253,9 @@ fun DocumentButton(
                 .fillMaxWidth()
                 .padding(horizontal = 40.dp)
                 .background(Color.Black),
-            onClick = {navController.navigate(Destination.DriverLicence.route)}
+            onClick = { navController.navigate(Destination.DriverLicence.route) }
         ) {
-            Text("Continue", fontSize = 20.sp, color = Color.White)
+            Text(stringResource(R.string.Continue), fontSize = 20.sp, color = Color.White)
         }
     }
 }
