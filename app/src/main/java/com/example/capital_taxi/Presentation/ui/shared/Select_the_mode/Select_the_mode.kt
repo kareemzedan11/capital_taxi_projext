@@ -24,6 +24,10 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.example.capital_taxi.Navigation.Destination
+import com.example.capital_taxi.Presentation.ui.shared.Select_the_mode.Components.CustomBottomBackground
+import com.example.capital_taxi.Presentation.ui.shared.Select_the_mode.Components.CustomTopBackground
+import com.example.capital_taxi.Presentation.ui.shared.Select_the_mode.Components.ModeSelectionButton
+import com.example.capital_taxi.Presentation.ui.shared.Select_the_mode.Components.SelectTheModeHeader
 import com.example.capital_taxi.R
 
 @Composable
@@ -36,121 +40,40 @@ fun SelectTheMode(navController: NavController) {
 
         val generalColor = colorResource(id = R.color.primary_color)
 
-        Box(
-            modifier = Modifier
-                .align(Alignment.TopEnd)
-                .height(200.dp)
-                .width(200.dp)
-                .border(
-                    width = 2.dp,
-                    color = Color.Transparent,
-                    shape = RoundedCornerShape(bottomStart = 222.dp)
-                )
-                .drawBehind {
-                    val shape = RoundedCornerShape(bottomStart = 222.dp)
-                    val path = shape.createOutline(size, LayoutDirection.Ltr, this)
+        // Custom Background Components
+        Box(modifier = Modifier.align(Alignment.TopEnd)) { CustomTopBackground(generalColor) }
+        CustomBottomBackground(generalColor)
 
-                    drawOutline(outline = path, style = Fill, brush = SolidColor(generalColor))
-                }
-        )
+        // Main Content
 
         Box(
             modifier = Modifier
-                .fillMaxSize()
-                .align(Alignment.BottomStart)
+                .fillMaxSize(), contentAlignment = Alignment.Center
+
         ) {
-            Canvas(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .fillMaxHeight()
-            ) {
-                val width = size.width
-                val height = size.height
+            // Header
 
-                val path = Path().apply {
-                    moveTo(0f, height * 0.6f)
-                    cubicTo(
-                        width * 0.3f, height * 0.8f,
-                        width * 1f, height * 1f,
-                        width, height * 1f
-                    )
-                    lineTo(width, height)
-                    lineTo(0f, height)
-                    close()
-                }
 
-                clipPath(path) {
-                    drawRect(
-                        brush = Brush.verticalGradient(
-                            colors = listOf(
-                                generalColor,
-                                generalColor,
-                            ),
-                            startY = 0f,
-                            endY = height
-                        ),
-                        size = size
-                    )
-                }
-            }
-
+            // Mode Selection Buttons
             Column(
-                modifier = Modifier.padding(top = 80.dp, start = 20.dp),
+                modifier = Modifier
+                    .fillMaxSize()
+                    .padding(8.dp),
                 verticalArrangement = Arrangement.Center
             ) {
                 Spacer(modifier = Modifier.weight(1f))
-
-                // Updated to use string resources
-                Text(
-                    text = stringResource(R.string.select_the_mode_title),
-                    fontSize = 24.sp,
-                    fontWeight = FontWeight.Bold
-                )
-                Spacer(modifier = Modifier.padding(top = 16.dp))
-                Text(
-                    text = stringResource(R.string.mode_instruction),
-                    fontSize = 20.sp,
-                    fontWeight = FontWeight.W600
-                )
-
+                SelectTheModeHeader()
                 Spacer(modifier = Modifier.weight(1f))
-                Button(
-                    modifier = Modifier
-                        .fillMaxWidth(.95f)
-                        .padding(8.dp)
-                        .border(2.dp, color = Color.Transparent, RoundedCornerShape(30.dp))
-                        .background(Color.White, RoundedCornerShape(30.dp))
-                        .padding(6.dp),
-                    colors = ButtonDefaults.buttonColors(containerColor = Color.White),
+                ModeSelectionButton(
+                    label = stringResource(R.string.captain_button),
                     onClick = { navController.navigate(Destination.FaceValidation.route) }
-                ) {
-                    Text(
-                        text = stringResource(R.string.captain_button),
-                        fontWeight = FontWeight.Medium,
-                        fontSize = 18.sp,
-                        color = Color(0XFF111111)
-                    )
-                }
+                )
                 Spacer(modifier = Modifier.height(5.dp))
 
-                Button(
-                    modifier = Modifier
-                        .fillMaxWidth(.95f)
-                        .padding(8.dp)
-                        .border(2.dp, color = Color.Transparent, RoundedCornerShape(30.dp))
-                        .background(Color.White, RoundedCornerShape(30.dp))
-                        .padding(6.dp),
-                    colors = ButtonDefaults.buttonColors(containerColor = Color.White),
+                ModeSelectionButton(
+                    label = stringResource(R.string.passenger_button),
                     onClick = { navController.navigate(Destination.UserHomeScreen.route) }
-                ) {
-                    Text(
-                        text = stringResource(R.string.passenger_button),
-                        fontWeight = FontWeight.Medium,
-                        fontSize = 18.sp,
-                        color = Color(0XFF111111)
-                    )
-                }
-
+                )
                 Spacer(modifier = Modifier.weight(1f))
             }
 
@@ -158,22 +81,6 @@ fun SelectTheMode(navController: NavController) {
     }
 }
 
-@Composable
-fun ModeOption(language: String, backgroundColor: Color, onClick: () -> Unit) {
-    Row(
-        modifier = Modifier
-            .fillMaxWidth(.7f)
-            .padding(8.dp)
-            .clickable { onClick() }
-            .border(2.dp, color = Color.DarkGray, RoundedCornerShape(30.dp))
-            .background(
-                backgroundColor,
-                RoundedCornerShape(30.dp)
-            )
-            .padding(16.dp),
-        horizontalArrangement = Arrangement.Center,
-        verticalAlignment = Alignment.CenterVertically
-    ) {
-        Text(text = language, fontWeight = FontWeight.Medium, fontSize = 16.sp)
-    }
-}
+
+
+

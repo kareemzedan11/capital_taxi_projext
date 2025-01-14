@@ -32,8 +32,10 @@ import androidx.compose.ui.unit.sp
 import androidx.core.content.ContextCompat
 import androidx.navigation.NavController
 import com.example.capital_taxi.Navigation.Destination
+import com.example.capital_taxi.Presentation.ui.shared.search_for_location.Components.LocationPrompt
+import com.example.capital_taxi.Presentation.ui.shared.search_for_location.Components.RequestLocationPermission
+import com.example.capital_taxi.Presentation.ui.shared.search_for_location.Components.TopBar
 import com.example.capital_taxi.R
-
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -61,30 +63,7 @@ fun SearchForLocation(navController: NavController) {
     )
 
     Scaffold(
-        topBar = {
-            TopAppBar(
-                title = {},
-                navigationIcon = {
-                    IconButton(onClick = { navController.popBackStack() }) {
-                        Box(
-                            modifier = Modifier
-                                .size(36.dp)
-                                .background(Color.Transparent)
-                                .border(4.dp, color = Color.Black, RoundedCornerShape(30.dp)),
-                            contentAlignment = Alignment.Center
-                        ) {
-                            Icon(
-                                modifier = Modifier.size(26.dp),
-                                painter = painterResource(id = R.drawable.baseline_arrow_back_ios_new_24),
-                                contentDescription = "Back",
-                                tint = Color.Black
-                            )
-                        }
-                    }
-                },
-                colors = TopAppBarDefaults.topAppBarColors(containerColor = Color.White)
-            )
-        }
+        topBar = { TopBar(navController) }
     ) { innerPadding ->
         Box(
             modifier = Modifier
@@ -110,41 +89,17 @@ fun SearchForLocation(navController: NavController) {
 
                 Spacer(modifier = Modifier.height(16.dp))
 
-                Text(
-                    text = "We need to know your location,\nPlease allow us to access it",
-                    color = Color.Black,
-                    fontSize = 24.sp,
-                    fontWeight = FontWeight.Bold,
-                    modifier = Modifier.padding(16.dp)
-                )
+                // Location prompt
+                LocationPrompt()
 
                 Spacer(modifier = Modifier.weight(1f))
 
-                // If location permission is already granted, navigate to the home screen
-                if (locationPermission == PackageManager.PERMISSION_GRANTED) {
-                    LaunchedEffect(true) {
-                        navController.navigate(Destination.UserHomeScreen.route)
-                    }
-                } else {
-                    // Request permission if not granted
-                    Button(
-                        onClick = {
-                            permissionLauncher.launch(Manifest.permission.ACCESS_FINE_LOCATION)
-                        },
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .padding(horizontal = 20.dp)
-                            .height(60.dp),
-                        colors = ButtonDefaults.buttonColors(colorResource(R.color.primary_color)),
-                        shape = RoundedCornerShape(8.dp)
-                    ) {
-                        Text(
-                            text = "Access My Location",
-                            fontSize = 18.sp,
-                            color = Color.Black
-                        )
-                    }
-                }
+                // Handle location permission request
+                RequestLocationPermission(
+                    permissionLauncher = { permissionLauncher.launch(it) },
+                    locationPermissionStatus = locationPermission,
+                    onPermissionGranted = { navController.navigate(Destination.UserHomeScreen.route) }
+                )
 
                 Spacer(modifier = Modifier.weight(1f))
             }

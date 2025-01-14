@@ -242,3 +242,148 @@ fun OtpInputBox(
             .border(1.dp, Color.Gray)
     )
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*
+refactor fun
+
+@Composable
+fun OtpScreen(navController: NavController, otpViewModel: OtpViewModel = viewModel()) {
+    val timer = otpViewModel.timer
+    val otpValues = otpViewModel.otpValues
+    val progress by animateFloatAsState(
+        targetValue = timer / 30f,
+        animationSpec = tween(
+            durationMillis = 1000,
+            easing = LinearEasing
+        )
+    )
+
+    // Start the countdown timer on first composition
+    LaunchedEffect(key1 = timer) {
+        if (timer == 30) otpViewModel.startTimer()
+    }
+
+    Scaffold(
+        topBar = { OtpTopBar(navController) }
+    ) { innerPadding ->
+        Box(
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(innerPadding)
+                .background(colorResource(R.color.primary_color)),
+            contentAlignment = Alignment.TopCenter
+        ) {
+            Column(
+                horizontalAlignment = Alignment.CenterHorizontally,
+                verticalArrangement = Arrangement.Top
+            ) {
+                Image(
+                    modifier = Modifier
+                        .size(200.dp)
+                        .clip(CircleShape),
+                    painter = painterResource(R.drawable.otp),
+                    contentDescription = null
+                )
+
+                Spacer(modifier = Modifier.height(60.dp))
+
+                Text(
+                    text = stringResource(R.string.otp_verification_title),
+                    fontSize = 32.sp,
+                    fontWeight = FontWeight.Bold
+                )
+
+                Spacer(modifier = Modifier.height(16.dp))
+
+                Text(
+                    text = stringResource(R.string.otp_placeholder),
+                    fontSize = 18.sp,
+                    color = Color(0XFFF2F2F2),
+                    fontWeight = FontWeight.Bold
+                )
+            }
+
+            Column(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .align(Alignment.BottomCenter)
+                    .padding(innerPadding),
+                horizontalAlignment = Alignment.CenterHorizontally,
+                verticalArrangement = Arrangement.Bottom
+            ) {
+
+                Box(
+                    modifier = Modifier
+                        .fillMaxHeight(.6f)
+                        .fillMaxWidth()
+                        .clip(RoundedCornerShape(topStart = 100.dp))
+                        .background(Color.White),
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+
+                        Spacer(modifier = Modifier.height(60.dp))
+
+                        // OTP Input Boxes
+                        Row(
+                            modifier = Modifier.fillMaxWidth(),
+                            horizontalArrangement = Arrangement.Center
+                        ) {
+                            otpValues.forEachIndexed { index, value ->
+                                OtpInputBox(
+                                    value = value,
+                                    onValueChange = { newValue ->
+                                        otpViewModel.onOtpValueChange(index, newValue)
+                                    },
+                                    focusRequester = FocusRequester.Default,
+                                    modifier = Modifier
+                                        .padding(4.dp)
+                                )
+                            }
+                        }
+
+                        Spacer(modifier = Modifier.height(24.dp))
+
+                        // Countdown Timer and Progress Bar
+                        CountdownTimer(progress = progress, timer = timer) {}
+
+                        Spacer(modifier = Modifier.height(16.dp))
+
+                        Button(
+                            onClick = { navController.navigate(Destination.SelectTheMode.route) },
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .padding(horizontal = 20.dp)
+                                .height(60.dp),
+                            colors = ButtonDefaults.buttonColors(colorResource(R.color.primary_color)),
+                            shape = RoundedCornerShape(8.dp)
+                        ) {
+                            Text(
+                                text = stringResource(R.string.verify_now_button),
+                                fontSize = 18.sp,
+                                color = Color.Black
+                            )
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+ */
+
+
+

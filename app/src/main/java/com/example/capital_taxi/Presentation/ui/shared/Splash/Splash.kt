@@ -17,10 +17,13 @@ import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.platform.LocalLayoutDirection
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.LayoutDirection
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.times
 import androidx.navigation.NavHostController
+import com.example.capital_taxi.Presentation.ui.shared.Splash.Components.SplashLogo
+import com.example.capital_taxi.Presentation.ui.shared.Splash.Components.SplashProgressBar
 import com.example.capital_taxi.R
 import kotlinx.coroutines.delay
 
@@ -31,18 +34,6 @@ fun SplashScreen(navController: NavHostController) {
 
     // Detect the current layout direction (LTR or RTL)
     val layoutDirection = LocalLayoutDirection.current
-
-    // Animate logo size with scale based on progress
-    val logoScale by animateFloatAsState(
-        targetValue = if (progress < 1f) 1f else 0.8f,
-        animationSpec = tween(durationMillis = 500)
-    )
-
-    // Animate logo visibility (fade in gradually)
-    val logoAlpha by animateFloatAsState(
-        targetValue = progress,
-        animationSpec = tween(durationMillis = 100)
-    )
 
     LaunchedEffect(Unit) {
         while (progress < 1f) {
@@ -75,71 +66,18 @@ fun SplashScreen(navController: NavHostController) {
         ) {
             Spacer(modifier = Modifier.weight(1f))
 
-            Icon(
-                modifier = Modifier
-                    .size(320.dp)
-                    .graphicsLayer(
-                        scaleX = logoScale, // Apply scaling animation on X-axis
-                        scaleY = logoScale, // Apply scaling animation on Y-axis
-                        alpha = logoAlpha // Apply fade-in animation
-                    ),
-                painter = painterResource(R.drawable.logo), contentDescription = "Logo"
-            )
+            // Use the SplashLogo composable
+            SplashLogo(progress)
 
             Spacer(modifier = Modifier.weight(1f))
 
-            // Progress Bar Card
-            Card(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(horizontal = 64.dp)
-                    .height(10.dp),
-                elevation = CardDefaults.elevatedCardElevation(10.dp),
-                colors = CardDefaults.cardColors(
-                    containerColor = Color.White,
-                    contentColor = Color.White
-                )
-            ) {
-                Box(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .height(10.dp)
-                        .background(Color.White)
-                ) {
-                    // Progress bar
-                    LinearProgressIndicator(
-                        progress = progress,
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .height(10.dp),
-                        color = androidx.compose.ui.graphics.lerp(
-                            start = colorResource(R.color.primary_color),
-                            stop = colorResource(R.color.primary_color),
-                            fraction = progress
-                        )
-                    )
-
-                    // Change car icon based on layout direction (RTL or LTR)
-                    val carIcon = if (layoutDirection == LayoutDirection.Rtl) {
-                        // Use a different icon for RTL (Arabic)
-                        R.drawable.ar_car
-                    } else {
-                        // Use the default car icon for LTR (English)
-                        R.drawable.splashcar
-                    }
-
-                    Icon(
-                        painter = painterResource(carIcon),
-                        contentDescription = "Car Icon",
-                        tint = Color.Black,
-                        modifier = Modifier
-                            .size(80.dp)
-                            .offset(x = (progress * (screenWidth - 128.dp)) - 32.dp)
-                    )
-                }
-            }
+            // Use the SplashProgressBar composable
+            SplashProgressBar(progress, layoutDirection, screenWidth)
 
             Spacer(modifier = Modifier.weight(1f))
         }
     }
 }
+
+
+

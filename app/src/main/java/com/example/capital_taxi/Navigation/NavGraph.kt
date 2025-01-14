@@ -41,8 +41,7 @@ import com.example.capital_taxi.Presentation.ui.Passengar.Screens.notification.u
 import com.example.capital_taxi.Presentation.ui.Passengar.Screens.profile.Profile
 import com.example.capital_taxi.Presentation.ui.shared.Confirm_information.ConfirmInformation
 import com.example.capital_taxi.Presentation.ui.shared.OTP.OtpScreen
-import com.example.capital_taxi.Presentation.ui.shared.Onboarding.Components.SelectTheMode2
-import com.example.capital_taxi.Presentation.ui.shared.Onboarding.OnboardingPager
+ import com.example.capital_taxi.Presentation.ui.shared.Onboarding.OnboardingPager
 import com.example.capital_taxi.Presentation.ui.shared.Select_the_mode.SelectTheMode
 import com.example.capital_taxi.Presentation.ui.shared.Start.StartScreen
 import com.example.capital_taxi.Presentation.ui.shared.modeDesign.modeDesign
@@ -67,7 +66,7 @@ fun AppNavGraph(navController: NavHostController) {
             StartScreen(navController)
         }
         composable(Destination.OnboardingPager.route) {
-            OnboardingPager(navController, onSignInClick = {})
+            OnboardingPager(navController, )
         }
         composable(Destination.PhoneVerification.route) {
             PhoneVerification(navController)
@@ -125,9 +124,7 @@ fun AppNavGraph(navController: NavHostController) {
         composable(Destination.OtpScreen.route) {
             OtpScreen(navController)
         }
-        composable(Destination.SelectTheMode2.route) {
-            SelectTheMode2(navController)
-        }
+
         composable(Destination.WhereToButton.route) {
             TripDestination(navController)
         }
