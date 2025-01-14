@@ -17,6 +17,8 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
+import com.example.app.ui.theme.CustomFontFamily
+import com.example.app.ui.theme.responsiveTextSize
 import com.example.capital_taxi.Presentation.ui.shared.Start.Components.StartButtonDesign
 import com.example.capital_taxi.R
 
@@ -59,13 +61,23 @@ fun StartScreen(navController: NavController) {
                     horizontalAlignment = Alignment.Start,
                     modifier = Modifier.fillMaxHeight()
                 ) {
+                    Spacer(modifier = Modifier.weight(1f))
+
                     Text(
                         text = stringResource(R.string.get_started),
                         modifier = Modifier.padding(start = 20.dp),
                         fontWeight = FontWeight.Bold,
-                        fontSize = 32.sp
+                        fontSize = responsiveTextSize(
+                            fraction = 0.07f,
+                            minSize = 24.sp,
+                            maxSize = 32.sp
+                        ),
+                        fontFamily = CustomFontFamily
                     )
+                    Spacer(modifier = Modifier.weight(1f))
                     StartButtonDesign(navController)
+
+
                 }
             }
         }

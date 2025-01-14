@@ -29,6 +29,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.core.content.ContextCompat
 import androidx.navigation.NavController
+import com.example.app.ui.theme.responsiveTextSize
 import com.example.capital_taxi.Navigation.Destination
 import com.example.capital_taxi.R
 import com.google.android.gms.auth.api.signin.GoogleSignIn
@@ -37,7 +38,6 @@ import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.tasks.Task
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.GoogleAuthProvider
-
 
 
 @Composable
@@ -195,7 +195,8 @@ fun OnboardingPager(navController: NavController, onSignInClick: () -> Unit) {
 
                         stringResource(R.string.log_in),
 
-                        fontSize = 20.sp,
+                        fontSize = responsiveTextSize(fraction = 0.06f, minSize = 14.sp, maxSize = 20.sp),
+
                         fontWeight = FontWeight.W500,
                         color = Color(0XFF987200),
                         modifier = Modifier
@@ -253,7 +254,8 @@ private fun SignInButton(
 
                 text,
                 fontWeight = FontWeight.W500,
-                fontSize = 16.sp,
+                fontSize = responsiveTextSize(fraction = 0.06f, minSize = 14.sp, maxSize = 16.sp),
+
                 color = Color(0XFF987200),
 
                 )

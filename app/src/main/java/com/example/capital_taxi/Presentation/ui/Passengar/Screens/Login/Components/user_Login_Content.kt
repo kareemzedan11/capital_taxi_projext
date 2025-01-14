@@ -59,6 +59,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
+import com.example.app.ui.theme.responsiveTextSize
 import com.example.capital_taxi.Helper.GoogleAuthentication
 import com.example.capital_taxi.Helper.PermissionViewModel
 import com.example.capital_taxi.Helper.checkLocationPermission
@@ -162,7 +163,8 @@ fun userLoginContent(
 
         Text(
             text = stringResource(R.string.signin),
-            fontSize = 32.sp,
+            fontSize = responsiveTextSize(fraction = 0.06f, minSize = 20.sp, maxSize = 32.sp),
+
             fontWeight = FontWeight.Bold,
             color = Color.Black,
             style = MaterialTheme.typography.headlineMedium
@@ -250,7 +252,8 @@ fun userLoginContent(
                 .align(alignment = Alignment.End)
                 .clickable { navController.navigate(Destination.NewPasswordScreen.route) },
             color = colorResource(R.color.primary_color),
-            fontWeight = FontWeight.Bold, fontSize = 18.sp,
+            fontWeight = FontWeight.Bold,            fontSize = responsiveTextSize(fraction = 0.06f, minSize = 14.sp, maxSize = 20.sp),
+
 
 
             )
@@ -273,16 +276,16 @@ fun userLoginContent(
 
                 .height(60.dp),
             colors = ButtonDefaults.buttonColors(colorResource(R.color.primary_color)),
-            shape = RoundedCornerShape(8.dp) // For rounded corners with 8.dp radius
-// Use RectangleShape to remove any default rounded corners
+            shape = RoundedCornerShape(8.dp)
+
 
         ) {
             Text(
                 text = stringResource(R.string.signin),
-                fontSize = 18.sp,
+                fontSize = responsiveTextSize(fraction = 0.06f, minSize = 14.sp, maxSize = 18.sp),
                 color = Color.Black
-
             )
+
         }
 
 
@@ -293,7 +296,8 @@ fun userLoginContent(
         Text(
             text = stringResource(R.string.sign_in_with),
             color = Color.Black,
-            fontSize = 18.sp,
+            fontSize = responsiveTextSize(fraction = 0.06f, minSize = 14.sp, maxSize = 20.sp),
+
             fontWeight = FontWeight.Bold
         )
 
@@ -389,15 +393,17 @@ fun userLoginContent(
         Row {
             Text(
                 text = stringResource(id = R.string.Dont_have_an_account),
-                fontSize = 18.sp,
-            )
+                fontSize = responsiveTextSize(fraction = 0.06f, minSize = 14.sp, maxSize = 20.sp),
+
+                )
 
             Spacer(modifier = Modifier.width(4.dp))
 
             Text(
                 text = stringResource(id = R.string.SignUp),
                color =  colorResource(R.color.primary_color),
-                fontSize = 18.sp,
+                fontSize = responsiveTextSize(fraction = 0.06f, minSize = 14.sp, maxSize = 20.sp),
+
 
                 modifier = Modifier.clickable {
                     navController.navigate(Destination.UserRegister.route)

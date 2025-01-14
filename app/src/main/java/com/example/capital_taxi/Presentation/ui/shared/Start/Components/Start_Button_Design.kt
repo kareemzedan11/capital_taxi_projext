@@ -26,6 +26,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
+import com.example.app.ui.theme.responsiveTextSize
 import com.example.capital_taxi.Navigation.Destination
 import com.example.capital_taxi.R
 
@@ -33,8 +34,7 @@ import com.example.capital_taxi.R
 fun StartButtonDesign(navController: NavController) {
     Box(
         modifier = Modifier
-            .fillMaxSize()
-        , Alignment.Center
+            .fillMaxSize(), Alignment.Center
     ) {
 
 
@@ -42,22 +42,27 @@ fun StartButtonDesign(navController: NavController) {
             onClick = { navController.navigate(Destination.OnboardingPager.route) },
             modifier = Modifier
                 .align(Alignment.BottomCenter)
-                .padding(bottom = 60.dp, start = 20.dp, end = 20.dp)
+                .padding(bottom = 50.dp, start = 20.dp, end = 20.dp)
                 .fillMaxWidth()
                 .height(60.dp),
             colors = ButtonDefaults.buttonColors(Color.Black),
-            shape = RoundedCornerShape(0.dp) // Ensure corners are square
+            shape = RoundedCornerShape(0.dp)
         ) {
             Row(
                 Modifier.fillMaxWidth(),
                 verticalAlignment = Alignment.CenterVertically,
                 horizontalArrangement = Arrangement.Center,
 
-            ) {
+                ) {
                 Text(
                     stringResource(R.string.get_started_button),
                     fontWeight = FontWeight.Bold,
-                    fontSize = 18.sp,
+                    fontSize = responsiveTextSize(
+                        fraction = 0.06f,
+                        minSize = 14.sp,
+                        maxSize = 18.sp
+                    ),
+
                     color = Color.White
                 )
                 Spacer(modifier = Modifier.width(8.dp))

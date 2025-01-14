@@ -1,7 +1,6 @@
 package com.example.capital_taxi.Presentation.ui.Passengar.Screens.Login
 
 
-
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
@@ -25,6 +24,7 @@ import androidx.compose.ui.graphics.drawscope.clipPath
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
+import com.example.app.ui.theme.responsiveTextSize
 import com.example.capital_taxi.Presentation.ui.Passengar.Screens.Login.Components.userLoginContent
 
 import com.example.capital_taxi.R
@@ -39,8 +39,17 @@ fun UserLogin(navController: NavController) {
         topBar = {
             TopAppBar(
 
-                title = { Text(   text = stringResource(R.string.passenger_Mode),
-                    fontWeight = FontWeight.Bold, fontSize = 20.sp) },
+                title = {
+                    Text(
+                        text = stringResource(R.string.passenger_Mode),
+                        fontWeight = FontWeight.Bold,
+                        fontSize = responsiveTextSize(
+                            fraction = 0.06f,
+                            minSize = 18.sp,
+                            maxSize = 20.sp
+                        ),
+                    )
+                },
                 navigationIcon = {
                     IconButton(onClick = { navController.popBackStack() }) {
                         Box(
@@ -70,7 +79,7 @@ fun UserLogin(navController: NavController) {
                 .fillMaxSize()
                 .background(Color.White)
                 .padding(innerPadding)
-                .imePadding()  ,
+                .imePadding(),
             contentAlignment = Alignment.Center
         ) {
             Box(
@@ -116,8 +125,9 @@ fun UserLogin(navController: NavController) {
                     }
                 }
 
-                    userLoginContent(navController)
+                userLoginContent(navController)
 
-            }}
+            }
         }
     }
+}

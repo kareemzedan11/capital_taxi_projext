@@ -15,6 +15,7 @@ import androidx.compose.ui.platform.LocalLayoutDirection
 import androidx.compose.ui.unit.LayoutDirection
 import androidx.core.content.ContextCompat
 import androidx.navigation.compose.rememberNavController
+import com.example.app.ui.theme.AppTypography
 import com.example.capital_taxi.Navigation.AppNavGraph
 import com.example.capital_taxi.Presentation.ui.shared.Language.components.LanguagePreference
 import updateLocale
@@ -62,6 +63,8 @@ class MainActivity : ComponentActivity() {
                 LocalLayoutDirection provides if (languageCode == "ar") LayoutDirection.Rtl else LayoutDirection.Ltr
             ) {
                 MaterialTheme(
+
+                    typography = AppTypography,
 
                     content = {
                         val navController = rememberNavController()
