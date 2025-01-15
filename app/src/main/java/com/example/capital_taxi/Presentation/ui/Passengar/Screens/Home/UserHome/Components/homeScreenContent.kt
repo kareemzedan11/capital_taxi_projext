@@ -69,7 +69,6 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.capital_taxi.Helper.PartialBottomSheet
 import com.example.capital_taxi.Helper.PermissionViewModel
 import com.example.capital_taxi.Helper.checkLocationPermission
-import com.example.capital_taxi.Presentation.ui.Driver.Screens.Home.Components.TripDetailsForDriver
 import com.google.android.gms.location.LocationServices
 import java.util.Locale
 

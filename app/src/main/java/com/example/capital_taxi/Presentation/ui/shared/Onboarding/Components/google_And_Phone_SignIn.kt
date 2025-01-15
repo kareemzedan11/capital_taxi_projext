@@ -52,6 +52,7 @@ fun GoogleAndPhone(onSignInClick: () -> Unit,navController: NavController,modifi
             val displayName = account?.displayName ?: "Unknown User"
             val email = account?.email ?: "Unknown Email"
 
+
             // Authenticate with Firebase
             val credential = GoogleAuthProvider.getCredential(idToken, null)
             firebaseAuth.signInWithCredential(credential)

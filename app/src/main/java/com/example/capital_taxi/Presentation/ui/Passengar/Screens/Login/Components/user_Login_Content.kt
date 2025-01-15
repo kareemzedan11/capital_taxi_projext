@@ -93,63 +93,11 @@ fun userLoginContent(
 
     val isLocationGranted by permissionViewModel.isLocationGranted.collectAsState()
 
-    val scope = rememberCoroutineScope()
-    var email1 by remember { mutableStateOf("") }
-    var password1 by remember { mutableStateOf("") }
-    var passwordVisible1 by remember { mutableStateOf(false) }
-    var isGoogleSignInVisible by remember { mutableStateOf(false) }
-
-    // Initialize FirebaseAuth instance
-    val firebaseAuth = FirebaseAuth.getInstance()
-
-    // Configure Google Sign-In options
-    val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-        .requestIdToken(context.getString(R.string.default_web_client_id))
-        .requestEmail()
-        .build()
-
-    // Initialize GoogleSignInClient
-    val googleSignInClient = GoogleSignIn.getClient(context, gso)
-    fun handleSignInResult(
-        task: Task<GoogleSignInAccount>,
-        firebaseAuth: FirebaseAuth,
-        navController: NavController
-    ) {
-        try {
-            val account = task.getResult(Exception::class.java)
-            val idToken = account?.idToken
-            val photoUrl = account?.photoUrl?.toString() // Convert Uri to String
-            val displayName = account?.displayName ?: "Unknown User"
-            val email = account?.email ?: "Unknown Email"
-
-            // Authenticate with Firebase
-            val credential = GoogleAuthProvider.getCredential(idToken, null)
-            firebaseAuth.signInWithCredential(credential)
-                .addOnCompleteListener { authTask ->
-                    if (authTask.isSuccessful) {
-                        // Encode the values for safe navigation
-                        val encodedName = Uri.encode(displayName)
-                        val encodedEmail = Uri.encode(email)
-                        val encodedPhotoUrl = Uri.encode(photoUrl ?: "")
-
-                        // Navigate to ConfirmInformation
-                        navController.navigate("ConfirmInformation?name=$encodedName&email=$encodedEmail&photoUrl=$encodedPhotoUrl")
-                    } else {
-                        println("Firebase Sign-In Failed: ${authTask.exception?.message}")
-                    }
-                }
-        } catch (e: Exception) {
-            e.printStackTrace()
-        }
-    }
+    var email by remember { mutableStateOf("") }
+    var password by remember { mutableStateOf("") }
+    var passwordVisible by remember { mutableStateOf(false) }
 
 
-    val signInLauncher =
-        rememberLauncherForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
-            val task: Task<GoogleSignInAccount> =
-                GoogleSignIn.getSignedInAccountFromIntent(result.data)
-            handleSignInResult(task, firebaseAuth, navController)
-        }
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -171,77 +119,13 @@ fun userLoginContent(
         )
 
         Spacer(modifier = Modifier.height(40.dp))
-
-        OutlinedTextField(
-            shape = RoundedCornerShape(12.dp),// For rounded corners with 8.dp radius
-
-            colors = TextFieldDefaults.outlinedTextFieldColors(
-                // Setting the container background color to #F2F2F2
-                containerColor = Color(0xFFF2F2F2), // Use the Color class to set the color
-                focusedBorderColor = Color.Gray,
-                unfocusedBorderColor = Color.Gray,
-
-                ),
-            value = email1,
-            onValueChange = { email1 = it },
-            leadingIcon = {
-                Icon(
-                    imageVector = Icons.Default.Email,
-                    tint = colorResource(R.color.primary_color),
-                    contentDescription = "email icon",
-                    modifier = Modifier
-                        .clip(CircleShape)
-                        .size(20.dp)
-
-                )
-
-
-            },
-            label = { Text(stringResource(id = R.string.Email_label)) },
-            modifier = Modifier.fillMaxWidth(),
-            keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Email)
-        )
-
-
-        Spacer(modifier = Modifier.height(16.dp))
-
-        OutlinedTextField(
-            value = password1,
-            onValueChange = { password1 = it },
-            leadingIcon = {
-                Icon(
-                    imageVector = Icons.Default.Lock,
-                    tint = colorResource(R.color.primary_color),
-
-                    contentDescription = "password icon",
-                    modifier = Modifier
-                        .clip(CircleShape)
-                        .size(20.dp)
-
-                )
-            },
-            label = { Text(stringResource(id = R.string.Password_label)) },
-            modifier = Modifier.fillMaxWidth(),
-            visualTransformation = if (passwordVisible1) VisualTransformation.None else PasswordVisualTransformation(),
-            trailingIcon = {
-                IconButton(onClick = { passwordVisible1 = !passwordVisible1 }) {
-                    Icon(
-                        painter = painterResource(
-                            if (passwordVisible1) R.drawable.baseline_visibility_24 else R.drawable.baseline_visibility_off_24
-                        ),
-                        contentDescription = if (passwordVisible1) "Hide password" else "Show password"
-                    )
-                }
-            },
-            keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password),
-            colors = TextFieldDefaults.outlinedTextFieldColors(
-                // Setting the container background color to #F2F2F2
-                containerColor = Color(0xFFF2F2F2), // Use the Color class to set the color
-                focusedBorderColor = Color.Gray,
-                unfocusedBorderColor = Color.Gray,
-
-                ),
-            shape = RoundedCornerShape(12.dp) // For rounded corners with 8.dp radius
+        LoginForm(
+            email = email,
+            password = password,
+            onEmailChange = { email = it },
+            onPasswordChange = { password = it },
+            passwordVisible = passwordVisible,
+            onPasswordToggle = { passwordVisible = !passwordVisible }
         )
 
         Spacer(modifier = Modifier.height(16.dp))
@@ -252,8 +136,8 @@ fun userLoginContent(
                 .align(alignment = Alignment.End)
                 .clickable { navController.navigate(Destination.NewPasswordScreen.route) },
             color = colorResource(R.color.primary_color),
-            fontWeight = FontWeight.Bold,            fontSize = responsiveTextSize(fraction = 0.06f, minSize = 14.sp, maxSize = 20.sp),
-
+            fontWeight = FontWeight.Bold,
+            fontSize = responsiveTextSize(fraction = 0.06f, minSize = 14.sp, maxSize = 20.sp),
 
 
             )
@@ -302,90 +186,7 @@ fun userLoginContent(
         )
 
         Spacer(modifier = Modifier.height(40.dp))
-
-        // Social Media Login Options
-        Row {
-
-            Box(
-                modifier = Modifier
-                    .size(50.dp)
-                    .clickable {     // Launch the Google sign-in intent
-                        val signInIntent = googleSignInClient.signInIntent
-                        signInLauncher.launch(signInIntent) }
-                    .background(
-                        colorResource(R.color.secondary_color),
-                        shape = RoundedCornerShape(10.dp) // For rounded corners with 8.dp radius
-
-                    ), contentAlignment = Alignment.Center
-
-            ) {
-                Image(
-                    modifier = Modifier
-                        .size(30.dp)
-                        .clip(CircleShape),
-                    painter = painterResource(R.drawable.googleicon),
-                    contentDescription = "Google Logo"
-                )
-
-            }
-            if (isGoogleSignInVisible) {
-                GoogleAuthentication(navController)
-            }
-            Spacer(Modifier.width(30.dp))
-
-            Row {
-
-                Box(
-                    modifier = Modifier
-                        .size(50.dp)
-
-                        .background(
-                            colorResource(R.color.secondary_color),
-                            shape = RoundedCornerShape(10.dp) // For rounded corners with 8.dp radius
-
-                        ), contentAlignment = Alignment.Center
-
-                ) {
-                    Image(
-                        modifier = Modifier
-                            .size(30.dp)
-                            .clip(CircleShape),
-                        painter = painterResource(R.drawable.xicon),
-                        contentDescription = "X Logo"
-                    )
-                }
-                Spacer(Modifier.width(30.dp))
-
-
-                Row {
-
-                    Box(
-                        modifier = Modifier
-                            .size(50.dp)
-
-                            .background(
-                                colorResource(R.color.secondary_color),
-                                shape = RoundedCornerShape(10.dp) // For rounded corners with 8.dp radius
-
-                            ), contentAlignment = Alignment.Center
-
-                    ) {
-                        Image(
-                            modifier = Modifier
-                                .size(30.dp)
-                                .clip(CircleShape),
-                            painter = painterResource(R.drawable.facelogo),
-                            contentDescription = "Google Logo",
-
-
-                            )
-                    }
-
-
-                    Spacer(modifier = Modifier.height(10.dp))
-                }
-            }
-        }
+        userMediaLoginOption()
 
         Spacer(modifier = Modifier.height(60.dp))
 
@@ -401,7 +202,7 @@ fun userLoginContent(
 
             Text(
                 text = stringResource(id = R.string.SignUp),
-               color =  colorResource(R.color.primary_color),
+                color = colorResource(R.color.primary_color),
                 fontSize = responsiveTextSize(fraction = 0.06f, minSize = 14.sp, maxSize = 20.sp),
 
 

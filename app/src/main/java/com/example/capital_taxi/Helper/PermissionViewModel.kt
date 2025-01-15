@@ -65,5 +65,3 @@ fun showPermissionSettings(context: Context) {
         Toast.makeText(context, "Unable to open settings", Toast.LENGTH_SHORT).show()
     }
 }
-
-

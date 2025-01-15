@@ -1,5 +1,6 @@
 package com.example.capital_taxi.Presentation.ui.shared.new_password
 
+import android.annotation.SuppressLint
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
@@ -21,6 +22,10 @@ import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
+import androidx.compose.material3.SnackbarHost
+import androidx.compose.material3.SnackbarHostState
+import androidx.compose.material3.AlertDialog
+import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -38,140 +43,59 @@ import androidx.navigation.NavController
 import com.example.capital_taxi.Navigation.Destination
 import com.example.capital_taxi.R
 import androidx.compose.ui.res.stringResource
-import androidx.compose.material3.SnackbarHost
-import androidx.compose.material3.SnackbarHostState
-import androidx.compose.runtime.rememberCoroutineScope
 import kotlinx.coroutines.launch
-
-import androidx.compose.material3.AlertDialog
-import androidx.compose.material3.TextButton
+import androidx.compose.runtime.rememberCoroutineScope
+import androidx.lifecycle.viewmodel.compose.viewModel
+import com.example.capital_taxi.Presentation.ui.shared.new_password.Components.NewPasswordContent
+import com.example.capital_taxi.Presentation.ui.shared.new_password.Components.NewPasswordDialog
+import com.example.capital_taxi.Presentation.ui.shared.new_password.Components.NewPasswordTopBar
+import com.example.capital_taxi.Presentation.viewmodel.shared.NewPasswordViewModel
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun NewPasswordScreen(navController: NavController) {
-    var password by remember { mutableStateOf("") }
-    var showDialog by remember { mutableStateOf(false) } // State for showing the dialog
-    var dialogMessage by remember { mutableStateOf("") } // Message to display in the dialog
+    // Access the ViewModel
+    val viewModel: NewPasswordViewModel = viewModel()
+
+    // Snackbar host state
     val snackbarHostState = remember { SnackbarHostState() }
-
-    var diologMessage =   (stringResource(R.string.password_changed_successfully))
-    var validpassword =   (stringResource(R.string.please_enter_valid_password))
-
-
     val scope = rememberCoroutineScope()
+
     Box(modifier = Modifier.fillMaxSize()) {
         Scaffold(
-            modifier = Modifier
-                .fillMaxSize()
-                .background(Color.White),
-            topBar = {
-                TopAppBar(
-                    title = { null },
-                    navigationIcon = {
-                        IconButton(onClick = { navController.popBackStack() }) {
-                            Box(
-                                modifier = Modifier
-                                    .size(36.dp)
-                                    .background(Color.Transparent)
-                                    .border(4.dp, color = Color.Black, RoundedCornerShape(30.dp)),
-                                contentAlignment = Alignment.Center
-                            ) {
-                                Icon(
-                                    modifier = Modifier.size(26.dp),
-                                    painter = painterResource(id = R.drawable.baseline_arrow_back_ios_new_24),
-                                    contentDescription = stringResource(R.string.back_button_description),
-                                    tint = Color.Black
+            modifier = Modifier.fillMaxSize().background(Color.White),
+            topBar = { NewPasswordTopBar(navController) },
+            snackbarHost = { SnackbarHost(snackbarHostState) }
+        ) { paddingValues ->
+            Box(modifier = Modifier.fillMaxSize().padding(paddingValues)) {
+                NewPasswordContent(
+                    password = viewModel.password,
+                    onPasswordChange = { viewModel.onPasswordChange(it) },
+                    onSaveClicked = {
+                        viewModel.onSaveClicked { message ->
+                            // Show snackbar message if password is empty
+                            scope.launch {
+                                snackbarHostState.showSnackbar(
+                                    message = message,
+                                    withDismissAction = true
                                 )
                             }
                         }
                     }
                 )
             }
-            ,  snackbarHost = { SnackbarHost(snackbarHostState) }
-        ) { paddingValues ->
-            Box(
-                modifier = Modifier
-                    .fillMaxSize()
-                    .padding(paddingValues)
-            ) {
-                Column(
-                    modifier = Modifier.padding(16.dp),
-                    horizontalAlignment = Alignment.Start,
-                    verticalArrangement = Arrangement.Top
-                ) {
-                    Text(
-                        stringResource(R.string.create_new_password),
-                        fontWeight = FontWeight.W400,
-                        fontSize = 32.sp,
-                        modifier = Modifier.padding(bottom = 8.dp)
-                    )
-                    Text(
-                        stringResource(R.string.password_hint),
-                        fontWeight = FontWeight.W400,
-                        fontSize = 18.sp,
-                        modifier = Modifier.padding(bottom = 20.dp)
-                    )
-                    Spacer(modifier = Modifier.height(16.dp))
-                    OutlinedTextField(
-                        value = password,
-                        onValueChange = { password = it.trim() },
-                        label = { Text(stringResource(R.string.new_password_label)) },
-                        placeholder = { Text(stringResource(R.string.new_password_placeholder)) },
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .background(Color.White.copy(alpha = .2f)),
-                        singleLine = true,
-                    )
-                    Spacer(modifier = Modifier.weight(1f))
-                    Button(
-                        onClick = {
-                            if (password.isNotEmpty()) {
-                                dialogMessage = diologMessage
-                                showDialog = true
-                            } else {
-                                scope.launch {
-                                    snackbarHostState.showSnackbar(
-                                        message =  validpassword,
-                                        withDismissAction = true
-                                    )
-                                }
-                            }
-
-                        },
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .height(60.dp),
-                        colors = ButtonDefaults.buttonColors(colorResource(R.color.primary_color)),
-                        shape = RoundedCornerShape(8.dp)
-                    ) {
-                        Text(
-                            text = stringResource(R.string.save_button),
-                            fontSize = 18.sp,
-                            color = Color.Black
-                        )
-                    }
-                    Spacer(modifier = Modifier.weight(2f))
-                }
-            }
         }
     }
 
-    // Dialog Box
-    if (showDialog) {
-        AlertDialog(
-            onDismissRequest = { showDialog = false },
-            confirmButton = {
-                TextButton(onClick = {
-                    showDialog = false
-                    if (dialogMessage ==diologMessage) {
-                        navController.navigate(Destination.UserLogin.route)
-                    }
-                }) {
-                    Text(stringResource(R.string.ok_button))
+    if (viewModel.showDialog) {
+        NewPasswordDialog(
+            dialogMessage = viewModel.dialogMessage,
+            onDismiss = { viewModel.showDialog = false },
+            onConfirm = {
+                viewModel.onDialogConfirm {
+                    navController.navigate(Destination.UserLogin.route)
                 }
-            },
-            title = { Text(stringResource(R.string.dialog_title)) },
-            text = { Text(dialogMessage) }
+            }
         )
     }
 }

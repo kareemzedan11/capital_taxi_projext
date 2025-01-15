@@ -29,6 +29,7 @@ import androidx.compose.material.icons.filled.Phone
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Checkbox
+import androidx.compose.material3.CheckboxDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -53,6 +54,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
+import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
@@ -69,7 +71,6 @@ import com.google.firebase.auth.GoogleAuthProvider
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun userRegisterContent(
-
 
 
     navController: NavController
@@ -89,7 +90,7 @@ fun userRegisterContent(
 
     // Initialize FirebaseAuth instance
     val firebaseAuth = FirebaseAuth.getInstance()
-    val context= LocalContext.current
+    val context = LocalContext.current
 
     // Configure Google Sign-In options
     val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
@@ -202,7 +203,9 @@ fun userRegisterContent(
                         painter = painterResource(
                             if (passwordVisible1) R.drawable.baseline_visibility_24 else R.drawable.baseline_visibility_off_24
                         ),
-                        contentDescription = if (passwordVisible1) stringResource(id = R.string.hide_password) else stringResource(id = R.string.show_password)
+                        contentDescription = if (passwordVisible1) stringResource(id = R.string.hide_password) else stringResource(
+                            id = R.string.show_password
+                        )
                     )
                 }
             },
@@ -224,7 +227,9 @@ fun userRegisterContent(
                         painter = painterResource(
                             if (Confirmpasswordvisible1) R.drawable.baseline_visibility_24 else R.drawable.baseline_visibility_off_24
                         ),
-                        contentDescription = if (Confirmpasswordvisible1) stringResource(id = R.string.hide_password) else stringResource(id = R.string.show_password)
+                        contentDescription = if (Confirmpasswordvisible1) stringResource(id = R.string.hide_password) else stringResource(
+                            id = R.string.show_password
+                        )
                     )
                 }
             },
@@ -252,13 +257,28 @@ fun userRegisterContent(
             Checkbox(
                 checked = isChecked1,
                 onCheckedChange = { isChecked1 = it },
-                modifier = Modifier.padding(end = 8.dp)
+                modifier = Modifier.padding(end = 8.dp),
+                colors = CheckboxDefaults.colors(colorResource(R.color.primary_color))
             )
-            Text(
-                text = stringResource(id = R.string.terms_conditions),
-                fontSize = 16.sp,
-                modifier = Modifier.clickable {}
-            )
+            Row(verticalAlignment = Alignment.CenterVertically) {
+                Text(
+                    text = stringResource(id = R.string.terms_conditions),
+                    fontSize = 16.sp,
+                    modifier = Modifier.clickable {}
+                )
+                Spacer(modifier = Modifier.width(4.dp))
+                Text(
+                    text = stringResource(
+                        id = R.string.terms_conditions_accept
+                    ),
+                    fontSize = 16.sp,
+                    textDecoration = TextDecoration.Underline,
+                    modifier = Modifier.clickable {},
+                    color = Color.Red
+                )
+            }
+
+
         }
 
         Spacer(modifier = Modifier.height(24.dp))
@@ -266,12 +286,14 @@ fun userRegisterContent(
         // Sign Up Button
         Button(
             onClick = { /* Handle Sign Up */ },
-            modifier = Modifier.fillMaxWidth().height(60.dp),
+            modifier = Modifier
+                .fillMaxWidth()
+                .height(60.dp),
             enabled = isChecked1,
             shape = RoundedCornerShape(8.dp),
             colors = ButtonDefaults.buttonColors(colorResource(R.color.primary_color)),
 
-        ) {
+            ) {
             Text(
                 text = stringResource(id = R.string.sign_up),
                 fontSize = 18.sp,
@@ -297,7 +319,8 @@ fun userRegisterContent(
                     .size(50.dp)
                     .clickable {     // Launch the Google sign-in intent
                         val signInIntent = googleSignInClient.signInIntent
-                        signInLauncher.launch(signInIntent) }
+                        signInLauncher.launch(signInIntent)
+                    }
                     .background(
                         colorResource(R.color.secondary_color),
                         shape = RoundedCornerShape(10.dp) // For rounded corners with 8.dp radius

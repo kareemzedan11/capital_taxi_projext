@@ -60,7 +60,8 @@
     <string name="password">كلمة المرور</string>
     <string name="confirm_password">تأكيد كلمة المرور</string>
     <string name="phone">الهاتف</string>
-    <string name="terms_conditions">أوافق على الشروط والأحكام</string>
+    <string name="terms_conditions">أوافق على</string>
+    <string name="terms_conditions_accept">الشروط والأحكام</string>
     <string name="sign_up_with">أو سجل باستخدام</string>
     <string name="google_logo_desc">شعار جوجل</string>
     <string name="x_logo_desc">شعار X</string>

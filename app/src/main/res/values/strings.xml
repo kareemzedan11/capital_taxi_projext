@@ -94,13 +94,15 @@
     <string name="password">Password</string>
     <string name="confirm_password">Confirm Password</string>
     <string name="phone">Phone</string>
-    <string name="terms_conditions">I agree to terms&amp;conditions</string>
+    <string name="terms_conditions">I agree to </string>
+    <string name="terms_conditions_accept"> terms&amp;conditions</string>
+
     <string name="sign_up_with">Or sign up With</string>
     <string name="google_logo_desc">Google Logo</string>
     <string name="x_logo_desc">X Logo</string>
     <string name="facebook_logo_desc">Facebook Logo</string>
     <string name="already_have_account">Already have an account?</string>
-    <string name="signin">SignIn</string>
+    <string name="signin">Sign In</string>
     <string name="back">Back</string>
     <string name="password_icon_desc">Password icon</string>
     <string name="phone_icon_desc">Phone icon</string>
@@ -312,7 +314,7 @@
     <string name="Arrange_your_trip">Arrange your trip</string>
 
 
-    <string name="create_new_password">Create New \n \nPassword</string>
+    <string name="create_new_password">Create New\nPassword</string>
     <string name="password_hint">This password should be different from the previous password</string>
     <string name="new_password_label">New Password</string>
 

@@ -4,34 +4,10 @@ import android.view.View
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.imePadding
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material3.Card
-import androidx.compose.material3.CardDefaults
-import androidx.compose.material3.CircularProgressIndicator
-import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.Icon
-import androidx.compose.material3.IconButton
-import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Text
-import androidx.compose.material3.TopAppBar
-import androidx.compose.material3.TopAppBarDefaults
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.rememberUpdatedState
-import androidx.compose.runtime.setValue
+import androidx.compose.material3.*
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -41,14 +17,11 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-
 import androidx.navigation.NavController
 import com.example.capital_taxi.R
 import com.example.capital_taxi.Presentation.ui.shared.Language.components.LanguagePreference
 import kotlinx.coroutines.delay
 import java.util.*
-
-@SuppressLint("SuspiciousIndentation")
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun LanguageDScreen(
@@ -56,36 +29,18 @@ fun LanguageDScreen(
     onLanguageSelected: (String) -> Unit,
     context: Context
 ) {
-
     val generalColor = colorResource(id = R.color.primary_color)
     val secondColor = colorResource(id = R.color.secondary_color)
 
     var selectedLanguage by remember { mutableStateOf(LanguagePreference.getSavedLanguage(context)) }
-    var isLoading by remember { mutableStateOf(false) }  // State to handle loading progress
-    val currentLanguage =
-        rememberUpdatedState(selectedLanguage)  // Remember current selected language
-
+    var isLoading by remember { mutableStateOf(false) }
 
     Scaffold(
         topBar = {
             TopAppBar(
                 navigationIcon = {
                     IconButton(onClick = { navController.popBackStack() }) {
-                        Box(
-                            modifier = Modifier
-                                .size(36.dp)
-                                .background(Color.Transparent)
-                                .border(4.dp, color = Color.Black, RoundedCornerShape(30.dp)),
-                            contentAlignment = Alignment.Center
-                        ) {
-
-                            Icon(
-                                modifier = Modifier.size(26.dp),
-                                painter = painterResource(id = R.drawable.baseline_arrow_forward_ios_24),
-                                contentDescription = "Back",
-                                tint = Color.Black
-                            )
-                        }
+                        BackButton()
                     }
                 },
                 title = {
@@ -99,7 +54,6 @@ fun LanguageDScreen(
             )
         }
     ) { innerPadding ->
-
         Box(
             modifier = Modifier
                 .fillMaxSize()
@@ -116,59 +70,75 @@ fun LanguageDScreen(
             ) {
                 LanguageButton(
                     language = stringResource(R.string.English),
-
                     color = secondColor,
                     painter = R.drawable.us,
-                    check = if (selectedLanguage == "en") R.drawable.baseline_check_circle_outline_24 else R.drawable.baseline_radio_button_unchecked_24,
                     isSelected = selectedLanguage == "en",
                     isLoading = isLoading,
                     onClick = {
+                        selectedLanguage = "en"  // Immediately update selected language
+                        isLoading = true  // Show loading indicator
                         onLanguageSelected("en")
-                        isLoading = true
-                        selectedLanguage = "en"
                         LanguagePreference.saveLanguage(context, "en")
                         updateLocale(context, "en")
-                        onLanguageSelected("en")
                     }
                 )
 
                 LanguageButton(
-                    language =   stringResource(R.string.Arabic),
-
+                    language = stringResource(R.string.Arabic),
                     color = secondColor,
                     painter = R.drawable.egypt,
-                    check = if (selectedLanguage == "ar") R.drawable.baseline_check_circle_outline_24 else R.drawable.baseline_radio_button_unchecked_24,
                     isSelected = selectedLanguage == "ar",
                     isLoading = isLoading,
                     onClick = {
+                        selectedLanguage = "ar"  // Immediately update selected language
+                        isLoading = true  // Show loading indicator
                         onLanguageSelected("ar")
-                        isLoading = true
-                        selectedLanguage = "ar"
                         LanguagePreference.saveLanguage(context, "ar")
                         updateLocale(context, "ar")
-
-
                     }
                 )
             }
         }
     }
 
-
-    // Force UI recomposition when language changes
-    LaunchedEffect(currentLanguage.value) {
-        if (Locale.getDefault().language.equals("ar"))
-
-            View.LAYOUT_DIRECTION_RTL else View.LAYOUT_DIRECTION_LTR
-        updateLocale(context, currentLanguage.value)
+    // Handle language update effect
+    LaunchedEffect(selectedLanguage) {
+        updateLocale(context, selectedLanguage)
     }
 
-    // Simulating a delay to hide progress circle after language change
+    // Simulate loading
     LaunchedEffect(isLoading) {
         if (isLoading) {
-            delay(1500)  // Simulate a delay (e.g., network operation)
+            delay(1500)
             isLoading = false
         }
+    }
+}
+
+
+@Composable
+fun BackButton() {
+    Box(
+        modifier = Modifier
+            .size(36.dp)
+            .background(Color.Transparent)
+            .border(4.dp, color = Color.Black, shape = RoundedCornerShape(30.dp)),
+        contentAlignment = Alignment.Center
+    ) {
+        Icon(
+            modifier = Modifier.size(26.dp),
+            painter = painterResource(id = R.drawable.baseline_arrow_forward_ios_24),
+            contentDescription = "Back",
+            tint = Color.Black
+        )
+    }
+}
+
+fun updateLanguage(context: Context, languageCode: String, selectedLanguage: String, onLanguageSelected: (String) -> Unit) {
+    if (selectedLanguage != languageCode) {
+        LanguagePreference.saveLanguage(context, languageCode)
+        onLanguageSelected(languageCode)
+        updateLocale(context, languageCode)
     }
 }
 
@@ -178,35 +148,19 @@ fun updateLocale(context: Context, languageCode: String) {
 
     val config = context.resources.configuration
     config.setLocale(locale)
+    config.setLayoutDirection(locale)
 
-    if (languageCode == "ar") {
-
-        config.setLayoutDirection(Locale("ar"))
-        View.LAYOUT_DIRECTION_RTL
-        println("View is View.LAYOUT_DIRECTION_RTL ${View.LAYOUT_DIRECTION_RTL}")
-    } else {
-        config.setLayoutDirection(Locale("en"))
-        View.LAYOUT_DIRECTION_LTR
-        println("View is View.LAYOUT_DIRECTION_LTR ${View.LAYOUT_DIRECTION_LTR}")
-    }
-
-    // Update configuration
     context.resources.updateConfiguration(config, context.resources.displayMetrics)
-
-
 }
-
-
 
 @Composable
 fun LanguageButton(
     language: String,
     color: Color,
     painter: Int,
-    check: Int,
     isSelected: Boolean,
     isLoading: Boolean,
-    onClick: () -> Unit,
+    onClick: () -> Unit
 ) {
     Card(elevation = CardDefaults.elevatedCardElevation(10.dp)) {
         Box(
@@ -243,7 +197,6 @@ fun LanguageButton(
                 }
                 Spacer(modifier = Modifier.weight(1f))
 
-                // Show the circular progress indicator if isLoading is true
                 if (isLoading) {
                     CircularProgressIndicator(
                         modifier = Modifier.size(24.dp),
@@ -251,32 +204,36 @@ fun LanguageButton(
                         strokeWidth = 2.dp
                     )
                 } else {
-                    // Circle indicator for selection
-                    Box(
-                        modifier = Modifier
-                            .size(24.dp)
-                            .background(
-                                if (isSelected) Color.Green else Color.Transparent,
-                                shape = RoundedCornerShape(50)
-                            )
-                            .border(
-                                2.dp,
-                                if (isSelected) Color.Green else Color.Gray,
-                                RoundedCornerShape(50)
-                            ),
-                        contentAlignment = Alignment.Center
-                    ) {
-                        if (isSelected) {
-                            Icon(
-                                painter = painterResource(id = R.drawable.baseline_check_circle_outline_24),
-                                contentDescription = null,
-                                tint = Color.White,
-                                modifier = Modifier.size(16.dp)
-                            )
-                        }
-                    }
+                    SelectionIndicator(isSelected)
                 }
             }
+        }
+    }
+}
+
+@Composable
+fun SelectionIndicator(isSelected: Boolean) {
+    Box(
+        modifier = Modifier
+            .size(24.dp)
+            .background(
+                if (isSelected) Color.Green else Color.Transparent,
+                shape = RoundedCornerShape(50)
+            )
+            .border(
+                2.dp,
+                if (isSelected) Color.Green else Color.Gray,
+                RoundedCornerShape(50)
+            ),
+        contentAlignment = Alignment.Center
+    ) {
+        if (isSelected) {
+            Icon(
+                painter = painterResource(id = R.drawable.baseline_check_circle_outline_24),
+                contentDescription = null,
+                tint = Color.White,
+                modifier = Modifier.size(16.dp)
+            )
         }
     }
 }

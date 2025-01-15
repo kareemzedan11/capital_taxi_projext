@@ -36,6 +36,10 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.example.capital_taxi.Navigation.Destination
+import com.example.capital_taxi.Presentation.ui.shared.Select_the_mode.Components.CustomBottomBackground
+import com.example.capital_taxi.Presentation.ui.shared.Select_the_mode.Components.CustomTopBackground
+import com.example.capital_taxi.Presentation.ui.shared.Select_the_mode.Components.ModeSelectionButton
+import com.example.capital_taxi.Presentation.ui.shared.Select_the_mode.Components.SelectTheModeHeader
 import com.example.capital_taxi.R
 
 @Composable
@@ -43,151 +47,48 @@ fun modeDesign(navController: NavController) {
     Box(
         modifier = Modifier
             .fillMaxSize()
-            .background(colorResource(R.color.primary_color).copy(alpha = .3f)),
+            .background(colorResource(R.color.primary_color).copy(alpha = .3f))
+    ) {
 
-        ) {
+        val generalColor = colorResource(id = R.color.primary_color)
 
-        val generalColor =
-            colorResource(id = R.color.primary_color) // استدعاء اللون داخل دالة Composable
+        // Custom Background Components
+        Box(modifier = Modifier.align(Alignment.TopEnd)) { CustomTopBackground(generalColor) }
+        CustomBottomBackground(generalColor)
 
-        Box(
-            modifier = Modifier
-                .align(Alignment.TopEnd)
-                .height(200.dp)
-                .width(200.dp)
-                .border(
-                    width = 2.dp,
-                    color = Color.Transparent,
-                    shape = RoundedCornerShape(bottomStart = 222.dp)
-                )
-                .drawBehind {
-                    // رسم اللون داخل الـ border فقط باستخدام اللون من resources
-                    val shape = RoundedCornerShape(bottomStart = 222.dp)
-                    val path = shape.createOutline(size, LayoutDirection.Ltr, this)
-
-                    drawOutline(outline = path, style = Fill, brush = SolidColor(generalColor))
-                }
-        )
+        // Main Content
 
         Box(
             modifier = Modifier
-                .fillMaxSize()
-                .align(Alignment.BottomStart)
+                .fillMaxSize(), contentAlignment = Alignment.Center
+
         ) {
-            Canvas(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .fillMaxHeight()
-            ) {
-                val width = size.width
-                val height = size.height
-
-                // Define the curved path
-                val path = Path().apply {
-                    moveTo(0f, height * 0.6f) // نقطة البداية (يسار منتصف السفلي)
-                    cubicTo(
-                        width * 0.3f, height * 0.8f,
-                        width * 1f, height * 1f,
-                        width, height * 1f
-                    )
-                    lineTo(width, height) // الزاوية السفلية اليمنى (خط تأكيدي)
-                    lineTo(0f, height)    // الزاوية السفلية اليسرى
-                    close()
-                }
-
-                // Draw a gradient inside the path
-                clipPath(path) {
-                    drawRect(
-                        brush = Brush.verticalGradient(
-                            colors = listOf(
-                                generalColor,
-                                generalColor,
-                            ),
-                            startY = 0f,
-                            endY = height
-                        ),
-                        size = size
-                    )
-                }
-            }
+            // Header
 
 
-
+            // Mode Selection Buttons
             Column(
-                modifier = Modifier.padding(top = 80.dp, start = 20.dp),
+                modifier = Modifier
+                    .fillMaxSize()
+                    .padding(8.dp),
                 verticalArrangement = Arrangement.Center
             ) {
                 Spacer(modifier = Modifier.weight(1f))
-
-                Text(
-                    stringResource(R.string.select_the_mode_title),
-                    fontSize = 24.sp,
-                    fontWeight = FontWeight.Bold
-                )
-                Spacer(modifier = Modifier.padding(top = 16.dp))
-                Text(
-                    stringResource(R.string.mode_instruction),
-                    fontSize = 20.sp,
-                    fontWeight = FontWeight.W600
-                )
-
+                SelectTheModeHeader()
                 Spacer(modifier = Modifier.weight(1f))
-                Button(
-                    modifier = Modifier
-                        .fillMaxWidth(.95f)
-                        .padding(8.dp)
-
-                        .border(2.dp, color = Color.Transparent, RoundedCornerShape(30.dp))
-                        .background(
-                            Color.White,
-                            RoundedCornerShape(30.dp)
-                        )
-                        .padding(6.dp),
-                    colors = ButtonDefaults.buttonColors(containerColor = Color.White),
+                ModeSelectionButton(
+                    label = stringResource(R.string.captain_button),
                     onClick = { navController.navigate(Destination.driverLogin.route) }
-                ) {
-                    Text(
-                        text = stringResource(R.string.captain_button),
-                        fontWeight = FontWeight.Medium,
-                        fontSize = 18.sp,
-                        color = Color(0XFF111111)
-                    )
-                }
+                )
                 Spacer(modifier = Modifier.height(5.dp))
 
-                Button(
-                    modifier = Modifier
-                        .fillMaxWidth(.95f)
-                        .padding(8.dp)
-
-                        .border(2.dp, color = Color.Transparent, RoundedCornerShape(30.dp))
-                        .background(
-                            Color.White,
-                            RoundedCornerShape(30.dp)
-                        )
-                        .padding(6.dp),
-                    colors = ButtonDefaults.buttonColors(containerColor = Color.White),
+                ModeSelectionButton(
+                    label = stringResource(R.string.passenger_button),
                     onClick = { navController.navigate(Destination.UserLogin.route) }
-                ) {
-                    Text(
-                        text = stringResource(R.string.passenger_button),
-                        fontWeight = FontWeight.Medium,
-                        fontSize = 18.sp,
-                        color = Color(0XFF111111)
-                    )
-                }
-
-
-
-
+                )
                 Spacer(modifier = Modifier.weight(1f))
-
-
             }
 
         }
     }
-
-
-}
-
+    }

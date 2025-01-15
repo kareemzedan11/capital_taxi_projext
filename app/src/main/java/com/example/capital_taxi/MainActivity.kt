@@ -15,11 +15,9 @@ import androidx.compose.ui.platform.LocalLayoutDirection
 import androidx.compose.ui.unit.LayoutDirection
 import androidx.core.content.ContextCompat
 import androidx.navigation.compose.rememberNavController
-import com.example.app.ui.theme.AppTypography
 import com.example.capital_taxi.Navigation.AppNavGraph
 import com.example.capital_taxi.Presentation.ui.shared.Language.components.LanguagePreference
 import updateLocale
-
 
 class MainActivity : ComponentActivity() {
 
@@ -39,42 +37,41 @@ class MainActivity : ComponentActivity() {
             if (!locationGranted) {
                 Toast.makeText(this, "Location permission is required", Toast.LENGTH_SHORT).show()
             }
-
         }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        // Get the saved language and update the locale
         val languageCode = LanguagePreference.getSavedLanguage(this)
-        updateLocale(this , languageCode) // Dynamically applies the locale and layout direction
-
+        updateLocale(this, languageCode)
 
         requestPermissions()
 
-        if ( LanguagePreference.getSavedLanguage(this) == "ar") {
+        // Set the layout direction based on the saved language
+        if (languageCode == "ar") {
             window.decorView.layoutDirection = View.LAYOUT_DIRECTION_RTL
         } else {
             window.decorView.layoutDirection = View.LAYOUT_DIRECTION_LTR
         }
 
         setContent {
+            // Use CompositionLocalProvider to dynamically apply layout direction
+            val currentLanguage = remember { mutableStateOf(languageCode) }
 
             CompositionLocalProvider(
-                LocalLayoutDirection provides if (languageCode == "ar") LayoutDirection.Rtl else LayoutDirection.Ltr
+                LocalLayoutDirection provides if (currentLanguage.value == "ar") LayoutDirection.Rtl else LayoutDirection.Ltr
             ) {
-                MaterialTheme(
-
-                    typography = AppTypography,
-
-                    content = {
-                        val navController = rememberNavController()
-                        AppNavGraph(navController = navController)
-                    }
-                )
+                MaterialTheme {
+                    val navController = rememberNavController()
+                    AppNavGraph(navController = navController)
+                }
             }
         }
     }
-     private fun requestPermissions() {
+
+    // Request permissions method
+    private fun requestPermissions() {
         val permissionsToRequest = mutableListOf<String>()
 
         if (ContextCompat.checkSelfPermission(
@@ -98,6 +95,7 @@ class MainActivity : ComponentActivity() {
         }
     }
 }
+
 
 
 
