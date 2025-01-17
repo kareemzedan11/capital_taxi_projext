@@ -59,9 +59,7 @@ class MainActivity : ComponentActivity() {
         }
         val isRtl = languageCode == "ar"
         setContent {
-            CompositionLocalProvider(LocalLayoutDirection provides if (isRtl) LayoutDirection.Rtl else LayoutDirection.Ltr) {
-                BackIcon()
-            }
+
             val currentLanguage = remember { mutableStateOf(languageCode) }
 
             CompositionLocalProvider(

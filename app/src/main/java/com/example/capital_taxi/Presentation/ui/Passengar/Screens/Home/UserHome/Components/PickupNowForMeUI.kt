@@ -31,22 +31,41 @@ fun PickupNowForMeUI(navController: NavController) {
     var showPickupSheet by remember { mutableStateOf(false) }
     var showForMeSheet by remember { mutableStateOf(false) }
 
+    val pickupNowTextNow = stringResource(R.string.Pickup_Now)
+    val pickupLaterText = stringResource(R.string.Pickup_later)
+
+    // States to track selected options
+    var selectedPickupOption by remember { mutableStateOf("Now") } // Default to "Now"
+    var selectedForMeOption by remember { mutableStateOf("For Me") } // Default to "For Me"
+
+    val pickupNowText = if (selectedPickupOption == "Now") pickupNowTextNow else pickupLaterText
+    val forMeText =
+        if (selectedForMeOption == "For Me") stringResource(R.string.For_Me) else stringResource(R.string.For_a_group)
+
     if (showPickupSheet) {
         RideSelectionBottomSheet(
             title = stringResource(R.string.When_do_you_need_a_ride),
-            options = listOf(stringResource(R.string.Now) to R.drawable.baseline_access_time_24,stringResource(R.string.Later) to R.drawable.baseline_punch_clock_24),
-            selectedOption = remember { mutableStateOf("Now") },
-            onDone = { navController.navigate(Destination.SelectTheMode.route) },
+            options = listOf(
+                "Now" to R.drawable.baseline_access_time_24,
+                "Later" to R.drawable.baseline_punch_clock_24
+            ),
+            selectedOption = selectedPickupOption,
+            onOptionSelected = { selectedOption -> selectedPickupOption = selectedOption },
+            onDone = { showPickupSheet = false },
             onDismiss = { showPickupSheet = false }
         )
     }
 
     if (showForMeSheet) {
         RideSelectionBottomSheet(
-            title =  stringResource(R.string.Who_is_the_ride_for),
-            options = listOf(stringResource(R.string.For_Me) to R.drawable.baseline_person_24, stringResource(R.string.For_a_group) to R.drawable.baseline_groups_24),
-            selectedOption = remember { mutableStateOf("For Me") },
-            onDone = { /* Navigate or handle selection */ },
+            title = stringResource(R.string.Who_is_the_ride_for),
+            options = listOf(
+                stringResource(R.string.For_Me) to R.drawable.baseline_person_24,
+                stringResource(R.string.For_a_group) to R.drawable.baseline_groups_24
+            ),
+            selectedOption = selectedForMeOption,
+            onOptionSelected = { selectedOption -> selectedForMeOption = selectedOption },
+            onDone = { showForMeSheet = false },
             onDismiss = { showForMeSheet = false }
         )
     }
@@ -59,14 +78,14 @@ fun PickupNowForMeUI(navController: NavController) {
     ) {
         OptionButtonWithMenu(
             icon = Icons.Default.AddCircle,
-            text =  stringResource(R.string.Pickup_Now),
+            text = pickupNowText, // Dynamic text for "Pickup Now"
             onMenuClick = { showPickupSheet = true },
             showIcon = true
         )
         Spacer(modifier = Modifier.width(8.dp))
         OptionButtonWithMenu(
             icon = Icons.Default.Person,
-            text = stringResource(R.string.For_Me),
+            text = forMeText, // Dynamic text for "For Me"
             onMenuClick = { showForMeSheet = true },
             showIcon = true
         )
@@ -77,7 +96,8 @@ fun PickupNowForMeUI(navController: NavController) {
 fun RideSelectionBottomSheet(
     title: String,
     options: List<Pair<String, Int>>,
-    selectedOption: MutableState<String>,
+    selectedOption: String,
+    onOptionSelected: (String) -> Unit,
     onDone: () -> Unit,
     onDismiss: () -> Unit
 ) {
@@ -108,30 +128,15 @@ fun RideSelectionBottomSheet(
             options.forEach { option ->
                 SelectableCard(
                     text = option.first,
-                    isSelected = selectedOption.value == option.first,
+                    isSelected = selectedOption == option.first,
                     iconRes = option.second,
-                    onClick = { selectedOption.value = option.first }
+                    onClick = { onOptionSelected(option.first) } // Update the selection
                 )
 
                 Spacer(modifier = Modifier.height(20.dp))
             }
-            Spacer(modifier = Modifier.height(20.dp))
 
-            Button(
-                onClick = onDone,
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(horizontal = 40.dp)
-                    .height(60.dp),
-                colors = ButtonDefaults.buttonColors(colorResource(R.color.primary_color)),
-                shape = RoundedCornerShape(8.dp)
-            ) {
-                Text(
-                    text = stringResource(R.string.Done_Button),
-                    fontSize = 18.sp,
-                    color = Color.Black
-                )
-            }
+
         }
     }
 }
