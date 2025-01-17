@@ -18,8 +18,11 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
+import com.example.capital_taxi.Presentation.ui.shared.Language.components.BackButton
+import com.example.capital_taxi.Presentation.ui.shared.Language.components.LanguageButton
 import com.example.capital_taxi.R
 import com.example.capital_taxi.Presentation.ui.shared.Language.components.LanguagePreference
+import com.example.capital_taxi.Presentation.ui.shared.Language.components.updateLocale
 import kotlinx.coroutines.delay
 import java.util.*
 @OptIn(ExperimentalMaterial3Api::class)
@@ -116,24 +119,6 @@ fun LanguageDScreen(
 }
 
 
-@Composable
-fun BackButton() {
-    Box(
-        modifier = Modifier
-            .size(36.dp)
-            .background(Color.Transparent)
-            .border(4.dp, color = Color.Black, shape = RoundedCornerShape(30.dp)),
-        contentAlignment = Alignment.Center
-    ) {
-        Icon(
-            modifier = Modifier.size(26.dp),
-            painter = painterResource(id = R.drawable.baseline_arrow_forward_ios_24),
-            contentDescription = "Back",
-            tint = Color.Black
-        )
-    }
-}
-
 fun updateLanguage(context: Context, languageCode: String, selectedLanguage: String, onLanguageSelected: (String) -> Unit) {
     if (selectedLanguage != languageCode) {
         LanguagePreference.saveLanguage(context, languageCode)
@@ -142,98 +127,3 @@ fun updateLanguage(context: Context, languageCode: String, selectedLanguage: Str
     }
 }
 
-fun updateLocale(context: Context, languageCode: String) {
-    val locale = Locale(languageCode)
-    Locale.setDefault(locale)
-
-    val config = context.resources.configuration
-    config.setLocale(locale)
-    config.setLayoutDirection(locale)
-
-    context.resources.updateConfiguration(config, context.resources.displayMetrics)
-}
-
-@Composable
-fun LanguageButton(
-    language: String,
-    color: Color,
-    painter: Int,
-    isSelected: Boolean,
-    isLoading: Boolean,
-    onClick: () -> Unit
-) {
-    Card(elevation = CardDefaults.elevatedCardElevation(10.dp)) {
-        Box(
-            modifier = Modifier
-                .fillMaxWidth(0.95f)
-                .padding(vertical = 8.dp)
-                .background(color, RoundedCornerShape(8.dp))
-                .clickable { onClick() }
-                .padding(vertical = 16.dp),
-            contentAlignment = Alignment.Center
-        ) {
-            Row(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(horizontal = 8.dp),
-                horizontalArrangement = Arrangement.SpaceBetween,
-                verticalAlignment = Alignment.CenterVertically
-            ) {
-                Row(verticalAlignment = Alignment.CenterVertically) {
-                    Icon(
-                        painter = painterResource(painter),
-                        contentDescription = null,
-                        tint = Color.Unspecified,
-                        modifier = Modifier.size(40.dp)
-                    )
-
-                    Text(
-                        text = language,
-                        fontWeight = FontWeight.Bold,
-                        fontSize = 18.sp,
-                        color = Color.Black,
-                        modifier = Modifier.padding(start = 16.dp)
-                    )
-                }
-                Spacer(modifier = Modifier.weight(1f))
-
-                if (isLoading) {
-                    CircularProgressIndicator(
-                        modifier = Modifier.size(24.dp),
-                        color = Color.Green,
-                        strokeWidth = 2.dp
-                    )
-                } else {
-                    SelectionIndicator(isSelected)
-                }
-            }
-        }
-    }
-}
-
-@Composable
-fun SelectionIndicator(isSelected: Boolean) {
-    Box(
-        modifier = Modifier
-            .size(24.dp)
-            .background(
-                if (isSelected) Color.Green else Color.Transparent,
-                shape = RoundedCornerShape(50)
-            )
-            .border(
-                2.dp,
-                if (isSelected) Color.Green else Color.Gray,
-                RoundedCornerShape(50)
-            ),
-        contentAlignment = Alignment.Center
-    ) {
-        if (isSelected) {
-            Icon(
-                painter = painterResource(id = R.drawable.baseline_check_circle_outline_24),
-                contentDescription = null,
-                tint = Color.White,
-                modifier = Modifier.size(16.dp)
-            )
-        }
-    }
-}

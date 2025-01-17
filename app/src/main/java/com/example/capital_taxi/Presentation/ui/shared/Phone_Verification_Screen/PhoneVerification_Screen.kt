@@ -21,6 +21,7 @@ import androidx.compose.ui.unit.sp
 import androidx.compose.ui.viewinterop.AndroidView
 import androidx.navigation.NavController
 import com.example.capital_taxi.Navigation.Destination
+import com.example.capital_taxi.Presentation.ui.shared.Phone_Verification_Screen.Components.CountryCodePickerView
 import com.example.capital_taxi.R
 import com.google.firebase.FirebaseException
 import com.google.firebase.auth.*
@@ -200,21 +201,4 @@ fun PhoneVerification(navController: NavController) {
             }
         }
     }
-}
-
-@Composable
-fun CountryCodePickerView(onCountrySelected: (String) -> Unit) {
-    AndroidView(factory = { context ->
-        val countryCodePicker = CountryCodePicker(context).apply {
-            setOnCountryChangeListener {
-                onCountrySelected(selectedCountryCodeWithPlus)
-            }
-
-            setSearchAllowed(true)
-
-
-            setCountryForNameCode("EG")
-        }
-        countryCodePicker
-    })
 }
