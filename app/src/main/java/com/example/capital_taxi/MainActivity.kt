@@ -11,11 +11,14 @@ import android.view.View
 import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.ui.platform.LocalLayoutDirection
 import androidx.compose.ui.unit.LayoutDirection
 import androidx.core.content.ContextCompat
 import androidx.navigation.compose.rememberNavController
 import com.example.capital_taxi.Navigation.AppNavGraph
+import com.example.capital_taxi.Presentation.Common.BackIcon
+import com.example.capital_taxi.Presentation.ui.Theme.AppTheme
 import com.example.capital_taxi.Presentation.ui.shared.Language.components.LanguagePreference
 import updateLocale
 
@@ -39,7 +42,7 @@ class MainActivity : ComponentActivity() {
             }
         }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
+    override fun onCreate(savedInstanceState: Bundle? ) {
         super.onCreate(savedInstanceState)
 
         // Get the saved language and update the locale
@@ -54,15 +57,20 @@ class MainActivity : ComponentActivity() {
         } else {
             window.decorView.layoutDirection = View.LAYOUT_DIRECTION_LTR
         }
-
+        val isRtl = languageCode == "ar"
         setContent {
-            // Use CompositionLocalProvider to dynamically apply layout direction
+            CompositionLocalProvider(LocalLayoutDirection provides if (isRtl) LayoutDirection.Rtl else LayoutDirection.Ltr) {
+                BackIcon()
+            }
             val currentLanguage = remember { mutableStateOf(languageCode) }
 
             CompositionLocalProvider(
                 LocalLayoutDirection provides if (currentLanguage.value == "ar") LayoutDirection.Rtl else LayoutDirection.Ltr
+
             ) {
-                MaterialTheme {
+                AppTheme(
+                    darkTheme = false,
+                ) {
                     val navController = rememberNavController()
                     AppNavGraph(navController = navController)
                 }

@@ -3,6 +3,7 @@ package com.example.capital_taxi.Presentation.ui.shared.Start
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -31,7 +32,7 @@ fun StartScreen(navController: NavController) {
     Box(
         modifier = Modifier
             .fillMaxSize()
-            .background(colorResource(R.color.secondary_color))
+
     ) {
         Column(
             modifier = Modifier.fillMaxSize()
@@ -40,7 +41,7 @@ fun StartScreen(navController: NavController) {
                 modifier = Modifier
                     .weight(6f)
                     .fillMaxWidth()
-                    .background(colorResource(R.color.secondary_color))
+
             ) {
                 Image(
                     modifier = Modifier.fillMaxSize(),
@@ -54,12 +55,13 @@ fun StartScreen(navController: NavController) {
                 modifier = Modifier
                     .weight(2f)
                     .fillMaxWidth()
-                    .background(Color.White)
+
             ) {
                 Column(
                     verticalArrangement = Arrangement.Top,
                     horizontalAlignment = Alignment.Start,
                     modifier = Modifier.fillMaxHeight()
+                        .background(MaterialTheme.colorScheme.background)
                 ) {
                     Spacer(modifier = Modifier.weight(1f))
 

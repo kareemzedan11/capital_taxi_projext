@@ -1,5 +1,6 @@
 package com.example.capital_taxi.Presentation.ui.shared.Start.Components
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 
@@ -14,6 +15,7 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
@@ -44,8 +46,9 @@ fun StartButtonDesign(navController: NavController) {
                 .align(Alignment.BottomCenter)
                 .padding(bottom = 50.dp, start = 20.dp, end = 20.dp)
                 .fillMaxWidth()
+
                 .height(60.dp),
-            colors = ButtonDefaults.buttonColors(Color.Black),
+            colors = ButtonDefaults.buttonColors(MaterialTheme.colorScheme.onSurface),
             shape = RoundedCornerShape(0.dp)
         ) {
             Row(
@@ -63,11 +66,10 @@ fun StartButtonDesign(navController: NavController) {
                         maxSize = 18.sp
                     ),
 
-                    color = Color.White
                 )
                 Spacer(modifier = Modifier.width(8.dp))
                 Icon(
-                    tint = Color.White,
+
                     contentDescription = null,
                     painter = painterResource(R.drawable.baseline_arrow_right_alt_24)
                 )

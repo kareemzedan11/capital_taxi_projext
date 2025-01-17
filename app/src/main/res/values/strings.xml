@@ -208,8 +208,6 @@
     <string name="Become_driver">Become a driver</string>
 
 
-
-
     <!-- General UI Texts -->
     <string name="Trips">Trips</string>
     <string name="Payment_and_Billing">Payment and Billing</string>
@@ -347,7 +345,6 @@
     <string name="back_of_vehicle_registration">Back of Vehicle Registration</string>
 
 
-
     <string name="driver_licence">Driver License</string>
     <string name="front_of_license">Front of License</string>
     <string name="back_of_license">Back of License</string>
@@ -364,5 +361,10 @@
 
     <string name="driver_license_number">Driver License Number</string>
     <string name="expiration_date">Expiration Date</string>
+    <string name="Additional_comments"> Additional comments...</string>
+    <string name="Confirm">Confirm</string>
+    <string name="How_is_your_trip"> How is your trip?</string>
+    <string name="rate_driver">Please rate your driver</string>
+
 
 </resources>

@@ -300,6 +300,10 @@
     <string name="selfie_with_license">سيلفي مع الرخصة</string>
     <string name="add_selfie">أضف سيلفي</string>
 
+    <string name="Additional_comments">تعليقات إضافية...</string>
+    <string name="Confirm">تأكيد</string>
+    <string name="How_is_your_trip">كيف كانت رحلتك؟</string>
+    <string name="rate_driver">يرجى تقييم السائق</string>
 
     <string name="driver_license_number">رقم رخصة القيادة</string>
     <string name="expiration_date">تاريخ الانتهاء</string>

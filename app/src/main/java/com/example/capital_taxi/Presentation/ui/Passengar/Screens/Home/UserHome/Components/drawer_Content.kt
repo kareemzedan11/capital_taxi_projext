@@ -44,6 +44,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.example.capital_taxi.Navigation.Destination
+import com.example.capital_taxi.Presentation.ui.Passengar.Screens.Home.UserHome.Components.navigationDrawerItem
 import com.example.capital_taxi.R
 
 @Composable
@@ -187,7 +188,7 @@ fun drawerContent(navController: NavController) {
 
 
                 navigationDrawerItem(
-                    onClick = { navController.navigate(Destination.InviteFriendsPage.route) },
+                    onClick = { navController.navigate(Destination.InviteForMyApp.route) },
                     painter = painterResource(R.drawable.invite),
                     text = stringResource(R.string.Invite_Friends)
 
@@ -218,47 +219,5 @@ fun drawerContent(navController: NavController) {
         }
         Spacer(Modifier.height(20.dp))
     }
-}
-
-
-@Composable
-fun navigationDrawerItem(onClick: () -> Unit, painter: Painter? = null, text: String) {
-    NavigationDrawerItem(
-
-        onClick = { onClick() },
-        icon = {
-            if (painter != null) {
-                Icon(
-                    modifier = Modifier
-
-                        .padding(start = 5.dp, end = 3.dp) // Apply padding inside the background
-                        .size(28.dp), // Set the size of the icon
-                    contentDescription = "menu",
-                    painter = painter, tint = Color.Unspecified
-
-                )
-
-            }
-        },
-        selected = false,
-        label = {
-            Text(
-                text, fontSize = 20.sp,
-                fontWeight = FontWeight.Bold
-            )
-        },
-        badge = {
-            Icon(
-                modifier = Modifier
-
-                    .padding(start = 5.dp, end = 3.dp) // Apply padding inside the background
-                    .size(28.dp), // Set the size of the icon
-                contentDescription = "menu",
-                imageVector = Icons.Default.KeyboardArrowRight, tint = Color.Unspecified
-
-            )
-        },
-    )
-
 }
 

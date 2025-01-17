@@ -18,6 +18,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -28,6 +29,7 @@ fun TripRatingDialog() {
     var selectedRating by remember { mutableStateOf(0f) }
     var comments by remember { mutableStateOf("") }
 
+
     Column(
         modifier = Modifier
             .fillMaxWidth()
@@ -35,14 +37,15 @@ fun TripRatingDialog() {
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         Text(
-            text = "How is your trip?",
+            text = stringResource(R.string.How_is_your_trip),
+
             fontSize = 24.sp,
             fontWeight = FontWeight.Bold
         )
         Spacer(modifier = Modifier.padding(3.dp))
 
         Text(
-            text = "Please rate your driver",
+            text = stringResource(R.string.rate_driver),
             fontSize = 18.sp,
             color = Color.Gray,
             modifier = Modifier.padding(vertical = 8.dp)
@@ -61,7 +64,7 @@ fun TripRatingDialog() {
         TextField(
             value = comments,
             onValueChange = {comments=it},
-            placeholder = { Text("Additional comments...") },
+            placeholder = {stringResource(R.string.Additional_comments)},
             modifier = Modifier
                 .fillMaxWidth()
                 .height(120.dp)
@@ -77,7 +80,7 @@ fun TripRatingDialog() {
                 .height(55.dp),
             shape = RoundedCornerShape(8.dp)
         ) {
-            Text(text = "Confirm", color = Color.Black, fontSize = 16.sp)
+            Text(text =stringResource(R.string.Confirm), color = Color.Black, fontSize = 16.sp)
         }
     }
 }

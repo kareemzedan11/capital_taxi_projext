@@ -26,6 +26,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
@@ -52,12 +53,21 @@ fun userNotification(navController: NavController) {
                     )
                 },
                 navigationIcon = {
-                    IconButton(onClick = { navController.popBackStack() }) {
-                        Icon(
-                            imageVector = Icons.Default.ArrowBack,
-                            contentDescription = "Back",
-                            tint = Color.Black
-                        )
+                    androidx.compose.material3.IconButton(onClick = { navController.popBackStack() }) {
+                        Box(
+                            modifier = Modifier
+                                .size(36.dp)
+                                .background(Color.Transparent)
+                                .border(4.dp, color = Color.Black, RoundedCornerShape(30.dp)),
+                            contentAlignment = Alignment.Center
+                        ) {
+                            androidx.compose.material3.Icon(
+                                modifier = Modifier.size(26.dp),
+                                painter = painterResource(id = R.drawable.baseline_arrow_back_ios_new_24),
+                                contentDescription = stringResource(R.string.back),
+                                tint = Color.Black
+                            )
+                        }
                     }
                 },
                 backgroundColor = Color.White,

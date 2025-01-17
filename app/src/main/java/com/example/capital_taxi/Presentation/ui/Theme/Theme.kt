@@ -8,27 +8,54 @@ import androidx.compose.material3.lightColorScheme
 
 import androidx.compose.runtime.Composable
 
-
-// Define your color palettes
 private val LightColorPalette = lightColorScheme(
     primary = LightPrimary,
-    secondary = LightSecondary,
-    background = LightBackground,
-    surface = LightSurface,
     onPrimary = LightOnPrimary,
+    primaryContainer = LightPrimaryContainer,
+    onPrimaryContainer = LightOnPrimaryContainer,
+    secondary = LightSecondary,
     onSecondary = LightOnSecondary,
-
+    secondaryContainer = LightSecondaryContainer,
+    onSecondaryContainer = LightOnSecondaryContainer,
+    background = LightBackground,
+    onBackground = LightOnBackground,
+    surface = LightSurface,
+    onSurface = LightOnSurface,
+    surfaceVariant = LightSurfaceVariant,
+    onSurfaceVariant = LightOnSurfaceVariant,
+    error = LightError,
+    onError = LightOnError,
+    errorContainer = LightErrorContainer,
+    onErrorContainer = LightOnErrorContainer,
+    outline = LightOutline,
+    inverseSurface = LightInverseSurface,
+    inverseOnSurface = LightInverseOnSurface,
 )
 
 private val DarkColorPalette = darkColorScheme(
     primary = DarkPrimary,
-    secondary = DarkSecondary,
-    background = DarkBackground,
-    surface = DarkSurface,
     onPrimary = DarkOnPrimary,
+    primaryContainer = DarkPrimaryContainer,
+    onPrimaryContainer = DarkOnPrimaryContainer,
+    secondary = DarkSecondary,
     onSecondary = DarkOnSecondary,
-
+    secondaryContainer = DarkSecondaryContainer,
+    onSecondaryContainer = DarkOnSecondaryContainer,
+    background = DarkBackground,
+    onBackground = DarkOnBackground,
+    surface = DarkSurface,
+    onSurface = DarkOnSurface,
+    surfaceVariant = DarkSurfaceVariant,
+    onSurfaceVariant = DarkOnSurfaceVariant,
+    error = DarkError,
+    onError = DarkOnError,
+    errorContainer = DarkErrorContainer,
+    onErrorContainer = DarkOnErrorContainer,
+    outline = DarkOutline,
+    inverseSurface = DarkInverseSurface,
+    inverseOnSurface = DarkInverseOnSurface,
 )
+
 
 
 @Composable

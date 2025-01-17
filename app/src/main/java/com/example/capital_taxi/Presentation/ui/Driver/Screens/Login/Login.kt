@@ -33,6 +33,8 @@ import androidx.compose.ui.graphics.drawscope.clipPath
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
+import com.example.capital_taxi.Presentation.Common.Shared_AppBar
+import com.example.capital_taxi.Presentation.Common.appBar_background_curve
 import com.example.capital_taxi.Presentation.ui.Driver.Screens.Login.Components.driverLoginContent
 
 import com.example.capital_taxi.R
@@ -45,88 +47,31 @@ fun DriverLoginIn(navController: NavController) {
 
     Scaffold(
         topBar = {
+            Shared_AppBar(navController, generalColor, text = R.string.Driver_Mode)
+        }
+    ) { innerPadding ->
 
-            TopAppBar(
-
-                title = {
-                    Text(
-                        stringResource(R.string.Driver_Mode),
-                        color = Color.Black,
-                        fontWeight = FontWeight.Bold
-                    )
-                },
-                navigationIcon = {
-                    IconButton(onClick = { navController.popBackStack() }) {
-                        IconButton(onClick = { navController.popBackStack() }) {
-                            Box(
-                                modifier = Modifier
-
-                                    .size(36.dp)
-                                    .background(Color.Transparent)
-                                    .border(4.dp, color = Color.Black, RoundedCornerShape(30.dp)),
-                                contentAlignment = Alignment.Center
-                            ) {
-                                Icon(
-                                    modifier = Modifier.size(26.dp),
-                                    painter = painterResource(id = R.drawable.baseline_arrow_back_ios_new_24),
-                                    contentDescription = "Back",
-                                    tint = Color.Black
-                                )
-                            }
-                        }
-                    }
-                },
-                colors = TopAppBarDefaults.topAppBarColors(containerColor = generalColor)
-
-            )
-        },
-        content = { paddingValues ->
+        Box(
+            modifier = Modifier
+                .fillMaxSize()
+                .background(Color.White)
+                .padding(innerPadding)
+                .imePadding(),
+            contentAlignment = Alignment.Center
+        ) {
             Box(
                 modifier = Modifier
                     .fillMaxSize()
-                    .padding(paddingValues) // Use padding values to avoid overlapping the topBar
-                    .background(Color.White),
-                contentAlignment = Alignment.Center
+                    .align(Alignment.TopEnd)
             ) {
-                Canvas(
+                Box(
                     modifier = Modifier
-                        .fillMaxWidth()
-                        .height(200.dp) // تحديد ارتفاع ثابت للـ Canvas
-                        .align(Alignment.TopEnd) // التأكد من محاذاة Canvas في الزاوية العليا اليمنى
+                        .align(Alignment.TopEnd)
                 ) {
-                    val width = size.width
-                    val height = size.height
-
-                    // Define the curved path
-                    val path = Path().apply {
-                        moveTo(0f, height * 0.4f)
-                        cubicTo(
-                            width * 0.3f, height * 0.1f,
-                            width * 0.7f, height * 0.9f,
-                            width, height * 0.4f
-                        )
-                        lineTo(width, 0f)
-                        lineTo(0f, 0f)
-                        close()
-                    }
-
-                    // Draw a gradient inside the path
-                    clipPath(path) {
-                        drawRect(
-                            brush = Brush.verticalGradient(
-                                colors = listOf(
-                                    generalColor,
-                                    generalColor.copy(alpha = .4f),
-                                ),
-                                startY = 0f,
-                                endY = height
-                            ),
-                            size = size
-                        )
-                    }
+                    appBar_background_curve(generalColor)
                 }
-                driverLoginContent(  navController)
+                driverLoginContent(navController)
             }
         }
-    )
+    }
 }

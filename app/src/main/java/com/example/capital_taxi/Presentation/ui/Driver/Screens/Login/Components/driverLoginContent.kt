@@ -1,53 +1,48 @@
 package com.example.capital_taxi.Presentation.ui.Driver.Screens.Login.Components
 
-import androidx.compose.foundation.Image
-import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
-import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.foundation.text.KeyboardOptions
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Email
-import androidx.compose.material.icons.filled.Lock
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.Icon
-import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
-import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.colorResource
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.input.KeyboardType
-import androidx.compose.ui.text.input.PasswordVisualTransformation
-import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
+import com.example.app.ui.theme.responsiveTextSize
+import com.example.capital_taxi.Helper.PermissionViewModel
+import com.example.capital_taxi.Helper.checkLocationPermission
 import com.example.capital_taxi.Navigation.Destination
+import com.example.capital_taxi.Presentation.Common.userMediaLoginOption
+import com.example.capital_taxi.Presentation.Common.LoginForm
 import com.example.capital_taxi.R
 
 
@@ -57,126 +52,93 @@ fun driverLoginContent(
 
     navController: NavController
 ) {
+    val permissionViewModel: PermissionViewModel = viewModel()
+    val context = LocalContext.current
+
+    // تأكد من التحقق من الصلاحية عند تحميل الشاشة
+    LaunchedEffect(context) {
+        checkLocationPermission(context, permissionViewModel)
+    }
+
+    val isLocationGranted by permissionViewModel.isLocationGranted.collectAsState()
+
     var email by remember { mutableStateOf("") }
     var password by remember { mutableStateOf("") }
     var passwordVisible by remember { mutableStateOf(false) }
+
+
     Column(
         modifier = Modifier
-            .fillMaxWidth()
+            .fillMaxSize()
+            .verticalScroll(rememberScrollState())
+
             .padding(16.dp),
-        horizontalAlignment = Alignment.CenterHorizontally
+        horizontalAlignment = Alignment.CenterHorizontally,
+        verticalArrangement = Arrangement.Center
     ) {
 
 
         Text(
-            text = stringResource(R.string.SignIn),
-            fontSize = 32.sp,
+            text = stringResource(R.string.signin),
+            fontSize = responsiveTextSize(fraction = 0.06f, minSize = 20.sp, maxSize = 32.sp),
+
             fontWeight = FontWeight.Bold,
             color = Color.Black,
             style = MaterialTheme.typography.headlineMedium
         )
 
         Spacer(modifier = Modifier.height(40.dp))
-
-        OutlinedTextField(
-            shape = RoundedCornerShape(12.dp),
-
-            colors = TextFieldDefaults.outlinedTextFieldColors(
-                containerColor = Color(0xFFF2F2F2),
-                focusedBorderColor = Color.Gray,
-                unfocusedBorderColor = Color.Gray,
-
-                ),
-            value = email,
-            onValueChange = { email = it },
-            leadingIcon = {
-                Icon(
-                    imageVector = Icons.Default.Email,
-                    tint = colorResource(id = R.color.primary_color),
-                    contentDescription = "email icon",
-                    modifier = Modifier
-                        .clip(CircleShape)
-                        .size(20.dp)
-
-                )
-
-
-            },
-            label = { Text(stringResource(id = R.string.Email_label)) },
-            modifier = Modifier.fillMaxWidth(),
-            keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Email)
-        )
-
-
-        Spacer(modifier = Modifier.height(16.dp))
-
-        OutlinedTextField(
-            value = password,
-            onValueChange = { password= it },
-            leadingIcon = {
-                Icon(
-                    imageVector = Icons.Default.Lock,
-                    tint = colorResource(id = R.color.primary_color),
-                    contentDescription = "password icon",
-                    modifier = Modifier
-                        .clip(CircleShape)
-                        .size(20.dp)
-
-                )
-            },
-            label = { Text(stringResource(id = R.string.Password_label)) },
-            modifier = Modifier.fillMaxWidth(),
-            visualTransformation = if (passwordVisible) VisualTransformation.None else PasswordVisualTransformation(),
-            trailingIcon = {
-                IconButton(onClick = { passwordVisible = !passwordVisible }) {
-                    Icon(
-                        painter = painterResource(
-                            if (passwordVisible) R.drawable.baseline_visibility_24 else R.drawable.baseline_visibility_off_24
-                        ),
-                        contentDescription = if (passwordVisible) "Hide password" else "Show password"
-                    )
-                }
-            },
-            keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password),
-            colors = TextFieldDefaults.outlinedTextFieldColors(
-
-                containerColor = Color(0xFFF2F2F2),
-                focusedBorderColor = Color.Gray,
-                unfocusedBorderColor = Color.Gray,
-
-                ),
-            shape = RoundedCornerShape(12.dp)
+        LoginForm(
+            email = email,
+            password = password,
+            onEmailChange = { email = it },
+            onPasswordChange = { password = it },
+            passwordVisible = passwordVisible,
+            onPasswordToggle = { passwordVisible = !passwordVisible }
         )
 
         Spacer(modifier = Modifier.height(16.dp))
         Text(
             textDecoration = TextDecoration.Underline,
-
             text = stringResource(R.string.ForgetPassword),
-            modifier = Modifier.align(alignment = Alignment.End),
-            color = colorResource(id = R.color.primary_color),
-            fontWeight = FontWeight.Bold, fontSize = 18.sp,
-        )
+            modifier = Modifier
+                .align(alignment = Alignment.End)
+                .clickable { navController.navigate(Destination.NewPasswordScreen.route) },
+            color = colorResource(R.color.primary_color),
+            fontWeight = FontWeight.Bold,
+            fontSize = responsiveTextSize(fraction = 0.06f, minSize = 14.sp, maxSize = 20.sp),
+
+
+            )
         Spacer(modifier = Modifier.height(24.dp))
 
         Button(
-            onClick = { navController.navigate(Destination.DriverHomeScreen.route)},
+            onClick = {
+                if (isLocationGranted) {
+                    navController.navigate(Destination.DriverHomeScreen.route)
+                } else {
+                    navController.navigate(Destination.searchForLocation.route)
+
+                }
+
+
+            },
             modifier = Modifier
                 .fillMaxWidth()
 
 
                 .height(60.dp),
-            colors = ButtonDefaults.buttonColors(colorResource(id = R.color.primary_color)),
-            shape = RoundedCornerShape(8.dp) // For rounded corners with 8.dp radius
-// Use RectangleShape to remove any default rounded corners
+            colors = ButtonDefaults.buttonColors(colorResource(R.color.primary_color)),
+            shape = RoundedCornerShape(8.dp)
+
 
         ) {
             Text(
-                text = stringResource(R.string.SignIn),
-                fontSize = 18.sp,
+                text = stringResource(R.string.signin),
+                fontSize = responsiveTextSize(fraction = 0.06f, minSize = 14.sp, maxSize = 18.sp),
                 color = Color.Black
+            )
 
-                )
         }
 
 
@@ -185,88 +147,15 @@ fun driverLoginContent(
 
 
         Text(
-            text = stringResource(R.string.OrSignInWith),
+            text = stringResource(R.string.sign_in_with),
             color = Color.Black,
-            fontSize = 18.sp,
+            fontSize = responsiveTextSize(fraction = 0.06f, minSize = 14.sp, maxSize = 20.sp),
+
             fontWeight = FontWeight.Bold
         )
 
         Spacer(modifier = Modifier.height(40.dp))
-
-        // Social Media Login Options
-        Row {
-
-            Box(
-                modifier = Modifier
-                    .size(50.dp)
-                    .background(
-                        colorResource(R.color.secondary_color),
-                        shape = RoundedCornerShape(10.dp) // For rounded corners with 8.dp radius
-
-                    ), contentAlignment = Alignment.Center
-
-            ) {
-                Image(
-                    modifier = Modifier
-                        .size(30.dp)
-                        .clip(CircleShape),
-                    painter = painterResource(R.drawable.googleicon),
-                    contentDescription = "Google Logo"
-                )
-            }
-
-            Spacer(Modifier.width(30.dp))
-
-            Row {
-
-                Box(
-                    modifier = Modifier
-                        .size(50.dp)
-
-                        .background(
-                            colorResource(R.color.secondary_color),
-                            shape = RoundedCornerShape(10.dp) // For rounded corners with 8.dp radius
-
-                        ), contentAlignment = Alignment.Center
-
-                ) {
-                    Image(
-                        modifier = Modifier
-                            .size(30.dp)
-                            .clip(CircleShape),
-                        painter = painterResource(R.drawable.xicon),
-                        contentDescription = "X Logo"
-                    )
-                }
-                Spacer(Modifier.width(30.dp))
-
-
-                Row {
-
-                    Box(
-                        modifier = Modifier
-                            .size(50.dp)
-                            .background(
-                                colorResource(R.color.secondary_color),
-                                shape = RoundedCornerShape(10.dp) // For rounded corners with 8.dp radius
-
-                            ), contentAlignment = Alignment.Center
-
-                    ) {
-                        Image(
-                            modifier = Modifier
-                                .size(30.dp)
-                                .clip(CircleShape),
-                            painter = painterResource(R.drawable.facelogo),
-                            contentDescription = "facelogo Logo"
-                        )
-                    }
-
-
-                    Spacer(modifier = Modifier.height(10.dp))
-                }
-            }
-        }
+        userMediaLoginOption()
 
         Spacer(modifier = Modifier.height(60.dp))
 
@@ -274,18 +163,22 @@ fun driverLoginContent(
         Row {
             Text(
                 text = stringResource(id = R.string.Dont_have_an_account),
-                fontSize = 18.sp,
-            )
+                fontSize = responsiveTextSize(fraction = 0.06f, minSize = 14.sp, maxSize = 20.sp),
+
+                )
 
             Spacer(modifier = Modifier.width(4.dp))
 
             Text(
                 text = stringResource(id = R.string.SignUp),
                 color = colorResource(R.color.primary_color),
-                fontSize = 18.sp,
+                fontSize = responsiveTextSize(fraction = 0.06f, minSize = 14.sp, maxSize = 20.sp),
+
+
                 modifier = Modifier.clickable {
                     navController.navigate(Destination.driverSignUp.route)
                 }
             )
         }
-    }}
+    }
+}

@@ -37,8 +37,8 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.example.capital_taxi.Navigation.Destination
+import com.example.capital_taxi.Presentation.ui.Passengar.Screens.Home.UserHome.Components.navigationDrawerItem
 import com.example.capital_taxi.R
-import navigationDrawerItem
 
 @Composable
 fun DriverNavigationDrawer(navController: NavController) {

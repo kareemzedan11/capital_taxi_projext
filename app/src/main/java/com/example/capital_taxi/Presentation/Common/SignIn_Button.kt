@@ -1,4 +1,4 @@
-package com.example.capital_taxi.Presentation.ui.Passengar.Screens.Login.Components
+package com.example.capital_taxi.Presentation.Common
 
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height

@@ -194,32 +194,7 @@ fun RideDetailsBottomSheetContent() {
                         .shadow(0.dp),  // Remove shadow if any (no elevation)
                     colors = ButtonDefaults.buttonColors(containerColor = Color(0XFFF2F2F2))  // Button color
                 ) {
-                    Row {
-                        Icon(
-                            modifier = Modifier.size(20.dp),
-                            tint = Color(0XFF46C96B),
-                            painter = painterResource(R.drawable.dollar),
-                            contentDescription = "cash"
-                        )
-                        Spacer(modifier = Modifier.padding(15.dp))
-
-                        Text(
-                            text = "32.5 EGP", fontSize = 20.sp, color = Color.Black
-                        )
-                        Spacer(modifier = Modifier.padding(5.dp))
-                        Text(
-                            text = "Cash", fontSize = 20.sp, color = Color.Black
-                        )
-                        Spacer(modifier = Modifier.weight(1f))
-                        Text(
-                            text = "Change", fontSize = 18.sp, color = Color.Gray
-                        )
-                        Icon(
-                            tint = Color.Gray,
-                            imageVector = Icons.Default.KeyboardArrowRight,
-                            contentDescription = "KeyboardArrowRight"
-                        )
-                    }
+                    Payment_trip_cost()
                 }
                 Spacer(modifier = Modifier.padding(top = 15.dp))
 

@@ -31,6 +31,7 @@ import com.example.capital_taxi.Presentation.ui.Passengar.Screens.Home.UserHome.
 import com.example.capital_taxi.Presentation.ui.Passengar.Screens.Home.UserHome.Components.savedPlaces.WorkPlace
 import com.example.capital_taxi.Presentation.ui.Passengar.Screens.chat_bot.chatbot
 import com.example.capital_taxi.Presentation.ui.Passengar.Screens.Home.UserHome.UserHomeScreen
+import com.example.capital_taxi.Presentation.ui.Passengar.Screens.InviteFriendsPage.InviteForMyApp
 import com.example.capital_taxi.Presentation.ui.Passengar.Screens.Voucher.voucherScreen
 import com.example.capital_taxi.Presentation.ui.Passengar.Screens.payment.PaymentScreen
 
@@ -175,6 +176,9 @@ fun AppNavGraph(navController: NavHostController) {
         }
         composable(Destination.HomePlace.route) {
             HomePlace(navController)
+        }
+        composable(Destination.InviteForMyApp.route) {
+            InviteForMyApp(navController)
         }
 
         composable(Destination.WorkPlace.route) {
