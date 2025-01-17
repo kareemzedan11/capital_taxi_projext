@@ -21,6 +21,7 @@ import androidx.compose.ui.platform.LocalContext
 import android.content.Context
 import android.content.SharedPreferences
 import com.example.capital_taxi.Navigation.Destination
+import com.example.capital_taxi.Presentation.ui.Passengar.Screens.profile.Components.ProfileTextField
 import com.example.capital_taxi.R
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -155,33 +156,5 @@ fun Profile(navController: NavController) {
                 }
             }
         }
-    )
-}
-
-
-@OptIn(ExperimentalMaterial3Api::class)
-@Composable
-fun ProfileTextField(
-    label: String,
-    value: String,
-    onValueChange: (String) -> Unit,
-    leadingIcon: @Composable (() -> Unit)? = null // Optional leading icon
-) {
-    OutlinedTextField(
-        value = value,
-        onValueChange = onValueChange,
-        label = { Text(label) },
-        leadingIcon = leadingIcon,
-        modifier = Modifier
-             .fillMaxWidth(0.9f)
-            .padding(vertical = 8.dp),
-        shape = RoundedCornerShape(16.dp)
-        ,
-        textStyle = LocalTextStyle.current.copy(color = Color.Black),
-        colors = TextFieldDefaults.outlinedTextFieldColors(
-            focusedBorderColor = Color.Black,
-            unfocusedBorderColor = Color.Gray,
-            cursorColor = Color.Black
-        )
     )
 }

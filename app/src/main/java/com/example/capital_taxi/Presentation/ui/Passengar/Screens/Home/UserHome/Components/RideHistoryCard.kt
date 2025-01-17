@@ -1,9 +1,7 @@
-package com.example.capital_taxi.Presentation.ui.Passengar.Components
+package com.example.capital_taxi.Presentation.ui.Passengar.Screens.Home.UserHome.Components
 
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Card
 import androidx.compose.material.MaterialTheme

@@ -1,5 +1,6 @@
 package com.example.capital_taxi.Navigation
 
+import DriverHelpDetailScreen
 import LanguageDScreen
 import PhoneVerification
 import androidx.compose.runtime.Composable
@@ -9,6 +10,7 @@ import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
+import com.example.capital_taxi.Presentation.ui.Driver.Screens.HelpScreen.DriverHelpScreen
 import com.example.capital_taxi.Presentation.ui.Driver.Screens.Home.Components.TripDetailsForDriver
 import com.example.capital_taxi.Presentation.ui.Driver.Screens.Home.drawerTabs.Inbox.InboxPage
 import com.example.capital_taxi.Presentation.ui.Driver.Screens.Home.drawerTabs.income.IncomePage
@@ -58,7 +60,7 @@ import com.example.capital_taxi.ui.screens.Driver.VerficationScreens.NationalIDV
 fun AppNavGraph(navController: NavHostController) {
 
     var context = LocalContext.current
-    NavHost(navController = navController, startDestination = Destination.UserHomeScreen.route) {
+    NavHost(navController = navController, startDestination = Destination.StartScreen.route) {
 
         composable(Destination.SplashScreen.route) {
             SplashScreen(navController)
@@ -191,6 +193,9 @@ fun AppNavGraph(navController: NavHostController) {
         composable(Destination.LanguageDScreen.route) {
             LanguageDScreen(navController,{}, context)
         }
+        composable(Destination.DriverHelpScreen.route) {
+            DriverHelpScreen(navController)
+        }
 
         composable("help_detail/{topic}") { backStackEntry ->
           HelpDetailScreen(
@@ -198,6 +203,18 @@ fun AppNavGraph(navController: NavHostController) {
                 topic = backStackEntry.arguments?.getString("topic") ?: ""
             )
         }
+
+            composable("driver_help") {
+                DriverHelpScreen(navController = navController)
+            }
+            composable(
+                "driver_help_detail/{topic}",
+                arguments = listOf(navArgument("topic") { type = NavType.StringType })
+            ) { backStackEntry ->
+                val topic = backStackEntry.arguments?.getString("topic") ?: ""
+                DriverHelpDetailScreen(navController = navController, topic = topic)
+            }
+
 
         composable(
             route = "ConfirmInformation?name={name}&email={email}&photoUrl={photoUrl}",

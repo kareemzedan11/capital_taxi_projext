@@ -32,6 +32,9 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
+import com.example.capital_taxi.Presentation.ui.Passengar.Screens.InviteFriendsPage.Components.CodeBox
+import com.example.capital_taxi.Presentation.ui.Passengar.Screens.InviteFriendsPage.Components.DetailCard
+import com.example.capital_taxi.Presentation.ui.Passengar.Screens.InviteFriendsPage.Components.ShareOption
 import com.example.capital_taxi.R
 
 
@@ -145,107 +148,8 @@ fun InviteForMyApp(navController: NavController) {
     }
 }
 
-@Composable
-fun CodeBox(code: String) {
-    val context = LocalContext.current
-    Box(
-        modifier = Modifier
-            .fillMaxWidth()
-            .padding(16.dp)
-            .background(colorResource(R.color.primary_color), RoundedCornerShape(8.dp))
-            .padding(16.dp)
-    ) {
-        Column(
-            modifier = Modifier
-                .background(color = Color.White)
-                .padding(horizontal = 5.dp)
-        ) {
-
-            Text(
-                text = "Referral Code:",
-                fontSize = 16.sp,
-                fontWeight = FontWeight.Bold
-            )
-
-            Row(
-                verticalAlignment = Alignment.CenterVertically,
-                horizontalArrangement = Arrangement.Start
-            ) {
-                BasicText(
-                    text = code,
-                    style = TextStyle(fontSize = 20.sp, fontWeight = FontWeight.Medium)
-                )
-                Spacer(modifier = Modifier.weight(1f))
-
-                Button(
-                    onClick = { copyToClipboard(context, code) },
-                    colors = ButtonDefaults.buttonColors(colorResource(R.color.primary_color))
-
-                ) {
-                    Text("Copy Code", color = Color.Black)
-                }
-            }
-        }
 
 
-    }
-}
-
-
-fun copyToClipboard(context: Context, text: String) {
-    val clipboard = context.getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
-    val clip = android.content.ClipData.newPlainText("Referral Code", text)
-    clipboard.setPrimaryClip(clip)
-}
-
-@Composable
-fun ShareOption(icon: Int, label: String) {
-    Column(
-        horizontalAlignment = Alignment.CenterHorizontally
-    ) {
-        Image(
-            painter = painterResource(id = icon),
-            contentDescription = label,
-            modifier = Modifier
-                .size(60.dp)
-                .background(
-                    color = Color.White,
-                    shape = RoundedCornerShape(50.dp)
-                )
-                .padding(12.dp),
-            contentScale = ContentScale.Crop
-        )
-        Spacer(modifier = Modifier.height(8.dp))
-        Text(text = label, fontSize = 14.sp, fontWeight = FontWeight.Medium)
-    }
-}
-
-@Composable
-fun DetailCard(title: String, description: String, backgroundColor: Color) {
-    Card(
-        modifier = Modifier
-            .width(200.dp)
-            .wrapContentHeight()
-
-            .padding(10.dp),
-        elevation = CardDefaults.cardElevation(10.dp)
-    ) {
-        Column(Modifier.padding(10.dp)) {
-            Text(
-                text = title,
-                fontSize = 18.sp,
-                fontWeight = FontWeight.Bold,
-                color = Color(0xFF333333)
-            )
-            Spacer(modifier = Modifier.height(8.dp))
-            Text(
-                text = description,
-                fontSize = 14.sp,
-                color = Color(0xFF666666)
-            )
-        }
-    }
-}
 
 // Sample data for rewards
 data class Reward(val title: String, val description: String)

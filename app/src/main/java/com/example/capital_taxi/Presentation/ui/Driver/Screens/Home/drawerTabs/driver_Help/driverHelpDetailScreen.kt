@@ -1,33 +1,45 @@
-package com.example.capital_taxi.Presentation.ui.Passengar.Screens.HelpScreen
-
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.icons.filled.KeyboardArrowRight
-import androidx.compose.material3.*
+import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
+import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Text
+import androidx.compose.material3.TopAppBar
+import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
-import androidx.compose.ui.res.stringResource
-import com.example.capital_taxi.Presentation.ui.Passengar.Screens.HelpScreen.Components.ManageAccountList
-import com.example.capital_taxi.Presentation.ui.Passengar.Screens.HelpScreen.Components.PaymentHelpSectionList
-import com.example.capital_taxi.Presentation.ui.Passengar.Screens.HelpScreen.Components.RateFeedbackList
-import com.example.capital_taxi.Presentation.ui.Passengar.Screens.HelpScreen.Components.RideSafetySectionList
-import com.example.capital_taxi.Presentation.ui.Passengar.Screens.HelpScreen.Components.TripHelpSectionList
+import com.example.capital_taxi.Presentation.ui.Driver.Screens.Home.drawerTabs.driver_Help.Components.driverManageAccountList
+import com.example.capital_taxi.Presentation.ui.Driver.Screens.Home.drawerTabs.driver_Help.Components.driverPaymentHelpSectionList
+import com.example.capital_taxi.Presentation.ui.Driver.Screens.Home.drawerTabs.driver_Help.Components.driverRateFeedbackList
+import com.example.capital_taxi.Presentation.ui.Driver.Screens.Home.drawerTabs.driver_Help.Components.driverRideSafetySectionList
+import com.example.capital_taxi.Presentation.ui.Driver.Screens.Home.drawerTabs.driver_Help.Components.driverTripHelpSectionList
 import com.example.capital_taxi.R
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun HelpDetailScreen(navController: NavController, topic: String) {
+fun DriverHelpDetailScreen(navController: NavController, topic: String) {
     Scaffold(
         topBar = {
             TopAppBar(
@@ -80,11 +92,11 @@ fun HelpDetailScreen(navController: NavController, topic: String) {
                 Spacer(modifier = Modifier.height(20.dp))
 
                 when (topic) {
-                    stringResource(id = R.string.Trips) -> TripHelpSectionList()
-                    stringResource(id = R.string.Payment_and_Billing) -> PaymentHelpSectionList()
-                    stringResource(id = R.string.Ride_Safety) -> RideSafetySectionList()
-                    stringResource(id = R.string.Account) -> ManageAccountList()
-                    stringResource(id = R.string.Rate_and_Feedback) -> RateFeedbackList()
+                    stringResource(id = R.string.Trips) -> driverTripHelpSectionList()
+                    stringResource(id = R.string.Payment_and_Billing) -> driverPaymentHelpSectionList()
+                    stringResource(id = R.string.Ride_Safety) -> driverRideSafetySectionList()
+                    stringResource(id = R.string.Account) -> driverManageAccountList()
+                    stringResource(id = R.string.Rate_and_Feedback) -> driverRateFeedbackList()
                     else -> Text(stringResource(id = R.string.Content_coming_soon))
                 }
 
@@ -124,5 +136,3 @@ fun HelpDetailScreen(navController: NavController, topic: String) {
         }
     )
 }
-
-

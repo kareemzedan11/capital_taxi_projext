@@ -368,5 +368,40 @@
     <string name="How_is_your_trip"> How is your trip?</string>
     <string name="rate_driver">Please rate your driver</string>
 
+    <!-- Manage Account -->
+    <string name="Updating_Profile_and_Information">Updating Profile and Information</string>
+    <string name="Bank_Account_Management">Bank Account Management</string>
+    <string name="Notification_Settings">Notification Settings</string>
+    <string name="Document_Upload_and_Verification">Document Upload and Verification</string>
+    <string name="Deactivating_or_Deleting_Account">Deactivating or Deleting Account</string>
 
+    <!-- Payment Help -->
+    <string name="How_to_Set_Up_Payment_Methods">How to Set Up Payment Methods</string>
+    <string name="Updating_Bank_Details">Updating Bank Details</string>
+    <string name="Payment_Cycle_and_Timelines">Payment Cycle and Timelines</string>
+    <string name="Viewing_Earnings_and_Payments">Viewing Earnings and Payments</string>
+    <string name="Handling_Payment_Disputes">Handling Payment Disputes</string>
+    <string name="What_to_Do_if_a_Payment_is_Missing">What to Do if a Payment is Missing</string>
+
+    <!-- Rate Feedback -->
+    <string name="Understanding_Ratings">Understanding Ratings</string>
+    <string name="Improving_Your_Rating">Improving Your Rating</string>
+    <string name="Handling_Customer_Feedback">Handling Customer Feedback</string>
+    <string name="Reporting_Unfair_Ratings">Reporting Unfair Ratings</string>
+    <string name="Providing_Feedback_to_Passengers">Providing Feedback to Passengers</string>
+
+    <!-- Ride Safety -->
+    <string name="Safety_Tips_for_Drivers">Safety Tips for Drivers</string>
+    <string name="Reporting_Incidents">Reporting Incidents</string>
+    <string name="Lost_and_Found_Procedures">Lost and Found Procedures</string>
+    <string name="Vehicle_Safety_Requirements">Vehicle Safety Requirements</string>
+
+    <!-- Trip Help -->
+    <string name="Accepting_and_Declining_Trips">Accepting and Declining Trips</string>
+    <string name="How_to_Navigate_to_a_Passenger">How to Navigate to a Passenger</string>
+    <string name="Managing_Scheduled_Trips">Managing Scheduled Trips</string>
+    <string name="Dealing_with_Fare_Disputes">Dealing with Fare Disputes</string>
+    <string name="Handling_Cancellations">Handling Cancellations</string>
+    <string name="Tips_for_Ensuring_Trip_Quality">Tips for Ensuring Trip Quality</string>
+    <string name="Safety_Tips_During_Trips">Safety Tips During Trips</string>
 </resources>

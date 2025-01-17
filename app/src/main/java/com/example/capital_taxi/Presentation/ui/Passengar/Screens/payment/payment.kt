@@ -45,6 +45,7 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.stringResource
 import androidx.core.content.ContextCompat
+import com.example.capital_taxi.Presentation.ui.Passengar.Screens.payment.Components.PaymentMethodCard
 
 
 data class PaymentMethod(
@@ -182,55 +183,5 @@ fun PaymentScreenContent(
                 }
             }
         }
-    }
-}
-
-@Composable
-fun PaymentMethodCard(
-    paymentMethod: PaymentMethod,
-    isSelected: Boolean,
-    onSelect: () -> Unit
-) {
-    Row(
-        modifier = Modifier
-            .fillMaxWidth()
-            .padding(vertical = 8.dp)
-            .clickable { onSelect() }
-            .background(
-                color = if (isSelected) Color(0xFFFFF8E1) else Color.White,
-                shape = RoundedCornerShape(12.dp)
-            )
-            .padding(16.dp),
-        verticalAlignment = Alignment.CenterVertically
-    ) {
-        // Payment Method Icon
-        Icon(
-            painter = painterResource(id = paymentMethod.iconRes),
-            contentDescription = paymentMethod.name,
-            modifier = Modifier
-                .size(35.dp)
-                .clip(CircleShape)
-
-                .background(Color.Yellow),
-
-            tint = Color.Unspecified
-        )
-
-        Spacer(modifier = Modifier.width(16.dp))
-
-        // Payment Method Details
-        Column(modifier = Modifier.weight(1f)) {
-            Text(paymentMethod.name, fontWeight = FontWeight.Bold, fontSize = 16.sp)
-            Text(paymentMethod.description, color = Color.Gray, fontSize = 14.sp)
-            Text(paymentMethod.discount, color = Color.Gray, fontSize = 14.sp)
-        }
-
-        // Selection Indicator
-        Box(
-            modifier = Modifier
-                .size(24.dp)
-                .clip(CircleShape)
-                .background(if (isSelected) Color.Yellow else Color.LightGray)
-        )
     }
 }

@@ -131,7 +131,7 @@ fun DriverNavigationDrawer(navController: NavController) {
                 )
                 Spacer(Modifier.height(10.dp))
                 navigationDrawerItem(
-                    onClick = { navController.navigate(Destination.settings.route) },
+                    onClick = { navController.navigate(Destination.DriverHelpScreen.route) },
                     text = "Help"
                 )
                 Spacer(Modifier.height(10.dp))

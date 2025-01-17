@@ -308,4 +308,42 @@
 
     <string name="driver_license_number">رقم رخصة القيادة</string>
     <string name="expiration_date">تاريخ الانتهاء</string>
+
+
+    <!-- Manage Account -->
+    <string name="Updating_Profile_and_Information">تحديث الملف الشخصي والمعلومات</string>
+    <string name="Bank_Account_Management">إدارة الحساب البنكي</string>
+    <string name="Notification_Settings">إعدادات الإشعارات</string>
+    <string name="Document_Upload_and_Verification">رفع المستندات والتحقق منها</string>
+    <string name="Deactivating_or_Deleting_Account">تعطيل أو حذف الحساب</string>
+
+    <!-- Payment Help -->
+    <string name="How_to_Set_Up_Payment_Methods">كيفية إعداد طرق الدفع</string>
+    <string name="Updating_Bank_Details">تحديث بيانات الحساب البنكي</string>
+    <string name="Payment_Cycle_and_Timelines">دورة الدفع والجداول الزمنية</string>
+    <string name="Viewing_Earnings_and_Payments">عرض الأرباح والمدفوعات</string>
+    <string name="Handling_Payment_Disputes">معالجة نزاعات المدفوعات</string>
+    <string name="What_to_Do_if_a_Payment_is_Missing">ماذا تفعل إذا كانت هناك دفعة مفقودة</string>
+
+    <!-- Rate Feedback -->
+    <string name="Understanding_Ratings">فهم التقييمات</string>
+    <string name="Improving_Your_Rating">تحسين تقييمك</string>
+    <string name="Handling_Customer_Feedback">التعامل مع تعليقات العملاء</string>
+    <string name="Reporting_Unfair_Ratings">الإبلاغ عن التقييمات غير العادلة</string>
+    <string name="Providing_Feedback_to_Passengers">تقديم التعليقات للركاب</string>
+
+    <!-- Ride Safety -->
+    <string name="Safety_Tips_for_Drivers">نصائح السلامة للسائقين</string>
+    <string name="Reporting_Incidents">الإبلاغ عن الحوادث</string>
+    <string name="Lost_and_Found_Procedures">إجراءات المفقودات</string>
+    <string name="Vehicle_Safety_Requirements">متطلبات سلامة المركبات</string>
+
+    <!-- Trip Help -->
+    <string name="Accepting_and_Declining_Trips">قبول أو رفض الرحلات</string>
+    <string name="How_to_Navigate_to_a_Passenger">كيفية التنقل إلى الراكب</string>
+    <string name="Managing_Scheduled_Trips">إدارة الرحلات المجدولة</string>
+    <string name="Dealing_with_Fare_Disputes">التعامل مع نزاعات الأجرة</string>
+    <string name="Handling_Cancellations">التعامل مع الإلغاءات</string>
+    <string name="Tips_for_Ensuring_Trip_Quality">نصائح لضمان جودة الرحلة</string>
+    <string name="Safety_Tips_During_Trips">نصائح السلامة أثناء الرحلات</string>
 </resources>
