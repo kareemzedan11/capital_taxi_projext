@@ -51,7 +51,7 @@ fun PickupNowForMeUI(navController: NavController) {
             ),
             selectedOption = selectedPickupOption,
             onOptionSelected = { selectedOption -> selectedPickupOption = selectedOption },
-            onDone = { showPickupSheet = false },
+            onDone = { showPickupSheet = false  },
             onDismiss = { showPickupSheet = false }
         )
     }

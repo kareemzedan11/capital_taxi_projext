@@ -1,6 +1,6 @@
 package com.example.capital_taxi.Presentation.ui.Driver.Screens.Home.drawerTabs.settings
 
-import AppearanceBottomSheetContent
+
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
@@ -48,7 +48,7 @@ fun driversettings(navController: NavController) {
         showBottomSheet = showBottomSheet,
         onDismissRequest = { showBottomSheet = false }) {
 
-        AppearanceBottomSheetContent(isDark, navController)
+
     }
     androidx.compose.material.Scaffold(
         topBar = {

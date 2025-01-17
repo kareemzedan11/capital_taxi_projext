@@ -40,6 +40,7 @@ import com.example.capital_taxi.Presentation.ui.Passengar.Screens.Register.UserR
 import com.example.capital_taxi.Presentation.ui.Passengar.Screens.Safety.SafetyScreen
 import com.example.capital_taxi.Presentation.ui.Passengar.Screens.notification.userNotification
 import com.example.capital_taxi.Presentation.ui.Passengar.Screens.profile.Profile
+import com.example.capital_taxi.Presentation.ui.Passengar.Screens.settings.Components.settings
 import com.example.capital_taxi.Presentation.ui.shared.Confirm_information.ConfirmInformation
 import com.example.capital_taxi.Presentation.ui.shared.OTP.OtpScreen
  import com.example.capital_taxi.Presentation.ui.shared.Onboarding.OnboardingPager
@@ -52,13 +53,12 @@ import com.example.capital_taxi.ui.screens.Driver.VerficationScreens.Certificate
 import com.example.capital_taxi.ui.screens.Driver.VerficationScreens.DriverLicence
 import com.example.capital_taxi.ui.screens.Driver.VerficationScreens.NationalIDValidation
 
-import settings
 
 @Composable
 fun AppNavGraph(navController: NavHostController) {
 
     var context = LocalContext.current
-    NavHost(navController = navController, startDestination = Destination.StartScreen.route) {
+    NavHost(navController = navController, startDestination = Destination.UserHomeScreen.route) {
 
         composable(Destination.SplashScreen.route) {
             SplashScreen(navController)
