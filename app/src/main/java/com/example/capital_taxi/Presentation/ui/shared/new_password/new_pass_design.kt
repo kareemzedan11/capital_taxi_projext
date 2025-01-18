@@ -60,7 +60,12 @@ fun NewPasswordScreen(navController: NavController) {
     // Snackbar host state
     val snackbarHostState = remember { SnackbarHostState() }
     val scope = rememberCoroutineScope()
+    // Pass the string resources to the ViewModel
+    val validPasswordMessage = stringResource(R.string.please_enter_valid_password)
+    val successPasswordMessage = stringResource(R.string.password_changed_successfully)
 
+    // Set the messages in the ViewModel
+    viewModel.setMessages(validPasswordMessage, successPasswordMessage)
     Box(modifier = Modifier.fillMaxSize()) {
         Scaffold(
             modifier = Modifier.fillMaxSize().background(Color.White),

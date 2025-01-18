@@ -21,16 +21,18 @@ import androidx.compose.ui.geometry.CornerRadius
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.capital_taxi.R
 
 
 @Composable
 fun RoundedTimeDisplayWithFill() {
     val totalTimeMillis = 16 * 60 * 1000L
     val progress = remember { Animatable(0f) }
-
+var generalColor= colorResource(R.color.primary_color)
     LaunchedEffect(Unit) {
         progress.animateTo(
             targetValue = 1f,
@@ -46,7 +48,7 @@ fun RoundedTimeDisplayWithFill() {
         // Animated Fill
         Canvas(modifier = Modifier.fillMaxSize()) {
             drawRoundRect(
-                color = Color(0xFF4CAF50),
+                color = generalColor,
                 topLeft = Offset(0f, 0f),
                 size = Size(size.width * progress.value, size.height),
                 cornerRadius = CornerRadius(25.dp.toPx(), 25.dp.toPx())

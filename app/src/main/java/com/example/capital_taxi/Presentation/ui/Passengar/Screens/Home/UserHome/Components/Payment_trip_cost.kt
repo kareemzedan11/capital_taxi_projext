@@ -12,6 +12,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.capital_taxi.R
@@ -33,11 +34,11 @@ fun Payment_trip_cost() {
         )
         Spacer(modifier = Modifier.padding(5.dp))
         Text(
-            text = "Cash", fontSize = 20.sp, color = Color.Black
+            text = stringResource(R.string.Cash), fontSize = 20.sp, color = Color.Black
         )
         Spacer(modifier = Modifier.weight(1f))
         Text(
-            text = "Change", fontSize = 18.sp, color = Color.Gray
+            text = stringResource(R.string.change), fontSize = 18.sp, color = Color.Gray
         )
         Icon(
             tint = Color.Gray,

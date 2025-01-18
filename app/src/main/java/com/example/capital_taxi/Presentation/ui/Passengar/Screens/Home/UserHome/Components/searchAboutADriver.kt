@@ -129,13 +129,14 @@ fun searchAboutADriver() {
 
                     Box(
                         modifier = Modifier
+
                             .clip(
                                 RoundedCornerShape(10.dp)
                             )
                             .background(Color.LightGray),
                         contentAlignment = Alignment.Center
                     ) {
-                        Row {
+                        Row(modifier = Modifier.padding(10.dp)) {
                             Text(
                                 stringResource(R.string.Drop_off_time),
 
@@ -146,7 +147,7 @@ fun searchAboutADriver() {
                             Spacer(modifier = Modifier.padding(start = 10.dp))
 
                                 Text(
-                                    "3:24 Pm",
+                                    "3:24 ${stringResource(R.string.Pm)}",
 
                                     fontSize = 18.sp,
                                     fontWeight = FontWeight.W600

@@ -17,6 +17,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -37,7 +38,7 @@ fun TripDetailsLiveTracker() {
             verticalAlignment = Alignment.CenterVertically
         ) {
             Text(
-                "The Arrive After",
+                stringResource(R.string.the_arrive_after),
                 fontSize = 24.sp,
                 fontWeight = FontWeight.Bold
             )
@@ -52,10 +53,10 @@ fun TripDetailsLiveTracker() {
 
 
         Row(horizontalArrangement = Arrangement.Center) {
-            Text("Your Trip", fontSize = 20.sp, fontWeight = FontWeight.Bold)
+            Text(  stringResource(R.string.your_trip), fontSize = 20.sp, fontWeight = FontWeight.Bold)
             Spacer(modifier = Modifier.weight(1f))
 
-            Text("12:02 PM", fontSize = 18.sp, color = Color.DarkGray)
+            Text("12:02 ${stringResource(R.string.Pm)}", fontSize = 18.sp, color = Color.DarkGray)
             Spacer(modifier = Modifier.padding(15.dp))
             Text("21:12:2024", fontSize = 18.sp, color = Color.DarkGray)
 

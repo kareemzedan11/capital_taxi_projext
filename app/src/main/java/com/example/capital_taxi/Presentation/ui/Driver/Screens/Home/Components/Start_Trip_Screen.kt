@@ -17,8 +17,10 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import com.example.capital_taxi.R
 
 
 @Composable
@@ -35,7 +37,7 @@ fun StartTripScreen(onStartTrip: () -> Unit) {
             verticalArrangement = Arrangement.Center
         ) {
             Text(
-                text = "You've arrived at the passenger's location",
+                text = stringResource(R.string.arrived_at_passenger_location),
                 style = MaterialTheme.typography.titleLarge,
                 textAlign = TextAlign.Center
             )
@@ -48,7 +50,7 @@ fun StartTripScreen(onStartTrip: () -> Unit) {
                 colors = ButtonDefaults.buttonColors(Color.Green)
             ) {
                 Text(
-                    text = "Start Trip",
+                    text = stringResource(R.string.start_trip),
                     color = Color.White,
                     style = MaterialTheme.typography.titleLarge
                 )

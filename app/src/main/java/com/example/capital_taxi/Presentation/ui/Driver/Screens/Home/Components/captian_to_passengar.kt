@@ -16,6 +16,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -64,17 +65,18 @@ fun captainToPassengar(navController: NavController) {
                     verticalArrangement = Arrangement.Center
                 ) {
                     Text(
-                        text = "Meet Passenger ",
+                        text = stringResource(R.string.meet_passenger),
                         fontSize = 18.sp,
-                        color = Color.Black, fontWeight = FontWeight.Bold
+                        color = Color.Black,
+                        fontWeight = FontWeight.Bold
                     )
-                    Spacer(modifier = Modifier.height(10.dp))
-
                     Text(
-                        text = "Meet before 15:22",
+                        text = stringResource(R.string.meet_before_time, "15:22"),
                         fontSize = 16.sp,
-                        color = Color.Gray, fontWeight = FontWeight.Bold
+                        color = Color.Gray,
+                        fontWeight = FontWeight.Bold
                     )
+
                 }
                 Spacer(modifier = Modifier.weight(1f))
             }

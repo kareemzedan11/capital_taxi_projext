@@ -1,4 +1,4 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
     <!-- App Name -->
     <string name="app_name">Capital Taxi</string>
 
@@ -278,8 +278,8 @@
     <string name="Select_Pickup_Location">Select Pickup Location</string>
 
 
-    <string name="Pickup_Now">Pickup Now</string>">
-    <string name="Pickup_later">Pickup Later</string>">
+    <string name="Pickup_Now">Now</string>">
+    <string name="Pickup_later">Later</string>">
 
     <string name="PickOff_Point">PickOff Point</string>">
     <string name="Pickup_Point">Pickup Point</string>
@@ -363,7 +363,7 @@
 
     <string name="driver_license_number">Driver License Number</string>
     <string name="expiration_date">Expiration Date</string>
-    <string name="Additional_comments"> Additional comments...</string>
+    <string name="Additional_comments"> Additional comments…</string>
     <string name="Confirm">Confirm</string>
     <string name="How_is_your_trip"> How is your trip?</string>
     <string name="rate_driver">Please rate your driver</string>
@@ -404,4 +404,114 @@
     <string name="Handling_Cancellations">Handling Cancellations</string>
     <string name="Tips_for_Ensuring_Trip_Quality">Tips for Ensuring Trip Quality</string>
     <string name="Safety_Tips_During_Trips">Safety Tips During Trips</string>
+
+    <string name="Pm">Pm</string>
+    <string name="Am">Am</string>
+
+    <string name="To">To</string>
+    <string name="From">From</string>
+    <string name="Stop">Stop</string>
+
+    <string name="Price">Price</string>
+
+    <string name="share_with_friends">Share with your friends and enjoy rewards!</string>
+    <string name="rewards">Rewards</string>
+    <string name="share_your_referral_code">Share Your Referral Code</string>
+    <string name="copy_code">Copy Code</string>
+    <string name="facebook">Facebook</string>
+    <string name="whatsapp">WhatsApp</string>
+    <string name="more">More</string>
+    <string name="referral_code">Referral Code:</string>
+
+    <string name="your_discount">Your Discount</string>
+    <string name="get_20_percent_off">Get 20% off for every friend you invite!</string>
+    <string name="win_a_prize">Win a Prize</string>
+    <string name="get_50_gift_card">Get a $50 gift card when 5 friends join!</string>
+    <string name="your_code">Your Code</string>
+    <string name="use_code_to_share">Use code: ABC123 to share!</string>
+
+
+    <string name="Duration">Duration</string>
+    <string name="Distance">Distance</string>
+
+    <string name="the_arrive_after">The Arrive After</string>
+    <string name="your_trip">Your Trip</string>
+
+    <string name="trip_details">Trip Details</string>
+    <string name="share_trip_status">Share your trip status</string>
+    <string name="share">Share</string>
+    <string name="cancel_trip">Cancel Trip</string>
+
+    <string name="service_not_available">Service not available</string>
+    <string name="service_not_available_message">Our service is not available in your area</string>
+    <string name="enter_address">Enter Address</string>
+
+    <string name="meeting_location">We will meet after</string>
+    <string name="change">Change</string>
+
+
+    <string name="Income">Income</string>
+    <string name="Inbox">Inbox</string>
+    <string name="Wallet">Wallet</string>
+    <string name="meet_passenger">Meet Passenger</string>
+    <string name="meet_before_time">Meet before 15:22</string>
+    <string name="waiting_for_passenger_acceptance">Waiting for passenger acceptance</string>
+    <string name="new_price_sent_to_passenger">The new price has been sent to the passenger</string>
+    <string name="arrived_at_passenger_location"  >You\'ve arrived at the passenger\'s location</string>
+    <string name="start_trip">Start Trip</string>
+    <string name="you_arrived">YOU ARRIVED</string>
+    <string name="trip_duration">20 min</string>
+
+    <string name="see_trip_review">See Trip Review</string>
+    <string name="end_trip">End Trip</string>
+
+
+    <string name="trip_arrived">Trip Arrived</string>
+    <string name="destination">Destination:</string>
+    <string name="location">Abbas El-Akkad Strt</string>
+    <string name="arrived">Arrived</string>
+    <string name="distance">Distance:</string>
+    <string name="distance_value">5.2 km</string>
+    <string name="fare">Fare:</string>
+    <string name="fare_value">30.00 EGP</string>
+    <string name="rate_user">Rate the User:</string>
+    <string name="leave_comment">Leave a comment (optional):</string>
+    <string name="comment_placeholder">Your comment...</string>
+    <string name="submit_rating">Submit Rating</string>
+    <string name="go_to_home">Go to Home</string>
+    <string name="rating_submitted">Rating Submitted</string>
+    <string name="rating_submitted_message">Your rating and comment have been submitted.</string>
+    <string name="stop_accept_trips">Stop Accept Trips</string>
+     <string name="cancellation_reasons">Reasons for cancellation:</string>
+    <string name="cancel_trip_dialog_title">Confirm Cancellation</string>
+    <string name="cancel_trip_dialog_message">Are you sure you want to cancel the trip? This action may lower your rating.</string>
+    <string name="cancel_trip_button_confirm">Yes, Cancel</string>
+    <string name="cancel_trip_button_dismiss">No, Keep Trip</string>
+    <string-array name="reasons">
+        <item>Passenger was not at the pickup location</item>
+        <item>Passenger had too many passengers</item>
+        <item>Passenger brought prohibited items</item>
+        <item>Passenger\'s behavior was inappropriate</item>
+        <item>Safety concerns at the pickup location</item>
+        <item>Trip distance is too short</item>
+        <item>Destination is in a restricted area</item>
+        <item>Technical issues with the app</item>
+        <item>Vehicle condition does not support the trip</item>
+        <item>Personal emergency for the driver</item>
+        <item>Passenger refused to follow safety protocols</item>
+        <item>Passenger requested illegal or unsafe activities</item>
+        <item>Weather conditions are unfavorable</item>
+        <item>Heavy traffic in the area</item>
+        <item>Destination is too far or out of coverage</item>
+        <item>Passenger\'s payment method is invalid or suspicious</item>
+    </string-array>
+
+    <string name="trip_in_progress">Trip In Progress</string>
+    <string name="destination_address">Abbas El-Akkad Strt</string>
+    <string name="time_left">15 mins left</string>
+    <string name="estimated_fare">Estimated Fare:</string>
+
+    <string name="documents">Documents</string>
+    <string name="terms_and_conditions">Terms and Conditions</string>
+    <string name="about_the_app">About the App</string>
 </resources>

@@ -45,6 +45,8 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringArrayResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -104,7 +106,7 @@ fun TripDetailsForDriver(navController: NavController) {
 
                 Spacer(modifier = Modifier.width(8.dp))
                 Text(
-                    text = "Trip Details",
+                    text = stringResource(R.string.trip_details),
                     color = Color.Black,
                     fontSize = 20.sp,
                     fontWeight = FontWeight.Bold
@@ -267,7 +269,7 @@ fun TripDetailsForDriver(navController: NavController) {
                                 colors = ButtonDefaults.buttonColors(backgroundColor = Color.LightGray)
                             ) {
                                 androidx.compose.material.Text(
-                                    "Cancel Trip",
+                                    stringResource(R.string.cancel_trip),
                                     color = Color.Black,
                                     fontSize = 16.sp,
                                     fontWeight = FontWeight.Bold
@@ -286,7 +288,7 @@ fun TripDetailsForDriver(navController: NavController) {
                     colors = ButtonDefaults.buttonColors(backgroundColor = Color.Black)
                 ) {
                     androidx.compose.material.Text(
-                        "Stop Accept Trips",
+                        stringResource(R.string.stop_accept_trips),
                         color = Color.White,
                         fontSize = 16.sp,
                         fontWeight = FontWeight.Bold
@@ -396,7 +398,6 @@ fun RideRequestCard() {
     }
 }
 
-
 @Composable
 fun CancellationReasons(navController: NavController) {
     var selectedReason by remember { mutableStateOf<String?>(null) }
@@ -416,28 +417,12 @@ fun CancellationReasons(navController: NavController) {
         )
     }
 
-    val reasons = listOf(
-        "Passenger was not at the pickup location",
-        "Passenger had too many passengers",
-        "Passenger brought prohibited items",
-        "Passenger's behavior was inappropriate",
-        "Safety concerns at the pickup location",
-        "Trip distance is too short",
-        "Destination is in a restricted area",
-        "Technical issues with the app",
-        "Vehicle condition does not support the trip",
-        "Personal emergency for the driver",
-        "Passenger refused to follow safety protocols",
-        "Passenger requested illegal or unsafe activities",
-        "Weather conditions are unfavorable",
-        "Heavy traffic in the area",
-        "Destination is too far or out of coverage",
-        "Passenger's payment method is invalid or suspicious"
-    )
+    // Retrieve cancellation reasons from string resources
+    val reasons = stringArrayResource(id = R.array.reasons)
 
     Column(modifier = Modifier.padding(16.dp)) {
         Text(
-            text = "Reasons for cancellation:",
+            text = stringResource(id = R.string.cancellation_reasons),
             color = Color.Black,
             fontSize = 20.sp,
             fontWeight = FontWeight.Bold,
@@ -480,23 +465,23 @@ fun CancelTripDialog(onConfirm: () -> Unit, onDismiss: () -> Unit) {
     androidx.compose.material.AlertDialog(
         onDismissRequest = { onDismiss() },
         title = {
-            Text(text = "Confirm Cancellation")
+            Text(text = stringResource(id = R.string.cancel_trip_dialog_title))
         },
         text = {
-            Text(text = "Are you sure you want to cancel the trip? This action may lower your rating.")
+            Text(text = stringResource(id = R.string.cancel_trip_dialog_message))
         },
         confirmButton = {
-
             Button(
                 colors = ButtonDefaults.buttonColors(Color(0XFF46C96B)),
                 onClick = { onConfirm() }) {
-                Text("Yes, Cancel")
+                Text(stringResource(id = R.string.cancel_trip_button_confirm))
             }
         },
         dismissButton = {
             OutlinedButton(onClick = { onDismiss() }) {
-                Text("No, Keep Trip")
+                Text(stringResource(id = R.string.cancel_trip_button_dismiss))
             }
         }
     )
 }
+

@@ -19,12 +19,12 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.colorResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.capital_taxi.R
-
 
 @Composable
 fun CodeBox(code: String) {
@@ -41,9 +41,8 @@ fun CodeBox(code: String) {
                 .background(color = Color.White)
                 .padding(horizontal = 5.dp)
         ) {
-
             Text(
-                text = "Referral Code:",
+                text = stringResource(R.string.referral_code),
                 fontSize = 16.sp,
                 fontWeight = FontWeight.Bold
             )
@@ -61,13 +60,10 @@ fun CodeBox(code: String) {
                 Button(
                     onClick = { copyToClipboard(context, code) },
                     colors = ButtonDefaults.buttonColors(colorResource(R.color.primary_color))
-
                 ) {
-                    Text("Copy Code", color = Color.Black)
+                    Text(stringResource(R.string.copy_code), color = Color.Black)
                 }
             }
         }
-
-
     }
 }

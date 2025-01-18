@@ -12,6 +12,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.res.colorResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.capital_taxi.R
@@ -44,15 +45,16 @@ fun passengerAcceptPrice() {
                         , verticalArrangement = Arrangement.Center
                     ) {
                         Text(
-                            text = "Waiting for passenger acceptance ",
+                            text = stringResource(R.string.waiting_for_passenger_acceptance),
                             fontSize = 14.sp,
                             color = Color.Black
                         )
                         Text(
-                            text = "The new price has been sent to the passenger ",
+                            text = stringResource(R.string.new_price_sent_to_passenger),
                             fontSize = 10.sp,
                             color = Color.Gray
                         )
+
                     }
                 }
                 Spacer(modifier = Modifier.weight(1f))

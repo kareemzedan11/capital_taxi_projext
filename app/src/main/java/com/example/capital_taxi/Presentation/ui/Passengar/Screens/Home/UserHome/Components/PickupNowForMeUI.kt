@@ -35,10 +35,10 @@ fun PickupNowForMeUI(navController: NavController) {
     val pickupLaterText = stringResource(R.string.Pickup_later)
 
     // States to track selected options
-    var selectedPickupOption by remember { mutableStateOf("Now") } // Default to "Now"
+    var selectedPickupOption by remember { mutableStateOf(pickupNowTextNow) } // Default to "Now"
     var selectedForMeOption by remember { mutableStateOf("For Me") } // Default to "For Me"
 
-    val pickupNowText = if (selectedPickupOption == "Now") pickupNowTextNow else pickupLaterText
+    val pickupNowText = if (selectedPickupOption == pickupNowTextNow) pickupNowTextNow else pickupLaterText
     val forMeText =
         if (selectedForMeOption == "For Me") stringResource(R.string.For_Me) else stringResource(R.string.For_a_group)
 
@@ -46,8 +46,8 @@ fun PickupNowForMeUI(navController: NavController) {
         RideSelectionBottomSheet(
             title = stringResource(R.string.When_do_you_need_a_ride),
             options = listOf(
-                "Now" to R.drawable.baseline_access_time_24,
-                "Later" to R.drawable.baseline_punch_clock_24
+                pickupNowTextNow to R.drawable.baseline_access_time_24,
+                pickupLaterText to R.drawable.baseline_punch_clock_24
             ),
             selectedOption = selectedPickupOption,
             onOptionSelected = { selectedOption -> selectedPickupOption = selectedOption },

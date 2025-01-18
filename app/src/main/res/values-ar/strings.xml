@@ -228,7 +228,7 @@
     <string name="For_a_group">لمجموعة</string>
 
     <string name="When_do_you_need_a_ride">متى تحتاج إلى رحلة؟</string>
-    <string name="Pickup_later">Pickup Later</string>">
+    <string name="Pickup_later">لاحقا</string>">
 
     <string name="Now">الآن</string>
     <string name="Later">لاحقًا</string>
@@ -308,7 +308,8 @@
 
     <string name="driver_license_number">رقم رخصة القيادة</string>
     <string name="expiration_date">تاريخ الانتهاء</string>
-
+    <string name="Pm">م</string>
+    <string name="Am">ص</string>
 
     <!-- Manage Account -->
     <string name="Updating_Profile_and_Information">تحديث الملف الشخصي والمعلومات</string>
@@ -346,4 +347,110 @@
     <string name="Handling_Cancellations">التعامل مع الإلغاءات</string>
     <string name="Tips_for_Ensuring_Trip_Quality">نصائح لضمان جودة الرحلة</string>
     <string name="Safety_Tips_During_Trips">نصائح السلامة أثناء الرحلات</string>
+
+
+    <string name="To">الي</string>
+    <string name="From">من</string>
+    <string name="Stop">التوقف</string>
+
+    <string name="Price">السعر</string>
+    <string name="share_with_friends">شارك مع أصدقائك واستمتع بالمكافآت!</string>
+    <string name="rewards">المكافآت</string>
+    <string name="share_your_referral_code">شارك رمز الإحالة الخاص بك</string>
+    <string name="copy_code">نسخ الرمز</string>
+    <string name="facebook">فيسبوك</string>
+    <string name="whatsapp">واتساب</string>
+    <string name="more">المزيد</string>
+    <string name="referral_code">رمز الإحالة:</string>
+
+
+    <string name="your_discount">خصمك</string>
+    <string name="get_20_percent_off">احصل على خصم 20% لكل صديق تدعوه!</string>
+    <string name="win_a_prize">فز بجائزة</string>
+    <string name="get_50_gift_card">احصل على بطاقة هدايا بقيمة 50 دولار عندما ينضم 5 أصدقاء!</string>
+    <string name="your_code">رمزك</string>
+    <string name="use_code_to_share">استخدم الرمز: ABC123 للمشاركة!</string>
+
+
+    <string name="the_arrive_after">الوصول بعد</string>
+    <string name="your_trip">رحلتك</string>
+    <string name="Duration">المده</string>
+    <string name="Distance">المسافه</string>
+    <string name="trip_details">تفاصيل الرحلة</string>
+    <string name="share_trip_status">شارك حالة رحلتك</string>
+    <string name="share">مشاركة</string>
+    <string name="cancel_trip">إلغاء الرحلة</string>
+
+    <string name="you_arrived">لقد وصلت</string>
+    <string name="trip_duration">20 دقيقة</string>
+
+    <string name="see_trip_review">عرض تقييم الرحلة</string>
+    <string name="end_trip">إنهاء الرحلة</string>
+
+    <string name="service_not_available">الخدمة غير متوفرة</string>
+    <string name="service_not_available_message">خدمتنا غير متوفرة في منطقتك</string>
+    <string name="enter_address">أدخل العنوان</string>
+    <string name="change">تغيير</string>
+    <string name="meeting_location">سيكون الالتقاء بعد </string>
+
+
+    <string name="Income">الدخل</string>
+    <string name="Inbox">البريد الوارد</string>
+    <string name="Wallet">المحفظة</string>
+    <string name="meet_passenger">قابل الراكب</string>
+    <string name="meet_before_time">قابل قبل 15:22 </string>
+    <string name="waiting_for_passenger_acceptance">في انتظار قبول الراكب</string>
+    <string name="new_price_sent_to_passenger">تم إرسال السعر الجديد إلى الراكب</string>
+    <string name="arrived_at_passenger_location">لقد وصلت إلى موقع الراكب</string>
+    <string name="start_trip">ابدأ الرحلة</string>
+
+
+
+    <string name="trip_arrived">تم الوصول إلى الرحلة</string>
+    <string name="destination">الوجهة:</string>
+    <string name="location">شارع عباس العقاد</string>
+    <string name="arrived">تم الوصول</string>
+    <string name="distance">المسافة:</string>
+    <string name="distance_value">٥.٢ كم</string>
+    <string name="fare">الأجرة:</string>
+    <string name="fare_value">٣٠.٠٠ جنيه</string>
+    <string name="rate_user">قيّم المستخدم:</string>
+    <string name="leave_comment">اترك تعليقًا (اختياري):</string>
+    <string name="comment_placeholder">تعليقك...</string>
+    <string name="submit_rating">إرسال التقييم</string>
+    <string name="go_to_home">العودة إلى الصفحة الرئيسية</string>
+    <string name="rating_submitted">تم إرسال التقييم</string>
+    <string name="rating_submitted_message">تم إرسال تقييمك وتعليقك.</string>
+    <string name="stop_accept_trips">إيقاف قبول الرحلات</string>
+     <string name="cancellation_reasons">أسباب الإلغاء:</string>
+    <string name="cancel_trip_dialog_title">تأكيد الإلغاء</string>
+    <string name="cancel_trip_dialog_message">هل أنت متأكد أنك تريد إلغاء الرحلة؟ قد يؤدي هذا الإجراء إلى تقليل تقييمك.</string>
+    <string name="cancel_trip_button_confirm">نعم، إلغاء</string>
+    <string name="cancel_trip_button_dismiss">لا، إبقاء الرحلة</string>
+    <string-array name="reasons">
+        <item>الراكب لم يكن في موقع الاستلام</item>
+        <item>الراكب كان لديه عدد كبير من الركاب</item>
+        <item>الراكب جلب أشياء محظورة</item>
+        <item>سلوك الراكب كان غير لائق</item>
+        <item>مخاوف تتعلق بالسلامة في موقع الاستلام</item>
+        <item>مسافة الرحلة قصيرة جدًا</item>
+        <item>الوجهة في منطقة محظورة</item>
+        <item>مشاكل فنية في التطبيق</item>
+        <item>حالة المركبة لا تدعم الرحلة</item>
+        <item>حالة طارئة للسائق</item>
+        <item>الراكب رفض اتباع بروتوكولات السلامة</item>
+        <item>الراكب طلب أنشطة غير قانونية أو غير آمنة</item>
+        <item>الظروف الجوية غير مواتية</item>
+        <item>حركة المرور الكثيفة في المنطقة</item>
+        <item>الوجهة بعيدة جدًا أو خارج التغطية</item>
+        <item>طريقة الدفع الخاصة بالراكب غير صالحة أو مشبوهة</item>
+    </string-array>
+
+    <string name="documents">المستندات</string>
+    <string name="terms_and_conditions">الشروط والأحكام</string>
+    <string name="about_the_app">عن التطبيق</string>
+    <string name="trip_in_progress">الرحلة جارية</string>
+    <string name="destination_address">شارع عباس العقاد</string>
+    <string name="time_left">15 دقيقة متبقية</string>
+     <string name="estimated_fare">التكلفة المقدرة:</string>
 </resources>

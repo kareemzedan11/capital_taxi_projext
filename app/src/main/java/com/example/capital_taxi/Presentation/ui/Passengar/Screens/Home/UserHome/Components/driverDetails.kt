@@ -15,6 +15,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -60,7 +61,7 @@ fun driverDetails() {
                 )
                 Spacer(modifier = Modifier.padding(6.dp))
                 Text(
-                    "+2000 Trips",
+                    "+2000 ${stringResource(R.string.Trips)}",
                     fontWeight = FontWeight.Bold,
                     fontSize = 20.sp,
                     color = Color.Black.copy(alpha = .3f)

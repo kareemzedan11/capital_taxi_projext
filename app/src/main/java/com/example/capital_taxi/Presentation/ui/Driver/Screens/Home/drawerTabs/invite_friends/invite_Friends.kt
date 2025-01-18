@@ -15,6 +15,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -29,7 +30,8 @@ fun InviteFriendsPage(navController: NavController) {
             TopAppBar(
                 title = {
                     Text(
-                        "Invite Friends",
+                        stringResource(id = R.string.Invite_Friends),
+
                         fontWeight = FontWeight.Bold,
                         color = Color.Black
                     )
@@ -96,7 +98,10 @@ fun InviteFriendsPage(navController: NavController) {
                     Column {
                         // Tabs
                         var selectedTabIndex by remember { mutableStateOf(0) }
-                        val tabTitles = listOf("Offers", "Invitations")
+                        val tabTitles = listOf(
+                            stringResource(id = R.string.offers),
+                            stringResource(id = R.string.Invitations),
+                        )
 
                         TabRow(selectedTabIndex = selectedTabIndex) {
                             tabTitles.forEachIndexed { index, title ->
@@ -116,7 +121,8 @@ fun InviteFriendsPage(navController: NavController) {
                         when (selectedTabIndex) {
                             0 -> {
                                 Text(
-                                    text = "You haven't any Offers yet.",
+                                    text = stringResource(id = R.string.You_not_have_any_offers),
+
                                     modifier = Modifier
                                         .fillMaxWidth()
                                         .padding(16.dp),
@@ -125,9 +131,11 @@ fun InviteFriendsPage(navController: NavController) {
                                 )
 
                             }
+
                             1 -> {
                                 Text(
-                                    text = "You haven't sent any invitations yet.",
+                                    text = stringResource(id = R.string.You_not_have_any_invitations),
+
                                     modifier = Modifier
                                         .fillMaxWidth()
                                         .padding(16.dp),
@@ -146,7 +154,13 @@ fun InviteFriendsPage(navController: NavController) {
                                 .height(50.dp),
                             colors = ButtonDefaults.buttonColors(backgroundColor = Color.Black)
                         ) {
-                            Text("Invite", color = Color.White, fontSize = 16.sp, fontWeight = FontWeight.Bold)
+                            Text(
+                                text = stringResource(id = R.string.Invite),
+
+                                color = Color.White,
+                                fontSize = 16.sp,
+                                fontWeight = FontWeight.Bold
+                            )
                         }
                     }
                 }

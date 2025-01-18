@@ -29,10 +29,12 @@ fun callAndChat() {
             modifier = Modifier
                 .size(43.dp)
                 .clip(CircleShape)
-                .background(Color(0XFFc6c5c5)),
+                .background(colorResource(R.color.secondary_color)),
             contentAlignment = Alignment.Center
         ) {
             Icon(
+                modifier = Modifier.size(24.dp),
+
                 imageVector = Icons.Default.Call,
                 contentDescription = "call",
                 tint = Color.Black

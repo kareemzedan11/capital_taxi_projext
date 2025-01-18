@@ -12,6 +12,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.colorResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.capital_taxi.R
@@ -46,7 +47,7 @@ fun RideHistoryCard(
 
             ) {
 
-                Text(text = "From :", style = MaterialTheme.typography.body1)
+                Text(text = "${stringResource(R.string.From)} :", style = MaterialTheme.typography.body1)
                 Spacer(modifier = Modifier.width(8.dp))
                 Text(text = from, style = MaterialTheme.typography.body2)
 
@@ -64,7 +65,7 @@ fun RideHistoryCard(
                 stop?.let {
 
 
-                    Text(text = "Stop 1 :", style = MaterialTheme.typography.body1)
+                    Text(text = "${stringResource(R.string.Stop)} 1 :", style = MaterialTheme.typography.body1)
                     Spacer(modifier = Modifier.width(8.dp))
 
                     Text(text = stop, style = MaterialTheme.typography.body2)
@@ -77,7 +78,7 @@ fun RideHistoryCard(
                 horizontalArrangement = Arrangement.Start,
                 verticalAlignment = Alignment.CenterVertically
             ) {
-                Text(text = "To :", style = MaterialTheme.typography.body1)
+                Text(text = "${stringResource(R.string.To)} :", style = MaterialTheme.typography.body1)
                 Spacer(modifier = Modifier.width(8.dp))
 
                 Text(text = to, style = MaterialTheme.typography.body2)
@@ -91,7 +92,7 @@ fun RideHistoryCard(
             Spacer(modifier = Modifier.height(16.dp))
 
             Text(
-                text = "Price: $price EGP",
+                text = "${stringResource(R.string.Price)}: $price EGP",
                 style = MaterialTheme.typography.h6,
                 color = colorResource(R.color.primary_color)
             )

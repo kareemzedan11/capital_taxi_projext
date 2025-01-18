@@ -41,9 +41,23 @@ import com.example.capital_taxi.R
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun InviteForMyApp(navController: NavController) {
+
+    val rewardItems = listOf(
+        Reward(
+            title = stringResource(id = R.string.your_discount),
+            description = stringResource(id = R.string.get_20_percent_off)
+        ),
+        Reward(
+            title = stringResource(id = R.string.win_a_prize),
+            description = stringResource(id = R.string.get_50_gift_card)
+        ),
+        Reward(
+            title = stringResource(id = R.string.your_code),
+            description = stringResource(id = R.string.use_code_to_share)
+        )
+    )
     Scaffold(
         topBar = {
-
             TopAppBar(
                 navigationIcon = {
                     IconButton(onClick = { navController.popBackStack() }) {
@@ -63,7 +77,8 @@ fun InviteForMyApp(navController: NavController) {
                         }
                     }
                 },
-                title = { Text("Invite Friends") })
+                title = { Text(stringResource(R.string.Invite_Friends)) }
+            )
         }
     ) { innerPadding ->
         Box(
@@ -78,22 +93,20 @@ fun InviteForMyApp(navController: NavController) {
                     .verticalScroll(rememberScrollState())
                     .padding(16.dp)
             ) {
-
-
                 Spacer(modifier = Modifier.height(24.dp))
+
                 // Header
                 Text(
-                    text = "Share with your friends and enjoy rewards!",
+                    text = stringResource(R.string.share_with_friends),
                     fontSize = 22.sp,
                     fontWeight = FontWeight.Bold,
                     modifier = Modifier.padding(bottom = 16.dp)
                 )
                 Spacer(modifier = Modifier.padding(30.dp))
 
-
                 // Horizontal Scrollable Containers
                 Text(
-                    text = "Rewards",
+                    text = stringResource(R.string.rewards),
                     fontSize = 20.sp,
                     fontWeight = FontWeight.Bold,
                     modifier = Modifier.padding(bottom = 8.dp)
@@ -104,7 +117,6 @@ fun InviteForMyApp(navController: NavController) {
                 ) {
                     items(rewardItems) { reward ->
                         DetailCard(
-
                             title = reward.title,
                             description = reward.description,
                             backgroundColor = colorResource(R.color.secondary_color)
@@ -114,10 +126,9 @@ fun InviteForMyApp(navController: NavController) {
 
                 Spacer(modifier = Modifier.padding(30.dp))
 
-
                 // Code Box Section
                 Text(
-                    text = "Share Your Referral Code",
+                    text = stringResource(R.string.share_your_referral_code),
                     fontSize = 20.sp,
                     fontWeight = FontWeight.Bold,
                     modifier = Modifier.padding(bottom = 8.dp)
@@ -125,9 +136,7 @@ fun InviteForMyApp(navController: NavController) {
 
                 CodeBox(code = "ABC123")
 
-
                 Spacer(modifier = Modifier.padding(30.dp))
-
 
                 // Share Options
                 Row(
@@ -136,18 +145,16 @@ fun InviteForMyApp(navController: NavController) {
                         .padding(vertical = 8.dp),
                     horizontalArrangement = Arrangement.SpaceEvenly
                 ) {
-                    ShareOption(icon = R.drawable.facelogo, label = "Facebook")
-                    ShareOption(icon = R.drawable.whatsapp, label = "WhatsApp")
-                    ShareOption(icon = R.drawable.email, label = "Email")
-                    ShareOption(icon = R.drawable.ic_more, label = "More")
+                    ShareOption(icon = R.drawable.facelogo, label = stringResource(R.string.facebook))
+                    ShareOption(icon = R.drawable.whatsapp, label = stringResource(R.string.whatsapp))
+                    ShareOption(icon = R.drawable.email, label = stringResource(R.string.email))
+                    ShareOption(icon = R.drawable.ic_more, label = stringResource(R.string.more))
                 }
                 Spacer(modifier = Modifier.weight(1f))
-
             }
         }
     }
 }
-
 
 
 
@@ -159,3 +166,21 @@ val rewardItems = listOf(
     Reward("Win a Prize", "Get a $50 gift card when 5 friends join!"),
     Reward("Your Code", "Use code: ABC123 to share!")
 )
+
+@Composable
+fun RewardItemsList(): List<Reward> {
+    return listOf(
+        Reward(
+            title = stringResource(id = R.string.your_discount),
+            description = stringResource(id = R.string.get_20_percent_off)
+        ),
+        Reward(
+            title = stringResource(id = R.string.win_a_prize),
+            description = stringResource(id = R.string.get_50_gift_card)
+        ),
+        Reward(
+            title = stringResource(id = R.string.your_code),
+            description = stringResource(id = R.string.use_code_to_share)
+        )
+    )
+}

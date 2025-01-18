@@ -27,6 +27,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.colorResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -58,14 +59,14 @@ fun TripArrivedCard2() {
             ) {
                 Column {
                     Text(
-                        text = "Trip Arrived",
+                        text = stringResource(R.string.trip_arrived),
                         fontWeight = FontWeight.Bold,
                         fontSize = 16.sp,
-                        color =  colorResource(R.color.primary_color)
+                        color = colorResource(R.color.primary_color)
                     )
                     Spacer(modifier = Modifier.height(4.dp))
                     Text(
-                        text = "Destination: ",
+                        text = stringResource(R.string.destination),
                         fontSize = 14.sp,
                         fontWeight = FontWeight.Bold
                     )
@@ -76,7 +77,7 @@ fun TripArrivedCard2() {
                 }
 
                 Text(
-                    text = "Arrived",
+                    text = stringResource(R.string.arrived),
                     fontSize = 12.sp,
                     color = Color.Gray
                 )
@@ -95,23 +96,26 @@ fun TripArrivedCard2() {
             ) {
                 Column {
                     Text(
-                        text = "Distance:",
+                        text = stringResource(R.string.destination),
                         fontWeight = FontWeight.Bold,
                         fontSize = 14.sp
                     )
                     Text(
-                        text = "5.2 km", // Optional
+                        text = stringResource(R.string.distance_value),
+
                         fontSize = 14.sp
                     )
                 }
                 Column {
                     Text(
-                        text = "Fare:",
+                        text = stringResource(R.string.fare),
+
                         fontWeight = FontWeight.Bold,
                         fontSize = 14.sp
                     )
                     Text(
-                        text = "30.00 EGP",
+                        text = stringResource(R.string.fare_value),
+
                         fontSize = 14.sp,
                         color = Color(0xFF4CAF50)
                     )
@@ -122,7 +126,8 @@ fun TripArrivedCard2() {
 
             // Rating Section - Driver Rating User
             Text(
-                text = "Rate the User:",
+                text = stringResource(R.string.rate_user),
+
                 fontWeight = FontWeight.Bold,
                 fontSize = 14.sp
             )
@@ -135,7 +140,8 @@ fun TripArrivedCard2() {
 
             // Comment Section
             Text(
-                text = "Leave a comment (optional):",
+                text = stringResource(R.string.leave_comment),
+
                 fontWeight = FontWeight.Bold,
                 fontSize = 14.sp
             )
@@ -144,7 +150,9 @@ fun TripArrivedCard2() {
             TextField(
                 value = comment,
                 onValueChange = { comment = it },
-                label = { Text("Your comment...") },
+                label = {
+                    stringResource(R.string.comment_placeholder)
+                },
                 modifier = Modifier.fillMaxWidth(),
                 maxLines = 3
             )
@@ -158,11 +166,14 @@ fun TripArrivedCard2() {
                 },
                 enabled = rating > 0f || comment.isNotEmpty(), // Button enabled if rating or comment provided
                 colors = ButtonDefaults.buttonColors(
-                    containerColor = if (rating > 0f || comment.isNotEmpty())  colorResource(R.color.primary_color) else Color.Gray
+                    containerColor = if (rating > 0f || comment.isNotEmpty()) colorResource(R.color.primary_color) else Color.Gray
                 ),
                 modifier = Modifier.fillMaxWidth()
             ) {
-                Text(text = "Submit Rating", color = Color.Black)
+                Text(
+                    text = stringResource(R.string.submit_rating),
+                    color = Color.Black
+                )
             }
 
             Spacer(modifier = Modifier.height(8.dp))
@@ -173,7 +184,10 @@ fun TripArrivedCard2() {
                 colors = ButtonDefaults.buttonColors(containerColor = colorResource(R.color.primary_color)),
                 modifier = Modifier.fillMaxWidth()
             ) {
-                Text(text = "Go to Home", color = Color.Black)
+                Text(
+                    text = stringResource(R.string.go_to_home),
+                    color = Color.Black
+                )
             }
         }
     }
@@ -182,8 +196,12 @@ fun TripArrivedCard2() {
     if (showDialog) {
         AlertDialog(
             onDismissRequest = { showDialog = false },
-            title = { Text("Rating Submitted") },
-            text = { Text("Your rating and comment have been submitted.") },
+            title = {
+                stringResource(R.string.rating_submitted)
+            },
+            text = {
+                stringResource(R.string.rating_submitted_message)
+            },
             confirmButton = {
                 TextButton(onClick = { showDialog = false }) {
                     Text("OK")

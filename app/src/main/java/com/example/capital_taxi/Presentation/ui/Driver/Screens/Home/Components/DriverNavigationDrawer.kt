@@ -32,6 +32,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -100,7 +101,7 @@ fun DriverNavigationDrawer(navController: NavController) {
                 navigationDrawerItem(
                     onClick = { navController.navigate(Destination.InboxPage.route) },
 
-                    text = "Inbox"
+                    text =  stringResource(R.string.Inbox)
                 )
 
                 Spacer(Modifier.height(10.dp))
@@ -108,36 +109,36 @@ fun DriverNavigationDrawer(navController: NavController) {
 
                 navigationDrawerItem(
                     onClick = { navController.navigate(Destination.InviteFriendsPage.route) },
-                    text = "Invite Friends"
+                    text =  stringResource(R.string.Invite_Friends)
                 )
 
                 Spacer(Modifier.height(10.dp))
                navigationDrawerItem(
                     onClick = { navController.navigate(Destination.notification.route) },
-                    text = "Notifications"
+                    text =  stringResource(R.string.Notifications)
 
                 )
                 Spacer(Modifier.height(10.dp))
 
                 navigationDrawerItem(
                     onClick = { navController.navigate(Destination.IncomePage.route) },
-                    text = "Income"
+                    text =  stringResource(R.string.Income)
                 )
                 Spacer(Modifier.height(10.dp))
 
                 navigationDrawerItem(
                     onClick = { navController.navigate(Destination.voucherScreen.route) },
-                    text = "Wallet"
+                    text = stringResource(R.string.Wallet)
                 )
                 Spacer(Modifier.height(10.dp))
                 navigationDrawerItem(
                     onClick = { navController.navigate(Destination.DriverHelpScreen.route) },
-                    text = "Help"
+                    text =  stringResource(R.string.Help)
                 )
                 Spacer(Modifier.height(10.dp))
                 navigationDrawerItem(
                     onClick = { navController.navigate(Destination.driversettings.route) },
-                    text = "Settings"
+                    text =  stringResource(R.string.Settings)
                 )
 
             }

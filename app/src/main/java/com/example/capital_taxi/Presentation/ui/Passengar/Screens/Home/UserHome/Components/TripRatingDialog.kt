@@ -19,6 +19,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -64,10 +65,12 @@ fun TripRatingDialog() {
         TextField(
             value = comments,
             onValueChange = {comments=it},
+            textStyle = TextStyle(color = Color.Black),
             placeholder = {stringResource(R.string.Additional_comments)},
             modifier = Modifier
                 .fillMaxWidth()
                 .height(120.dp)
+
         )
 
         Spacer(modifier = Modifier.padding(25.dp))

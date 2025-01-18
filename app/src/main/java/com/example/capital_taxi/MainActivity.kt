@@ -20,7 +20,7 @@ import com.example.capital_taxi.Navigation.AppNavGraph
 import com.example.capital_taxi.Presentation.Common.BackIcon
 import com.example.capital_taxi.Presentation.ui.Theme.AppTheme
 import com.example.capital_taxi.Presentation.ui.shared.Language.components.LanguagePreference
-import updateLocale
+import com.example.capital_taxi.Presentation.ui.shared.Language.components.updateLocale
 
 class MainActivity : ComponentActivity() {
 

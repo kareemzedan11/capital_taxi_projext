@@ -1,6 +1,5 @@
 package com.example.capital_taxi.Presentation.ui.shared.Confirm_information
 
-import BackButton
 import android.net.Uri
 import android.content.Context
 import android.widget.Toast
@@ -20,6 +19,7 @@ import coil.size.Size
 import com.example.capital_taxi.Helper.User_Image.getImageFromSharedPreferences
 import com.example.capital_taxi.Helper.User_Image.saveImageToInternalStorage
 import com.example.capital_taxi.Navigation.Destination
+import com.example.capital_taxi.Presentation.ui.shared.Confirm_information.Components.BackButton
 import com.example.capital_taxi.Presentation.ui.shared.Confirm_information.Components.EmailField
 import com.example.capital_taxi.Presentation.ui.shared.Confirm_information.Components.NameField
 import com.example.capital_taxi.Presentation.ui.shared.Confirm_information.Components.NextButton

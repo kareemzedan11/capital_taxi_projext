@@ -14,6 +14,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -104,7 +105,8 @@ fun notification(navController: NavController) {
 
 
                     Text(
-                        "No Notification Available Now",
+                        stringResource(id = R.string.No_Notification_Message),
+
                         color = Color.Black,
                         fontSize = 20.sp,
                         fontWeight = FontWeight.Bold

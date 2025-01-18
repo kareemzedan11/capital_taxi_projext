@@ -26,6 +26,7 @@ import androidx.compose.ui.graphics.Paint
 import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -55,7 +56,7 @@ fun driversettings(navController: NavController) {
             androidx.compose.material.TopAppBar(
                 title = {
                     androidx.compose.material.Text(
-                        "Settings",
+                      stringResource(id = R.string.Settings),
                         fontWeight = FontWeight.Bold,
                         color = Color.Black
                     )
@@ -135,13 +136,14 @@ fun driversettings(navController: NavController) {
                     ) {
 
                         SettingBox(
-                            title = "Language",
+                            title = stringResource(id = R.string.Language),
                             icon = painterResource(R.drawable.language),
 
                             onClick = { /* Handle language change */ }
                         )
                         SettingBox(
-                            title = "Night Mode",
+                            title = stringResource(id = R.string.Preferences),
+
                             icon = painterResource(R.drawable.mode),
 
                             onClick = { showBottomSheet = true }
@@ -149,19 +151,22 @@ fun driversettings(navController: NavController) {
 
 
                         SettingBox(
-                            title = "Documents",
+                            title = stringResource(id = R.string.documents),
+
                             icon = painterResource(R.drawable.note),
 
                             onClick = { /* Handle Two-Factor Authentication */ }
                         )
                         SettingBox(
-                            title = "Terms and Conditions",
+                            title = stringResource(id = R.string.terms_and_conditions),
+
                             icon = painterResource(R.drawable.termsandconditions),
 
                             onClick = { /* Handle Privacy Settings */ }
                         )
                         SettingBox(
-                            title = " About the App",
+                            title = stringResource(id = R.string.about_the_app),
+
                             icon = painterResource(R.drawable.abouttheapp),
 
                             onClick = { }
@@ -178,7 +183,8 @@ fun driversettings(navController: NavController) {
                             colors = ButtonDefaults.buttonColors(backgroundColor = Color.LightGray)
                         ) {
                             androidx.compose.material.Text(
-                                "Log Out",
+                                 stringResource(id = R.string.Logout),
+
                                 color = Color.Red,
                                 fontSize = 16.sp,
                                 fontWeight = FontWeight.Bold

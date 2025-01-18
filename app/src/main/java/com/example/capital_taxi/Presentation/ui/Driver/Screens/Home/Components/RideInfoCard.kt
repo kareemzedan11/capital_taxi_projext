@@ -12,6 +12,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -39,7 +40,7 @@ fun RideInfoCard() {
             ) {
                 Column {
                     Text(
-                        text = "From :",
+                        text = "${stringResource(R.string.From)} :",
                         fontWeight = FontWeight.Bold,
                         fontSize = 14.sp
                     )
@@ -60,7 +61,7 @@ fun RideInfoCard() {
 
             // Destination Section
             Text(
-                text = "To :",
+                text = "${stringResource(R.string.To)} :",
                 fontWeight = FontWeight.Bold,
                 fontSize = 14.sp
             )
@@ -81,7 +82,7 @@ fun RideInfoCard() {
                 verticalAlignment = Alignment.CenterVertically
             ) {
                 Text(
-                    text = "Price :",
+                    text = "${stringResource(R.string.Price)} :",
                     fontWeight = FontWeight.Bold,
                     fontSize = 16.sp
                 )
@@ -146,7 +147,7 @@ fun RideInfoCard() {
                         onClick = { /* Handle Cancel action */ },
                         colors = ButtonDefaults.buttonColors(containerColor = Color(0xFFF44336))
                     ) {
-                        Text(text = "Cancel ride", color = Color.White)
+                        Text(text = stringResource(R.string.cancel_trip), color = Color.White)
                     }
                 }
             }

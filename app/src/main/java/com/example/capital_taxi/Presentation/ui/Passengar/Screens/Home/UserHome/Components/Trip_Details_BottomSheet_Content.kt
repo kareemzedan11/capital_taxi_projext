@@ -17,20 +17,22 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.capital_taxi.R
 
 
 @Composable
-fun TripDetailsBottomSheetContent(){
-    Column (
-
+fun TripDetailsBottomSheetContent() {
+    Column(
         modifier = Modifier.padding(horizontal = 10.dp),
         verticalArrangement = Arrangement.Center,
-        horizontalAlignment = Alignment.CenterHorizontally){
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
         Text(
-            "Trip Details",
+            stringResource(R.string.trip_details),
             fontSize = 20.sp,
             fontWeight = FontWeight.Bold,
             color = Color.Black
@@ -49,32 +51,30 @@ fun TripDetailsBottomSheetContent(){
         Row(
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.Center
-
         ) {
-            Text(" Share your trip status", fontSize = 18.sp, fontWeight = FontWeight.Bold)
+            Text(
+                stringResource(R.string.share_trip_status),
+                fontSize = 18.sp,
+                fontWeight = FontWeight.Bold
+            )
             Spacer(modifier = Modifier.weight(1f))
             Button(
                 onClick = {},
                 modifier = Modifier
                     .border(
-
                         width = 2.dp,
                         color = Color.Gray,
                         shape = RoundedCornerShape(23.dp)
-
-                    )
-                , colors = ButtonDefaults.buttonColors(containerColor = Color.LightGray)
-
-
+                    ),
+                colors = ButtonDefaults.buttonColors(containerColor = Color.LightGray)
             ) {
                 Text(
-                    "Share",
+                    stringResource(R.string.share),
                     fontSize = 16.sp,
                     fontWeight = FontWeight.Bold,
                     color = Color.Gray
                 )
             }
-
         }
         Spacer(modifier = Modifier.padding(bottom = 10.dp))
 
@@ -83,26 +83,22 @@ fun TripDetailsBottomSheetContent(){
         Spacer(modifier = Modifier.weight(1f))
 
         Button(
-            onClick = {  },
+            onClick = { },
             modifier = Modifier
                 .fillMaxWidth(.9f)
-
-
                 .height(50.dp),
             colors = ButtonDefaults.buttonColors(Color.LightGray),
             shape = RoundedCornerShape(8.dp)
-
         ) {
             androidx.compose.material3.Text(
-                text = "Cancel Trip",
+                text = stringResource(R.string.cancel_trip),
                 color = Color.Red,
                 fontSize = 18.sp,
-
-                )
+            )
         }
         Spacer(modifier = Modifier.padding(bottom = 10.dp))
         Button(
-            onClick = {  },
+            onClick = { },
             modifier = Modifier
                 .fillMaxWidth(.9f)
 
@@ -113,7 +109,7 @@ fun TripDetailsBottomSheetContent(){
 
         ) {
             androidx.compose.material3.Text(
-                text = "Done",
+                text = stringResource(R.string.Done_Button),
                 color = Color.White,
                 fontSize = 18.sp,
 

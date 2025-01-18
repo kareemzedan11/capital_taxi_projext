@@ -6,9 +6,11 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.capital_taxi.R
 
 @Composable
 fun TripInfoRow(
@@ -23,7 +25,7 @@ fun TripInfoRow(
         modifier = modifier.fillMaxWidth()
     ) {
         Text(
-            text = "Distance \n\n $distance",
+            text = "${stringResource(R.string.Distance)} \n\n $distance",
             fontSize = 16.sp,
             fontWeight = FontWeight.Bold,
             color = Color.Black
@@ -35,7 +37,7 @@ fun TripInfoRow(
                 .padding(horizontal = 12.dp)
         )
         Text(
-            text = "Duration \n\n $duration",
+            text = "${stringResource(R.string.Duration)} \n\n $duration",
             fontSize = 16.sp,
             fontWeight = FontWeight.Bold,
             color = Color.Black
@@ -47,7 +49,7 @@ fun TripInfoRow(
                 .padding(horizontal = 12.dp)
         )
         Text(
-            text = "Price \n\n $price",
+            text = "${stringResource(R.string.Price)} \n\n $price",
             fontSize = 16.sp,
             fontWeight = FontWeight.Bold,
             color = Color.Black

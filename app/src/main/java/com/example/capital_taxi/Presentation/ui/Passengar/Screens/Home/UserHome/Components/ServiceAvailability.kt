@@ -29,6 +29,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -55,7 +56,6 @@ fun ServiceAvailability(navController: NavController) {
     }
     Box(
         modifier = Modifier
-
             .fillMaxWidth()
             .background(Color.White), contentAlignment = Alignment.Center
     ) {
@@ -65,32 +65,31 @@ fun ServiceAvailability(navController: NavController) {
                     .verticalScroll(rememberScrollState())
                     .windowInsetsPadding(WindowInsets.navigationBars)
                     .padding(horizontal = 20.dp),
-                contentDescription = "the service not available ",
+                contentDescription = stringResource(R.string.service_not_available),
                 painter = painterResource(R.drawable.logo7)
             )
             Text(
-                "Our service is not available in your area",
-
+                stringResource(R.string.service_not_available_message),
                 modifier = Modifier
-
                     .padding(vertical = 16.dp, horizontal = 16.dp),
                 color = Color.Black, fontSize = 24.sp, fontWeight = FontWeight.Bold
             )
 
             Button(
-                onClick = { showBottomSheet=true},
+                onClick = { showBottomSheet = true },
                 shape = RoundedCornerShape(50.dp),
                 modifier = Modifier
-
-
                     .height(100.dp)
                     .fillMaxWidth()
                     .padding(vertical = 16.dp, horizontal = 30.dp),
                 colors = ButtonDefaults.buttonColors(Color.Black)
             ) {
-                Text("Enter Address", fontSize = 18.sp, fontWeight = FontWeight.Bold)
+                Text(
+                    stringResource(R.string.enter_address),
+                    fontSize = 18.sp,
+                    fontWeight = FontWeight.Bold
+                )
             }
-
         }
     }
 }

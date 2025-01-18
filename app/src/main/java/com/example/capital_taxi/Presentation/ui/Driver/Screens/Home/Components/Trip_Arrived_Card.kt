@@ -14,6 +14,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.colorResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -32,7 +33,7 @@ fun TripArrivedCard() {
         // Header
         Box(modifier = Modifier.fillMaxWidth(), contentAlignment = Alignment.Center) {
             Text(
-                text = "YOU ARRIVED",
+                text = stringResource(R.string.you_arrived),
                 fontWeight = FontWeight.Bold,
                 fontSize = 24.sp,
                 modifier = Modifier.padding(bottom = 8.dp)
@@ -41,7 +42,7 @@ fun TripArrivedCard() {
 
         // Trip Duration
         Text(
-            text = "20 min",
+            text = stringResource(R.string.trip_duration),
             fontWeight = FontWeight.Bold,
             fontSize = 24.sp,
             modifier = Modifier.padding(bottom = 16.dp)
@@ -58,7 +59,7 @@ fun TripArrivedCard() {
 
         // Trip Review Link
         Text(
-            text = "See Trip Review",
+            text = stringResource(R.string.see_trip_review),
             color = colorResource(R.color.primary_color),
             fontSize = 14.sp,
             modifier = Modifier.padding(bottom = 16.dp)
@@ -75,7 +76,7 @@ fun TripArrivedCard() {
             )
         ) {
             androidx.compose.material.Text(
-                "End Trip",
+                stringResource(R.string.end_trip),
                 color = Color.Black,
                 fontSize = 16.sp,
                 fontWeight = FontWeight.Bold

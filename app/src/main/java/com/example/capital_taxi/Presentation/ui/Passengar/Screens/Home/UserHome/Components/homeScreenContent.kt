@@ -206,30 +206,30 @@ fun homeScreenContent(navController: NavController) {
                     ) {
 
                         // TripDetailsLiveTracker()
-                       // RideDetailsBottomSheetContent()
-                       // TripRatingDialog()
+                      RideDetailsBottomSheetContent()
+                      //TripRatingDialog()
 
-                        // Use the current state to check if location is enabled and permission granted
-                        if (currentIsLocationEnabled.value && currentIsLocationGranted.value) {
-                            if (!isConfirmed) {
-                                PickupWithDropOffButtons(
-                                    navController = navController,
-                                    locationName = locationName
-                                )
-                            } else if (isConfirmed) {
-                                confirmPickup(onclick = { isSearch = true })
-
-                            }
-                            if (isSearch) {
-                                isConfirmed = false
-                                searchAboutADriver()
-                            }
-                        } else {
-                            EnableLocationServices(
-                                permissionViewModel = permissionViewModel,
-                                context = context
-                            )
-                        }
+//                        // Use the current state to check if location is enabled and permission granted
+//                        if (currentIsLocationEnabled.value && currentIsLocationGranted.value) {
+//                            if (!isConfirmed) {
+//                                PickupWithDropOffButtons(
+//                                    navController = navController,
+//                                    locationName = locationName
+//                                )
+//                            } else if (isConfirmed) {
+//                                confirmPickup(onclick = { isSearch = true })
+//                               // TripDetailsLiveTracker()
+//                            }
+//                            if (isSearch) {
+//                                isConfirmed = false
+//                                searchAboutADriver()
+//                            }
+//                        } else {
+//                            EnableLocationServices(
+//                                permissionViewModel = permissionViewModel,
+//                                context = context
+//                            )
+//                        }
                     }
                 }
             )

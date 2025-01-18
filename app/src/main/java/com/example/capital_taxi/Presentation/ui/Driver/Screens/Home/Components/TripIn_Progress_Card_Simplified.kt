@@ -20,11 +20,11 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.colorResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.capital_taxi.R
-
 
 @Composable
 fun TripInProgressCardSimplified() {
@@ -48,25 +48,25 @@ fun TripInProgressCardSimplified() {
             ) {
                 Column {
                     Text(
-                        text = "Trip In Progress",
+                        text = stringResource(id = R.string.trip_in_progress),
                         fontWeight = FontWeight.Bold,
                         fontSize = 16.sp,
                         color = colorResource(R.color.primary_color)
                     )
                     Spacer(modifier = Modifier.height(4.dp))
                     Text(
-                        text = "Destination:",
+                        text = stringResource(id = R.string.destination),
                         fontSize = 14.sp,
                         fontWeight = FontWeight.Bold
                     )
                     Text(
-                        text = "Abbas El-Akkad Strt",
+                        text = stringResource(id = R.string.destination_address),
                         fontSize = 14.sp
                     )
                 }
 
                 Text(
-                    text = "15 mins left",
+                    text = stringResource(id = R.string.time_left),
                     fontSize = 12.sp,
                     color = Color.Gray
                 )
@@ -85,23 +85,23 @@ fun TripInProgressCardSimplified() {
             ) {
                 Column {
                     Text(
-                        text = "Distance:",
+                        text = stringResource(id = R.string.distance),
                         fontWeight = FontWeight.Bold,
                         fontSize = 14.sp
                     )
                     Text(
-                        text = "5.2 km",
+                        text = "5.2 km", // You can replace this with dynamic data if needed
                         fontSize = 14.sp
                     )
                 }
                 Column {
                     Text(
-                        text = "Estimated Fare:",
+                        text = stringResource(id = R.string.estimated_fare),
                         fontWeight = FontWeight.Bold,
                         fontSize = 14.sp
                     )
                     Text(
-                        text = "30.00 EGP",
+                        text = "30.00 EGP", // Replace with dynamic data if needed
                         fontSize = 14.sp,
                         color = colorResource(R.color.primary_color)
                     )
@@ -120,9 +120,10 @@ fun TripInProgressCardSimplified() {
                     onClick = { /* Handle End Trip action */ },
                     colors = ButtonDefaults.buttonColors(containerColor = Color.Red)
                 ) {
-                    Text(text = "End Trip", color = Color.White)
+                    Text(text = stringResource(id = R.string.end_trip), color = Color.White)
                 }
             }
         }
     }
 }
+
