@@ -13,6 +13,8 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.app.ui.theme.CustomFontFamily
+import com.example.app.ui.theme.responsiveTextSize
 import com.example.capital_taxi.R
 
 // Next Button Composable
@@ -27,7 +29,12 @@ fun NextButton(onClick: () -> Unit) {
     ) {
         Text(
             stringResource(R.string.next_button),
-            color = Color.Black, fontSize = 20.sp, fontWeight = FontWeight.W400
+            color = Color.Black,   fontSize = responsiveTextSize(
+                fraction = 0.06f,
+                minSize = 16.sp,
+                maxSize = 20.sp
+            ),
+            fontFamily = CustomFontFamily, fontWeight = FontWeight.W400
         )
     }
 }

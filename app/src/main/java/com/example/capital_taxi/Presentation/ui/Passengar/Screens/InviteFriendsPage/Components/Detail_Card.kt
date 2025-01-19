@@ -15,6 +15,8 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.app.ui.theme.CustomFontFamily
+import com.example.app.ui.theme.responsiveTextSize
 
 
 @Composable
@@ -30,14 +32,24 @@ fun DetailCard(title: String, description: String, backgroundColor: Color) {
         Column(Modifier.padding(10.dp)) {
             Text(
                 text = title,
-                fontSize = 18.sp,
+                fontSize = responsiveTextSize(
+                    fraction = 0.06f,
+                    minSize = 14.sp,
+                    maxSize = 18.sp
+                ),
+                fontFamily = CustomFontFamily,
                 fontWeight = FontWeight.Bold,
                 color = Color(0xFF333333)
             )
             Spacer(modifier = Modifier.height(8.dp))
             Text(
                 text = description,
-                fontSize = 14.sp,
+                fontSize = responsiveTextSize(
+                    fraction = 0.06f,
+                    minSize = 12.sp,
+                    maxSize = 14.sp
+                ),
+                fontFamily = CustomFontFamily,
                 color = Color(0xFF666666)
             )
         }

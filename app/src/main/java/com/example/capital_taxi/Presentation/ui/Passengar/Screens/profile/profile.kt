@@ -20,6 +20,8 @@ import androidx.navigation.NavController
 import androidx.compose.ui.platform.LocalContext
 import android.content.Context
 import android.content.SharedPreferences
+import com.example.app.ui.theme.CustomFontFamily
+import com.example.app.ui.theme.responsiveTextSize
 import com.example.capital_taxi.Navigation.Destination
 import com.example.capital_taxi.Presentation.ui.Passengar.Screens.profile.Components.ProfileTextField
 import com.example.capital_taxi.R
@@ -150,7 +152,12 @@ fun Profile(navController: NavController) {
                 ) {
                     Text(
                         text = stringResource(R.string.save_button),
-                        fontSize = 18.sp,
+                        fontSize = responsiveTextSize(
+                            fraction = 0.06f,
+                            minSize = 14.sp,
+                            maxSize = 18.sp
+                        ),
+                        fontFamily = CustomFontFamily,
                         color = Color.Black
                     )
                 }

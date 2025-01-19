@@ -21,6 +21,8 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.app.ui.theme.CustomFontFamily
+import com.example.app.ui.theme.responsiveTextSize
 import com.example.capital_taxi.R
 
 @Composable
@@ -37,13 +39,23 @@ fun NewPasswordContent(
         Text(
             stringResource(R.string.create_new_password),
             fontWeight = FontWeight.W400,
-            fontSize = 32.sp,
+            fontSize = responsiveTextSize(
+                fraction = 0.06f,
+                minSize = 24.sp,
+                maxSize = 32.sp
+            ),
+            fontFamily = CustomFontFamily,
             modifier = Modifier.padding(bottom = 8.dp)
         )
         Text(
             stringResource(R.string.password_hint),
             fontWeight = FontWeight.W400,
-            fontSize = 18.sp,
+            fontSize = responsiveTextSize(
+                fraction = 0.06f,
+                minSize = 14.sp,
+                maxSize = 18.sp
+            ),
+            fontFamily = CustomFontFamily,
             modifier = Modifier.padding(bottom = 20.dp)
         )
         Spacer(modifier = Modifier.height(16.dp))
@@ -52,17 +64,28 @@ fun NewPasswordContent(
             onValueChange = onPasswordChange,
             label = { Text(stringResource(R.string.new_password_label)) },
             placeholder = { Text(stringResource(R.string.new_password_placeholder)) },
-            modifier = Modifier.fillMaxWidth().background(Color.White.copy(alpha = .2f)),
+            modifier = Modifier
+                .fillMaxWidth()
+                .background(Color.White.copy(alpha = .2f)),
             singleLine = true
         )
         Spacer(modifier = Modifier.weight(1f))
         Button(
             onClick = onSaveClicked,
-            modifier = Modifier.fillMaxWidth().height(60.dp),
+            modifier = Modifier
+                .fillMaxWidth()
+                .height(60.dp),
             colors = ButtonDefaults.buttonColors(colorResource(R.color.primary_color)),
             shape = RoundedCornerShape(8.dp)
         ) {
-            Text(text = stringResource(R.string.save_button), fontSize = 18.sp, color = Color.Black)
+            Text(
+                text = stringResource(R.string.save_button), fontSize = responsiveTextSize(
+                    fraction = 0.06f,
+                    minSize = 14.sp,
+                    maxSize = 18.sp
+                ),
+                fontFamily = CustomFontFamily, color = Color.Black
+            )
         }
         Spacer(modifier = Modifier.weight(2f))
     }

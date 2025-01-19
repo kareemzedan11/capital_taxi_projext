@@ -21,6 +21,8 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.airbnb.lottie.compose.*
+import com.example.app.ui.theme.CustomFontFamily
+import com.example.app.ui.theme.responsiveTextSize
 import com.example.capital_taxi.R
 
 @Composable
@@ -139,7 +141,11 @@ fun InviteFriendsPage(navController: NavController) {
                                     modifier = Modifier
                                         .fillMaxWidth()
                                         .padding(16.dp),
-                                    style = MaterialTheme.typography.body1,
+                                    fontSize = responsiveTextSize(fraction = 0.06f, minSize = 14.sp, maxSize = 18.sp),
+
+
+
+                                    fontFamily = CustomFontFamily,
                                     color = Color.Gray
                                 )
                             }
@@ -158,7 +164,11 @@ fun InviteFriendsPage(navController: NavController) {
                                 text = stringResource(id = R.string.Invite),
 
                                 color = Color.White,
-                                fontSize = 16.sp,
+                                fontSize = responsiveTextSize(fraction = 0.06f, minSize = 12.sp, maxSize = 16.sp),
+
+
+
+                                fontFamily = CustomFontFamily,
                                 fontWeight = FontWeight.Bold
                             )
                         }

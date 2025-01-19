@@ -35,6 +35,8 @@ import com.airbnb.lottie.compose.LottieCompositionSpec
 import com.airbnb.lottie.compose.LottieConstants
 import com.airbnb.lottie.compose.animateLottieCompositionAsState
 import com.airbnb.lottie.compose.rememberLottieComposition
+import com.example.app.ui.theme.CustomFontFamily
+import com.example.app.ui.theme.responsiveTextSize
 import com.example.capital_taxi.Presentation.ui.Driver.Screens.Home.Components.Help_Screen_Header
 import com.example.capital_taxi.Presentation.ui.Passengar.Screens.HelpScreen.Components.HelpTopicItem
 import com.example.capital_taxi.R
@@ -52,7 +54,12 @@ fun HelpScreen(navController: NavController) {
                         text = stringResource(R.string.Help),
 
                         fontWeight = FontWeight.Bold,
-                        fontSize = 20.sp,
+                        fontSize = responsiveTextSize(
+                            fraction = 0.06f,
+                            minSize = 16.sp,
+                            maxSize = 20.sp
+                        ),
+                        fontFamily = CustomFontFamily,
                         color = Color.Black
                     )
                 },

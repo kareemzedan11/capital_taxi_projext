@@ -55,6 +55,8 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
+import com.example.app.ui.theme.CustomFontFamily
+import com.example.app.ui.theme.responsiveTextSize
 import com.example.capital_taxi.Navigation.Destination
 import com.example.capital_taxi.R
 import java.io.File
@@ -116,7 +118,14 @@ fun NationalIDValidation(navController: NavController) {
                 Text(
                     text = stringResource(R.string.national_id_card),
                     color = Color.Black,
-                    fontSize = 30.sp,
+                    fontSize = responsiveTextSize(
+                        fraction = 0.06f,
+                        minSize = 24.sp,
+                        maxSize = 30.sp
+                    ),
+
+
+                    fontFamily = CustomFontFamily,
                     fontWeight = FontWeight.Bold
                 )
 
@@ -204,7 +213,10 @@ fun DriverNationalIDCaptureSection(
             Text(
                 text = title,
                 color = Color.Black,
-                fontSize = 22.sp,
+                fontSize = responsiveTextSize(fraction = 0.06f, minSize = 18.sp, maxSize = 22.sp),
+
+
+                fontFamily = CustomFontFamily,
                 fontWeight = FontWeight.Bold
             )
 
@@ -217,8 +229,9 @@ fun DriverNationalIDCaptureSection(
                 if (capturedBitmap != null) {
                     Card(
                         elevation = CardDefaults.elevatedCardElevation(10.dp),
-                        modifier = Modifier.background(Color.Transparent)
-                            .border(2.dp,Color.Transparent, RoundedCornerShape(16.dp))
+                        modifier = Modifier
+                            .background(Color.Transparent)
+                            .border(2.dp, Color.Transparent, RoundedCornerShape(16.dp))
                     ) {
                         Image(
                             bitmap = capturedBitmap!!.asImageBitmap(),
@@ -229,8 +242,9 @@ fun DriverNationalIDCaptureSection(
                 } else {
                     Card(
                         elevation = CardDefaults.elevatedCardElevation(10.dp),
-                        modifier = Modifier.background(Color.Transparent)
-                            .border(2.dp,Color.Transparent, RoundedCornerShape(16.dp))
+                        modifier = Modifier
+                            .background(Color.Transparent)
+                            .border(2.dp, Color.Transparent, RoundedCornerShape(16.dp))
                     ) {
                         Image(
                             painter = painterResource(R.drawable.id), // Placeholder image
@@ -264,8 +278,20 @@ fun DriverNationalIDCaptureSection(
                     shape = RoundedCornerShape(10.dp)
 
                 ) {
-                Text(text = buttonText, color = Color(0XFF111111), fontSize = 18.sp)
-            }}
+                    Text(
+                        text = buttonText,
+                        color = Color(0XFF111111),
+                        fontSize = responsiveTextSize(
+                            fraction = 0.06f,
+                            minSize = 14.sp,
+                            maxSize = 18.sp
+                        ),
+
+
+                        fontFamily = CustomFontFamily,
+                    )
+                }
+            }
         }
     }
 }

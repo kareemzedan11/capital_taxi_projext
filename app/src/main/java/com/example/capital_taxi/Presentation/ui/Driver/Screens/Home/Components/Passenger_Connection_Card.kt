@@ -14,6 +14,8 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.app.ui.theme.CustomFontFamily
+import com.example.app.ui.theme.responsiveTextSize
 
 
 @Composable
@@ -29,7 +31,11 @@ fun PassengerConnectionCard() {
         Text(
             text = "Connecting to your Passenger",
             fontWeight = FontWeight.Bold,
-            fontSize = 18.sp,
+            fontSize = responsiveTextSize(fraction = 0.06f, minSize = 14.sp, maxSize = 18.sp),
+
+
+
+            fontFamily = CustomFontFamily,
             modifier = Modifier.padding(bottom = 16.dp)
         )
 

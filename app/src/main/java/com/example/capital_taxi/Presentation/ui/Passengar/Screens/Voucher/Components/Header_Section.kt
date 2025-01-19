@@ -21,6 +21,8 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.app.ui.theme.CustomFontFamily
+import com.example.app.ui.theme.responsiveTextSize
 import com.example.capital_taxi.R
 
 
@@ -50,7 +52,12 @@ fun HeaderSection(backgroundColor: Color, onClose: () -> Unit) {
             modifier = Modifier
                 .align(Alignment.Center)
                 .padding(top = 60.dp),
-            fontSize = 24.sp,
+            fontSize = responsiveTextSize(
+                fraction = 0.06f,
+                minSize = 20.sp,
+                maxSize = 24.sp
+            ),
+            fontFamily = CustomFontFamily,
             fontWeight = FontWeight.Bold,
             color = Color.Black
         )

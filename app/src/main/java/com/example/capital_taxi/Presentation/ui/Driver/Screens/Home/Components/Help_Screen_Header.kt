@@ -26,6 +26,8 @@ import com.airbnb.lottie.compose.LottieCompositionSpec
 import com.airbnb.lottie.compose.LottieConstants
 import com.airbnb.lottie.compose.animateLottieCompositionAsState
 import com.airbnb.lottie.compose.rememberLottieComposition
+import com.example.app.ui.theme.CustomFontFamily
+import com.example.app.ui.theme.responsiveTextSize
 import com.example.capital_taxi.R
 
 
@@ -52,7 +54,11 @@ fun Help_Screen_Header() {
             text = stringResource(R.string.How_can_we_help_you),
 
             fontWeight = FontWeight.Medium,
-            fontSize = 18.sp,
+            fontSize = responsiveTextSize(fraction = 0.06f, minSize = 14.sp, maxSize = 18.sp),
+
+
+
+            fontFamily = CustomFontFamily,
             color = Color.Black
         )
         Box(

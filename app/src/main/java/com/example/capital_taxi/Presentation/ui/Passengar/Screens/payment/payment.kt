@@ -45,6 +45,8 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.stringResource
 import androidx.core.content.ContextCompat
+import com.example.app.ui.theme.CustomFontFamily
+import com.example.app.ui.theme.responsiveTextSize
 import com.example.capital_taxi.Presentation.ui.Passengar.Screens.payment.Components.PaymentMethodCard
 
 
@@ -131,7 +133,12 @@ fun PaymentScreenContent(
                 modifier = Modifier
                     .align(Alignment.Center)
                     .padding(top = 40.dp),
-                fontSize = 24.sp,
+                fontSize = responsiveTextSize(
+                    fraction = 0.06f,
+                    minSize = 20.sp,
+                    maxSize = 24.sp
+                ),
+                fontFamily = CustomFontFamily,
                 fontWeight = FontWeight.Bold,
                 color = Color.Black
             )
@@ -151,7 +158,12 @@ fun PaymentScreenContent(
                 Text(
                     stringResource(R.string.choose_payment_method), // Add this string to `strings.xml`
                     modifier = Modifier.padding(top = 20.dp),
-                    fontSize = 24.sp,
+                    fontSize = responsiveTextSize(
+                        fraction = 0.06f,
+                        minSize = 20.sp,
+                        maxSize = 24.sp
+                    ),
+                    fontFamily = CustomFontFamily,
                     fontWeight = FontWeight.Bold,
                     color = Color.Black
                 )
@@ -177,7 +189,12 @@ fun PaymentScreenContent(
                 ) {
                     Text(
                         stringResource(R.string.add_new_method_button), // Add this string to `strings.xml`
-                        fontSize = 18.sp,
+                        fontSize = responsiveTextSize(
+                            fraction = 0.06f,
+                            minSize = 14.sp,
+                            maxSize = 18.sp
+                        ),
+                        fontFamily = CustomFontFamily,
                         fontWeight = FontWeight.Bold
                     )
                 }

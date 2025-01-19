@@ -14,6 +14,8 @@ import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.app.ui.theme.CustomFontFamily
+import com.example.app.ui.theme.responsiveTextSize
 
 @Composable
 fun navigationDrawerItem(onClick: () -> Unit, painter: Painter? = null, text: String) {
@@ -37,7 +39,12 @@ fun navigationDrawerItem(onClick: () -> Unit, painter: Painter? = null, text: St
         selected = false,
         label = {
             Text(
-                text, fontSize = 20.sp,
+                text, fontSize = responsiveTextSize(
+                    fraction = 0.06f,
+                    minSize = 16.sp,
+                    maxSize = 20.sp
+                ),
+                fontFamily = CustomFontFamily,
                 fontWeight = FontWeight.Bold
             )
         },

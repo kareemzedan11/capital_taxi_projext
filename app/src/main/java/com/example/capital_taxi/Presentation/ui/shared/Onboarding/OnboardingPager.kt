@@ -30,6 +30,7 @@ import androidx.compose.ui.unit.sp
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
+import com.example.app.ui.theme.CustomFontFamily
 import com.example.capital_taxi.R
 import com.example.capital_taxi.Navigation.Destination
 import com.example.app.ui.theme.responsiveTextSize
@@ -144,7 +145,12 @@ fun OnboardingPager(navController: NavController) {
 
                     Text(
                         stringResource(R.string.log_in),
-                        fontSize = responsiveTextSize(fraction = 0.06f, minSize = 14.sp, maxSize = 20.sp),
+                        fontSize = responsiveTextSize(
+                            fraction = 0.06f,
+                            minSize = 14.sp,
+                            maxSize = 20.sp
+                        ),
+                        fontFamily = CustomFontFamily,
                         fontWeight = FontWeight.W500,
                         color = Color(0XFF987200),
                         modifier = Modifier

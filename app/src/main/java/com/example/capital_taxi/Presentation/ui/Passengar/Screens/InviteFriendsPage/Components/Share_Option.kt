@@ -18,6 +18,8 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.app.ui.theme.CustomFontFamily
+import com.example.app.ui.theme.responsiveTextSize
 
 
 @Composable
@@ -38,7 +40,12 @@ fun ShareOption(icon: Int, label: String) {
             contentScale = ContentScale.Crop
         )
         Spacer(modifier = Modifier.height(8.dp))
-        Text(text = label, fontSize = 14.sp, fontWeight = FontWeight.Medium)
+        Text(text = label,    fontSize = responsiveTextSize(
+            fraction = 0.06f,
+            minSize = 12.sp,
+            maxSize = 14.sp
+        ),
+            fontFamily = CustomFontFamily, fontWeight = FontWeight.Medium)
     }
 }
 

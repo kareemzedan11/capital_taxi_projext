@@ -32,6 +32,8 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
+import com.example.app.ui.theme.CustomFontFamily
+import com.example.app.ui.theme.responsiveTextSize
 import com.example.capital_taxi.Presentation.ui.Passengar.Screens.InviteFriendsPage.Components.CodeBox
 import com.example.capital_taxi.Presentation.ui.Passengar.Screens.InviteFriendsPage.Components.DetailCard
 import com.example.capital_taxi.Presentation.ui.Passengar.Screens.InviteFriendsPage.Components.ShareOption
@@ -98,7 +100,12 @@ fun InviteForMyApp(navController: NavController) {
                 // Header
                 Text(
                     text = stringResource(R.string.share_with_friends),
-                    fontSize = 22.sp,
+                    fontSize = responsiveTextSize(
+                        fraction = 0.06f,
+                        minSize = 18.sp,
+                        maxSize = 22.sp
+                    ),
+                    fontFamily = CustomFontFamily,
                     fontWeight = FontWeight.Bold,
                     modifier = Modifier.padding(bottom = 16.dp)
                 )
@@ -107,7 +114,12 @@ fun InviteForMyApp(navController: NavController) {
                 // Horizontal Scrollable Containers
                 Text(
                     text = stringResource(R.string.rewards),
-                    fontSize = 20.sp,
+                    fontSize = responsiveTextSize(
+                        fraction = 0.06f,
+                        minSize = 16.sp,
+                        maxSize = 20.sp
+                    ),
+                    fontFamily = CustomFontFamily,
                     fontWeight = FontWeight.Bold,
                     modifier = Modifier.padding(bottom = 8.dp)
                 )
@@ -129,7 +141,12 @@ fun InviteForMyApp(navController: NavController) {
                 // Code Box Section
                 Text(
                     text = stringResource(R.string.share_your_referral_code),
-                    fontSize = 20.sp,
+                    fontSize = responsiveTextSize(
+                        fraction = 0.06f,
+                        minSize = 16.sp,
+                        maxSize = 20.sp
+                    ),
+                    fontFamily = CustomFontFamily,
                     fontWeight = FontWeight.Bold,
                     modifier = Modifier.padding(bottom = 8.dp)
                 )

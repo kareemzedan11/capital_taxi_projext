@@ -37,6 +37,8 @@ import com.airbnb.lottie.compose.LottieCompositionSpec
 import com.airbnb.lottie.compose.LottieConstants
 import com.airbnb.lottie.compose.animateLottieCompositionAsState
 import com.airbnb.lottie.compose.rememberLottieComposition
+import com.example.app.ui.theme.CustomFontFamily
+import com.example.app.ui.theme.responsiveTextSize
 import com.example.capital_taxi.R
 
 
@@ -130,7 +132,12 @@ fun userNotification(navController: NavController) {
                             stringResource(R.string.No_Notification_Message)
                             ,
                             color = Color.Black,
-                            fontSize = 20.sp,
+                            fontSize = responsiveTextSize(
+                                fraction = 0.06f,
+                                minSize = 16.sp,
+                                maxSize = 20.sp
+                            ),
+                            fontFamily = CustomFontFamily,
                             fontWeight = FontWeight.Bold
                         )
                     }

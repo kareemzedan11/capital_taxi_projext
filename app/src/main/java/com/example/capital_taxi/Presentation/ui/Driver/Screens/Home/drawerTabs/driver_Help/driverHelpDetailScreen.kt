@@ -30,6 +30,8 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
+import com.example.app.ui.theme.CustomFontFamily
+import com.example.app.ui.theme.responsiveTextSize
 import com.example.capital_taxi.Presentation.ui.Driver.Screens.Home.drawerTabs.driver_Help.Components.driverManageAccountList
 import com.example.capital_taxi.Presentation.ui.Driver.Screens.Home.drawerTabs.driver_Help.Components.driverPaymentHelpSectionList
 import com.example.capital_taxi.Presentation.ui.Driver.Screens.Home.drawerTabs.driver_Help.Components.driverRateFeedbackList
@@ -85,7 +87,11 @@ fun DriverHelpDetailScreen(navController: NavController, topic: String) {
                 Text(
                     text = stringResource(id = R.string.Details_about, topic),
                     fontWeight = FontWeight.Medium,
-                    fontSize = 18.sp,
+                    fontSize = responsiveTextSize(fraction = 0.06f, minSize = 14.sp, maxSize = 18.sp),
+
+
+
+                    fontFamily = CustomFontFamily,
                     color = Color.Black
                 )
 
@@ -105,7 +111,11 @@ fun DriverHelpDetailScreen(navController: NavController, topic: String) {
                 Text(
                     text = stringResource(id = R.string.Was_this_helpful),
                     fontWeight = FontWeight.Medium,
-                    fontSize = 16.sp,
+                    fontSize = responsiveTextSize(fraction = 0.06f, minSize = 12.sp, maxSize = 16.sp),
+
+
+
+                    fontFamily = CustomFontFamily,
                     color = Color.Black,
                     modifier = Modifier.align(Alignment.CenterHorizontally)
                 )

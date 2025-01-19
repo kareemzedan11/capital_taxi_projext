@@ -26,6 +26,8 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
+import com.example.app.ui.theme.CustomFontFamily
+import com.example.app.ui.theme.responsiveTextSize
 import com.example.capital_taxi.Navigation.Destination
 
 @Composable
@@ -100,7 +102,11 @@ fun CustomShapeButton(text: String, color: Color, onClick: () -> Unit) {
         Text(
             text = text,
             color = Color.White,
-            fontSize = 16.sp,
+            fontSize = responsiveTextSize(fraction = 0.06f, minSize = 14.sp, maxSize = 16.sp),
+
+
+
+            fontFamily = CustomFontFamily,
             fontWeight = FontWeight.Bold
         )
     }

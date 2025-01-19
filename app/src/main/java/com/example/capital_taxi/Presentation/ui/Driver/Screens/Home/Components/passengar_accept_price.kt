@@ -15,13 +15,15 @@ import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.app.ui.theme.CustomFontFamily
+import com.example.app.ui.theme.responsiveTextSize
 import com.example.capital_taxi.R
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
 @Composable
 fun passengerAcceptPrice() {
-     Box(modifier = Modifier.fillMaxSize()) {
+    Box(modifier = Modifier.fillMaxSize()) {
         Card(
             modifier = Modifier
                 .fillMaxWidth()
@@ -38,20 +40,34 @@ fun passengerAcceptPrice() {
                 horizontalArrangement = Arrangement.Start,
                 verticalAlignment = Alignment.CenterVertically
             ) {
-                Box(modifier = Modifier.fillMaxWidth(.6f)){
+                Box(modifier = Modifier.fillMaxWidth(.6f)) {
                     Column(
                         modifier = Modifier.fillMaxWidth(),
-                        horizontalAlignment = Alignment.Start
-                        , verticalArrangement = Arrangement.Center
+                        horizontalAlignment = Alignment.Start,
+                        verticalArrangement = Arrangement.Center
                     ) {
                         Text(
                             text = stringResource(R.string.waiting_for_passenger_acceptance),
-                            fontSize = 14.sp,
+                            fontSize = responsiveTextSize(
+                                fraction = 0.06f,
+                                minSize = 12.sp,
+                                maxSize = 14.sp
+                            ),
+
+
+                            fontFamily = CustomFontFamily,
                             color = Color.Black
                         )
                         Text(
                             text = stringResource(R.string.new_price_sent_to_passenger),
-                            fontSize = 10.sp,
+                            fontSize = responsiveTextSize(
+                                fraction = 0.06f,
+                                minSize = 12.sp,
+                                maxSize = 16.sp
+                            ),
+
+
+                            fontFamily = CustomFontFamily,
                             color = Color.Gray
                         )
 
@@ -61,16 +77,15 @@ fun passengerAcceptPrice() {
                 CircularCountdown()
 
 
-
-                }
             }
         }
     }
+}
 
 
 @Composable
 fun CircularCountdown() {
-    val backgroundcolor= colorResource(R.color.primary_color)
+    val backgroundcolor = colorResource(R.color.primary_color)
 
     val countdownTime = 15 // Total countdown seconds
     var currentTime by remember { mutableStateOf(countdownTime) }

@@ -21,6 +21,8 @@ import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.app.ui.theme.CustomFontFamily
+import com.example.app.ui.theme.responsiveTextSize
 import com.example.capital_taxi.R
 
 
@@ -45,14 +47,28 @@ fun TotalIncomeSection() {
                 ) {
                     Text(
                         "1 july - ",
-                        fontSize = 18.sp,
+                        fontSize = responsiveTextSize(
+                            fraction = 0.06f,
+                            minSize = 14.sp,
+                            maxSize = 18.sp
+                        ),
+
+
+                        fontFamily = CustomFontFamily,
                         color = Color.White,
                         fontWeight = FontWeight.Bold
                     )
 
                     Text(
                         "7 july",
-                        fontSize = 18.sp,
+                        fontSize = responsiveTextSize(
+                            fraction = 0.06f,
+                            minSize = 14.sp,
+                            maxSize = 18.sp
+                        ),
+
+
+                        fontFamily = CustomFontFamily,
                         color = Color.White,
                         fontWeight = FontWeight.Bold
                     )
@@ -61,7 +77,14 @@ fun TotalIncomeSection() {
                 Spacer(modifier = Modifier.height(18.dp))
                 Text(
                     "0:00 EGB",
-                    fontSize = 50.sp,
+                    fontSize = responsiveTextSize(
+                        fraction = 0.06f,
+                        minSize = 32.sp,
+                        maxSize = 50.sp
+                    ),
+
+
+                    fontFamily = CustomFontFamily,
                     style = MaterialTheme.typography.h4,
                     color = Color.White,
                     fontWeight = FontWeight.Bold
@@ -87,12 +110,29 @@ fun TotalIncomeSection() {
                         ) {
                             Text(
                                 " Trips",
-                                style = MaterialTheme.typography.h5,
+                                fontSize = responsiveTextSize(
+                                    fraction = 0.06f,
+                                    minSize = 14.sp,
+                                    maxSize = 18.sp
+                                ),
+
+
+                                fontFamily = CustomFontFamily,
                                 fontWeight = FontWeight.Bold
                             )
 
 
-                            Text("0", style = MaterialTheme.typography.button)
+                            Text(
+                                "0",
+                                fontSize = responsiveTextSize(
+                                    fraction = 0.06f,
+                                    minSize = 14.sp,
+                                    maxSize = 16.sp
+                                ),
+
+
+                                fontFamily = CustomFontFamily,
+                            )
                         }
 
 
@@ -109,12 +149,29 @@ fun TotalIncomeSection() {
                             ) {
                             Text(
                                 " Call duration",
-                                style = MaterialTheme.typography.h5,
+                                fontSize = responsiveTextSize(
+                                    fraction = 0.06f,
+                                    minSize = 14.sp,
+                                    maxSize = 18.sp
+                                ),
+
+
+                                fontFamily = CustomFontFamily,
                                 fontWeight = FontWeight.Bold
                             )
 
 
-                            Text("0", style = MaterialTheme.typography.button)
+                            Text(
+                                "0",
+                                fontSize = responsiveTextSize(
+                                    fraction = 0.06f,
+                                    minSize = 14.sp,
+                                    maxSize = 16.sp
+                                ),
+
+
+                                fontFamily = CustomFontFamily,
+                            )
 
                         }
                         Spacer(modifier = Modifier.height(18.dp))
@@ -128,12 +185,29 @@ fun TotalIncomeSection() {
                         ) {
                             Text(
                                 " Points",
-                                style = MaterialTheme.typography.h5,
+                                fontSize = responsiveTextSize(
+                                    fraction = 0.06f,
+                                    minSize = 14.sp,
+                                    maxSize = 18.sp
+                                ),
+
+
+                                fontFamily = CustomFontFamily,
                                 fontWeight = FontWeight.Bold
                             )
 
 
-                            Text("0", style = MaterialTheme.typography.button)
+                            Text(
+                                "0",
+                                fontSize = responsiveTextSize(
+                                    fraction = 0.06f,
+                                    minSize = 14.sp,
+                                    maxSize = 16.sp
+                                ),
+
+
+                                fontFamily = CustomFontFamily,
+                            )
 
                         }
 

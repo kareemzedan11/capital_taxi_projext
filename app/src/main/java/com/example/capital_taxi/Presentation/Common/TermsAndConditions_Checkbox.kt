@@ -18,6 +18,8 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.app.ui.theme.CustomFontFamily
+import com.example.app.ui.theme.responsiveTextSize
 import com.example.capital_taxi.R
 
 
@@ -35,7 +37,12 @@ fun TermsAndConditionsCheckbox(isChecked: Boolean, onCheckedChange: (Boolean) ->
         Row(verticalAlignment = Alignment.CenterVertically) {
             Text(
                 text = stringResource(id = R.string.terms_conditions),
-                fontSize = 16.sp,
+                fontSize = responsiveTextSize(
+                    fraction = 0.06f,
+                    minSize = 12.sp,
+                    maxSize = 16.sp
+                ),
+                fontFamily = CustomFontFamily,
                 modifier = Modifier.clickable {}
             )
             Spacer(modifier = Modifier.width(4.dp))
@@ -43,7 +50,12 @@ fun TermsAndConditionsCheckbox(isChecked: Boolean, onCheckedChange: (Boolean) ->
                 text = stringResource(
                     id = R.string.terms_conditions_accept
                 ),
-                fontSize = 16.sp,
+                fontSize = responsiveTextSize(
+                    fraction = 0.06f,
+                    minSize = 12.sp,
+                    maxSize = 16.sp
+                ),
+                fontFamily = CustomFontFamily,
                 textDecoration = TextDecoration.Underline,
                 modifier = Modifier.clickable {},
                 color = Color.Red

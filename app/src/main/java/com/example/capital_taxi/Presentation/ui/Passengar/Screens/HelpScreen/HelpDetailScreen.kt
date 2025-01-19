@@ -18,6 +18,8 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import androidx.compose.ui.res.stringResource
+import com.example.app.ui.theme.CustomFontFamily
+import com.example.app.ui.theme.responsiveTextSize
 import com.example.capital_taxi.Presentation.ui.Passengar.Screens.HelpScreen.Components.ManageAccountList
 import com.example.capital_taxi.Presentation.ui.Passengar.Screens.HelpScreen.Components.PaymentHelpSectionList
 import com.example.capital_taxi.Presentation.ui.Passengar.Screens.HelpScreen.Components.RateFeedbackList
@@ -35,7 +37,12 @@ fun HelpDetailScreen(navController: NavController, topic: String) {
                     Text(
                         text = topic,
                         fontWeight = FontWeight.Bold,
-                        fontSize = 20.sp,
+                        fontSize = responsiveTextSize(
+                            fraction = 0.06f,
+                            minSize = 16.sp,
+                            maxSize = 20.sp
+                        ),
+                        fontFamily = CustomFontFamily,
                         color = Color.Black
                     )
                 },
@@ -93,7 +100,12 @@ fun HelpDetailScreen(navController: NavController, topic: String) {
                 Text(
                     text = stringResource(id = R.string.Was_this_helpful),
                     fontWeight = FontWeight.Medium,
-                    fontSize = 16.sp,
+                    fontSize = responsiveTextSize(
+                        fraction = 0.06f,
+                        minSize = 12.sp,
+                        maxSize = 16.sp
+                    ),
+                    fontFamily = CustomFontFamily,
                     color = Color.Black,
                     modifier = Modifier.align(Alignment.CenterHorizontally)
                 )

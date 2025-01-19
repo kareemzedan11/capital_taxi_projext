@@ -16,6 +16,8 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.app.ui.theme.CustomFontFamily
+import com.example.app.ui.theme.responsiveTextSize
 
 
 @Composable
@@ -38,7 +40,11 @@ fun InfoRow(icon: Int, label: String) {
         Text(
             text = label,
             fontWeight = FontWeight.Bold,
-            fontSize = 14.sp,
+            fontSize = responsiveTextSize(fraction = 0.06f, minSize = 12.sp, maxSize = 14.sp),
+
+
+
+            fontFamily = CustomFontFamily,
             modifier = Modifier.weight(1f)
         )
     }

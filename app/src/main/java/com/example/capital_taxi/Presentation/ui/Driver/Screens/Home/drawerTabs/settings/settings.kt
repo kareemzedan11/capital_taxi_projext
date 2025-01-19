@@ -36,6 +36,8 @@ import com.airbnb.lottie.compose.LottieCompositionSpec
 import com.airbnb.lottie.compose.LottieConstants
 import com.airbnb.lottie.compose.animateLottieCompositionAsState
 import com.airbnb.lottie.compose.rememberLottieComposition
+import com.example.app.ui.theme.CustomFontFamily
+import com.example.app.ui.theme.responsiveTextSize
 import com.example.capital_taxi.Helper.PartialBottomSheet
 import com.example.capital_taxi.R
 
@@ -258,7 +260,11 @@ fun driversettings(navController: NavController) {
                 Spacer(modifier = Modifier.width(20.dp))
                 Text(
                     text = title,
-                    fontSize = 20.sp, // Larger text size
+                    fontSize = responsiveTextSize(fraction = 0.06f, minSize = 14.sp, maxSize = 20.sp),
+
+
+
+                    fontFamily = CustomFontFamily,
                     fontWeight = FontWeight.Medium,
                     color = Color.Black,
                     modifier = Modifier.weight(1f) // Text takes up the remaining space

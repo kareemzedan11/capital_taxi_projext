@@ -24,6 +24,9 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
+import com.example.app.ui.theme.CustomFontFamily
+import com.example.app.ui.theme.responsiveTextSize
 import com.example.capital_taxi.R
 
 
@@ -56,7 +59,18 @@ fun dataBox(text: String, painter: Painter) {
                     contentDescription = null
                 )
                 Spacer(modifier = Modifier.width(5.dp))
-                Text(text, style = MaterialTheme.typography.body1, color = Color.DarkGray)
+                Text(
+                    text,
+                    fontSize = responsiveTextSize(
+                        fraction = 0.06f,
+                        minSize = 14.sp,
+                        maxSize = 18.sp
+                    ),
+
+
+                    fontFamily = CustomFontFamily,
+                    color = Color.DarkGray
+                )
                 Spacer(modifier = Modifier.weight(1f))
                 Icon(imageVector = Icons.Default.KeyboardArrowRight, contentDescription = null)
             }

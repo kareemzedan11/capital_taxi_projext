@@ -62,11 +62,11 @@ fun StartScreen(navController: NavController) {
                     Text(
                         text = stringResource(R.string.get_started),
                         modifier = Modifier.padding(start = 20.dp),
-                        fontWeight = FontWeight.Bold,
+
                         fontSize = responsiveTextSize(
                             fraction = 0.07f,
                             minSize = 24.sp,
-                            maxSize = 32.sp
+                            maxSize = 27.sp
                         ),
                         fontFamily = CustomFontFamily
                     )

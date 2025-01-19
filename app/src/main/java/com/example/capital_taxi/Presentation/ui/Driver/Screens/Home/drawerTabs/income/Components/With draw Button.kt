@@ -11,6 +11,9 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
+import com.example.app.ui.theme.CustomFontFamily
+import com.example.app.ui.theme.responsiveTextSize
 
 
 @Composable
@@ -23,6 +26,10 @@ fun WithdrawButton(text: String, color: Color) {
         shape = RoundedCornerShape(12.dp),
         colors = ButtonDefaults.buttonColors(backgroundColor = color)
     ) {
-        Text(text, style = MaterialTheme.typography.button)
+        Text(text,  fontSize = responsiveTextSize(fraction = 0.06f, minSize = 14.sp, maxSize = 20.sp),
+
+
+
+            fontFamily = CustomFontFamily,)
     }
 }

@@ -28,6 +28,8 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.navigation.NavController
+import com.example.app.ui.theme.CustomFontFamily
+import com.example.app.ui.theme.responsiveTextSize
 import com.example.capital_taxi.Navigation.Destination
 import com.example.capital_taxi.R
 import kotlinx.coroutines.delay
@@ -112,14 +114,24 @@ fun OtpScreen(navController: NavController) {
 
                 Text(
                     text = stringResource(R.string.otp_verification_title),
-                    fontSize = 32.sp,
+                    fontSize = responsiveTextSize(
+                        fraction = 0.06f,
+                        minSize = 24.sp,
+                        maxSize = 32.sp
+                    ),
+                    fontFamily = CustomFontFamily,
                     fontWeight = FontWeight.Bold
                 )
 
                 Spacer(modifier = Modifier.height(16.dp))
                 Text(
                     text = stringResource(R.string.otp_placeholder),
-                    fontSize = 18.sp,
+                    fontSize = responsiveTextSize(
+                        fraction = 0.06f,
+                        minSize = 14.sp,
+                        maxSize = 18.sp
+                    ),
+                    fontFamily = CustomFontFamily,
                     color = Color(0XFFF2F2F2),
                     fontWeight = FontWeight.Bold
                 )
@@ -204,7 +216,12 @@ fun OtpScreen(navController: NavController) {
                         ) {
                             Text(
                                 text = stringResource(R.string.verify_now_button),
-                                fontSize = 18.sp,
+                                fontSize = responsiveTextSize(
+                                    fraction = 0.06f,
+                                    minSize = 14.sp,
+                                    maxSize = 18.sp
+                                ),
+                                fontFamily = CustomFontFamily,
                                 color = Color.Black
                             )
                         }

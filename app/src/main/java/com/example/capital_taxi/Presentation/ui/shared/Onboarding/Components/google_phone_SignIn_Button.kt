@@ -21,6 +21,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
+import com.example.app.ui.theme.CustomFontFamily
 import com.example.app.ui.theme.responsiveTextSize
 
 
@@ -62,6 +63,8 @@ import com.example.app.ui.theme.responsiveTextSize
                 fontWeight = FontWeight.W500,
                 fontSize = responsiveTextSize(fraction = 0.06f, minSize = 14.sp, maxSize = 16.sp),
                 color = Color(0XFF987200),
+
+                fontFamily = CustomFontFamily
             )
             Spacer(modifier = Modifier.weight(1f))
         }

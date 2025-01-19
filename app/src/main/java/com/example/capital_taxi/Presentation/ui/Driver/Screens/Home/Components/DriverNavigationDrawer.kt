@@ -37,13 +37,15 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
+import com.example.app.ui.theme.CustomFontFamily
+import com.example.app.ui.theme.responsiveTextSize
 import com.example.capital_taxi.Navigation.Destination
 import com.example.capital_taxi.Presentation.ui.Passengar.Screens.Home.UserHome.Components.navigationDrawerItem
 import com.example.capital_taxi.R
 
 @Composable
 fun DriverNavigationDrawer(navController: NavController) {
-    Column(     horizontalAlignment = Alignment.CenterHorizontally) {
+    Column(horizontalAlignment = Alignment.CenterHorizontally) {
         Box(
             modifier = Modifier
                 .fillMaxWidth()
@@ -52,7 +54,9 @@ fun DriverNavigationDrawer(navController: NavController) {
             contentAlignment = Alignment.Center // Center the Row horizontally and vertically
         ) {
             Row(
-                modifier = Modifier.padding(5.dp).clickable { navController.navigate( Destination.Profile.route )},
+                modifier = Modifier
+                    .padding(5.dp)
+                    .clickable { navController.navigate(Destination.Profile.route) },
                 horizontalArrangement = Arrangement.Center,
                 verticalAlignment = Alignment.CenterVertically
             ) {
@@ -65,19 +69,29 @@ fun DriverNavigationDrawer(navController: NavController) {
                     painter = painterResource(R.drawable.person)
                 )
                 Spacer(Modifier.width(10.dp))
-                Column(modifier = Modifier.padding(vertical = 10.dp) ) {
+                Column(modifier = Modifier.padding(vertical = 10.dp)) {
                     Text("Kareem", fontSize = 18.sp, fontWeight = FontWeight.Bold)
                     Row {
                         // Rating Stars
 
-                            Icon(
-                                tint = Color.Unspecified,
-                                contentDescription = null,
-                                painter = painterResource(R.drawable.baseline_star_rate_24)
-                            )
+                        Icon(
+                            tint = Color.Unspecified,
+                            contentDescription = null,
+                            painter = painterResource(R.drawable.baseline_star_rate_24)
+                        )
 
                         Spacer(Modifier.width(5.dp))
-                        Text("5", fontSize = 16.sp)
+                        Text(
+                            "5",
+                            fontSize = responsiveTextSize(
+                                fraction = 0.06f,
+                                minSize = 14.sp,
+                                maxSize = 16.sp
+                            ),
+
+
+                            fontFamily = CustomFontFamily,
+                        )
                     }
                 }
                 Spacer(modifier = Modifier.weight(1f))
@@ -101,7 +115,7 @@ fun DriverNavigationDrawer(navController: NavController) {
                 navigationDrawerItem(
                     onClick = { navController.navigate(Destination.InboxPage.route) },
 
-                    text =  stringResource(R.string.Inbox)
+                    text = stringResource(R.string.Inbox)
                 )
 
                 Spacer(Modifier.height(10.dp))
@@ -109,20 +123,20 @@ fun DriverNavigationDrawer(navController: NavController) {
 
                 navigationDrawerItem(
                     onClick = { navController.navigate(Destination.InviteFriendsPage.route) },
-                    text =  stringResource(R.string.Invite_Friends)
+                    text = stringResource(R.string.Invite_Friends)
                 )
 
                 Spacer(Modifier.height(10.dp))
-               navigationDrawerItem(
+                navigationDrawerItem(
                     onClick = { navController.navigate(Destination.notification.route) },
-                    text =  stringResource(R.string.Notifications)
+                    text = stringResource(R.string.Notifications)
 
                 )
                 Spacer(Modifier.height(10.dp))
 
                 navigationDrawerItem(
                     onClick = { navController.navigate(Destination.IncomePage.route) },
-                    text =  stringResource(R.string.Income)
+                    text = stringResource(R.string.Income)
                 )
                 Spacer(Modifier.height(10.dp))
 
@@ -133,15 +147,16 @@ fun DriverNavigationDrawer(navController: NavController) {
                 Spacer(Modifier.height(10.dp))
                 navigationDrawerItem(
                     onClick = { navController.navigate(Destination.DriverHelpScreen.route) },
-                    text =  stringResource(R.string.Help)
+                    text = stringResource(R.string.Help)
                 )
                 Spacer(Modifier.height(10.dp))
                 navigationDrawerItem(
                     onClick = { navController.navigate(Destination.driversettings.route) },
-                    text =  stringResource(R.string.Settings)
+                    text = stringResource(R.string.Settings)
                 )
 
             }
         }
 
- }}
+    }
+}

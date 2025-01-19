@@ -28,6 +28,8 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.airbnb.lottie.compose.*
+import com.example.app.ui.theme.CustomFontFamily
+import com.example.app.ui.theme.responsiveTextSize
 import com.example.capital_taxi.Navigation.Destination
 import com.example.capital_taxi.R
 import java.io.File
@@ -40,7 +42,13 @@ fun FaceValidation(navController: NavController) {
     Scaffold(
         topBar = {
             TopAppBar(
-                title = { Text(stringResource(R.string.face_validation_title), fontWeight = FontWeight.Bold, fontSize = 20.sp) },
+                title = {
+                    Text(
+                        stringResource(R.string.face_validation_title),
+                        fontWeight = FontWeight.Bold,
+                        fontSize = 20.sp
+                    )
+                },
                 navigationIcon = {
                     IconButton(onClick = { navController.popBackStack() }) {
                         Box(
@@ -168,7 +176,12 @@ fun DocumentButton(
     ) {
         Spacer(modifier = Modifier.height(90.dp))
 
-        Text(text = stringResource(R.string.photo), color = Color.Black, fontSize = 25.sp, fontWeight = FontWeight.W900)
+        Text(
+            text = stringResource(R.string.photo),
+            color = Color.Black,
+            fontSize = 25.sp,
+            fontWeight = FontWeight.W900
+        )
         Spacer(modifier = Modifier.height(50.dp))
 
         Box(
@@ -219,7 +232,18 @@ fun DocumentButton(
                         .border(1.dp, Color.DarkGray, RoundedCornerShape(10.dp)),
                     shape = RoundedCornerShape(10.dp)
                 ) {
-                    Text(text = stringResource(R.string.add_a_photo), color = Color(0XFF111111), fontSize = 18.sp)
+                    Text(
+                        text = stringResource(R.string.add_a_photo),
+                        color = Color(0XFF111111),
+                        fontSize = responsiveTextSize(
+                            fraction = 0.06f,
+                            minSize = 14.sp,
+                            maxSize = 18.sp
+                        ),
+
+
+                        fontFamily = CustomFontFamily,
+                    )
                 }
             }
         } else {
@@ -231,7 +255,18 @@ fun DocumentButton(
                     .height(50.dp),
                 enabled = false // Disabled once photo is uploaded
             ) {
-                Text(text = stringResource(R.string.photo_is_uploaded), color = Color.White, fontSize = 18.sp)
+                Text(
+                    text = stringResource(R.string.photo_is_uploaded),
+                    color = Color.White,
+                    fontSize = responsiveTextSize(
+                        fraction = 0.06f,
+                        minSize = 14.sp,
+                        maxSize = 18.sp
+                    ),
+
+
+                    fontFamily = CustomFontFamily,
+                )
             }
         }
 
@@ -240,9 +275,33 @@ fun DocumentButton(
         Column(
             modifier = Modifier.fillMaxWidth()
         ) {
-            Text(text = stringResource(R.string.clear_face), color = Color.Black, fontWeight = FontWeight.Bold, fontSize = 18.sp)
-            Text(text = stringResource(R.string.no_sunglasses), fontWeight = FontWeight.Bold, color = Color.Black, fontSize = 18.sp)
-            Text(text = stringResource(R.string.good_lighting), fontWeight = FontWeight.Bold, color = Color.Black, fontSize = 18.sp)
+            Text(
+                text = stringResource(R.string.clear_face),
+                color = Color.Black,
+                fontWeight = FontWeight.Bold,
+                fontSize = responsiveTextSize(fraction = 0.06f, minSize = 14.sp, maxSize = 18.sp),
+
+
+                fontFamily = CustomFontFamily,
+            )
+            Text(
+                text = stringResource(R.string.no_sunglasses),
+                fontWeight = FontWeight.Bold,
+                color = Color.Black,
+                fontSize = responsiveTextSize(fraction = 0.06f, minSize = 14.sp, maxSize = 18.sp),
+
+
+                fontFamily = CustomFontFamily,
+            )
+            Text(
+                text = stringResource(R.string.good_lighting),
+                fontWeight = FontWeight.Bold,
+                color = Color.Black,
+                fontSize = responsiveTextSize(fraction = 0.06f, minSize = 14.sp, maxSize = 18.sp),
+
+
+                fontFamily = CustomFontFamily,
+            )
         }
 
         Spacer(modifier = Modifier.height(90.dp))
@@ -255,7 +314,14 @@ fun DocumentButton(
                 .background(Color.Black),
             onClick = { navController.navigate(Destination.DriverLicence.route) }
         ) {
-            Text(stringResource(R.string.Continue), fontSize = 20.sp, color = Color.White)
+            Text(
+                stringResource(R.string.Continue),
+                fontSize = responsiveTextSize(fraction = 0.06f, minSize = 16.sp, maxSize = 20.sp),
+
+
+                fontFamily = CustomFontFamily,
+                color = Color.White
+            )
         }
     }
 }

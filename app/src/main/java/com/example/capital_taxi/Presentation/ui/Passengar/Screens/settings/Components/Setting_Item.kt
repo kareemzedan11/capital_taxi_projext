@@ -22,6 +22,8 @@ import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.app.ui.theme.CustomFontFamily
+import com.example.app.ui.theme.responsiveTextSize
 import com.example.capital_taxi.R
 
 
@@ -45,7 +47,12 @@ fun SettingItem(title: String, icon: Painter, onClick: () -> Unit, isRed: Boolea
         Spacer(modifier = Modifier.width(16.dp))
         Text(
             text = title,
-            fontSize = 20.sp,
+            fontSize = responsiveTextSize(
+                fraction = 0.06f,
+                minSize = 16.sp,
+                maxSize = 20.sp
+            ),
+            fontFamily = CustomFontFamily,
             fontWeight = FontWeight.Medium,
             color = Color.Black,
             modifier = Modifier.weight(1f)

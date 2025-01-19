@@ -41,6 +41,8 @@ import com.airbnb.lottie.compose.LottieCompositionSpec
 import com.airbnb.lottie.compose.LottieConstants
 import com.airbnb.lottie.compose.animateLottieCompositionAsState
 import com.airbnb.lottie.compose.rememberLottieComposition
+import com.example.app.ui.theme.CustomFontFamily
+import com.example.app.ui.theme.responsiveTextSize
 import com.example.capital_taxi.Navigation.Destination
 import com.example.capital_taxi.R
 
@@ -168,7 +170,12 @@ fun chatbot(navController: NavController) {
                                     text = stringResource(R.string.Lets_Chat),
                                     color = Color.Black,
                                     fontWeight = FontWeight.Bold,
-                                    fontSize = 16.sp
+                                    fontSize = responsiveTextSize(
+                                        fraction = 0.06f,
+                                        minSize = 12.sp,
+                                        maxSize = 16.sp
+                                    ),
+                                    fontFamily = CustomFontFamily,
                                 )
                             }
                         }

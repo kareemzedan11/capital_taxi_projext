@@ -2,6 +2,7 @@ package com.example.capital_taxi.Presentation.ui.Passengar.Screens.Login.Compone
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -37,10 +38,12 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
+import com.example.app.ui.theme.CustomFontFamily
 import com.example.app.ui.theme.responsiveTextSize
 import com.example.capital_taxi.Helper.PermissionViewModel
 import com.example.capital_taxi.Helper.checkLocationPermission
 import com.example.capital_taxi.Navigation.Destination
+import com.example.capital_taxi.Presentation.Common.ForgetPassword
 import com.example.capital_taxi.Presentation.Common.LoginForm
 import com.example.capital_taxi.Presentation.Common.userMediaLoginOption
 import com.example.capital_taxi.R
@@ -83,6 +86,7 @@ fun userLoginContent(
             text = stringResource(R.string.signin),
             fontSize = responsiveTextSize(fraction = 0.06f, minSize = 20.sp, maxSize = 32.sp),
 
+            fontFamily = CustomFontFamily,
             fontWeight = FontWeight.Bold,
             color = Color.Black,
             style = MaterialTheme.typography.headlineMedium
@@ -99,18 +103,9 @@ fun userLoginContent(
         )
 
         Spacer(modifier = Modifier.height(16.dp))
-        Text(
-            textDecoration = TextDecoration.Underline,
-            text = stringResource(R.string.ForgetPassword),
-            modifier = Modifier
-                .align(alignment = Alignment.End)
-                .clickable { navController.navigate(Destination.NewPasswordScreen.route) },
-            color = colorResource(R.color.primary_color),
-            fontWeight = FontWeight.Bold,
-            fontSize = responsiveTextSize(fraction = 0.06f, minSize = 14.sp, maxSize = 20.sp),
-
-
-            )
+        Box(modifier = Modifier.align(alignment = Alignment.End)) {
+            ForgetPassword(navController)
+        }
         Spacer(modifier = Modifier.height(24.dp))
 
         Button(
@@ -137,6 +132,8 @@ fun userLoginContent(
             Text(
                 text = stringResource(R.string.signin),
                 fontSize = responsiveTextSize(fraction = 0.06f, minSize = 14.sp, maxSize = 18.sp),
+
+                fontFamily = CustomFontFamily,
                 color = Color.Black
             )
 
@@ -152,8 +149,9 @@ fun userLoginContent(
             color = Color.Black,
             fontSize = responsiveTextSize(fraction = 0.06f, minSize = 14.sp, maxSize = 20.sp),
 
-            fontWeight = FontWeight.Bold
-        )
+            fontFamily = CustomFontFamily,
+
+            )
 
         Spacer(modifier = Modifier.height(40.dp))
         userMediaLoginOption()
@@ -166,7 +164,8 @@ fun userLoginContent(
                 text = stringResource(id = R.string.Dont_have_an_account),
                 fontSize = responsiveTextSize(fraction = 0.06f, minSize = 14.sp, maxSize = 20.sp),
 
-                )
+                fontFamily = CustomFontFamily,
+            )
 
             Spacer(modifier = Modifier.width(4.dp))
 
@@ -176,6 +175,7 @@ fun userLoginContent(
                 fontSize = responsiveTextSize(fraction = 0.06f, minSize = 14.sp, maxSize = 20.sp),
 
 
+                fontFamily = CustomFontFamily,
                 modifier = Modifier.clickable {
                     navController.navigate(Destination.UserRegister.route)
                 }
@@ -183,3 +183,4 @@ fun userLoginContent(
         }
     }
 }
+

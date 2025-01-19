@@ -101,7 +101,7 @@ fun TripInProgressCardSimplified() {
                         fontSize = 14.sp
                     )
                     Text(
-                        text = "30.00 EGP", // Replace with dynamic data if needed
+                        text = "30.00 EGP",
                         fontSize = 14.sp,
                         color = colorResource(R.color.primary_color)
                     )

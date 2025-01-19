@@ -24,6 +24,8 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.app.ui.theme.CustomFontFamily
+import com.example.app.ui.theme.responsiveTextSize
 import com.example.capital_taxi.R
 
 @Composable
@@ -43,7 +45,12 @@ fun CodeBox(code: String) {
         ) {
             Text(
                 text = stringResource(R.string.referral_code),
-                fontSize = 16.sp,
+                fontSize = responsiveTextSize(
+                    fraction = 0.06f,
+                    minSize = 12.sp,
+                    maxSize = 16.sp
+                ),
+                fontFamily = CustomFontFamily,
                 fontWeight = FontWeight.Bold
             )
 
@@ -53,7 +60,12 @@ fun CodeBox(code: String) {
             ) {
                 BasicText(
                     text = code,
-                    style = TextStyle(fontSize = 20.sp, fontWeight = FontWeight.Medium)
+                    style = TextStyle(   fontSize = responsiveTextSize(
+                        fraction = 0.06f,
+                        minSize = 16.sp,
+                        maxSize = 20.sp
+                    ),
+                        fontFamily = CustomFontFamily, fontWeight = FontWeight.Medium)
                 )
                 Spacer(modifier = Modifier.weight(1f))
 

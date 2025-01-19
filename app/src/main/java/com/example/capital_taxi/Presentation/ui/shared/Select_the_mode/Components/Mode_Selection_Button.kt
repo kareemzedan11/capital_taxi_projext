@@ -14,6 +14,8 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.app.ui.theme.CustomFontFamily
+import com.example.app.ui.theme.responsiveTextSize
 
 
 @Composable
@@ -34,8 +36,15 @@ fun ModeSelectionButton(
         Text(
             text = label,
             fontWeight = FontWeight.Medium,
-            fontSize = 18.sp,
+
             color = Color(0XFF111111)
+            ,
+            fontSize = responsiveTextSize(
+                fraction = 0.06f,
+                minSize = 14.sp,
+                maxSize = 20.sp
+            ),
+            fontFamily = CustomFontFamily,
         )
     }
 }

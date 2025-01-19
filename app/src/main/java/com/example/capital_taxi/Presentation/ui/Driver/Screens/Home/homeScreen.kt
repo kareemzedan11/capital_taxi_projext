@@ -25,6 +25,8 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
+import com.example.app.ui.theme.CustomFontFamily
+import com.example.app.ui.theme.responsiveTextSize
 import com.example.capital_taxi.Presentation.ui.Driver.Screens.Home.Components.DriverArrivedCard
 import com.example.capital_taxi.Presentation.ui.Driver.Screens.Home.Components.DriverNavigationDrawer
 import com.example.capital_taxi.Presentation.ui.Driver.Screens.Home.Components.InfoRow
@@ -84,14 +86,14 @@ fun driverHomeScreen(navController: NavController) {
                     MapSection(navController = navController)
                     //  PassengerConnectionCard()
                     if (isStart) {
-                          //   TripInProgressCardSimplified()
-                         // DriverArrivedCard()
-                         // RideInfoCard()
-                         // StartTripScreen(onStartTrip = {})
-                         //  TripArrivedCard()
+                        //   TripInProgressCardSimplified()
+                        // DriverArrivedCard()
+                        // RideInfoCard()
+                        // StartTripScreen(onStartTrip = {})
+                        //  TripArrivedCard()
                         //  tripDetailsCard(light = false)
                         // TripArrivedCard()
-                       TripArrivedCard2()
+                        TripArrivedCard2()
                     }
 
 
@@ -140,7 +142,17 @@ fun driverHomeScreen(navController: NavController) {
                             ) {
 
 
-                                Text(text = "0.00 EGB", fontSize = 18.sp)
+                                Text(
+                                    text = "0.00 EGB",
+                                    fontSize = responsiveTextSize(
+                                        fraction = 0.06f,
+                                        minSize = 14.sp,
+                                        maxSize = 18.sp
+                                    ),
+
+
+                                    fontFamily = CustomFontFamily,
+                                )
                             }
 
                         }

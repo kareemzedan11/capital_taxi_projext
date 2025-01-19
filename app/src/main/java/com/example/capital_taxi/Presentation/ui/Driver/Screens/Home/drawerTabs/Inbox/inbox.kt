@@ -19,6 +19,8 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
+import com.example.app.ui.theme.CustomFontFamily
+import com.example.app.ui.theme.responsiveTextSize
 import com.example.capital_taxi.R
 
 @Composable
@@ -119,7 +121,14 @@ fun InboxItem(text: String, time: String) {
                 Row(modifier = Modifier.padding(horizontal = 5.dp)) {
                     Text(
                         "Captain drive",
-                        fontSize = 18.sp,
+                        fontSize = responsiveTextSize(
+                            fraction = 0.06f,
+                            minSize = 14.sp,
+                            maxSize = 18.sp
+                        ),
+
+
+                        fontFamily = CustomFontFamily,
                         fontWeight = FontWeight.Bold,
                         color = Color.Black
                     )
@@ -132,7 +141,14 @@ fun InboxItem(text: String, time: String) {
                     )
                     Text(
                         time,
-                        fontSize = 13.sp,
+                        fontSize = responsiveTextSize(
+                            fraction = 0.06f,
+                            minSize = 9.sp,
+                            maxSize = 13.sp
+                        ),
+
+
+                        fontFamily = CustomFontFamily,
                         fontWeight = FontWeight.W500,
                         color = Color.Gray
                     )
@@ -153,7 +169,14 @@ fun InboxItem(text: String, time: String) {
                     Text(
                         modifier = Modifier.padding(vertical = 5.dp, horizontal = 5.dp),
                         text = text,
-                        fontSize = 16.sp,
+                        fontSize = responsiveTextSize(
+                            fraction = 0.06f,
+                            minSize = 12.sp,
+                            maxSize = 16.sp
+                        ),
+
+
+                        fontFamily = CustomFontFamily,
                         fontWeight = FontWeight.W500,
                         color = Color.Black
                     )

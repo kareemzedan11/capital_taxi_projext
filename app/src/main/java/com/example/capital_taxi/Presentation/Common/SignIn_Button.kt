@@ -11,6 +11,9 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
+import com.example.app.ui.theme.CustomFontFamily
+import com.example.app.ui.theme.responsiveTextSize
 
 @Composable
 fun SignInButton(
@@ -25,10 +28,20 @@ fun SignInButton(
                 // Navigate to location screen
             }
         },
-        modifier = Modifier.fillMaxWidth().height(60.dp),
+        modifier = Modifier
+            .fillMaxWidth()
+            .height(60.dp),
         colors = ButtonDefaults.buttonColors(MaterialTheme.colorScheme.primary),
         shape = RoundedCornerShape(8.dp)
     ) {
-        Text("Sign In", color = Color.Black)
+        Text(
+            "Sign In", color = Color.Black,
+            fontSize = responsiveTextSize(
+                fraction = 0.06f,
+                minSize = 14.sp,
+                maxSize = 18.sp
+            ),
+            fontFamily = CustomFontFamily,
+        )
     }
 }

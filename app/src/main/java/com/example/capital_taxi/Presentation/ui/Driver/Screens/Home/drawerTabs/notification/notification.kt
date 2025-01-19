@@ -20,6 +20,8 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.airbnb.lottie.compose.*
+import com.example.app.ui.theme.CustomFontFamily
+import com.example.app.ui.theme.responsiveTextSize
 import com.example.capital_taxi.R
 
 @Composable
@@ -108,7 +110,11 @@ fun notification(navController: NavController) {
                         stringResource(id = R.string.No_Notification_Message),
 
                         color = Color.Black,
-                        fontSize = 20.sp,
+                        fontSize = responsiveTextSize(fraction = 0.06f, minSize = 14.sp, maxSize = 20.sp),
+
+
+
+                        fontFamily = CustomFontFamily,
                         fontWeight = FontWeight.Bold
                     )
                 }}

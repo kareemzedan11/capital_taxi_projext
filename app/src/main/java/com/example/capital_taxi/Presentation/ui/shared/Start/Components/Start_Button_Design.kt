@@ -26,6 +26,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
+import com.example.app.ui.theme.CustomFontFamily
 import com.example.app.ui.theme.responsiveTextSize
 import com.example.capital_taxi.Navigation.Destination
 import com.example.capital_taxi.R
@@ -64,6 +65,7 @@ fun StartButtonDesign(navController: NavController) {
                         maxSize = 18.sp
                     ),
 
+                    fontFamily = CustomFontFamily
                 )
                 Spacer(modifier = Modifier.width(8.dp))
                 Icon(

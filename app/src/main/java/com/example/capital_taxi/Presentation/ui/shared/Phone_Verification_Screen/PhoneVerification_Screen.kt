@@ -20,6 +20,8 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.viewinterop.AndroidView
 import androidx.navigation.NavController
+import com.example.app.ui.theme.CustomFontFamily
+import com.example.app.ui.theme.responsiveTextSize
 import com.example.capital_taxi.Navigation.Destination
 import com.example.capital_taxi.Presentation.ui.shared.Phone_Verification_Screen.Components.CountryCodePickerView
 import com.example.capital_taxi.R
@@ -110,14 +112,25 @@ fun PhoneVerification(navController: NavController) {
                 Text(
                     stringResource(R.string.phone_verification_title),
                     fontWeight = FontWeight.W900,
-                    fontSize = 24.sp,
+                    fontSize = responsiveTextSize(
+                        fraction = 0.06f,
+                        minSize = 18.sp,
+                        maxSize = 24.sp
+                    ),
+                    fontFamily = CustomFontFamily,
                     modifier = Modifier.padding(bottom = 8.dp)
                 )
                 Text(
                     stringResource(R.string.phone_verification_message),
 
                     fontWeight = FontWeight.W600,
-                    fontSize = 18.sp,
+                    fontSize = responsiveTextSize(
+                        fraction = 0.06f,
+                        minSize = 14.sp,
+                        maxSize = 18.sp
+                    ),
+                    fontFamily = CustomFontFamily,
+
                     modifier = Modifier.padding(bottom = 20.dp)
                 )
 
@@ -162,8 +175,12 @@ fun PhoneVerification(navController: NavController) {
                 ) {
                     Text(
                         text = stringResource(R.string.send_code_button),
-
-                        fontSize = 18.sp,
+                        fontSize = responsiveTextSize(
+                            fraction = 0.06f,
+                            minSize = 14.sp,
+                            maxSize = 18.sp
+                        ),
+                        fontFamily = CustomFontFamily,
                         color = Color.Black
                     )
                 }

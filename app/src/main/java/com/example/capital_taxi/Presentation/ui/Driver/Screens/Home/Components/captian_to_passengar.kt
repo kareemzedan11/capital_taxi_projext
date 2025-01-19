@@ -21,6 +21,8 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
+import com.example.app.ui.theme.CustomFontFamily
+import com.example.app.ui.theme.responsiveTextSize
 import com.example.capital_taxi.Navigation.Destination
 import com.example.capital_taxi.R
 import kotlinx.coroutines.delay
@@ -46,7 +48,7 @@ fun captainToPassengar(navController: NavController) {
                 verticalAlignment = Alignment.CenterVertically
             ) {
                 Icon(
-                    modifier = Modifier.clickable {navController.navigate(Destination.TripDetailsForDriver.route)  },
+                    modifier = Modifier.clickable { navController.navigate(Destination.TripDetailsForDriver.route) },
 
                     contentDescription = null,
 
@@ -66,13 +68,27 @@ fun captainToPassengar(navController: NavController) {
                 ) {
                     Text(
                         text = stringResource(R.string.meet_passenger),
-                        fontSize = 18.sp,
+                        fontSize = responsiveTextSize(
+                            fraction = 0.06f,
+                            minSize = 14.sp,
+                            maxSize = 18.sp
+                        ),
+
+
+                        fontFamily = CustomFontFamily,
                         color = Color.Black,
                         fontWeight = FontWeight.Bold
                     )
                     Text(
                         text = stringResource(R.string.meet_before_time, "15:22"),
-                        fontSize = 16.sp,
+                        fontSize = responsiveTextSize(
+                            fraction = 0.06f,
+                            minSize = 12.sp,
+                            maxSize = 16.sp
+                        ),
+
+
+                        fontFamily = CustomFontFamily,
                         color = Color.Gray,
                         fontWeight = FontWeight.Bold
                     )
