@@ -25,11 +25,12 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
 import com.example.capital_taxi.R
 
 
 @Composable
-fun tripDetailsBox() {
+fun tripDetailsBox(navController:NavController) {
 
     Box(
         modifier = Modifier
@@ -129,7 +130,7 @@ fun tripDetailsBox() {
                                 contentDescription = "car image"
                             )
                             Spacer(modifier = Modifier.weight(1f))
-                            callAndChat()
+                            callAndChat(navController)
                         }
                     }
                 }

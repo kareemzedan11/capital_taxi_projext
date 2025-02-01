@@ -17,28 +17,24 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.capital_taxi.R
-
 @Composable
-fun IntercityCard() {
+fun IntercityCard(text: String) {
+    var displayText by remember { mutableStateOf(text) } // Store the text properly
+
     Card(
         modifier = Modifier
-
             .fillMaxWidth()
             .background(Color.White)
             .border(5.dp, Color.White, RoundedCornerShape(12.dp)),
         shape = RoundedCornerShape(12.dp),
-        elevation =  CardDefaults.elevatedCardElevation( 5.dp),
-        colors = CardDefaults.cardColors(
-            containerColor = Color.White
-
-        )
+        elevation = CardDefaults.elevatedCardElevation(5.dp),
+        colors = CardDefaults.cardColors(containerColor = Color.White)
     ) {
-        Column(
-            modifier = Modifier .background(Color.White)
-        ) {
-            Row(verticalAlignment = Alignment.CenterVertically, modifier = Modifier
-                .fillMaxWidth()
-                .background(Color.White)) {
+        Column(modifier = Modifier.background(Color.White)) {
+            Row(
+                verticalAlignment = Alignment.CenterVertically,
+                modifier = Modifier.fillMaxWidth().background(Color.White)
+            ) {
                 Image(
                     modifier = Modifier.size(120.dp),
                     painter = painterResource(R.drawable.uber),
@@ -50,18 +46,13 @@ fun IntercityCard() {
                 Column {
                     Row(verticalAlignment = Alignment.CenterVertically) {
                         Text(
-                            "Comfort",
+                            displayText, // Use the state variable directly
                             fontSize = 20.sp,
                             color = Color.Black,
                             fontWeight = FontWeight.Bold
                         )
                         Spacer(modifier = Modifier.width(8.dp))
-                        Text(
-                            "4",
-                            fontSize = 16.sp,
-                            color = Color.Black,
-                            fontWeight = FontWeight.W500
-                        )
+                        Text("4", fontSize = 16.sp, color = Color.Black, fontWeight = FontWeight.W500)
                         Spacer(modifier = Modifier.width(4.dp))
                         Icon(Icons.Default.Person, contentDescription = null)
                         Spacer(modifier = Modifier.weight(1f))

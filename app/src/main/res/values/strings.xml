@@ -300,7 +300,7 @@
     <string name="Confirm_Pickup">Confirm Pickup</string>
     <string name="drivers_are_view_request">drivers are viewing your request</string>
     <string name="Ride_requested">Ride requested, Please wait for the driver.</string>
-    <string name="Drop_off_time">Drop off time</string>
+    <string name="Drop_off_time">Drop off time:</string>
 
     <!-- Invite Friends -->
 

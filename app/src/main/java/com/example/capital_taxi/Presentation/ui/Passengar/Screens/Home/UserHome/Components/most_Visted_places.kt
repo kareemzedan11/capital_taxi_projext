@@ -1,5 +1,6 @@
 package com.example.capital_taxi.Presentation.ui.Passengar.Screens.Home.UserHome.Components
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -17,12 +18,14 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavController
+import com.example.capital_taxi.Navigation.Destination
 import com.example.capital_taxi.R
 
 @Composable
-fun MostVisitedPlaces(){
+fun MostVisitedPlaces(navController: NavController){
     Row (modifier = Modifier.fillMaxWidth().padding(horizontal = 10.dp)){
-        Row {
+        Row (modifier = Modifier.clickable {navController.navigate(Destination.HomePlace.route)  }){
             Icon(imageVector = Icons.Default.Home,
                 contentDescription = "home icon")
             Spacer(modifier = Modifier.padding(start = 5.dp))
@@ -34,7 +37,7 @@ fun MostVisitedPlaces(){
                 contentDescription = "KeyboardArrowRight icon")
         }
         Spacer(modifier = Modifier.weight(1f))
-        Row {
+        Row (modifier = Modifier.clickable {navController.navigate(Destination.WorkPlace.route)  }) {
             Icon(
                 modifier = Modifier.size(20.dp),
 
@@ -50,7 +53,7 @@ fun MostVisitedPlaces(){
         }
         Spacer(modifier = Modifier.weight(1f))
 
-        Row {
+        Row (modifier = Modifier.clickable {navController.navigate(Destination.SavedPlaces.route)  }) {
             Icon(imageVector = Icons.Default.Star,
                 contentDescription = "favorite icon")
             Spacer(modifier = Modifier.padding(start = 5.dp))

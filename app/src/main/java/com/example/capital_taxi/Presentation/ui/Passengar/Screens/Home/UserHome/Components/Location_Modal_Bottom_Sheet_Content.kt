@@ -33,6 +33,9 @@ import com.example.capital_taxi.Helper.checkLocationPermission
 import com.example.capital_taxi.R
 import com.google.android.gms.location.LocationServices
 import java.util.Locale
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
+import androidx.compose.foundation.layout.fillMaxSize
 
 @Composable
 fun LocationModalBottomSheetContent(navController: NavController) {
@@ -77,11 +80,12 @@ fun LocationModalBottomSheetContent(navController: NavController) {
         }
     }
 
-
     Column(
         modifier = Modifier
-            .padding(20.dp)
-            .fillMaxWidth(),
+            .fillMaxSize()
+
+            .verticalScroll(rememberScrollState())
+            .padding(20.dp),
         verticalArrangement = Arrangement.spacedBy(10.dp),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
@@ -90,7 +94,6 @@ fun LocationModalBottomSheetContent(navController: NavController) {
             style = MaterialTheme.typography.titleMedium.copy(
                 fontWeight = FontWeight.Bold,
                 fontSize = 20.sp,
-
             )
         )
 
@@ -98,7 +101,7 @@ fun LocationModalBottomSheetContent(navController: NavController) {
         PickupWithPickoffPoints(navController)
 
         Spacer(modifier = Modifier.padding(vertical = 10.dp))
-        MostVisitedPlaces()
+        MostVisitedPlaces(navController)
         Spacer(modifier = Modifier.padding(vertical = 10.dp))
 
         Column(modifier = Modifier.padding(horizontal = 10.dp)) {
@@ -109,5 +112,3 @@ fun LocationModalBottomSheetContent(navController: NavController) {
         }
     }
 }
-
-

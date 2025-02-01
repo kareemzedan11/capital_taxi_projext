@@ -20,14 +20,7 @@ fun startTripDesign() {
             .fillMaxSize()
             .border(5.dp, Color.Transparent, RoundedCornerShape(topStart = 20.dp, topEnd = 20.dp))
     ) {
-        // TripCars should take 80% of the height and align to the bottom
-        TripCars(
-            modifier = Modifier
-                .background(Color.White)
-                .fillMaxWidth()
-                .fillMaxHeight(0.5f) // Take up 80% of the screen height
-                .align(Alignment.BottomCenter) // Align at the bottom of the Box
-        )
+
 
         // The requestAndCash section stays at the bottom
         requestAndCash(modifier = Modifier.align(Alignment.BottomCenter)) // Stay fixed at the bottom

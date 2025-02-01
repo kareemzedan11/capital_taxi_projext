@@ -82,7 +82,7 @@ fun PickupNowForMeUI(navController: NavController) {
             onMenuClick = { showPickupSheet = true },
             showIcon = true
         )
-        Spacer(modifier = Modifier.width(8.dp))
+        Spacer(modifier = Modifier.weight(1f))
         OptionButtonWithMenu(
             icon = Icons.Default.Person,
             text = forMeText, // Dynamic text for "For Me"

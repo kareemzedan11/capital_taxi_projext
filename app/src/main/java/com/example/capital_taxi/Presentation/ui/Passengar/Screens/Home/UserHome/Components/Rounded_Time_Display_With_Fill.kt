@@ -43,7 +43,7 @@ var generalColor= colorResource(R.color.primary_color)
     Box(
         modifier = Modifier
             .size(width = 70.dp, height = 40.dp)
-            .background(Color(0xFFE8F5E9)) // Background color
+            .background( colorResource(R.color.secondary_color)) // Background color
     ) {
         // Animated Fill
         Canvas(modifier = Modifier.fillMaxSize()) {

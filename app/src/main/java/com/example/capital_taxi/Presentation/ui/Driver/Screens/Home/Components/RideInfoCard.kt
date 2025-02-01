@@ -153,8 +153,7 @@ fun RideInfoCard() {
             }
         }
     }
-}
-@Composable
+}@Composable
 fun DriverArrivedCard() {
     Card(
         shape = RoundedCornerShape(16.dp),
@@ -178,11 +177,14 @@ fun DriverArrivedCard() {
                     Text(
                         text = "Arrived At:",
                         fontWeight = FontWeight.Bold,
-                        fontSize = 14.sp
+                        fontSize = 16.sp,
+                        color = Color.Black
                     )
+                    Spacer(modifier = Modifier.height(4.dp))
                     Text(
                         text = "Abbas El-Akkad Strt",
-                        fontSize = 14.sp
+                        fontSize = 14.sp,
+                        color = Color.Gray
                     )
                 }
 
@@ -193,10 +195,9 @@ fun DriverArrivedCard() {
                 )
             }
 
-            Spacer(modifier = Modifier.height(8.dp))
-            Divider(color = Color.Gray, thickness = 1.dp)
-
-            Spacer(modifier = Modifier.height(8.dp))
+            Spacer(modifier = Modifier.height(16.dp))
+            Divider(color = Color.LightGray, thickness = 1.dp)
+            Spacer(modifier = Modifier.height(16.dp))
 
             // Driver Info Section
             Row(
@@ -204,20 +205,53 @@ fun DriverArrivedCard() {
                 horizontalArrangement = Arrangement.SpaceBetween,
                 verticalAlignment = Alignment.CenterVertically
             ) {
-                Text(
-                    text = "Your Passenger:",
-                    fontWeight = FontWeight.Bold,
-                    fontSize = 16.sp
-                )
-                Text(
-                    text = "John Doe",
-                    fontWeight = FontWeight.Bold,
-                    fontSize = 16.sp,
-                    color = Color(0xFF4CAF50)
-                )
+                Row(
+                    verticalAlignment = Alignment.CenterVertically
+                ) {
+                    // Passenger Icon
+                    Icon(
+                        painter = painterResource(id = R.drawable.person), // Replace with your passenger icon
+                        contentDescription = "Passenger",
+                        modifier = Modifier.size(24.dp),
+                        tint = Color.Unspecified
+                    )
+                    Spacer(modifier = Modifier.width(8.dp))
+                    Column {
+                        Text(
+                            text = "Your Passenger:",
+                            fontWeight = FontWeight.Bold,
+                            fontSize = 16.sp,
+                            color = Color.Black
+                        )
+                        Spacer(modifier = Modifier.height(4.dp))
+                        Text(
+                            text = "John Doe",
+                            fontSize = 14.sp,
+                            color = Color.Gray
+                        )
+                    }
+                }
+
+                // Rating Section
+                Row(
+                    verticalAlignment = Alignment.CenterVertically
+                ) {
+                    Icon(
+                        painter = painterResource(id = R.drawable.baseline_star_24), // Replace with your star icon
+                        contentDescription = "Rating",
+                        modifier = Modifier.size(16.dp),
+                        tint = Color(0xFFFFC107)
+                    )
+                    Spacer(modifier = Modifier.width(4.dp))
+                    Text(
+                        text = "4.5",
+                        fontSize = 14.sp,
+                        color = Color.Gray
+                    )
+                }
             }
 
-            Spacer(modifier = Modifier.height(8.dp))
+            Spacer(modifier = Modifier.height(16.dp))
 
             // Action Buttons
             Row(
@@ -225,19 +259,59 @@ fun DriverArrivedCard() {
                 horizontalArrangement = Arrangement.SpaceBetween,
                 verticalAlignment = Alignment.CenterVertically
             ) {
+                // Start Ride Button
                 Button(
                     onClick = { /* Handle Start Ride action */ },
                     colors = ButtonDefaults.buttonColors(containerColor = Color(0xFF4CAF50)),
-                    modifier = Modifier.padding(end = 8.dp)
+                    modifier = Modifier
+                        .weight(1f)
+                        .padding(end = 8.dp)
+                        .height(48.dp),
+                    shape = RoundedCornerShape(12.dp)
                 ) {
-                    Text(text = "Start Ride", color = Color.White)
+                    Row(
+                        verticalAlignment = Alignment.CenterVertically
+                    ) {
+                        Icon(
+                            painter = painterResource(id = R.drawable.uber), // Replace with your car icon
+                            contentDescription = "Start Ride",
+                            modifier = Modifier.size(26.dp),
+                            tint = Color.Unspecified
+                        )
+                        Spacer(modifier = Modifier.width(8.dp))
+                        Text(
+                            text = "Start Ride",
+                            fontSize = 16.sp,
+                            color = Color.White
+                        )
+                    }
                 }
 
+                // Cancel Ride Button
                 Button(
                     onClick = { /* Handle Cancel Ride action */ },
-                    colors = ButtonDefaults.buttonColors(containerColor = Color(0xFFF44336))
+                    colors = ButtonDefaults.buttonColors(containerColor = Color(0xFFF44336)),
+                    modifier = Modifier
+                        .weight(1f)
+                        .height(48.dp),
+                    shape = RoundedCornerShape(12.dp)
                 ) {
-                    Text(text = "Cancel Ride", color = Color.White)
+                    Row(
+                        verticalAlignment = Alignment.CenterVertically
+                    ) {
+                        Icon(
+                            painter = painterResource(id = R.drawable.baseline_cancel_24), // Replace with your cancel icon
+                            contentDescription = "Cancel Ride",
+                            modifier = Modifier.size(20.dp),
+                            tint = Color.White
+                        )
+                        Spacer(modifier = Modifier.width(8.dp))
+                        Text(
+                            text = "Cancel Ride",
+                            fontSize = 16.sp,
+                            color = Color.White
+                        )
+                    }
                 }
             }
         }

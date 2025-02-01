@@ -1,5 +1,6 @@
 package com.example.capital_taxi.Presentation.ui.Passengar.Screens.Home.UserHome.Components
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
@@ -33,19 +34,14 @@ fun OptionButtonWithMenu(
     onMenuClick: () -> Unit,
     showIcon: Boolean
 ) {
-    Surface(
-        modifier = Modifier
-            .width(200.dp)
-            .height(50.dp),
-        shape = RoundedCornerShape(12.dp),
-        color =colorResource(R.color.secondary_color),
-        shadowElevation = 4.dp
-    ) {
+
         Row(
             modifier = Modifier
-                .fillMaxWidth( )
-                .padding(horizontal = 12.dp),
-            verticalAlignment = Alignment.CenterVertically
+                .wrapContentWidth()
+                .padding(horizontal = 12.dp)
+                .background( colorResource(R.color.secondary_color),),
+            verticalAlignment = Alignment.CenterVertically,
+
         ) {
             if (showIcon && icon != null) {
                 Icon(
@@ -54,14 +50,15 @@ fun OptionButtonWithMenu(
                     tint = colorResource(R.color.primary_color),
                     modifier = Modifier.size(24.dp)
                 )
-                Spacer(modifier = Modifier.width(8.dp))
+
             }
+            Spacer(modifier = Modifier.width(10.dp))
             Text(
                 text = text,
                 fontSize = 16.sp,
                 color = Color.Black
             )
-            Spacer(modifier = Modifier.weight(1f))
+            Spacer(modifier = Modifier.width(20.dp))
 
 
             IconButton(onClick = onMenuClick) {
@@ -73,4 +70,4 @@ fun OptionButtonWithMenu(
             }
         }
     }
-}
+

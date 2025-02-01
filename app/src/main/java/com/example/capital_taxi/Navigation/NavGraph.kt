@@ -43,6 +43,7 @@ import com.example.capital_taxi.Presentation.ui.Passengar.Screens.Safety.SafetyS
 import com.example.capital_taxi.Presentation.ui.Passengar.Screens.notification.userNotification
 import com.example.capital_taxi.Presentation.ui.Passengar.Screens.profile.Profile
 import com.example.capital_taxi.Presentation.ui.Passengar.Screens.settings.Components.settings
+import com.example.capital_taxi.Presentation.ui.Passenger.Screens.ChatScreen.ChatScreen
 import com.example.capital_taxi.Presentation.ui.shared.Confirm_information.ConfirmInformation
 import com.example.capital_taxi.Presentation.ui.shared.OTP.OtpScreen
  import com.example.capital_taxi.Presentation.ui.shared.Onboarding.OnboardingPager
@@ -60,7 +61,7 @@ import com.example.capital_taxi.ui.screens.Driver.VerficationScreens.NationalIDV
 fun AppNavGraph(navController: NavHostController) {
 
     var context = LocalContext.current
-    NavHost(navController = navController, startDestination = Destination.StartScreen.route) {
+    NavHost(navController = navController, startDestination = Destination.UserHomeScreen.route) {
 
         composable(Destination.SplashScreen.route) {
             SplashScreen(navController)
@@ -195,6 +196,9 @@ fun AppNavGraph(navController: NavHostController) {
         }
         composable(Destination.DriverHelpScreen.route) {
             DriverHelpScreen(navController)
+        }
+        composable(Destination.ChatScreen.route) {
+            ChatScreen(navController )
         }
 
         composable("help_detail/{topic}") { backStackEntry ->

@@ -50,6 +50,7 @@ sealed class Destination(val route: String) {
     object LanguageDScreen : Destination("LanguageDScreen")
     object InviteForMyApp : Destination("InviteForMyApp")
     object DriverHelpScreen : Destination("DriverHelpScreen")
+    object ChatScreen : Destination("ChatScreen")
 
 
 

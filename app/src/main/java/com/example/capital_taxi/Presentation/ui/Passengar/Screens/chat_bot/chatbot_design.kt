@@ -154,6 +154,7 @@ fun chatbot(navController: NavController) {
                                 fontWeight = FontWeight.Bold,
                                 color = Color.Black,
                                 modifier = Modifier.padding(bottom = 16.dp)
+                                    .padding(horizontal = 10.dp)
                             )
 
 

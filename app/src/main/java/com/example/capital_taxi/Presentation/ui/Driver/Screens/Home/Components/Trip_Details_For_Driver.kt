@@ -77,7 +77,7 @@ fun TripDetailsForDriver(navController: NavController) {
             .background(colorResource(R.color.secondary_color))
     ) {
         Column(modifier = Modifier.background(colorResource(R.color.secondary_color))) {
-            // إضافة أيقونة العودة للخلف
+            // Back Icon and Title
             Row(
                 modifier = Modifier
                     .fillMaxWidth()
@@ -85,14 +85,12 @@ fun TripDetailsForDriver(navController: NavController) {
                     .padding(16.dp),
                 verticalAlignment = Alignment.CenterVertically
             ) {
-
                 IconButton(onClick = { navController.popBackStack() }) {
                     Box(
                         modifier = Modifier
-
                             .size(36.dp)
                             .background(Color.Transparent)
-                            .border(4.dp, color = Color.Black, RoundedCornerShape(30.dp)),
+                            .border(2.dp, color = Color.Black, RoundedCornerShape(30.dp)),
                         contentAlignment = Alignment.Center
                     ) {
                         Icon(
@@ -119,7 +117,7 @@ fun TripDetailsForDriver(navController: NavController) {
                         .fillMaxWidth()
                         .padding(16.dp),
                     shape = RoundedCornerShape(8.dp),
-                    elevation = CardDefaults.elevatedCardElevation(20.dp)
+                    elevation = CardDefaults.elevatedCardElevation(8.dp)
                 ) {
                     Box(
                         modifier = Modifier
@@ -129,16 +127,16 @@ fun TripDetailsForDriver(navController: NavController) {
                         Column(
                             modifier = Modifier
                                 .fillMaxWidth()
-                                .padding(horizontal = 10.dp, vertical = 10.dp)
+                                .padding(16.dp)
                         ) {
+                            // User Details
                             Row(
                                 modifier = Modifier
                                     .fillMaxWidth()
-                                    .padding(vertical = 5.dp),
+                                    .padding(vertical = 8.dp),
                                 horizontalArrangement = Arrangement.Start,
                                 verticalAlignment = Alignment.CenterVertically
                             ) {
-
                                 androidx.compose.material.Icon(
                                     modifier = Modifier.size(50.dp),
                                     painter = painterResource(R.drawable.person),
@@ -152,7 +150,8 @@ fun TripDetailsForDriver(navController: NavController) {
                                     Text(
                                         text = "Ahmed",
                                         color = Color.Black,
-                                        fontSize = 18.sp
+                                        fontSize = 18.sp,
+                                        fontWeight = FontWeight.Bold
                                     )
                                     Row {
                                         Text(
@@ -161,7 +160,6 @@ fun TripDetailsForDriver(navController: NavController) {
                                             fontSize = 16.sp
                                         )
                                         Spacer(Modifier.width(5.dp))
-
                                         Icon(
                                             tint = Color.Unspecified,
                                             contentDescription = null,
@@ -172,12 +170,14 @@ fun TripDetailsForDriver(navController: NavController) {
                             }
 
                             HorizontalDivider(
-                                thickness = 2.dp,
+                                thickness = 1.dp,
+                                color = Color.LightGray,
                                 modifier = Modifier
                                     .fillMaxWidth()
-                                    .padding(horizontal = 5.dp, vertical = 10.dp)
+                                    .padding(vertical = 8.dp)
                             )
 
+                            // Ride Details
                             RidePointDetails(
                                 Locationicon = R.drawable.circle,
                                 Destinationicon = R.drawable.travel,
@@ -188,89 +188,83 @@ fun TripDetailsForDriver(navController: NavController) {
                             )
 
                             HorizontalDivider(
-                                thickness = 2.dp,
+                                thickness = 1.dp,
+                                color = Color.LightGray,
                                 modifier = Modifier
                                     .fillMaxWidth()
-                                    .padding(horizontal = 5.dp, vertical = 10.dp)
+                                    .padding(vertical = 8.dp)
                             )
 
-                            // أزرار الدردشة والمكالمات
+                            // Chat and Call Buttons
                             Row(
                                 modifier = Modifier
                                     .fillMaxWidth()
-                                    .padding(16.dp),
-                                horizontalArrangement = Arrangement.Start,
+                                    .padding(vertical = 8.dp),
+                                horizontalArrangement = Arrangement.SpaceBetween,
                                 verticalAlignment = Alignment.CenterVertically
                             ) {
-                                // زر الدردشة بشكل مربع
-                                Box(
+                                Button(
+                                    onClick = { /* Handle chat */ },
                                     modifier = Modifier
-                                        .fillMaxWidth(.8f)
-
-                                        .background(
-                                            Color.LightGray,
-                                            RoundedCornerShape(
-                                                topStart = 30.dp,
-                                                bottomStart = 30.dp
-                                            )
-                                        ) // خلفية مربعة
-                                        .padding(10.dp),  // المسافة داخل المربع
-                                    contentAlignment = Alignment.CenterStart
+                                        .weight(1f)
+                                        .padding(end = 8.dp)
+                                        .height(50.dp),
+                                    shape = RoundedCornerShape(30.dp),
+                                    colors = ButtonDefaults.buttonColors(backgroundColor = Color.LightGray)
                                 ) {
-                                    IconButton(
-                                        onClick = { }
-                                    ) {
-                                        Icon(
-                                            painter = painterResource(id = R.drawable.message),
-                                            contentDescription = "Chat",
-                                            modifier = Modifier.size(30.dp),
-                                            tint = Color.Black // لون الأيقونة
-                                        )
-                                    }
+                                    Icon(
+                                        painter = painterResource(id = R.drawable.message),
+                                        contentDescription = "Chat",
+                                        modifier = Modifier.size(24.dp),
+                                        tint = Color.Black
+                                    )
+                                    Spacer(modifier = Modifier.width(8.dp))
+                                    Text(
+                                        text = "Chat",
+                                        color = Color.Black,
+                                        fontSize = 16.sp,
+                                        fontWeight = FontWeight.Bold
+                                    )
                                 }
 
-
-
-                                Box(
+                                Button(
+                                    onClick = { /* Handle call */ },
                                     modifier = Modifier
-                                        .weight(.1f)
-                                        .background(
-                                            colorResource(R.color.primary_color),
-                                            RoundedCornerShape(topEnd = 30.dp, bottomEnd = 30.dp)
-                                        ) // خلفية مربعة
-                                        .padding(10.dp),  // المسافة داخل المربع
-
+                                        .weight(1f)
+                                        .padding(start = 8.dp)
+                                        .height(50.dp),
+                                    shape = RoundedCornerShape(30.dp),
+                                    colors = ButtonDefaults.buttonColors(backgroundColor = colorResource(R.color.primary_color))
                                 ) {
-                                    IconButton(
-                                        modifier = Modifier
-                                            .clip(CircleShape)
-                                            .background(Color.White),
-                                        onClick = { /* اضافة الكود للمكالمة */ }
-                                    ) {
-                                        Icon(
-                                            painter = painterResource(id = R.drawable.baseline_phone_24),
-                                            contentDescription = "Call",
-                                            modifier = Modifier.size(30.dp),
-                                            tint = Color.Black
-                                        )
-
-
-                                    }
+                                    Icon(
+                                        painter = painterResource(id = R.drawable.baseline_phone_24),
+                                        contentDescription = "Call",
+                                        modifier = Modifier.size(24.dp),
+                                        tint = Color.White
+                                    )
+                                    Spacer(modifier = Modifier.width(8.dp))
+                                    Text(
+                                        text = "Call",
+                                        color = Color.White,
+                                        fontSize = 16.sp,
+                                        fontWeight = FontWeight.Bold
+                                    )
                                 }
                             }
 
-
+                            // Cancel Trip Button
                             Button(
                                 onClick = { showBottomSheet = true },
                                 modifier = Modifier
                                     .fillMaxWidth()
-                                    .padding(horizontal = 16.dp, vertical = 24.dp)
+                                    .padding(vertical = 16.dp)
                                     .height(50.dp),
-                                colors = ButtonDefaults.buttonColors(backgroundColor = Color.LightGray)
+                                shape = RoundedCornerShape(30.dp),
+                                colors = ButtonDefaults.buttonColors(backgroundColor = Color.Red)
                             ) {
-                                androidx.compose.material.Text(
-                                    stringResource(R.string.cancel_trip),
-                                    color = Color.Black,
+                                Text(
+                                    text = stringResource(R.string.cancel_trip),
+                                    color = Color.White,
                                     fontSize = 16.sp,
                                     fontWeight = FontWeight.Bold
                                 )
@@ -279,16 +273,18 @@ fun TripDetailsForDriver(navController: NavController) {
                     }
                 }
 
+                // Stop Accepting Trips Button
                 Button(
                     onClick = { /* Handle invite */ },
                     modifier = Modifier
                         .fillMaxWidth()
-                        .padding(horizontal = 16.dp, vertical = 24.dp)
+                        .padding(horizontal = 16.dp, vertical = 8.dp)
                         .height(60.dp),
+                    shape = RoundedCornerShape(30.dp),
                     colors = ButtonDefaults.buttonColors(backgroundColor = Color.Black)
                 ) {
-                    androidx.compose.material.Text(
-                        stringResource(R.string.stop_accept_trips),
+                    Text(
+                        text = stringResource(R.string.stop_accept_trips),
                         color = Color.White,
                         fontSize = 16.sp,
                         fontWeight = FontWeight.Bold
@@ -472,7 +468,7 @@ fun CancelTripDialog(onConfirm: () -> Unit, onDismiss: () -> Unit) {
         },
         confirmButton = {
             Button(
-                colors = ButtonDefaults.buttonColors(Color(0XFF46C96B)),
+                colors = ButtonDefaults.buttonColors(colorResource(R.color.primary_color)),
                 onClick = { onConfirm() }) {
                 Text(stringResource(id = R.string.cancel_trip_button_confirm))
             }

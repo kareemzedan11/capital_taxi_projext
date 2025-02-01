@@ -48,18 +48,19 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.example.capital_taxi.R
-
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun PickupWithDropOffButtons(navController: NavController, locationName: String?="Select Pickup Location") {
+fun PickupWithDropOffButtons(
+    navController: NavController,
+    locationName: String? = "Select Pickup Location"
+) {
     var showBottomSheet by remember { mutableStateOf(false) }
-    val sheetState = rememberModalBottomSheetState(
-        skipPartiallyExpanded = true,
-    )
+    val sheetState = rememberModalBottomSheetState(skipPartiallyExpanded = true)
 
     if (showBottomSheet) {
         ModalBottomSheet(
-            modifier = Modifier.fillMaxHeight(),
+            modifier = Modifier.fillMaxHeight()
+                .padding(top = 40.dp),
             sheetState = sheetState,
             onDismissRequest = { showBottomSheet = false }
         ) {
@@ -67,7 +68,8 @@ fun PickupWithDropOffButtons(navController: NavController, locationName: String?
         }
     }
 
-    var selectedVehicleIndex by remember { mutableStateOf(-1) } // Track selected item index
+    var selectedVehicleIndex by remember { mutableStateOf(-1) }
+    var selectedVehicleName by remember { mutableStateOf("") } // Track the selected vehicle name
 
     Column(
         modifier = Modifier
@@ -76,7 +78,7 @@ fun PickupWithDropOffButtons(navController: NavController, locationName: String?
         verticalArrangement = Arrangement.spacedBy(1.dp),
         horizontalAlignment = Alignment.Start
     ) {
-        androidx.compose.material3.Text(
+        Text(
             text = stringResource(R.string.Where_are_you_going_today),
             style = MaterialTheme.typography.titleLarge.copy(
                 fontWeight = FontWeight.Bold,
@@ -88,14 +90,12 @@ fun PickupWithDropOffButtons(navController: NavController, locationName: String?
                 .padding(bottom = 16.dp)
         )
 
-        // Use locationName if available
         PickupDropOffRow(
             iconRes = R.drawable.circle,
-            text = locationName ?: stringResource(R.string.Select_Pickup_Location), // Display the location name or default text
+            text = locationName ?: stringResource(R.string.Select_Pickup_Location),
             onClick = { showBottomSheet = true }
         )
 
-        // Vertical Divider
         repeat(9) {
             VerticalDivider(
                 thickness = 2.dp,
@@ -105,7 +105,6 @@ fun PickupWithDropOffButtons(navController: NavController, locationName: String?
             )
         }
 
-        // Drop-Off Location Row
         PickupDropOffRow(
             iconRes = R.drawable.travel,
             text = stringResource(R.string.Select_Drop_Off_Location),
@@ -124,28 +123,21 @@ fun PickupWithDropOffButtons(navController: NavController, locationName: String?
                     modifier = Modifier
                         .width(170.dp)
                         .height(150.dp)
-                        .scale(if (selectedVehicleIndex == index) 1.16f else 1f) // Scale the selected item
-                        .shadow(
-                            elevation = 8.dp,
-                            shape = RoundedCornerShape(20.dp),
-                            clip = false
-                        )
-                        .background(
-                            color = Color.White,
-                            shape = RoundedCornerShape(20.dp)
-                        )
+                        .scale(if (selectedVehicleIndex == index) 1.16f else 1f)
+                        .shadow(elevation = 8.dp, shape = RoundedCornerShape(20.dp), clip = false)
+                        .background(color = Color.White, shape = RoundedCornerShape(20.dp))
                         .clickable {
                             selectedVehicleIndex = index
+                            selectedVehicleName = vehicle.name // Update selected vehicle name
                         }
                 ) {
                     Column {
-                        // Top Box with Image
                         Box(
                             modifier = Modifier
                                 .weight(1f)
                                 .fillMaxWidth()
                                 .background(
-                                    color =colorResource(R.color.primary_color),
+                                    color = colorResource(R.color.primary_color),
                                     shape = RoundedCornerShape(topStart = 20.dp, topEnd = 20.dp)
                                 ),
                             contentAlignment = Alignment.Center
@@ -158,17 +150,15 @@ fun PickupWithDropOffButtons(navController: NavController, locationName: String?
                             )
                         }
 
-                        // Bottom Box with Text
                         Box(
                             modifier = Modifier
                                 .weight(1f)
                                 .fillMaxWidth()
                                 .background(
-                                    color = if (selectedVehicleIndex == index)colorResource(R.color.primary_color) else Color.White,
-                                    shape = RoundedCornerShape(
-                                        bottomStart = 20.dp,
-                                        bottomEnd = 20.dp
-                                    )
+                                    color = if (selectedVehicleIndex == index)
+                                        colorResource(R.color.primary_color)
+                                    else Color.White,
+                                    shape = RoundedCornerShape(bottomStart = 20.dp, bottomEnd = 20.dp)
                                 )
                         ) {
                             Column(
@@ -192,37 +182,11 @@ fun PickupWithDropOffButtons(navController: NavController, locationName: String?
                 }
             }
         }
+
         Spacer(modifier = Modifier.padding(top = 15.dp))
 
         if (selectedVehicleIndex != -1) {
-//            Box(
-//                modifier = Modifier
-//                    .fillMaxWidth()
-//                    .padding(horizontal = 16.dp)
-//                    .border(
-//                        width = 2.dp,
-//                        color = Color.Gray,
-//                        shape = RoundedCornerShape(10.dp)
-//                    )
-//                    .background(
-//                        color = Color(0XFFECECEC),
-//                        shape = RoundedCornerShape(10.dp)
-//                    )
-//                    .padding(20.dp)
-//            ) {
-//
-//
-//                TripInfoRow(
-//                    distance = "2.4 miles",
-//                    duration = "15:02",
-//                    price = "£10.50"
-//                )
-//
-//            }
-          IntercityCard()
-
-
+            IntercityCard(text = selectedVehicleName) // Pass selected vehicle name
         }
-
     }
 }

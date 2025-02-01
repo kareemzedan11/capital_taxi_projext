@@ -31,23 +31,22 @@ import com.example.capital_taxi.R
 import drawerContent
 import kotlinx.coroutines.delay
 
-
 @Composable
-fun tripDetailsCard(light: Boolean) {
+fun TripDetailsCard(light: Boolean) {
     Card(
         modifier = Modifier
             .fillMaxWidth()
             .padding(16.dp),
-        shape = RoundedCornerShape(8.dp),
+        shape = RoundedCornerShape(16.dp),
+        elevation = CardDefaults.cardElevation(defaultElevation = 8.dp)
     ) {
         Box(
             modifier = Modifier
                 .fillMaxWidth()
                 .background(Color.White)
         ) {
-
+            // Blinking Light Animation
             var blinkState by remember { mutableStateOf(true) }
-
             LaunchedEffect(Unit) {
                 while (true) {
                     blinkState = !blinkState
@@ -55,27 +54,27 @@ fun tripDetailsCard(light: Boolean) {
                 }
             }
 
-            if (light == true) {
+            if (light) {
                 Box(
                     modifier = Modifier
                         .fillMaxHeight(.7f)
                         .fillMaxWidth()
-
                         .background(
-                            color = if (blinkState) Color.Gray else Color.Transparent,
-                            shape = RoundedCornerShape(8.dp)
+                            color = if (blinkState) colorResource(R.color.secondary_color) else Color.Transparent,
+                            shape = RoundedCornerShape(16.dp)
                         )
                 )
             }
 
-
+            // Main Content
             Column(
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(16.dp),
-                verticalArrangement = Arrangement.spacedBy(8.dp),
+                verticalArrangement = Arrangement.spacedBy(12.dp),
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
+                // Trip Type and Price
                 Text(
                     text = "Comfort",
                     fontSize = 18.sp,
@@ -91,11 +90,12 @@ fun tripDetailsCard(light: Boolean) {
                 Text(
                     text = "Comprehensive Graphical Service",
                     fontSize = 14.sp,
-                    color = Color.Gray
+                    color = Color.Gray,
+                    textAlign = TextAlign.Center
                 )
 
+                // Progress Bar
                 var progress by remember { mutableStateOf(1f) }
-
                 LaunchedEffect(Unit) {
                     val totalDuration = 30000L
                     val frameDuration = 16L
@@ -105,35 +105,30 @@ fun tripDetailsCard(light: Boolean) {
                     }
                     progress = 0f
                 }
-
                 LinearProgressIndicator(
                     progress = progress,
                     modifier = Modifier
-                        .fillMaxWidth(),
+                        .fillMaxWidth()
+                        .height(8.dp),
                     color = colorResource(R.color.primary_color),
-                    Color(0XFFF2F2F2)
+                    trackColor = Color(0XFFF2F2F2)
                 )
 
-
+                // Rating
                 Row(
                     modifier = Modifier
                         .fillMaxWidth()
-                        .padding(vertical = 5.dp),
+                        .padding(vertical = 8.dp),
                     horizontalArrangement = Arrangement.Start,
                     verticalAlignment = Alignment.CenterVertically
                 ) {
-
-                    androidx.compose.material.Icon(
+                    Icon(
                         modifier = Modifier.size(26.dp),
                         painter = painterResource(R.drawable.person),
                         contentDescription = null,
                         tint = Color.Unspecified
                     )
-
-
-                    Spacer(modifier = Modifier.width(5.dp))
-
-
+                    Spacer(modifier = Modifier.width(8.dp))
                     Text(
                         text = "4.5",
                         color = Color.Black,
@@ -141,53 +136,66 @@ fun tripDetailsCard(light: Boolean) {
                     )
                 }
 
-                Column(
-                    modifier = Modifier.fillMaxWidth(),
-                    verticalArrangement = Arrangement.spacedBy(1.dp),
-                    horizontalAlignment = Alignment.Start
+                // Ride Details
+                RidePointDetails(
+                    Locationicon = R.drawable.circle,
+                    Destinationicon = R.drawable.travel,
+                    LocationText = "Cairo",
+                    DestinationText = "Alex",
+                    distance1 = "3m (1.2KM)",
+                    distance2 = "45m (20KM)",
+                    isDestance = true,
+                    onClick = { }
+                )
 
-                ) {
-
-                    RidePointDetails(
-                        Locationicon = R.drawable.circle,
-                        Destinationicon = R.drawable.travel,
-                        LocationText = "Cairo",
-                        DestinationText = "Alex",
-                        distance1 = "3m (1.2KM)",
-                        distance2 = "45m (20KM)",
-                        isDestance = true,
-                        onClick = { })
-
-                }
-
+                // Accept Trip Button
                 Button(
-                    onClick = { },
+                    onClick = { /* Handle Accept Trip */ },
                     modifier = Modifier
                         .fillMaxWidth()
                         .height(50.dp),
-                    colors = ButtonDefaults.buttonColors(colorResource(R.color.primary_color))
+                    colors = ButtonDefaults.buttonColors(colorResource(R.color.primary_color)),
+                    shape = RoundedCornerShape(12.dp)
                 ) {
-                    Text(text = "Accept Trip", color = Color.Black, fontSize = 16.sp)
+                    Text(text = "Accept Trip", color = Color.White, fontSize = 16.sp)
                 }
+
+                // Cancel Trip Button
+                Button(
+                    onClick = { /* Handle Cancel Trip */ },
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .height(50.dp),
+                    colors = ButtonDefaults.buttonColors(Color.Transparent),
+                    border = BorderStroke(1.dp, colorResource(R.color.primary_color)),
+                    shape = RoundedCornerShape(12.dp)
+                ) {
+                    Text(text = "Cancel Trip", color = colorResource(R.color.primary_color), fontSize = 16.sp)
+                }
+
+                // Divider
                 HorizontalDivider(
-                    thickness = 2.dp,
+                    thickness = 1.dp,
+                    color = Color.LightGray,
                     modifier = Modifier
                         .fillMaxWidth()
                         .padding(vertical = 10.dp)
                 )
-                Row(modifier = Modifier.horizontalScroll(rememberScrollState())) {
+
+                // Scrollable Trip Options
+                Row(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .horizontalScroll(rememberScrollState())
+                ) {
                     repeat(7) {
                         Button(
-                            onClick = { /* تنفيذ الرحلة */ },
+                            onClick = { /* Handle Trip Option */ },
                             modifier = Modifier
                                 .padding(horizontal = 5.dp),
-                            colors = ButtonDefaults.buttonColors(
-                                Color.Transparent // بدون خلفية
-                            ),
-                            border = BorderStroke(
-                                1.dp,
-                                colorResource(R.color.primary_color)
-                            ) // لون الحدود
+                            colors = ButtonDefaults.buttonColors(Color.Transparent),
+                            border = BorderStroke(1.dp, colorResource(R.color.primary_color)),
+                            shape = RoundedCornerShape(12.dp)
                         ) {
                             Text(
                                 text = "150 EGP",
@@ -195,10 +203,7 @@ fun tripDetailsCard(light: Boolean) {
                                 fontSize = 16.sp
                             )
                         }
-
-
                     }
-
                 }
             }
         }
@@ -216,153 +221,65 @@ fun RidePointDetails(
     LocationText: String,
     DestinationText: String
 ) {
-    Row(
+    Column(
         modifier = Modifier.fillMaxWidth(),
-        horizontalArrangement = Arrangement.SpaceBetween,
-        verticalAlignment = Alignment.CenterVertically
+        verticalArrangement = Arrangement.spacedBy(8.dp)
     ) {
-        Column(
-            verticalArrangement = Arrangement.spacedBy(4.dp),
-            horizontalAlignment = Alignment.Start
-
+        // Location
+        Row(
+            verticalAlignment = Alignment.CenterVertically
         ) {
-
-            Row(
-                horizontalArrangement = Arrangement.Start,
-                verticalAlignment = Alignment.CenterVertically
-            ) {
-
-                androidx.compose.material.Icon(
-                    modifier = Modifier.size(26.dp),
-                    painter = painterResource(Locationicon),
-                    contentDescription = null,
-                    tint = Color.Unspecified
+            Icon(
+                modifier = Modifier.size(26.dp),
+                painter = painterResource(Locationicon),
+                contentDescription = null,
+                tint = Color.Unspecified
+            )
+            Spacer(modifier = Modifier.width(8.dp))
+            Column {
+                distance1?.let {
+                    Text(
+                        text = it,
+                        fontSize = 14.sp,
+                        fontWeight = FontWeight.Bold,
+                        color = Color.Black
+                    )
+                }
+                Text(
+                    text = LocationText,
+                    fontSize = 16.sp,
+                    fontWeight = FontWeight.W600,
+                    color = Color.Black
                 )
-                if (!isDestance) {
-
-                    Button(
-                        onClick = onClick,
-                        modifier = Modifier.fillMaxWidth(),
-                        colors = ButtonDefaults.buttonColors(Color.Transparent),
-                    ) {
-                        Box(
-                            modifier = Modifier.fillMaxWidth(),
-                            contentAlignment = Alignment.CenterStart
-                        ) {
-                            androidx.compose.material.Text(
-                                text = LocationText,
-                                fontSize = 16.sp,
-                                fontWeight = FontWeight.W600,
-                            )
-                        }
-                    }
-                }
-                if (isDestance) {
-                    Column {
-
-
-                        distance1?.let {
-                            Text(
-                                modifier = Modifier.padding(horizontal = 10.dp),
-                                text = it,
-                                fontSize = 14.sp,
-                                fontWeight = FontWeight.Bold,
-                                color = Color.Black
-                            )
-                        }
-
-
-
-
-                        Button(
-                            onClick = onClick,
-                            modifier = Modifier.fillMaxWidth(),
-                            colors = ButtonDefaults.buttonColors(Color.Transparent),
-                        ) {
-                            Box(
-                                modifier = Modifier.fillMaxWidth(),
-                                contentAlignment = Alignment.CenterStart
-                            ) {
-                                androidx.compose.material.Text(
-                                    text = LocationText,
-                                    fontSize = 16.sp,
-                                    fontWeight = FontWeight.W600,
-                                )
-                            }
-                        }
-
-                    }
-
-                }
-
             }
-            Row(
-                horizontalArrangement = Arrangement.Start,
-                verticalAlignment = Alignment.CenterVertically
-            ) {
+        }
 
-
-                androidx.compose.material.Icon(
-                    modifier = Modifier.size(26.dp),
-                    painter = painterResource(Destinationicon),
-                    contentDescription = null,
-                    tint = Color.Unspecified
+        // Destination
+        Row(
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            Icon(
+                modifier = Modifier.size(26.dp),
+                painter = painterResource(Destinationicon),
+                contentDescription = null,
+                tint = Color.Unspecified
+            )
+            Spacer(modifier = Modifier.width(8.dp))
+            Column {
+                distance2?.let {
+                    Text(
+                        text = it,
+                        fontSize = 14.sp,
+                        fontWeight = FontWeight.Bold,
+                        color = Color.Black
+                    )
+                }
+                Text(
+                    text = DestinationText,
+                    fontSize = 16.sp,
+                    fontWeight = FontWeight.W600,
+                    color = Color.Black
                 )
-                if (!isDestance) {
-
-                    Button(
-                        onClick = onClick,
-                        modifier = Modifier.fillMaxWidth(),
-                        colors = ButtonDefaults.buttonColors(Color.Transparent),
-                    ) {
-                        Box(
-                            modifier = Modifier.fillMaxWidth(),
-                            contentAlignment = Alignment.CenterStart
-                        ) {
-                            androidx.compose.material.Text(
-                                text = DestinationText,
-                                fontSize = 16.sp,
-                                fontWeight = FontWeight.W600,
-                            )
-                        }
-                    }
-                }
-                if (isDestance) {
-
-                    Column {
-
-                            distance2?.let {
-                                Text(
-                                    modifier = Modifier.padding(horizontal = 10.dp),
-                                    text = it,
-                                    fontSize = 14.sp,
-                                    fontWeight = FontWeight.Bold,
-                                    color = Color.Black
-                                )
-                            }
-
-
-
-
-                        Button(
-                            onClick = onClick,
-                            modifier = Modifier.fillMaxWidth(),
-                            colors = ButtonDefaults.buttonColors(Color.Transparent),
-                        ) {
-                            Box(
-                                modifier = Modifier.fillMaxWidth(),
-                                contentAlignment = Alignment.CenterStart
-                            ) {
-                                androidx.compose.material.Text(
-                                    text = DestinationText,
-                                    fontSize = 16.sp,
-                                    fontWeight = FontWeight.W600,
-                                )
-                            }
-                        }
-                    }
-                }
-
             }
         }
     }

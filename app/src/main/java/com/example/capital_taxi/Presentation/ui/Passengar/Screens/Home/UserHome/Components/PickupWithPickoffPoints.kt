@@ -42,11 +42,9 @@ import com.example.capital_taxi.Helper.checkLocationPermission
 import com.example.capital_taxi.R
 import com.google.android.gms.location.LocationServices
 import java.util.Locale
-
-
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun PickupWithPickoffPoints(navController: NavController ) {
+fun PickupWithPickoffPoints(navController: NavController) {
     val permissionViewModel: PermissionViewModel = viewModel()
     val context = LocalContext.current
 
@@ -77,32 +75,17 @@ fun PickupWithPickoffPoints(navController: NavController ) {
             }
         }
     }
-    val labelText = locationName
-    var pickupPoint by remember { mutableStateOf(labelText.ifEmpty { "Pickup Point" }) }
+
     var destinationPoint by remember { mutableStateOf("") }
-    var showBottomSheet by remember { mutableStateOf(false) }
-    val sheetState = rememberModalBottomSheetState(
-        skipPartiallyExpanded = false,
-    )
-    if (showBottomSheet) {
-        ModalBottomSheet(modifier = Modifier.fillMaxHeight(),
-            sheetState = sheetState,
-            onDismissRequest = { showBottomSheet = false }) {
-            IntercityCard()
-        }
-    }
+    var stopPoints by remember { mutableStateOf(listOf<String>()) }
+
     // Box for Pickup and Pickoff Points
     Box(
         modifier = Modifier
-            .background(
-                color = colorResource(R.color.secondary_color), shape = RoundedCornerShape(20.dp)
-            )
-            .padding(horizontal = 16.dp),
-
-        ) {
-        Column(
-            modifier = Modifier.fillMaxWidth()
-        ) {
+            .background(color = colorResource(R.color.secondary_color), shape = RoundedCornerShape(20.dp))
+            .padding(horizontal = 16.dp)
+    ) {
+        Column(modifier = Modifier.fillMaxWidth()) {
             // Pickup Point Field
             LocationAutocompleteField(
                 icon = {
@@ -114,7 +97,6 @@ fun PickupWithPickoffPoints(navController: NavController ) {
                 },
                 onClick = {},
                 hint = stringResource(R.string.Pickup_Point),
-
                 initialText = locationName,
                 query = locationName,
                 onQueryChanged = { locationName = it },
@@ -124,19 +106,21 @@ fun PickupWithPickoffPoints(navController: NavController ) {
 
             // Divider with Add Button
             Row(
-                verticalAlignment = Alignment.CenterVertically, modifier = Modifier.fillMaxWidth()
+                verticalAlignment = Alignment.CenterVertically,
+                modifier = Modifier.fillMaxWidth()
             ) {
                 HorizontalDivider(
                     modifier = Modifier
                         .weight(1f)
                         .padding(horizontal = 8.dp), // Reduced horizontal padding
-                    color = Color.LightGray, thickness = 1.dp
+                    color = Color.LightGray,
+                    thickness = 1.dp
                 )
                 IconButton(
                     onClick = {
-                        showBottomSheet = true
-
-                    }, modifier = Modifier
+                        stopPoints = stopPoints + "" // Add an empty stop point
+                    },
+                    modifier = Modifier
                         .background(
                             color = colorResource(R.color.primary_color),
                             shape = RoundedCornerShape(50)
@@ -145,13 +129,55 @@ fun PickupWithPickoffPoints(navController: NavController ) {
                 ) {
                     Icon(
                         imageVector = Icons.Default.Add,
-                        contentDescription = "Add Point",
+                        contentDescription = "Add Stop Point",
                         tint = Color.White
                     )
                 }
             }
 
+            // Stop Points Fields with Horizontal Dividers
+            stopPoints.forEachIndexed { index, stopPoint ->
+                if (index > 0) { // Add a divider before each stop point (except the first one)
+                    HorizontalDivider(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(vertical = 8.dp),
+                        color = Color.Gray,
+                        thickness = 1.dp
+                    )
+                }
+                LocationAutocompleteField(
+                    icon = {
+                        Icon(
+                            imageVector = Icons.Default.Place,
+                            contentDescription = "Stop Point",
+                            tint = colorResource(R.color.primary_color)
+                        )
+                    },
+                    onClick = {},
+                    hint = "Stop Point ${index + 1}",
+                    initialText = stopPoint,
+                    query = stopPoint,
+                    onQueryChanged = { updatedValue ->
+                        stopPoints = stopPoints.toMutableList().apply { set(index, updatedValue) }
+                    },
+                    onLocationSelected = { updatedValue ->
+                        stopPoints = stopPoints.toMutableList().apply { set(index, updatedValue) }
+                    },
+                    apiKey = stringResource(id = R.string.SignUp)
+                )
+            }
+
             // Pickoff Point Field
+            if (stopPoints.isNotEmpty()) {
+                HorizontalDivider(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(vertical = 8.dp),
+                    color = Color.Gray,
+                    thickness = 1.dp
+                )
+            }
             LocationAutocompleteField(
                 icon = {
                     Icon(
@@ -171,15 +197,3 @@ fun PickupWithPickoffPoints(navController: NavController ) {
         }
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-

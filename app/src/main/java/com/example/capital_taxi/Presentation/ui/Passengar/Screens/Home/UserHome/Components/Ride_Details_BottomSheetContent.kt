@@ -14,6 +14,7 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Icon
@@ -34,11 +35,12 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
 import com.example.capital_taxi.R
 
 
 @Composable
-fun RideDetailsBottomSheetContent() {
+fun RideDetailsBottomSheetContent(navController:NavController) {
     Column(
         modifier = Modifier
             .background(Color.White)
@@ -59,157 +61,124 @@ fun RideDetailsBottomSheetContent() {
             )
         }
 
-
         Box(
             modifier = Modifier
                 .fillMaxSize()
-
-                .clip(
-                    RoundedCornerShape(
-                        topStart = 30.dp, topEnd = 30.dp
-                    )
-                ) // Match inner shape to border
+                .clip(RoundedCornerShape(topStart = 30.dp, topEnd = 30.dp))
                 .background(Color.White)
                 .padding(2.dp),
         ) {
-            Column(
+            LazyColumn(
                 verticalArrangement = Arrangement.Top,
-                horizontalAlignment = Alignment.CenterHorizontally
-
+                horizontalAlignment = Alignment.CenterHorizontally,
+                modifier = Modifier.fillMaxSize()
             ) {
-                Spacer(modifier = Modifier.padding(top = 10.dp))
-                Row(
-                    horizontalArrangement = Arrangement.Center,
-                    verticalAlignment = Alignment.CenterVertically
-                ) {
-                    Text(
-                        stringResource(R.string.meeting_location),
-                        fontSize = 20.sp,
-                        fontWeight = FontWeight.Bold
-                    )
-                    Spacer(modifier = Modifier.weight( 1f))
-
-                    RoundedTimeDisplayWithFill()
-                }
-                Spacer(modifier = Modifier.padding(top = 10.dp))
-                HorizontalDivider(Modifier.fillMaxWidth(), thickness = 2.dp)
-                Spacer(modifier = Modifier.padding(top = 10.dp))
-
-                RideDetailsCard()
-                Spacer(modifier = Modifier.padding(top = 10.dp))
-
-                HorizontalDivider(Modifier.fillMaxWidth(), thickness = 2.dp)
-                Spacer(modifier = Modifier.padding(bottom = 10.dp))
-
-                Box(
-                    modifier = Modifier
-                        .padding(horizontal = 10.dp)
-
-                        .fillMaxWidth()
-                        .shadow(20.dp, shape = RoundedCornerShape(8.dp))
-                        .clip(RoundedCornerShape(8.dp))
-                        .background(Color.White)
-                        .padding(16.dp)
-                        .padding(2.dp),
-                    contentAlignment = Alignment.TopStart
-                ) {
-
-
+                item {
+                    Spacer(modifier = Modifier.padding(top = 10.dp))
                     Row(
-                        horizontalArrangement = Arrangement.Start, verticalAlignment = Alignment.Top
+                        horizontalArrangement = Arrangement.Center,
+                        verticalAlignment = Alignment.CenterVertically
                     ) {
+                        Text(
+                            stringResource(R.string.meeting_location),
+                            fontSize = 20.sp,
+                            fontWeight = FontWeight.Bold
+                        )
+                        Spacer(modifier = Modifier.weight(1f))
+                        RoundedTimeDisplayWithFill()
+                    }
+                    Spacer(modifier = Modifier.padding(top = 10.dp))
+                    HorizontalDivider(Modifier.fillMaxWidth(), thickness = 2.dp)
+                    Spacer(modifier = Modifier.padding(top = 10.dp))
 
+                    RideDetailsCard()
+                    Spacer(modifier = Modifier.padding(top = 10.dp))
 
-                        Column {
+                    HorizontalDivider(Modifier.fillMaxWidth(), thickness = 2.dp)
+                    Spacer(modifier = Modifier.padding(bottom = 10.dp))
 
-                            Box(
-                                modifier = Modifier
-
-
-                                    .padding(25.dp)
-                            ) {
-                                Column {
-                                    androidx.compose.material3.Text(
-                                        "Car Number ",
-                                        fontWeight = FontWeight.Bold,
-                                        fontSize = 20.sp,
-                                        color = Color.Black.copy(alpha = .3f)
+                    Box(
+                        modifier = Modifier
+                            .padding(horizontal = 10.dp)
+                            .fillMaxWidth()
+                            .shadow(20.dp, shape = RoundedCornerShape(8.dp))
+                            .clip(RoundedCornerShape(8.dp))
+                            .background(Color.White)
+                            .padding(16.dp)
+                            .padding(2.dp),
+                        contentAlignment = Alignment.TopStart
+                    ) {
+                        Row(
+                            horizontalArrangement = Arrangement.Start,
+                            verticalAlignment = Alignment.Top
+                        ) {
+                            Column {
+                                Row(verticalAlignment = Alignment.CenterVertically) {
+                                    Image(
+                                        painter = painterResource(R.drawable.uber),
+                                        contentDescription = "car image",
+                                        modifier = Modifier
+                                            .size(160.dp) // Set a fixed size
+                                            .clip(RoundedCornerShape(12.dp)) // Optional rounded corners
                                     )
-                                    Spacer(modifier = Modifier.padding(10.dp))
+                                    Spacer(modifier = Modifier.weight(1f))
+                                    Box(
+                                        modifier = Modifier.padding(16.dp),
+                                    ) {
+                                        Column {
+                                            androidx.compose.material3.Text(
+                                                "Car Number ",
+                                                fontWeight = FontWeight.Bold,
+                                                fontSize = 20.sp,
+                                                color = Color.Black.copy(alpha = .3f)
+                                            )
+                                            Spacer(modifier = Modifier.padding(10.dp))
 
-                                    androidx.compose.material3.Text(
-                                        "Car Type",
-                                        fontWeight = FontWeight.Bold,
-                                        fontSize = 20.sp,
-                                    )
-
+                                            androidx.compose.material3.Text(
+                                                "Car Type",
+                                                fontWeight = FontWeight.Bold,
+                                                fontSize = 20.sp,
+                                            )
+                                        }
+                                    }
                                 }
 
+                                Spacer(modifier = Modifier.padding(top = 16.dp))
+                                driverDetails()
+                                Spacer(modifier = Modifier.padding(top = 16.dp))
 
+                                callAndChat(navController )
                             }
 
                             Spacer(modifier = Modifier.padding(top = 16.dp))
 
-                            driverDetails()
 
-                        }
-                        Spacer(modifier = Modifier.padding(top = 16.dp))
-
-
-
-
-                        Column {
-                            Box(
-                                modifier = Modifier
-                                    .size(120.dp)
-                                    .padding(end = 5.dp)
-                                    .shadow(8.dp, shape = RoundedCornerShape(8.dp))
-                                    .clip(RoundedCornerShape(8.dp))
-                                    .background(Color.White)
-                            ) {
-                                Image(
-                                    painter = painterResource(R.drawable.uber),
-                                    contentDescription = "car image",
-                                    modifier = Modifier.fillMaxSize() // لجعل الصورة تغطي كل الـ Box
-                                )
-                            }
-
-                            Spacer(modifier = Modifier.padding(top = 16.dp))
-
-                            callAndChat()
                         }
                     }
+                    Spacer(modifier = Modifier.padding(top = 16.dp))
+                    HorizontalDivider(Modifier.fillMaxWidth(), thickness = 2.dp)
+                    Spacer(modifier = Modifier.padding(top = 10.dp))
+
+                    Button(
+                        onClick = { },
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(top = 20.dp)
+                            .height(60.dp)
+                            .border(0.dp, Color.Transparent)
+                            .shadow(0.dp),
+                        colors = ButtonDefaults.buttonColors(containerColor = Color(0XFFF2F2F2))
+                    ) {
+                        Payment_trip_cost()
+                    }
+                    Spacer(modifier = Modifier.padding(top = 15.dp))
+
+                    HorizontalDivider(Modifier.fillMaxWidth(), thickness = 2.dp)
+                    Spacer(modifier = Modifier.padding(top = 15.dp))
+
+                    HorizontalImageScroll()
                 }
-                Spacer(modifier = Modifier.padding(top = 16.dp))
-                HorizontalDivider(Modifier.fillMaxWidth(), thickness = 2.dp)
-
-
-                Spacer(modifier = Modifier.padding(top = 10.dp))
-
-                Button(
-                    onClick = { },
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(top = 20.dp)
-                        .height(60.dp)
-                        .border(0.dp, Color.Transparent)  // Remove any border here
-                        .shadow(0.dp),  // Remove shadow if any (no elevation)
-                    colors = ButtonDefaults.buttonColors(containerColor = Color(0XFFF2F2F2))  // Button color
-                ) {
-                    Payment_trip_cost()
-                }
-                Spacer(modifier = Modifier.padding(top = 15.dp))
-
-                HorizontalDivider(Modifier.fillMaxWidth(), thickness = 2.dp)
-                Spacer(modifier = Modifier.padding(top = 15.dp))
-
-                HorizontalImageScroll()
-
             }
-
         }
-
-
     }
-
 }

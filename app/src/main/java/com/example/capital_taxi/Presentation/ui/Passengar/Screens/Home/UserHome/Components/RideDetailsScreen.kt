@@ -57,7 +57,7 @@ fun RideDetailsScreen(navController: NavController) {
 
 
         ) {
-            DraggableBottomSheet(sheetContent =  {RideDetailsBottomSheetContent()} )
+            DraggableBottomSheet(sheetContent =  {RideDetailsBottomSheetContent(navController)} )
         }
 
 
