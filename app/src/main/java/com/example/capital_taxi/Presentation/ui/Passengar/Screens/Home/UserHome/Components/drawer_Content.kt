@@ -176,7 +176,7 @@ fun drawerContent(navController: NavController) {
                 Spacer(Modifier.height(10.dp))
 
                 navigationDrawerItem(
-                    onClick = { navController.navigate(Destination.voucherScreen.route) },
+                    onClick = { navController.navigate(Destination.SupportPage.route) },
                     painter = painterResource(R.drawable.helpme2),
                     text = stringResource(R.string.Support)
                 )

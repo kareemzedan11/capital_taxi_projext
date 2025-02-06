@@ -51,6 +51,8 @@ sealed class Destination(val route: String) {
     object InviteForMyApp : Destination("InviteForMyApp")
     object DriverHelpScreen : Destination("DriverHelpScreen")
     object ChatScreen : Destination("ChatScreen")
+    object SupportPage : Destination("SupportPage")
+    object ContactSupportPage : Destination("ContactSupportPage")
 
 
 

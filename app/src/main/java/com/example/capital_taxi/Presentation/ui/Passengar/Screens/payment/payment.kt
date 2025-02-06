@@ -39,11 +39,14 @@ import androidx.navigation.NavController
 import com.example.capital_taxi.R
 
 import androidx.compose.foundation.layout.*
+import androidx.compose.material.Card
+import androidx.compose.material.icons.filled.Warning
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.style.TextAlign
 import androidx.core.content.ContextCompat
 import com.example.app.ui.theme.CustomFontFamily
 import com.example.app.ui.theme.responsiveTextSize
@@ -146,59 +149,95 @@ fun PaymentScreenContent(
 
         Spacer(modifier = Modifier.height(20.dp))
 
-        // Payment Methods List
-        LazyColumn(
+        Box(
             modifier = Modifier
                 .fillMaxSize()
-                .clip(RoundedCornerShape(topStart = 40.dp, topEnd = 40.dp))
-                .background(Color.White)
-                .padding(16.dp)
+                .background(colorResource(R.color.secondary_color)), // لون خفيف للتحذير
+            contentAlignment = Alignment.Center
         ) {
-            item {
-                Text(
-                    stringResource(R.string.choose_payment_method), // Add this string to `strings.xml`
-                    modifier = Modifier.padding(top = 20.dp),
-                    fontSize = responsiveTextSize(
-                        fraction = 0.06f,
-                        minSize = 20.sp,
-                        maxSize = 24.sp
-                    ),
-                    fontFamily = CustomFontFamily,
-                    fontWeight = FontWeight.Bold,
-                    color = Color.Black
-                )
-            }
-            item { Spacer(modifier = Modifier.height(20.dp)) }
-            items(paymentMethods) { method ->
-                PaymentMethodCard(
-                    paymentMethod = method,
-                    isSelected = selectedMethod == method,
-                    onSelect = { selectedMethod = method }
-                )
-            }
-            item { Spacer(modifier = Modifier.height(20.dp)) }
-            item {
-                Button(
-                    onClick = { /* Handle new method */ },
-                    shape = RoundedCornerShape(50.dp),
+            Card(
+                shape = RoundedCornerShape(16.dp),
+                backgroundColor = Color.White,
+                elevation = 8.dp,
+                modifier = Modifier
+                    .padding(16.dp)
+                    .fillMaxWidth(0.9f)
+            ) {
+                Column(
                     modifier = Modifier
-                        .height(100.dp)
-                        .fillMaxWidth()
-                        .padding(vertical = 16.dp, horizontal = 30.dp),
-                    colors = ButtonDefaults.buttonColors(Color.Black)
+                        .padding(20.dp),
+                    horizontalAlignment = Alignment.CenterHorizontally
                 ) {
+                    Icon(
+                        imageVector = Icons.Default.Warning,
+                        contentDescription = "Warning Icon",
+                        tint = Color.Red,
+                        modifier = Modifier.size(48.dp)
+                    )
+                    Spacer(modifier = Modifier.height(8.dp))
                     Text(
-                        stringResource(R.string.add_new_method_button), // Add this string to `strings.xml`
-                        fontSize = responsiveTextSize(
-                            fraction = 0.06f,
-                            minSize = 14.sp,
-                            maxSize = 18.sp
-                        ),
-                        fontFamily = CustomFontFamily,
-                        fontWeight = FontWeight.Bold
+                        text = stringResource(R.string.payment_message),
+                        fontWeight = FontWeight.Bold,
+                        color = Color.Black,
+                        fontSize = 20.sp,
+                        textAlign = TextAlign.Center
                     )
                 }
             }
         }
+//        // Payment Methods List
+//        LazyColumn(
+//            modifier = Modifier
+//                .fillMaxSize()
+//                .clip(RoundedCornerShape(topStart = 40.dp, topEnd = 40.dp))
+//                .background(Color.White)
+//                .padding(16.dp)
+//        ) {
+//            item {
+//                Text(
+//                    stringResource(R.string.choose_payment_method), // Add this string to `strings.xml`
+//                    modifier = Modifier.padding(top = 20.dp),
+//                    fontSize = responsiveTextSize(
+//                        fraction = 0.06f,
+//                        minSize = 20.sp,
+//                        maxSize = 24.sp
+//                    ),
+//                    fontFamily = CustomFontFamily,
+//                    fontWeight = FontWeight.Bold,
+//                    color = Color.Black
+//                )
+//            }
+//            item { Spacer(modifier = Modifier.height(20.dp)) }
+//            items(paymentMethods) { method ->
+//                PaymentMethodCard(
+//                    paymentMethod = method,
+//                    isSelected = selectedMethod == method,
+//                    onSelect = { selectedMethod = method }
+//                )
+//            }
+//            item { Spacer(modifier = Modifier.height(20.dp)) }
+//            item {
+//                Button(
+//                    onClick = { /* Handle new method */ },
+//                    shape = RoundedCornerShape(50.dp),
+//                    modifier = Modifier
+//                        .height(100.dp)
+//                        .fillMaxWidth()
+//                        .padding(vertical = 16.dp, horizontal = 30.dp),
+//                    colors = ButtonDefaults.buttonColors(Color.Black)
+//                ) {
+//                    Text(
+//                        stringResource(R.string.add_new_method_button), // Add this string to `strings.xml`
+//                        fontSize = responsiveTextSize(
+//                            fraction = 0.06f,
+//                            minSize = 14.sp,
+//                            maxSize = 18.sp
+//                        ),
+//                        fontFamily = CustomFontFamily,
+//                        fontWeight = FontWeight.Bold
+//                    )
+//                }
+//            }
+//        }
     }
 }

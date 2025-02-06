@@ -514,4 +514,10 @@
     <string name="documents">Documents</string>
     <string name="terms_and_conditions">Terms and Conditions</string>
     <string name="about_the_app">About the App</string>
+
+
+    <string name="warning">Warning</string>
+    <string name="photo_warning_message">The photo, once uploaded, cannot be deleted or edited for 2 years.</string>
+    <string name="understand">I Understand</string>
+    <string name="payment_message">Sorry, We would like to inform you that our payment services currently support cash payments only. Other payment methods are not available at this time.</string>
 </resources>

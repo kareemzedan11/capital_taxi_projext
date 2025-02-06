@@ -40,6 +40,8 @@ import com.example.capital_taxi.Presentation.ui.Passengar.Screens.payment.Paymen
 import com.example.capital_taxi.Presentation.ui.Passengar.Screens.Login.UserLogin
 import com.example.capital_taxi.Presentation.ui.Passengar.Screens.Register.UserRegister
 import com.example.capital_taxi.Presentation.ui.Passengar.Screens.Safety.SafetyScreen
+import com.example.capital_taxi.Presentation.ui.Passengar.Screens.Support.Components.ContactSupportPage
+import com.example.capital_taxi.Presentation.ui.Passengar.Screens.Support.SupportPage
 import com.example.capital_taxi.Presentation.ui.Passengar.Screens.notification.userNotification
 import com.example.capital_taxi.Presentation.ui.Passengar.Screens.profile.Profile
 import com.example.capital_taxi.Presentation.ui.Passengar.Screens.settings.Components.settings
@@ -61,7 +63,7 @@ import com.example.capital_taxi.ui.screens.Driver.VerficationScreens.NationalIDV
 fun AppNavGraph(navController: NavHostController) {
 
     var context = LocalContext.current
-    NavHost(navController = navController, startDestination = Destination.UserHomeScreen.route) {
+    NavHost(navController = navController, startDestination = Destination.SplashScreen.route) {
 
         composable(Destination.SplashScreen.route) {
             SplashScreen(navController)
@@ -199,6 +201,12 @@ fun AppNavGraph(navController: NavHostController) {
         }
         composable(Destination.ChatScreen.route) {
             ChatScreen(navController )
+        }
+        composable(Destination.SupportPage.route) {
+            SupportPage(navController )
+        }
+        composable(Destination.ContactSupportPage.route) {
+            ContactSupportPage(navController )
         }
 
         composable("help_detail/{topic}") { backStackEntry ->

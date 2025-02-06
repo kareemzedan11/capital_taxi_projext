@@ -17,7 +17,7 @@ import androidx.compose.ui.unit.LayoutDirection
 import androidx.core.content.ContextCompat
 import androidx.navigation.compose.rememberNavController
 import com.example.capital_taxi.Navigation.AppNavGraph
-import com.example.capital_taxi.Presentation.Common.BackIcon
+
 import com.example.capital_taxi.Presentation.ui.Theme.AppTheme
 import com.example.capital_taxi.Presentation.ui.shared.Language.components.LanguagePreference
 import com.example.capital_taxi.Presentation.ui.shared.Language.components.updateLocale
@@ -69,6 +69,8 @@ class MainActivity : ComponentActivity() {
                 AppTheme(
                     darkTheme = false,
                 ) {
+
+
                     val navController = rememberNavController()
                     AppNavGraph(navController = navController)
                 }

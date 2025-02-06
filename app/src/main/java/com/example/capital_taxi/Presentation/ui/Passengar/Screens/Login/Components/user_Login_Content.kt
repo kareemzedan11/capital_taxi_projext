@@ -87,7 +87,7 @@ fun userLoginContent(
             fontSize = responsiveTextSize(fraction = 0.06f, minSize = 20.sp, maxSize = 32.sp),
 
             fontFamily = CustomFontFamily,
-            fontWeight = FontWeight.Bold,
+            fontWeight = FontWeight.W900,
             color = Color.Black,
             style = MaterialTheme.typography.headlineMedium
         )
