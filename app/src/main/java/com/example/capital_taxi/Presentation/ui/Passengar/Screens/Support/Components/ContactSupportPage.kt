@@ -19,6 +19,7 @@ import androidx.compose.ui.Alignment
 
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
@@ -28,12 +29,20 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.example.capital_taxi.R
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun ContactSupportPage(navController: NavController) {
     Scaffold(
         topBar = {
             TopAppBar(
-                title = { Text("Contact Support") },
+
+                title = {
+                    Text(
+                        "Contact Support", fontSize = 20.sp,
+                        fontWeight = FontWeight.Bold,
+                        color = Color.Black
+                    )
+                },
                 navigationIcon = {
                     androidx.compose.material3.IconButton(onClick = { navController.popBackStack() }) {
                         Box(
@@ -52,6 +61,10 @@ fun ContactSupportPage(navController: NavController) {
                         }
                     }
                 },
+                colors = TopAppBarDefaults.topAppBarColors(
+                    containerColor = MaterialTheme.colorScheme.primary,
+                    titleContentColor = MaterialTheme.colorScheme.onPrimary
+                )
             )
         }
     ) { paddingValues ->
@@ -90,9 +103,11 @@ fun ContactSupportPage(navController: NavController) {
             )
             Button(
                 onClick = { /* Handle submit action */ },
-                modifier = Modifier.fillMaxWidth()
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .height(60.dp)
             ) {
-                Text("Submit")
+                Text("Submit", fontSize = 20.sp)
             }
         }
     }
