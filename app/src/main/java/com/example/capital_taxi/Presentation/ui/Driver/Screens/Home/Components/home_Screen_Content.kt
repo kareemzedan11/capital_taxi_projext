@@ -11,7 +11,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavController
-import com.example.capital_taxi.Presentation.ui.Passengar.Screens.Home.UserHome.Components.LocationModalBottomSheetContent
+import com.example.capital_taxi.Presentation.ui.Passengar.Screens.Home.UserHome.Components.Trip_preparation.LocationModalBottomSheetContent
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
