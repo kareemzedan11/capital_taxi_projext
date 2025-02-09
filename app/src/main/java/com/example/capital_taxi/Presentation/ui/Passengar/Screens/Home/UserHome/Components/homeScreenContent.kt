@@ -46,6 +46,8 @@ import com.example.capital_taxi.Helper.PartialBottomSheet
 import com.example.capital_taxi.Helper.PermissionViewModel
 import com.example.capital_taxi.Helper.checkLocationPermission
 import com.example.capital_taxi.Presentation.ui.Passengar.Screens.Home.UserHome.Components.Trip_preparation.FindDriverCard
+import com.example.capital_taxi.Presentation.ui.Passengar.Screens.Home.UserHome.Components.Trip_preparation.PickupWithDropOffButtons
+import com.example.capital_taxi.Presentation.ui.Passengar.Screens.Home.UserHome.Components.Trip_request.searchAboutADriver
 import com.example.capital_taxi.Presentation.ui.Passengar.Screens.Home.UserHome.Components.Waiting_for_the_driver.RideDetailsBottomSheetContent
 import com.google.android.gms.location.LocationServices
 import java.util.Locale
@@ -186,32 +188,32 @@ fun homeScreenContent(navController: NavController) {
                             )
                     ) {
 
- //TripDetailsLiveTracker()
-                       RideDetailsBottomSheetContent(navController)
-                      //TripRatingDialog()
-//
-//                        // Use the current state to check if location is enabled and permission granted
-//                        if (currentIsLocationEnabled.value && currentIsLocationGranted.value) {
-//                            if (!isConfirmed) {
-//                                PickupWithDropOffButtons(
-//                                    navController = navController,
-//                                    locationName = locationName
-//                                )
-//                            } else if (isConfirmed) {
-//                                confirmPickup(onclick = { isSearch = true })
-//                               // TripDetailsLiveTracker()
-//                            }
-//                            if (isSearch) {
-//                                isConfirmed = false
-//                                searchAboutADriver()
-//                            }
-//                        } else {
-//                            EnableLocationServices(
-//                                permissionViewModel = permissionViewModel,
-//                                context = context
-//                            )
-//                        }
-                 }
+                        //TripDetailsLiveTracker()
+                        //  RideDetailsBottomSheetContent(navController)
+                        //TripRatingDialog()
+
+                        // Use the current state to check if location is enabled and permission granted
+                        if (currentIsLocationEnabled.value && currentIsLocationGranted.value) {
+                            if (!isConfirmed) {
+                                PickupWithDropOffButtons(
+                                    navController = navController,
+                                    locationName = locationName
+                                )
+                            } else if (isConfirmed) {
+                                confirmPickup(onclick = { isSearch = true })
+                                // TripDetailsLiveTracker()
+                            }
+                            if (isSearch) {
+                                isConfirmed = false
+                                searchAboutADriver()
+                            }
+                        } else {
+                            EnableLocationServices(
+                                permissionViewModel = permissionViewModel,
+                                context = context
+                            )
+                        }
+                    }
                 }
             )
 

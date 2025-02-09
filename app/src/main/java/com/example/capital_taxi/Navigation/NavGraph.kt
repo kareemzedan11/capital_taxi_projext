@@ -3,6 +3,7 @@ package com.example.capital_taxi.Navigation
 import DriverHelpDetailScreen
 import LanguageDScreen
 import PhoneVerification
+import android.app.Activity
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.platform.LocalContext
 import androidx.navigation.NavHostController
@@ -47,6 +48,7 @@ import com.example.capital_taxi.Presentation.ui.Passengar.Screens.profile.Profil
 import com.example.capital_taxi.Presentation.ui.Passengar.Screens.settings.Components.settings
 import com.example.capital_taxi.Presentation.ui.Passenger.Screens.ChatScreen.ChatScreen
 import com.example.capital_taxi.Presentation.ui.shared.Confirm_information.ConfirmInformation
+import com.example.capital_taxi.Presentation.ui.shared.Language.components.updateLocale
 import com.example.capital_taxi.Presentation.ui.shared.OTP.OtpScreen
  import com.example.capital_taxi.Presentation.ui.shared.Onboarding.OnboardingPager
 import com.example.capital_taxi.Presentation.ui.shared.Select_the_mode.SelectTheMode
@@ -83,7 +85,6 @@ fun AppNavGraph(navController: NavHostController) {
         composable(Destination.UserLogin.route) {
             UserLogin(navController)
         }
-
         composable(Destination.driverSignUp.route) {
             DriverSignUp(navController)
         }
@@ -208,7 +209,18 @@ fun AppNavGraph(navController: NavHostController) {
         composable(Destination.ContactSupportPage.route) {
             ContactSupportPage(navController )
         }
-
+        composable(Destination.LanguageDScreen.route) {
+            val context = LocalContext.current
+            LanguageDScreen(
+                navController = navController,
+                onLanguageSelected = { languageCode ->
+                    // Handle language change here
+                    updateLocale(context, languageCode)
+                    (context as? Activity)?.recreate() // Recreate the activity to apply the new locale
+                },
+                context = context
+            )
+        }
         composable("help_detail/{topic}") { backStackEntry ->
           HelpDetailScreen(
                 navController = navController,

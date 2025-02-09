@@ -7,6 +7,7 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.material.LinearProgressIndicator
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
@@ -74,6 +75,7 @@ fun SplashProgressBar(
                 tint = Color.Black,
                 modifier = Modifier
                     .size(80.dp)
+
                     .offset(x = (progress * (screenWidth - 128.dp)) - 32.dp)
             )
         }
