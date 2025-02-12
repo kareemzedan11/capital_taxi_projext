@@ -15,6 +15,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.example.capital_taxi.Navigation.Destination
@@ -31,7 +32,14 @@ import com.example.capital_taxi.R
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun driverSignupContent(navController: NavController) {
+    val context = LocalContext.current
 
+    val name = remember { mutableStateOf("") }
+    val username = remember { mutableStateOf("") } // إضافة متغير `username`
+    val email = remember { mutableStateOf("") }
+    val password = remember { mutableStateOf("") }
+    val confirmPassword = remember { mutableStateOf("") }
+    val phone = remember { mutableStateOf("") }
     var isChecked by remember { mutableStateOf(false) }
 
     Column(
@@ -43,9 +51,13 @@ fun driverSignupContent(navController: NavController) {
     ) {
         RegisterHeader()
         Spacer(modifier = Modifier.height(16.dp))
-
         All_Register_textFields(
-
+            name = name,
+            username = username,
+            email = email,
+            password = password,
+            confirmPassword = confirmPassword,
+            phone = phone
         )
 
         Spacer(modifier = Modifier.height(16.dp))

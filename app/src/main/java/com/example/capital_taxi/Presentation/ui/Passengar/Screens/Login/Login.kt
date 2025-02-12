@@ -14,9 +14,9 @@ import androidx.navigation.NavController
 import androidx.compose.ui.res.colorResource
 import com.example.capital_taxi.Presentation.Common.Shared_AppBar
 import com.example.capital_taxi.Presentation.Common.appBar_background_curve
-import com.example.capital_taxi.Presentation.ui.Passengar.Screens.Login.Components.userLoginContent
 
 import com.example.capital_taxi.R
+import userLoginContent
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable

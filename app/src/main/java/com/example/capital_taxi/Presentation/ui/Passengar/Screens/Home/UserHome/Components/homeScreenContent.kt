@@ -48,15 +48,16 @@ import com.example.capital_taxi.Helper.checkLocationPermission
 import com.example.capital_taxi.Presentation.ui.Passengar.Screens.Home.UserHome.Components.Trip_preparation.FindDriverCard
 import com.example.capital_taxi.Presentation.ui.Passengar.Screens.Home.UserHome.Components.Trip_preparation.PickupWithDropOffButtons
 import com.example.capital_taxi.Presentation.ui.Passengar.Screens.Home.UserHome.Components.Trip_request.searchAboutADriver
-import com.example.capital_taxi.Presentation.ui.Passengar.Screens.Home.UserHome.Components.Waiting_for_the_driver.RideDetailsBottomSheetContent
+import com.example.capital_taxi.data.source.mapper.MapScreen
+
+import com.example.capital_taxi.domain.shared.LocationData
+import com.example.capital_taxi.domain.shared.TripViewModel
 import com.google.android.gms.location.LocationServices
 import java.util.Locale
 
-@OptIn(ExperimentalMaterial3Api::class, ExperimentalMaterialApi::class)
+@OptIn(ExperimentalMaterialApi::class)
 @Composable
 fun homeScreenContent(navController: NavController) {
-
-
     var isConfirmed by remember { mutableStateOf(false) }
     var isSearch by remember { mutableStateOf(false) }
 
@@ -92,11 +93,15 @@ fun homeScreenContent(navController: NavController) {
     // FusedLocationProviderClient to get current location
     val fusedLocationClient = LocationServices.getFusedLocationProviderClient(context)
     var locationName by remember { mutableStateOf("Fetching location...") }
-
+    var destinationLat by remember { mutableStateOf(0.0) }
+    var destinationLng by remember { mutableStateOf(0.0) }
+    val tripViewModel: TripViewModel = viewModel()
     LaunchedEffect(Unit) {
         // Get the last known location
         fusedLocationClient.lastLocation.addOnSuccessListener { location ->
             location?.let {
+                destinationLat = it.latitude
+                destinationLng = it.longitude
 
                 val geocoder = Geocoder(context, Locale.getDefault())
                 val addressList = geocoder.getFromLocation(it.latitude, it.longitude, 1)
@@ -116,11 +121,9 @@ fun homeScreenContent(navController: NavController) {
     PartialBottomSheet(
         showBottomSheet = showBottomSheet,
         onDismissRequest = { showBottomSheet = false }) {
-
         PaymentMethodContent()
-
-
     }
+
     // Main Container
     Box(modifier = Modifier.fillMaxSize()) {
         // Drawer
@@ -134,21 +137,19 @@ fun homeScreenContent(navController: NavController) {
                     drawerContent(navController)
                 }
             }
-        )
-        {
+        ) {
             BottomSheetScaffold(
                 scaffoldState = bottomSheetState,
                 sheetPeekHeight = if (isConfirmed) 200.dp else 500.dp,
-
                 content = { padding ->
                     Box(
                         modifier = Modifier
                             .fillMaxSize()
                             .padding(padding)
-
                     ) {
                         if (isLocationGranted) {
-                            MapSection(navController = navController)
+                          //  MapSection(navController = navController)
+                            MapScreen()
                         } else {
                             Text("Location permission is required to view the map.")
                         }
@@ -179,19 +180,12 @@ fun homeScreenContent(navController: NavController) {
                     Box(
                         modifier = Modifier
                             .fillMaxSize()
-
-
                             .border(
                                 width = 2.dp,
                                 color = Color.Gray,
                                 shape = RoundedCornerShape(16.dp)
                             )
                     ) {
-
-                        //TripDetailsLiveTracker()
-                        //  RideDetailsBottomSheetContent(navController)
-                        //TripRatingDialog()
-
                         // Use the current state to check if location is enabled and permission granted
                         if (currentIsLocationEnabled.value && currentIsLocationGranted.value) {
                             if (!isConfirmed) {
@@ -218,8 +212,24 @@ fun homeScreenContent(navController: NavController) {
             )
 
             if (currentIsLocationEnabled.value && currentIsLocationGranted.value && !isConfirmed && !isSearch) {
+                val token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3YWIxNWE3ZWEzMjJhMzg0OTIzODMxOSIsInJvbGUiOiJ1c2VyIiwiaWF0IjoxNzM5MzAyNTU4LCJleHAiOjE3MzkzODg5NTh9.iMJKNoKYy2ZeiWMmjBAs_iraOBd-jJ4Eh5KEVcLDY7E" // Fetch or pass the token
 
-                FindDriverCard(onclick = { isConfirmed = true })
+                FindDriverCard(onclick = {
+                    val userId = "67ab15a7ea322a3849238319" // Replace with actual user ID
+                    val origin = LocationData(30.0444, 31.2357) // Tahrir Square
+                    val destination = LocationData(30.1219, 31.4056) // Cairo International Airport
+                    val fare = 150.0 // Example fare
+                    val distanceInKm = 20.5 // Example distance
+                    val paymentMethod = "cash"
+
+
+                    tripViewModel.requestTrip(userId, origin, destination, paymentMethod, fare, distanceInKm, token)
+
+
+                    // Call your method to request the trip, inside composable scope
+
+                    isConfirmed = true
+                })
             }
         }
     }

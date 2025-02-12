@@ -1,31 +1,14 @@
-package com.example.capital_taxi.Presentation.ui.Passengar.Screens.Login.Components
-
+import android.content.Context
+import android.content.SharedPreferences
+import LoginRequest
+import android.util.Log
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material3.Button
-import androidx.compose.material3.ButtonDefaults
-import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Text
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.collectAsState
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
+import androidx.compose.material3.*
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -33,7 +16,6 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
@@ -49,11 +31,8 @@ import com.example.capital_taxi.Presentation.Common.userMediaLoginOption
 import com.example.capital_taxi.R
 
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun userLoginContent(
-
-
     navController: NavController
 ) {
     val permissionViewModel: PermissionViewModel = viewModel()
@@ -69,23 +48,60 @@ fun userLoginContent(
     var email by remember { mutableStateOf("") }
     var password by remember { mutableStateOf("") }
     var passwordVisible by remember { mutableStateOf(false) }
+    var loginError by remember { mutableStateOf<String?>(null) }
+    var isLoading by remember { mutableStateOf(false) }
 
+    // SharedPreferences for storing token
+    val sharedPreferences: SharedPreferences = context.getSharedPreferences("AppPreferences", Context.MODE_PRIVATE)
+    val editor: SharedPreferences.Editor = sharedPreferences.edit()
+
+    // Handle login when the button is clicked
+    LaunchedEffect(email, password, isLoading) {
+        if (isLoading) {
+            val role = "user" // Set role as "user" by default. Change to "driver" based on app logic
+            val request = LoginRequest(email = email, password = password, role = role)
+            try {
+                val response = LoginApiClient.loginApiService.loginuser(request)
+                if (response.isSuccessful) {
+                    // Get the token from the response (assuming it's in response.body().token)
+                    val token = response.body()?.token
+
+                    if (token != null) {
+                        // Save token in SharedPreferences
+                        editor.putString("USER_TOKEN", token)
+                        editor.apply()
+                        Log.d("Login", "Token: $token")
+                        // Navigate to the home screen on success
+                        navController.navigate(Destination.UserHomeScreen.route)
+                    } else {
+                        loginError = "No token received"
+                    }
+                } else {
+                    // Show error message from the response body if login fails
+                    val errorMessage = response.errorBody()?.string() ?: response.message()
+                    loginError = errorMessage
+                }
+            } catch (e: Exception) {
+                // Handle error case and capture errors in the response body
+                loginError = "An error occurred: ${e.localizedMessage}"
+            } finally {
+                // Stop the loading indicator after the operation
+                isLoading = false
+            }
+        }
+    }
 
     Column(
         modifier = Modifier
             .fillMaxSize()
             .verticalScroll(rememberScrollState())
-
             .padding(16.dp),
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center
     ) {
-
-
         Text(
             text = stringResource(R.string.signin),
             fontSize = responsiveTextSize(fraction = 0.06f, minSize = 20.sp, maxSize = 32.sp),
-
             fontFamily = CustomFontFamily,
             fontWeight = FontWeight.W900,
             color = Color.Black,
@@ -93,6 +109,7 @@ fun userLoginContent(
         )
 
         Spacer(modifier = Modifier.height(40.dp))
+
         LoginForm(
             email = email,
             password = password,
@@ -111,47 +128,49 @@ fun userLoginContent(
         Button(
             onClick = {
                 if (isLocationGranted) {
-                    navController.navigate(Destination.UserHomeScreen.route)
+                    // Start the login process when the button is clicked
+                    isLoading = true
                 } else {
                     navController.navigate(Destination.searchForLocation.route)
-
                 }
-
-
             },
             modifier = Modifier
                 .fillMaxWidth()
-
-
                 .height(60.dp),
             colors = ButtonDefaults.buttonColors(colorResource(R.color.primary_color)),
             shape = RoundedCornerShape(8.dp)
-
-
         ) {
             Text(
                 text = stringResource(R.string.signin),
                 fontSize = responsiveTextSize(fraction = 0.06f, minSize = 14.sp, maxSize = 18.sp),
-
                 fontFamily = CustomFontFamily,
                 color = Color.Black
             )
-
         }
 
+        // Show loading indicator while isLoading is true
+        if (isLoading) {
+            CircularProgressIndicator()
+        }
 
+        if (loginError != null) {
+            // Show error message if login fails
+            Text(
+                text = loginError ?: "",
+                color = Color.Red,
+                fontSize = 14.sp,
+                modifier = Modifier.padding(top = 8.dp)
+            )
+        }
 
         Spacer(modifier = Modifier.height(60.dp))
-
 
         Text(
             text = stringResource(R.string.sign_in_with),
             color = Color.Black,
             fontSize = responsiveTextSize(fraction = 0.06f, minSize = 14.sp, maxSize = 20.sp),
-
-            fontFamily = CustomFontFamily,
-
-            )
+            fontFamily = CustomFontFamily
+        )
 
         Spacer(modifier = Modifier.height(40.dp))
         userMediaLoginOption()
@@ -163,7 +182,6 @@ fun userLoginContent(
             Text(
                 text = stringResource(id = R.string.Dont_have_an_account),
                 fontSize = responsiveTextSize(fraction = 0.06f, minSize = 14.sp, maxSize = 20.sp),
-
                 fontFamily = CustomFontFamily,
             )
 
@@ -173,8 +191,6 @@ fun userLoginContent(
                 text = stringResource(id = R.string.SignUp),
                 color = colorResource(R.color.primary_color),
                 fontSize = responsiveTextSize(fraction = 0.06f, minSize = 14.sp, maxSize = 20.sp),
-
-
                 fontFamily = CustomFontFamily,
                 modifier = Modifier.clickable {
                     navController.navigate(Destination.UserRegister.route)
@@ -183,4 +199,3 @@ fun userLoginContent(
         }
     }
 }
-

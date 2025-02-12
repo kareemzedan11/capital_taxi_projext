@@ -89,7 +89,7 @@ fun LocationAutocompleteField(
 
                         onQueryChanged(it)
                         if (it.isNotEmpty()) {
-                            fetchPlaceSuggestions(it, apiKey) { result ->
+                            fetchPlaceSuggestions(it) { result ->
                                 suggestions = result
                                 expanded = suggestions.isNotEmpty()
                             }
@@ -97,6 +97,7 @@ fun LocationAutocompleteField(
                             suggestions = emptyList()
                             expanded = false
                         }
+
                     },
 
                     placeholder = { Text(hint) },

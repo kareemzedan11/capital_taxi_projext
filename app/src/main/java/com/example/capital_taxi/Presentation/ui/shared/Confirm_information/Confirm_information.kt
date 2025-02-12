@@ -26,7 +26,6 @@ import com.example.capital_taxi.Presentation.ui.shared.Confirm_information.Compo
 import com.example.capital_taxi.Presentation.ui.shared.Confirm_information.Components.PhoneNumberField
 import com.example.capital_taxi.Presentation.ui.shared.Confirm_information.Components.ProfileImage
 import com.example.capital_taxi.Presentation.ui.shared.Confirm_information.Components.TitleText
-
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun ConfirmInformation(
@@ -45,15 +44,21 @@ fun ConfirmInformation(
         )
     }
 
-    // Launcher for selecting an image from the gallery
     val launcher =
         rememberLauncherForActivityResult(contract = ActivityResultContracts.GetContent()) { uri: Uri? ->
-            profilePictureUri = uri
             if (uri != null) {
-                // Save the URI to SharedPreferences
-                sharedPreferences.edit()
-                    .putString("profile_picture_uri", uri.toString())
-                    .apply()
+                // Save the image to internal storage
+                val savedUri = saveImageToInternalStorage(context, uri)
+                if (savedUri != null) {
+                    profilePictureUri = savedUri // Update the state immediately
+                    println("New URI: $savedUri") // Log the new URI
+                    // Save the URI to SharedPreferences
+                    sharedPreferences.edit()
+                        .putString("profile_picture_uri", savedUri.toString())
+                        .apply()
+                } else {
+                    Toast.makeText(context, "Failed to save image", Toast.LENGTH_SHORT).show()
+                }
             } else {
                 Toast.makeText(context, "No image selected", Toast.LENGTH_SHORT).show()
             }
@@ -92,17 +97,18 @@ fun ConfirmInformation(
                 TitleText()
                 Spacer(modifier = Modifier.height(20.dp))
 
+                // Use a key to force recomposition when the URI changes
                 ProfileImage(
+                    key = profilePictureUri.toString(), // Force recomposition when URI changes
                     photo = profilePictureUri ?: Uri.parse(PhotoUrl ?: ""),
+                    getContent = { launcher.launch("image/*") },
                     painter = rememberAsyncImagePainter(
                         ImageRequest.Builder(LocalContext.current)
                             .data(profilePictureUri ?: PhotoUrl)
                             .size(Size.ORIGINAL)
                             .build()
-                    ),
-                    getContent = { launcher.launch("image/*") }
+                    )
                 )
-
                 Spacer(modifier = Modifier.height(20.dp))
 
                 NameField(name = name, onNameChange = { name = it })

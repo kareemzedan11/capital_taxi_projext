@@ -55,6 +55,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
+import com.example.capital_taxi.Navigation.Destination
 import com.example.capital_taxi.R
 import java.io.File
 @OptIn(ExperimentalMaterial3Api::class)
@@ -142,9 +143,9 @@ fun CertificateOfVehicleRegistration(navController: NavController) {
                         .fillMaxWidth()
                         .padding(horizontal = 40.dp)
                         .background(Color.Black),
-                    onClick = { } // Replace with actual route
+                    onClick = { navController.navigate(Destination.DocumentReviewScreen.route)} // Replace with actual route
                 ) {
-                    Text(stringResource(R.string.Continue), fontSize = 20.sp, color = Color.White)
+                    Text(stringResource(R.string.Send), fontSize = 20.sp, color = Color.White)
                 }
             }
         }

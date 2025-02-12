@@ -168,7 +168,7 @@ fun GoogleMapsDesign(
 }
 
 
-        @Composable
+@Composable
 fun GoogleMapsWithSimulatedMovement(
     context: Context,
     origin: LatLng,
@@ -440,8 +440,8 @@ fun DraggableIcon(iconSize: Dp = 50.dp,navController: NavController) {
                 .clip(CircleShape) // Make the box circular
                 .background(
                     color = Color.White.copy(alpha = 0.9f)
-,
-                            shape = RoundedCornerShape(30.dp)
+                    ,
+                    shape = RoundedCornerShape(30.dp)
                 )
                 .pointerInput(Unit) {
                     detectDragGestures(
@@ -456,7 +456,7 @@ fun DraggableIcon(iconSize: Dp = 50.dp,navController: NavController) {
                     )
                 }
                 .clickable {
-navController.navigate(Destination.chatbot.route)
+                    navController.navigate(Destination.chatbot.route)
                 }
             ,
             Alignment.Center
@@ -468,7 +468,7 @@ navController.navigate(Destination.chatbot.route)
                 modifier = Modifier
                     .size(iconSize)
                     .padding(8.dp),
-                        colorFilter = ColorFilter.tint(colorResource(R.color.primary_color)) // Apply a green tint to the icon
+                colorFilter = ColorFilter.tint(colorResource(R.color.primary_color)) // Apply a green tint to the icon
 
             )
         }

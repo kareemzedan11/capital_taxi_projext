@@ -457,6 +457,7 @@
         <string name="warning">تحذير</string>
         <string name="photo_warning_message">الصورة، بمجرد تحميلها، لا يمكن حذفها أو تعديلها لمدة عامين.</string>
         <string name="understand">أنا أفهم</string>
+    <string name="Send">ارسال</string>
 
     <string name="payment_message">عذرًا، نود إبلاغك بأن خدمات الدفع لدينا تدعم حاليًا الدفع النقدي فقط. لا تتوفر طرق دفع أخرى في الوقت الحالي.</string>
 </resources>

@@ -39,6 +39,7 @@ import com.airbnb.lottie.compose.rememberLottieComposition
 import com.example.app.ui.theme.CustomFontFamily
 import com.example.app.ui.theme.responsiveTextSize
 import com.example.capital_taxi.Helper.PartialBottomSheet
+import com.example.capital_taxi.Navigation.Destination
 import com.example.capital_taxi.R
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -141,7 +142,7 @@ fun driversettings(navController: NavController) {
                             title = stringResource(id = R.string.Language),
                             icon = painterResource(R.drawable.language),
 
-                            onClick = { /* Handle language change */ }
+                            onClick = { navController.navigate(Destination.LanguageDScreen.route) }
                         )
                         SettingBox(
                             title = stringResource(id = R.string.Preferences),

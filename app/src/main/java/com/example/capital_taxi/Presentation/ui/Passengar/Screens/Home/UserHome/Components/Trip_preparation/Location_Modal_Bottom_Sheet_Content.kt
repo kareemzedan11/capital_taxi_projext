@@ -3,6 +3,7 @@ package com.example.capital_taxi.Presentation.ui.Passengar.Screens.Home.UserHome
 import android.content.Context
 import android.location.Geocoder
 import android.location.LocationManager
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -35,6 +36,14 @@ import java.util.Locale
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.heightIn
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
+import androidx.compose.material.Divider
+import androidx.compose.material3.OutlinedTextField
+import com.example.capital_taxi.Presentation.ui.Passengar.Screens.Home.UserHome.Components.fetchPlaceSuggestions
 
 @Composable
 fun LocationModalBottomSheetContent(navController: NavController) {
@@ -52,17 +61,10 @@ fun LocationModalBottomSheetContent(navController: NavController) {
     val locationManager = context.getSystemService(Context.LOCATION_SERVICE) as LocationManager
     val isLocationEnabled = locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)
 
-    // Remember updated state of location enabled and granted
-    val currentIsLocationEnabled = rememberUpdatedState(isLocationEnabled)
-    val currentIsLocationGranted = rememberUpdatedState(isLocationGranted)
-
-    // FusedLocationProviderClient to get current location
     val fusedLocationClient = LocationServices.getFusedLocationProviderClient(context)
-
-    // Declare locationName as a state
     var locationName by remember { mutableStateOf("Fetching location...") }
 
-    // Launch an effect to fetch the location
+    // Fetch location name
     LaunchedEffect(Unit) {
         fusedLocationClient.lastLocation.addOnSuccessListener { location ->
             location?.let {
@@ -79,10 +81,13 @@ fun LocationModalBottomSheetContent(navController: NavController) {
         }
     }
 
+    // 🔹 حفظ الاقتراحات في State
+    var suggestions by remember { mutableStateOf(listOf<String>()) }
+    var query by remember { mutableStateOf("") }
+
     Column(
         modifier = Modifier
             .fillMaxSize()
-
             .verticalScroll(rememberScrollState())
             .padding(20.dp),
         verticalArrangement = Arrangement.spacedBy(10.dp),
@@ -96,6 +101,25 @@ fun LocationModalBottomSheetContent(navController: NavController) {
             )
         )
 
+        // 🔹 حقل البحث (TextField) مع استدعاء `fetchPlaceSuggestions`
+        OutlinedTextField(
+            value = query,
+            onValueChange = { text ->
+                query = text
+                if (text.isNotEmpty()) {
+                    fetchPlaceSuggestions(text) { result ->
+                        suggestions = result
+                    }
+                } else {
+                    suggestions = emptyList()
+                }
+            },
+            placeholder = { Text("Enter location...") },
+            modifier = Modifier.fillMaxWidth()
+        )
+
+        Spacer(modifier = Modifier.height(10.dp))
+
         PickupNowForMeUI(navController)
         PickupWithPickoffPoints(navController)
 
@@ -108,6 +132,28 @@ fun LocationModalBottomSheetContent(navController: NavController) {
                 modifier = Modifier,
                 thickness = 2.dp
             )
+        }
+
+        // 🔹 عرض الاقتراحات أسفل الـ Divider
+        LazyColumn(
+            modifier = Modifier
+                .fillMaxWidth()
+                .heightIn(max = 200.dp)
+        ) {
+            items(suggestions) { suggestion ->
+                Text(
+                    text = suggestion,
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .clickable {
+                            query = suggestion // تحديث النص عند النقر على اقتراح
+                            suggestions = emptyList() // إخفاء القائمة بعد الاختيار
+                        }
+                        .padding(10.dp),
+                    style = MaterialTheme.typography.bodyMedium
+                )
+                Divider()
+            }
         }
     }
 }

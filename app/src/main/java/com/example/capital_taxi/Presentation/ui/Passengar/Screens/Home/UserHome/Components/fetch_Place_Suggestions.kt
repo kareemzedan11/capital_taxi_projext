@@ -5,34 +5,36 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import org.json.JSONArray
 import org.json.JSONObject
 import java.net.HttpURLConnection
 import java.net.URL
 
-
 fun fetchPlaceSuggestions(
     query: String,
-    apiKey: String,
     onResult: (List<String>) -> Unit
 ) {
-    val url = "https://maps.googleapis.com/maps/api/place/autocomplete/json?input=$query&key=$apiKey"
+    val url = "https://nominatim.openstreetmap.org/search?format=json&q=$query"
+
     CoroutineScope(Dispatchers.IO).launch {
         try {
             val connection = URL(url).openConnection() as HttpURLConnection
             connection.connectTimeout = 10000
             connection.readTimeout = 10000
             connection.requestMethod = "GET"
+            connection.setRequestProperty("User-Agent", "YourAppName") // مطلوب في Nominatim
 
             if (connection.responseCode == HttpURLConnection.HTTP_OK) {
                 val response = connection.inputStream.bufferedReader().readText()
-                Log.d("API Response", response) // Log the API response for debugging
-                val jsonObject = JSONObject(response)
-                val predictions = jsonObject.getJSONArray("predictions")
+                Log.d("API Response", response) // Debugging
+                val jsonArray = JSONArray(response)
                 val suggestions = mutableListOf<String>()
-                for (i in 0 until predictions.length()) {
-                    val description = predictions.getJSONObject(i).getString("description")
-                    suggestions.add(description)
+
+                for (i in 0 until jsonArray.length()) {
+                    val displayName = jsonArray.getJSONObject(i).getString("display_name")
+                    suggestions.add(displayName)
                 }
+
                 withContext(Dispatchers.Main) {
                     onResult(suggestions)
                 }
@@ -49,3 +51,4 @@ fun fetchPlaceSuggestions(
         }
     }
 }
+

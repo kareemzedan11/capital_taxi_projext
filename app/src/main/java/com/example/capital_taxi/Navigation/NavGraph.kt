@@ -21,6 +21,7 @@ import com.example.capital_taxi.Presentation.ui.Driver.Screens.Home.drawerTabs.s
 import com.example.capital_taxi.Presentation.ui.Driver.Screens.Home.driverHomeScreen
 import com.example.capital_taxi.Presentation.ui.Driver.Screens.Login.DriverLoginIn
 import com.example.capital_taxi.Presentation.ui.Driver.Screens.Register.DriverSignUp
+import com.example.capital_taxi.Presentation.ui.Driver.Screens.VerficationScreens.DocumentReview.DocumentReviewScreen
 import com.example.capital_taxi.Presentation.ui.Driver.Screens.VerficationScreens.Validation_Navigation.ValidationNavigation
 import com.example.capital_taxi.Presentation.ui.Driver.Screens.VerficationScreens.faceValidation.FaceValidation
 import com.example.capital_taxi.Presentation.ui.Passengar.Screens.HelpScreen.HelpDetailScreen
@@ -65,7 +66,7 @@ import com.example.capital_taxi.ui.screens.Driver.VerficationScreens.NationalIDV
 fun AppNavGraph(navController: NavHostController) {
 
     var context = LocalContext.current
-    NavHost(navController = navController, startDestination = Destination.SplashScreen.route) {
+    NavHost(navController = navController, startDestination = Destination.UserHomeScreen.route) {
 
         composable(Destination.SplashScreen.route) {
             SplashScreen(navController)
@@ -200,6 +201,12 @@ fun AppNavGraph(navController: NavHostController) {
         composable(Destination.DriverHelpScreen.route) {
             DriverHelpScreen(navController)
         }
+        composable(Destination.DocumentReviewScreen.route) {
+            DocumentReviewScreen(navController)
+        }
+
+
+
         composable(Destination.ChatScreen.route) {
             ChatScreen(navController )
         }

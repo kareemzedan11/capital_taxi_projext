@@ -54,6 +54,7 @@ sealed class Destination(val route: String) {
     object SupportPage : Destination("SupportPage")
     object ContactSupportPage : Destination("ContactSupportPage")
 
+    object DocumentReviewScreen : Destination("DocumentReviewScreen")
 
 
 

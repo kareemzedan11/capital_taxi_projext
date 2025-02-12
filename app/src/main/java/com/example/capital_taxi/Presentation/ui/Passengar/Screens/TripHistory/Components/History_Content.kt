@@ -21,6 +21,6 @@ fun HistoryContent() {
             .background(Color.White),
         contentAlignment = Alignment.Center
     ) {
-        RideHistoryList()
+        RideHistoryList(token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3YWIxNWE3ZWEzMjJhMzg0OTIzODMxOSIsInJvbGUiOiJ1c2VyIiwiaWF0IjoxNzM5MzE0MzYyLCJleHAiOjE3Mzk0MDA3NjJ9.vh-jxlfJ2YlEaUD2XgPln2zHg0AJcRAUrwCpSTnCCvw")
     }
 }
